@@ -91,3 +91,7 @@ if ( !defined('ABSPATH') )
 
 /** Sets up WordPress vars and included files. */
 require_once(ABSPATH . 'wp-settings.php');
+
+/** Sets Up AWS Keys */
+define( 'AWS_ACCESS_KEY_ID', 'AKIAJFWBSISUBC32ZW3Q' );
+define( 'AWS_SECRET_ACCESS_KEY', '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' );
