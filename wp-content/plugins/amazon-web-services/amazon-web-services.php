@@ -4,9 +4,11 @@ Plugin Name: Amazon Web Services
 Plugin URI: http://wordpress.org/extend/plugins/amazon-web-services/
 Description: Includes the Amazon Web Services PHP libraries, stores access keys, and allows other plugins to hook into it
 Author: Brad Touesnard
-Version: 0.2
+Version: 0.2.2
 Author URI: http://bradt.ca/
 Network: True
+Text Domain: amazon-web-services
+Domain Path: /languages/
 */
 
 // Copyright (c) 2013 Brad Touesnard. All rights reserved.
@@ -20,10 +22,10 @@ Network: True
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 // **********************************************************************
 
-$GLOBALS['aws_meta']['amazon-web-services']['version'] = '0.2';
+$GLOBALS['aws_meta']['amazon-web-services']['version'] = '0.2.2';
 
 $GLOBALS['aws_meta']['amazon-web-services']['supported_addon_versions'] = array(
-	'amazon-s3-and-cloudfront' => '0.7'
+	'amazon-s3-and-cloudfront' => '0.8.1',
 );
 
 require dirname( __FILE__ ) . '/classes/aws-compatibility-check.php';
@@ -34,16 +36,27 @@ if ( $aws_compat_check->is_compatible() ) {
 	add_action( 'init', 'amazon_web_services_init' );
 }
 
-function amazon_web_services_init() {
+/**
+ * Fire up the plugin if compatibility checks have been met
+ */
+function amazon_web_services_require_files() {
 	$abspath = dirname( __FILE__ );
 	require_once $abspath . '/classes/aws-plugin-base.php';
 	require_once $abspath . '/classes/amazon-web-services.php';
 	require_once $abspath . '/vendor/aws/aws-autoloader.php';
+}
 
+function amazon_web_services_init() {
+	amazon_web_services_require_files();
 	global $amazon_web_services;
 	$amazon_web_services = new Amazon_Web_Services( __FILE__ );
 }
 
+/**
+ * On activation check the plugin meets compatibility checks
+ * and migrate any legacy settings over to the new option
+ *
+ */
 function amazon_web_services_activation() {
 	global $aws_compat_check;
 	if ( ! $aws_compat_check->is_compatible() ) {
@@ -61,10 +74,12 @@ function amazon_web_services_activation() {
 		return;
 	}
 
+	amazon_web_services_require_files();
+
 	if ( ! get_site_option( Amazon_Web_Services::SETTINGS_KEY ) ) {
 		add_site_option( Amazon_Web_Services::SETTINGS_KEY, array(
 			'access_key_id'     => $as3cf['key'],
-			'secret_access_key' => $as3cf['secret']
+			'secret_access_key' => $as3cf['secret'],
 		) );
 	}
 

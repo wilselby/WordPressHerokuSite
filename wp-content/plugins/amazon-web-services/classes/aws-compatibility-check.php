@@ -1,4 +1,5 @@
 <?php
+
 class AWS_Compatibility_Check {
 
 	private $plugin_file_path;
@@ -10,10 +11,20 @@ class AWS_Compatibility_Check {
 		add_action( 'network_admin_notices', array( $this, 'hook_admin_notices' ) );
 	}
 
+	/**
+	 * Check the server is compatible with the AWS SDK
+	 *
+	 * @return bool
+	 */
 	function is_compatible() {
 		return $this->get_sdk_requirements_errors() ? false : true;
 	}
 
+	/**
+	 * Return an array of issues with the server's compatibility with the AWS SDK
+	 *
+	 * @return array
+	 */
 	function get_sdk_requirements_errors() {
 		static $errors;
 
@@ -27,11 +38,13 @@ class AWS_Compatibility_Check {
 			$errors[] = __( 'a PHP version less than 5.3.3', 'amazon-web-services' );
 		}
 
-		if (
-			! function_exists( 'curl_version' )
-			|| ! ( $curl = curl_version() ) || empty( $curl['version'] ) || empty( $curl['features'] )
-			|| version_compare( $curl['version'], '7.16.2', '<' )
-		) {
+		if ( ! function_exists( 'curl_version' ) ) {
+			$errors[] = __( 'no PHP cURL library activated', 'amazon-web-services' );
+
+			return $errors;
+		}
+
+		if ( ! ( $curl = curl_version() ) || empty( $curl['version'] ) || empty( $curl['features'] ) || version_compare( $curl['version'], '7.16.2', '<' ) ) {
 			$errors[] = __( 'a cURL version less than 7.16.2', 'amazon-web-services' );
 		}
 
@@ -47,13 +60,18 @@ class AWS_Compatibility_Check {
 			}
 
 			if ( $curl_errors ) {
-				$errors[] = __( 'cURL compiled without', 'amazon-web-services' ) . ' ' . implode( ' or ', $curl_errors );
+				$errors[] = __( 'cURL compiled without', 'amazon-web-services' ) . ' ' . implode( ' or ', $curl_errors ); // xss ok
 			}
 		}
 
 		return $errors;
 	}
 
+	/**
+	 * Prepare an error message with compatibility issues
+	 *
+	 * @return string
+	 */
 	function get_sdk_requirements_error_msg() {
 		$errors = $this->get_sdk_requirements_errors();
 
@@ -65,8 +83,7 @@ class AWS_Compatibility_Check {
 
 		if ( count( $errors ) > 1 ) {
 			$last_one = ' and ' . array_pop( $errors );
-		}
-		else {
+		} else {
 			$last_one = '';
 		}
 
@@ -75,13 +92,16 @@ class AWS_Compatibility_Check {
 		return $msg;
 	}
 
+	/**
+	 * Display the compatibility error message for users
+	 * Deactivate the plugin if there are errors
+	 */
 	function hook_admin_notices() {
 		if ( is_multisite() ) {
 			if ( ! current_user_can( 'manage_network_plugins' ) ) {
 				return; // Don't show notices if the user can't manage network plugins
 			}
-		}
-		else {
+		} else {
 			// Don't show notices if user doesn't have plugin management privileges
 			$caps = array( 'activate_plugins', 'update_plugins', 'install_plugins' );
 			foreach ( $caps as $cap ) {

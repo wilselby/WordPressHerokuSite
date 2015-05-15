@@ -3,13 +3,13 @@ Contributors: embedplus
 Plugin Name: YouTube Advanced Embed by Embed Plus
 Plugin URI: http://www.embedplus.com/dashboard/easy-video-analytics-seo.aspx
 Author URI: http://www.embedplus.com/dashboard/easy-video-analytics-seo.aspx
-Tags: https, ssl, secure, rich snippets, analytics, vlog, vlogging, video blogging, seo, takedown, youtube seo, statistics, view count, play count, video seo, youtube analytics, video analytics, youtube seo, google analytics, advanced youtube, youtube plugin, youtube shortcode, embed youtube, embedplus youtube, academic, annotations, digg, DVD chapter markers, educational, embed, embed plus, embedplus, entertainment, google+, google plus, instant replay, looping, movable zoom, play, playback, plugin, real-time reactions, reddit, scene skipping, slomo, slow motion, social, teacher, tool, tv, twitter, video, web videos, youtube, embed videos, HD, height, width, crop, chapters, object, iframe, manage, manage youtube, media, plugin, smart, widget, flash, flv, swf, wizard, editor, embedding, youtube player, shortcode, smart youtube playback, action, sports, youtube embed, advanced youtube embed, wordpress youtube embed, advanced youtube embedding, embedding youtube, google+, youtube embedding, facebook, video plugin, autohd, auto hd, auto replay
+Tags: youtube for education, youtube snippets, deleted youtube videos, youtube takedowns, blocked youtube videos, youtube impressions, youtube alerts, https, ssl, secure, rich snippets, analytics, vlog, vlogging, video blogging, seo, takedown, youtube seo, statistics, view count, play count, video seo, youtube analytics, video analytics, youtube seo, google analytics, advanced youtube, youtube plugin, youtube shortcode, embed youtube, embedplus youtube, academic, annotations, digg, DVD chapter markers, educational, embed, embed plus, embedplus, entertainment, google+, google plus, instant replay, looping, movable zoom, play, playback, plugin, real-time reactions, reddit, scene skipping, slomo, slow motion, social, tool, tv, twitter, video, web videos, youtube, embed videos, HD, height, width, crop, chapters, object, iframe, manage, manage youtube, media, plugin, smart, widget, flash, flv, swf, wizard, editor, embedding, youtube player, shortcode, smart youtube playback, action, sports, youtube embed, advanced youtube embed, wordpress youtube embed, advanced youtube embedding, embedding youtube, google+, youtube embedding, facebook, video plugin, autohd, auto hd, auto replay
 Requires at least: 2.9
-Tested up to: 4.0
-Stable tag: 5.1
+Tested up to: 4.2
+Stable tag: 5.3
 License: GPLv3 or later
 
-YouTube embed plugin. Uses an advanced YouTube player to enhance the playback and engagement of each YouTube embed. Just paste YouTube Links!
+YouTube embed plugin. Customize a YouTube embed with your own annotations, links, and extra controls. Visitors will see YouTube in a unique way!
 
 == Description ==
 
@@ -18,16 +18,16 @@ YouTube Advanced Embed is a plugin that enhances the YouTube videos you embed in
 More specifically, YouTube Advanced Embed can provide you and your visitors with the following features for each YouTube embed:
 
 * Auto HD
-* Cropping - Set start *and stop* times to share just a funny or interesting part of a YouTube video.
-* Instant Replay
+* YouTube styled controls for instant replay
+* Cropping - Set start and stop times to share just a funny or interesting part of a YouTube video.
 * Video Reactions - Discussions around a YouTube video you embed might be happening all over the web, not just YouTube.com. This feature allows your visitors to read them right from your blog. We have a growing list of communities that includes Digg, Google+, Reddit, and Twitter. Recent YouTube.com comments can also be displayed by the plugin.
 * Timed Annotations - Now you can add annotations to a YouTube embed even if you don't own the YouTube channel.  Use it to display captions, links, calls-to-action, etc at a specific time during playback. 
-* Chaptering (custom and smart social chaptering)
-* Looping / Auto Replay - Repeat a scene you like or the whole video over and over.
+* YouTube styled chapter buttons (custom and smart social chaptering)
+* YouTube styled looping buttons to repeat a scene you like or the whole video over and over
 * Other DVD-like controls
 * Hide YouTube creator's annotations - Say goodbye to the links and annotations that the original owner of the video put in your embed.
 
-...All without having to alter the original video's content. Please see the YouTube embed on our [home page](http://embedplus.com) demo to try some of these features. If you like them, come back here to download the WordPress plugin so that your visitors also see them in your existing and future YouTube embeds -- even if you use the nifty [oEmbed method](http://codex.wordpress.org/Embeds) of just [pasting a YouTube video link on its own line](http://s.wordpress.org/extend/plugins/embedplus-for-wordpress/screenshot-1.jpg?r=618112).
+...All without having to alter the original video's content on YouTube. Please see the Advanced YouTube Embed related screenshots on our [home page](http://www.embedplus.com) or download the plugin now to play with some of these features on a real YouTube video. The plugin even works if you use the nifty oEmbed method of just pasting a YouTube video link on its own line. Your past YouTube embeds can be automatically transformed if you wish.
 
 After installing, you have the ability to add on PRO options like [One-click YouTube SEO tags and a user-friendly YouTube analytics dashboard](https://www.embedplus.com/dashboard/easy-video-analytics-seo.aspx). The dashboard answers important questions like: 
 
@@ -54,9 +54,9 @@ Hear about major upcoming announcements and feature updates by [signing up here]
 
 After installing, you have the option of adding our [user-friendly YouTube Analytics Dashboard](https://www.embedplus.com/dashboard/wordpress-video-analytics-seo.aspx). It can be a great complement to other Google Analytics plugins. Try it and get answers to questions like:
 
-* How much are your visitors actually watching the videos you post?
+* How much are your visitors actually watching the YouTube videos you post?
 * How does the view activity on your site compare to other sites like it?
-* What and when are your best and worst performers?
+* What and when are your best and worst performing YouTube videos?
 * How much do the YouTube videos you embed rely on **your** site for views?
 
 **Note: If you don't see the extra features on your YouTube embeds, you might have another YouTube-WordPress plugin that needs to be deactivated first.**
@@ -120,6 +120,12 @@ YouTube Advanced Embed by Embed Plus Advanced YouTube Embed by Embed Plus
 9. YouTube Advanced Embed Screenshot 9: Are you interested in learning how much your visitors are actually watching the videos you post? We suggest signing up now for this popular analytics feature to start getting data today. Use it to supplement Google Analytics.
 
 == Changelog ==
+
+= YouTube Advanced Embed 5.3 =
+Upgraded code to use YouTube API v3.
+
+= YouTube Advanced Embed 5.2 =
+Expanded HTTPS/SSL support (now for both FREE and PRO users).
 
 = YouTube Advanced Embed 5.1 =
 (PRO) Extends the plugin's existing tagging capabilities by also adding Open Graph markup to enhance Facebook sharing/discovery of your pages.
