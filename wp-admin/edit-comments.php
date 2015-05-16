@@ -7,9 +7,15 @@
  */
 
 /** WordPress Administration Bootstrap */
+<<<<<<< HEAD
 require_once('./admin.php');
 if ( !current_user_can('edit_posts') )
 	wp_die(__('Cheatin&#8217; uh?'));
+=======
+require_once( dirname( __FILE__ ) . '/admin.php' );
+if ( !current_user_can('edit_posts') )
+	wp_die( __( 'Cheatin&#8217; uh?' ), 403 );
+>>>>>>> WPHome/master
 
 $wp_list_table = _get_list_table('WP_Comments_List_Table');
 $pagenum = $wp_list_table->get_pagenum();
@@ -20,9 +26,15 @@ if ( $doaction ) {
 	check_admin_referer( 'bulk-comments' );
 
 	if ( 'delete_all' == $doaction && !empty( $_REQUEST['pagegen_timestamp'] ) ) {
+<<<<<<< HEAD
 		$comment_status = $wpdb->escape( $_REQUEST['comment_status'] );
 		$delete_time = $wpdb->escape( $_REQUEST['pagegen_timestamp'] );
 		$comment_ids = $wpdb->get_col( "SELECT comment_ID FROM $wpdb->comments WHERE comment_approved = '$comment_status' AND '$delete_time' > comment_date_gmt" );
+=======
+		$comment_status = wp_unslash( $_REQUEST['comment_status'] );
+		$delete_time = wp_unslash( $_REQUEST['pagegen_timestamp'] );
+		$comment_ids = $wpdb->get_col( $wpdb->prepare( "SELECT comment_ID FROM $wpdb->comments WHERE comment_approved = %s AND %s > comment_date_gmt", $comment_status, $delete_time ) );
+>>>>>>> WPHome/master
 		$doaction = 'delete';
 	} elseif ( isset( $_REQUEST['delete_comments'] ) ) {
 		$comment_ids = $_REQUEST['delete_comments'];
@@ -95,7 +107,11 @@ if ( $doaction ) {
 	wp_safe_redirect( $redirect_to );
 	exit;
 } elseif ( ! empty( $_GET['_wp_http_referer'] ) ) {
+<<<<<<< HEAD
 	 wp_redirect( remove_query_arg( array( '_wp_http_referer', '_wpnonce' ), stripslashes( $_SERVER['REQUEST_URI'] ) ) );
+=======
+	 wp_redirect( remove_query_arg( array( '_wp_http_referer', '_wpnonce' ), wp_unslash( $_SERVER['REQUEST_URI'] ) ) );
+>>>>>>> WPHome/master
 	 exit;
 }
 
@@ -105,11 +121,19 @@ wp_enqueue_script('admin-comments');
 enqueue_comment_hotkeys_js();
 
 if ( $post_id )
+<<<<<<< HEAD
 	$title = sprintf(__('Comments on &#8220;%s&#8221;'), wp_html_excerpt(_draft_or_post_title($post_id), 50));
 else
 	$title = __('Comments');
 
 add_screen_option( 'per_page', array('label' => _x( 'Comments', 'comments per page (screen options)' )) );
+=======
+	$title = sprintf( __( 'Comments on &#8220;%s&#8221;' ), wp_html_excerpt( _draft_or_post_title( $post_id ), 50, '&hellip;' ) );
+else
+	$title = __('Comments');
+
+add_screen_option( 'per_page' );
+>>>>>>> WPHome/master
 
 get_current_screen()->add_help_tab( array(
 'id'		=> 'overview',
@@ -121,7 +145,11 @@ get_current_screen()->add_help_tab( array(
 'id'		=> 'moderating-comments',
 'title'		=> __('Moderating Comments'),
 'content'	=>
+<<<<<<< HEAD
 		'<p>' . __( 'A yellow row means the comment is waiting for you to moderate it.' ) . '</p>' .
+=======
+		'<p>' . __( 'A red bar on the left means the comment is waiting for you to moderate it.' ) . '</p>' .
+>>>>>>> WPHome/master
 		'<p>' . __( 'In the <strong>Author</strong> column, in addition to the author&#8217;s name, email address, and blog URL, the commenter&#8217;s IP address is shown. Clicking on this link will show you all the comments made from this IP address.' ) . '</p>' .
 		'<p>' . __( 'In the <strong>Comment</strong> column, above each comment it says &#8220;Submitted on,&#8221; followed by the date and time the comment was left on your site. Clicking on the date/time link will take you to that comment on your live site. Hovering over any comment gives you options to approve, reply (and approve), quick edit, edit, spam mark, or trash that comment.' ) . '</p>' .
 		'<p>' . __( 'In the <strong>In Response To</strong> column, there are three elements. The text is the name of the post that inspired the comment, and links to the post editor for that entry. The View Post link leads to that post on your live site. The small bubble with the number in it shows the number of approved comments that post has received. If the bubble is gray, you have moderated all comments for that post. If it is blue, there are pending comments. Clicking the bubble will filter the comments screen to show only comments on that post.' ) . '</p>' .
@@ -130,6 +158,7 @@ get_current_screen()->add_help_tab( array(
 
 get_current_screen()->set_help_sidebar(
 	'<p><strong>' . __( 'For more information:' ) . '</strong></p>' .
+<<<<<<< HEAD
 	'<p>' . __( '<a href="http://codex.wordpress.org/Administration_Screens#Comments" target="_blank">Documentation on Comments</a>' ) . '</p>' .
 	'<p>' . __( '<a href="http://codex.wordpress.org/Comment_Spam" target="_blank">Documentation on Comment Spam</a>' ) . '</p>' .
 	'<p>' . __( '<a href="http://codex.wordpress.org/Keyboard_Shortcuts" target="_blank">Documentation on Keyboard Shortcuts</a>' ) . '</p>' .
@@ -154,6 +183,31 @@ else
 
 if ( isset($_REQUEST['s']) && $_REQUEST['s'] )
 	printf( '<span class="subtitle">' . sprintf( __( 'Search results for &#8220;%s&#8221;' ), wp_html_excerpt( esc_html( stripslashes( $_REQUEST['s'] ) ), 50 ) ) . '</span>' ); ?>
+=======
+	'<p>' . __( '<a href="https://codex.wordpress.org/Administration_Screens#Comments" target="_blank">Documentation on Comments</a>' ) . '</p>' .
+	'<p>' . __( '<a href="https://codex.wordpress.org/Comment_Spam" target="_blank">Documentation on Comment Spam</a>' ) . '</p>' .
+	'<p>' . __( '<a href="https://codex.wordpress.org/Keyboard_Shortcuts" target="_blank">Documentation on Keyboard Shortcuts</a>' ) . '</p>' .
+	'<p>' . __( '<a href="https://wordpress.org/support/" target="_blank">Support Forums</a>' ) . '</p>'
+);
+
+require_once( ABSPATH . 'wp-admin/admin-header.php' );
+?>
+
+<div class="wrap">
+<h2><?php
+if ( $post_id )
+	echo sprintf( __( 'Comments on &#8220;%s&#8221;' ),
+		sprintf( '<a href="%s">%s</a>',
+			get_edit_post_link( $post_id ),
+			wp_html_excerpt( _draft_or_post_title( $post_id ), 50, '&hellip;' )
+		)
+	);
+else
+	_e( 'Comments' );
+
+if ( isset($_REQUEST['s']) && $_REQUEST['s'] )
+	echo '<span class="subtitle">' . sprintf( __( 'Search results for &#8220;%s&#8221;' ), wp_html_excerpt( esc_html( wp_unslash( $_REQUEST['s'] ) ), 50, '&hellip;' ) ) . '</span>'; ?>
+>>>>>>> WPHome/master
 </h2>
 
 <?php
@@ -218,14 +272,22 @@ if ( isset($_REQUEST['approved']) || isset($_REQUEST['deleted']) || isset($_REQU
 			}
 		}
 
+<<<<<<< HEAD
 		echo '<div id="moderated" class="updated"><p>' . implode( "<br/>\n", $messages ) . '</p></div>';
+=======
+		echo '<div id="moderated" class="updated notice is-dismissible"><p>' . implode( "<br/>\n", $messages ) . '</p></div>';
+>>>>>>> WPHome/master
 	}
 }
 ?>
 
 <?php $wp_list_table->views(); ?>
 
+<<<<<<< HEAD
 <form id="comments-form" action="" method="get">
+=======
+<form id="comments-form" method="get">
+>>>>>>> WPHome/master
 
 <?php $wp_list_table->search_box( __( 'Search Comments' ), 'comment' ); ?>
 
@@ -252,4 +314,8 @@ if ( isset($_REQUEST['approved']) || isset($_REQUEST['deleted']) || isset($_REQU
 <?php
 wp_comment_reply('-1', true, 'detail');
 wp_comment_trashnotice();
+<<<<<<< HEAD
 include('./admin-footer.php'); ?>
+=======
+include( ABSPATH . 'wp-admin/admin-footer.php' ); ?>
+>>>>>>> WPHome/master

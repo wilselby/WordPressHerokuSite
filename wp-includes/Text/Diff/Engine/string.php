@@ -99,7 +99,11 @@ class Text_Diff_Engine_string {
                 do {
                     $diff1[] = substr($diff[$i], 1);
                 } while (++$i < $end && substr($diff[$i], 0, 1) == ' ');
+<<<<<<< HEAD
                 $edits[] = &new Text_Diff_Op_copy($diff1);
+=======
+                $edits[] = new Text_Diff_Op_copy($diff1);
+>>>>>>> WPHome/master
                 break;
 
             case '+':
@@ -107,7 +111,11 @@ class Text_Diff_Engine_string {
                 do {
                     $diff1[] = substr($diff[$i], 1);
                 } while (++$i < $end && substr($diff[$i], 0, 1) == '+');
+<<<<<<< HEAD
                 $edits[] = &new Text_Diff_Op_add($diff1);
+=======
+                $edits[] = new Text_Diff_Op_add($diff1);
+>>>>>>> WPHome/master
                 break;
 
             case '-':
@@ -121,9 +129,15 @@ class Text_Diff_Engine_string {
                     $diff2[] = substr($diff[$i++], 1);
                 }
                 if (count($diff2) == 0) {
+<<<<<<< HEAD
                     $edits[] = &new Text_Diff_Op_delete($diff1);
                 } else {
                     $edits[] = &new Text_Diff_Op_change($diff1, $diff2);
+=======
+                    $edits[] = new Text_Diff_Op_delete($diff1);
+                } else {
+                    $edits[] = new Text_Diff_Op_change($diff1, $diff2);
+>>>>>>> WPHome/master
                 }
                 break;
 
@@ -189,7 +203,11 @@ class Text_Diff_Engine_string {
                 $array[] = substr($diff[$j++], 2);
             }
             if (count($array) > 0) {
+<<<<<<< HEAD
                 $edits[] = &new Text_Diff_Op_copy($array);
+=======
+                $edits[] = new Text_Diff_Op_copy($array);
+>>>>>>> WPHome/master
             }
 
             if ($i < $max_i) {
@@ -203,21 +221,33 @@ class Text_Diff_Engine_string {
                             $diff2[] = substr($diff[$j++], 2);
                         }
                     } while (++$i < $max_i && substr($diff[$i], 0, 1) == '!');
+<<<<<<< HEAD
                     $edits[] = &new Text_Diff_Op_change($diff1, $diff2);
+=======
+                    $edits[] = new Text_Diff_Op_change($diff1, $diff2);
+>>>>>>> WPHome/master
                     break;
 
                 case '+':
                     do {
                         $diff1[] = substr($diff[$i], 2);
                     } while (++$i < $max_i && substr($diff[$i], 0, 1) == '+');
+<<<<<<< HEAD
                     $edits[] = &new Text_Diff_Op_add($diff1);
+=======
+                    $edits[] = new Text_Diff_Op_add($diff1);
+>>>>>>> WPHome/master
                     break;
 
                 case '-':
                     do {
                         $diff1[] = substr($diff[$i], 2);
                     } while (++$i < $max_i && substr($diff[$i], 0, 1) == '-');
+<<<<<<< HEAD
                     $edits[] = &new Text_Diff_Op_delete($diff1);
+=======
+                    $edits[] = new Text_Diff_Op_delete($diff1);
+>>>>>>> WPHome/master
                     break;
                 }
             }
@@ -229,14 +259,22 @@ class Text_Diff_Engine_string {
                     do {
                         $diff2[] = substr($diff[$j++], 2);
                     } while ($j < $max_j && substr($diff[$j], 0, 1) == '+');
+<<<<<<< HEAD
                     $edits[] = &new Text_Diff_Op_add($diff2);
+=======
+                    $edits[] = new Text_Diff_Op_add($diff2);
+>>>>>>> WPHome/master
                     break;
 
                 case '-':
                     do {
                         $diff2[] = substr($diff[$j++], 2);
                     } while ($j < $max_j && substr($diff[$j], 0, 1) == '-');
+<<<<<<< HEAD
                     $edits[] = &new Text_Diff_Op_delete($diff2);
+=======
+                    $edits[] = new Text_Diff_Op_delete($diff2);
+>>>>>>> WPHome/master
                     break;
                 }
             }

@@ -1,10 +1,18 @@
 <?php
 /**
+<<<<<<< HEAD
  * The template for displaying Category pages.
  *
  * Used to display archive-type pages for posts in a category.
  *
  * Learn more: http://codex.wordpress.org/Template_Hierarchy
+=======
+ * The template for displaying Category pages
+ *
+ * Used to display archive-type pages for posts in a category.
+ *
+ * @link https://codex.wordpress.org/Template_Hierarchy
+>>>>>>> WPHome/master
  *
  * @package WordPress
  * @subpackage Twenty_Twelve
@@ -48,4 +56,8 @@ get_header(); ?>
 	</section><!-- #primary -->
 
 <?php get_sidebar(); ?>
+<<<<<<< HEAD
 <?php get_footer(); ?>
+=======
+<?php get_footer(); ?>
+>>>>>>> WPHome/master

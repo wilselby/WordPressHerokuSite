@@ -1,6 +1,10 @@
 <?php
 /**
+<<<<<<< HEAD
  * The template for displaying 404 pages (Not Found).
+=======
+ * The template for displaying 404 pages (Not Found)
+>>>>>>> WPHome/master
  *
  * @package WordPress
  * @subpackage Twenty_Twelve

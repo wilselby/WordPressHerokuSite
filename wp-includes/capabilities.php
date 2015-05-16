@@ -13,6 +13,7 @@
  * the name in value of the 'name' key. The capabilities are stored as an array
  * in the value of the 'capability' key.
  *
+<<<<<<< HEAD
  * <code>
  * array (
  *		'rolename' => array (
@@ -21,6 +22,14 @@
  *		)
  * )
  * </code>
+=======
+ *     array (
+ *    		'rolename' => array (
+ *    			'name' => 'rolename',
+ *    			'capabilities' => array()
+ *    		)
+ *     )
+>>>>>>> WPHome/master
  *
  * @since 2.0.0
  * @package WordPress
@@ -34,7 +43,11 @@ class WP_Roles {
 	 * @access public
 	 * @var array
 	 */
+<<<<<<< HEAD
 	var $roles;
+=======
+	public $roles;
+>>>>>>> WPHome/master
 
 	/**
 	 * List of the role objects.
@@ -43,7 +56,11 @@ class WP_Roles {
 	 * @access public
 	 * @var array
 	 */
+<<<<<<< HEAD
 	var $role_objects = array();
+=======
+	public $role_objects = array();
+>>>>>>> WPHome/master
 
 	/**
 	 * List of role names.
@@ -52,7 +69,11 @@ class WP_Roles {
 	 * @access public
 	 * @var array
 	 */
+<<<<<<< HEAD
 	var $role_names = array();
+=======
+	public $role_names = array();
+>>>>>>> WPHome/master
 
 	/**
 	 * Option name for storing role list.
@@ -61,7 +82,11 @@ class WP_Roles {
 	 * @access public
 	 * @var string
 	 */
+<<<<<<< HEAD
 	var $role_key;
+=======
+	public $role_key;
+>>>>>>> WPHome/master
 
 	/**
 	 * Whether to use the database for retrieval and storage.
@@ -70,18 +95,46 @@ class WP_Roles {
 	 * @access public
 	 * @var bool
 	 */
+<<<<<<< HEAD
 	var $use_db = true;
+=======
+	public $use_db = true;
+>>>>>>> WPHome/master
 
 	/**
 	 * Constructor
 	 *
 	 * @since 2.0.0
 	 */
+<<<<<<< HEAD
 	function __construct() {
+=======
+	public function __construct() {
+>>>>>>> WPHome/master
 		$this->_init();
 	}
 
 	/**
+<<<<<<< HEAD
+=======
+	 * Make private/protected methods readable for backwards compatibility.
+	 *
+	 * @since 4.0.0
+	 * @access public
+	 *
+	 * @param callable $name      Method to call.
+	 * @param array    $arguments Arguments to pass when calling.
+	 * @return mixed|bool Return value of the callback, false otherwise.
+	 */
+	public function __call( $name, $arguments ) {
+		if ( '_init' === $name ) {
+			return call_user_func_array( array( $this, $name ), $arguments );
+		}
+		return false;
+	}
+
+	/**
+>>>>>>> WPHome/master
 	 * Set up the object properties.
 	 *
 	 * The role key is set to the current prefix for the $wpdb object with
@@ -90,12 +143,22 @@ class WP_Roles {
 	 *
 	 * @since 2.1.0
 	 * @access protected
+<<<<<<< HEAD
 	 * @uses $wpdb Used to get the database prefix.
 	 * @global array $wp_user_roles Used to set the 'roles' property value.
 	 */
 	function _init () {
 		global $wpdb, $wp_user_roles;
 		$this->role_key = $wpdb->prefix . 'user_roles';
+=======
+	 *
+	 * @global wpdb  $wpdb          WordPress database abstraction object.
+	 * @global array $wp_user_roles Used to set the 'roles' property value.
+	 */
+	protected function _init() {
+		global $wpdb, $wp_user_roles;
+		$this->role_key = $wpdb->get_blog_prefix() . 'user_roles';
+>>>>>>> WPHome/master
 		if ( ! empty( $wp_user_roles ) ) {
 			$this->roles = $wp_user_roles;
 			$this->use_db = false;
@@ -123,15 +186,26 @@ class WP_Roles {
 	 * @since 3.5.0
 	 * @access public
 	 */
+<<<<<<< HEAD
 	function reinit() {
+=======
+	public function reinit() {
+>>>>>>> WPHome/master
 		// There is no need to reinit if using the wp_user_roles global.
 		if ( ! $this->use_db )
 			return;
 
+<<<<<<< HEAD
 		global $wpdb, $wp_user_roles;
 
 		// Duplicated from _init() to avoid an extra function call.
 		$this->role_key = $wpdb->prefix . 'user_roles';
+=======
+		global $wpdb;
+
+		// Duplicated from _init() to avoid an extra function call.
+		$this->role_key = $wpdb->get_blog_prefix() . 'user_roles';
+>>>>>>> WPHome/master
 		$this->roles = get_option( $this->role_key );
 		if ( empty( $this->roles ) )
 			return;
@@ -158,9 +232,15 @@ class WP_Roles {
 	 * @param string $role Role name.
 	 * @param string $display_name Role display name.
 	 * @param array $capabilities List of role capabilities in the above format.
+<<<<<<< HEAD
 	 * @return null|WP_Role WP_Role object if role is added, null if already exists.
 	 */
 	function add_role( $role, $display_name, $capabilities = array() ) {
+=======
+	 * @return WP_Role|null WP_Role object if role is added, null if already exists.
+	 */
+	public function add_role( $role, $display_name, $capabilities = array() ) {
+>>>>>>> WPHome/master
 		if ( isset( $this->roles[$role] ) )
 			return;
 
@@ -183,7 +263,11 @@ class WP_Roles {
 	 *
 	 * @param string $role Role name.
 	 */
+<<<<<<< HEAD
 	function remove_role( $role ) {
+=======
+	public function remove_role( $role ) {
+>>>>>>> WPHome/master
 		if ( ! isset( $this->role_objects[$role] ) )
 			return;
 
@@ -193,6 +277,12 @@ class WP_Roles {
 
 		if ( $this->use_db )
 			update_option( $this->role_key, $this->roles );
+<<<<<<< HEAD
+=======
+
+		if ( get_option( 'default_role' ) == $role )
+			update_option( 'default_role', 'subscriber' );
+>>>>>>> WPHome/master
 	}
 
 	/**
@@ -205,7 +295,11 @@ class WP_Roles {
 	 * @param string $cap Capability name.
 	 * @param bool $grant Optional, default is true. Whether role is capable of performing capability.
 	 */
+<<<<<<< HEAD
 	function add_cap( $role, $cap, $grant = true ) {
+=======
+	public function add_cap( $role, $cap, $grant = true ) {
+>>>>>>> WPHome/master
 		if ( ! isset( $this->roles[$role] ) )
 			return;
 
@@ -223,7 +317,11 @@ class WP_Roles {
 	 * @param string $role Role name.
 	 * @param string $cap Capability name.
 	 */
+<<<<<<< HEAD
 	function remove_cap( $role, $cap ) {
+=======
+	public function remove_cap( $role, $cap ) {
+>>>>>>> WPHome/master
 		if ( ! isset( $this->roles[$role] ) )
 			return;
 
@@ -239,9 +337,15 @@ class WP_Roles {
 	 * @access public
 	 *
 	 * @param string $role Role name.
+<<<<<<< HEAD
 	 * @return object|null Null, if role does not exist. WP_Role object, if found.
 	 */
 	function get_role( $role ) {
+=======
+	 * @return WP_Role|null WP_Role object if found, null if the role does not exist.
+	 */
+	public function get_role( $role ) {
+>>>>>>> WPHome/master
 		if ( isset( $this->role_objects[$role] ) )
 			return $this->role_objects[$role];
 		else
@@ -256,7 +360,11 @@ class WP_Roles {
 	 *
 	 * @return array List of role names.
 	 */
+<<<<<<< HEAD
 	function get_names() {
+=======
+	public function get_names() {
+>>>>>>> WPHome/master
 		return $this->role_names;
 	}
 
@@ -269,7 +377,11 @@ class WP_Roles {
 	 * @param string $role Role name to look up.
 	 * @return bool
 	 */
+<<<<<<< HEAD
 	function is_role( $role ) {
+=======
+	public function is_role( $role ) {
+>>>>>>> WPHome/master
 		return isset( $this->role_names[$role] );
 	}
 }
@@ -289,7 +401,11 @@ class WP_Role {
 	 * @access public
 	 * @var string
 	 */
+<<<<<<< HEAD
 	var $name;
+=======
+	public $name;
+>>>>>>> WPHome/master
 
 	/**
 	 * List of capabilities the role contains.
@@ -298,7 +414,11 @@ class WP_Role {
 	 * @access public
 	 * @var array
 	 */
+<<<<<<< HEAD
 	var $capabilities;
+=======
+	public $capabilities;
+>>>>>>> WPHome/master
 
 	/**
 	 * Constructor - Set up object properties.
@@ -312,7 +432,11 @@ class WP_Role {
 	 * @param string $role Role name.
 	 * @param array $capabilities List of capabilities.
 	 */
+<<<<<<< HEAD
 	function __construct( $role, $capabilities ) {
+=======
+	public function __construct( $role, $capabilities ) {
+>>>>>>> WPHome/master
 		$this->name = $role;
 		$this->capabilities = $capabilities;
 	}
@@ -327,7 +451,11 @@ class WP_Role {
 	 * @param string $cap Capability name.
 	 * @param bool $grant Whether role has capability privilege.
 	 */
+<<<<<<< HEAD
 	function add_cap( $cap, $grant = true ) {
+=======
+	public function add_cap( $cap, $grant = true ) {
+>>>>>>> WPHome/master
 		global $wp_roles;
 
 		if ( ! isset( $wp_roles ) )
@@ -350,7 +478,11 @@ class WP_Role {
 	 *
 	 * @param string $cap Capability name.
 	 */
+<<<<<<< HEAD
 	function remove_cap( $cap ) {
+=======
+	public function remove_cap( $cap ) {
+>>>>>>> WPHome/master
 		global $wp_roles;
 
 		if ( ! isset( $wp_roles ) )
@@ -374,7 +506,20 @@ class WP_Role {
 	 * @param string $cap Capability name.
 	 * @return bool True, if user has capability. False, if doesn't have capability.
 	 */
+<<<<<<< HEAD
 	function has_cap( $cap ) {
+=======
+	public function has_cap( $cap ) {
+		/**
+		 * Filter which capabilities a role has.
+		 *
+		 * @since 2.0.0
+		 *
+		 * @param array  $capabilities Array of role capabilities.
+		 * @param string $cap          Capability name.
+		 * @param string $name         Role name.
+		 */
+>>>>>>> WPHome/master
 		$capabilities = apply_filters( 'role_has_cap', $this->capabilities, $cap, $this->name );
 		if ( !empty( $capabilities[$cap] ) )
 			return $capabilities[$cap];
@@ -390,16 +535,41 @@ class WP_Role {
  * @since 2.0.0
  * @package WordPress
  * @subpackage User
+<<<<<<< HEAD
+=======
+ *
+ * @property string $nickname
+ * @property string $user_description
+ * @property string $user_firstname
+ * @property string $user_lastname
+ * @property string $user_login
+ * @property string $user_pass
+ * @property string $user_nicename
+ * @property string $user_email
+ * @property string $user_url
+ * @property string $user_registered
+ * @property string $user_activation_key
+ * @property string $user_status
+ * @property string $display_name
+ * @property string $spam
+ * @property string $deleted
+>>>>>>> WPHome/master
  */
 class WP_User {
 	/**
 	 * User data container.
 	 *
 	 * @since 2.0.0
+<<<<<<< HEAD
 	 * @access private
 	 * @var array
 	 */
 	var $data;
+=======
+	 * @var object
+	 */
+	public $data;
+>>>>>>> WPHome/master
 
 	/**
 	 * The user's ID.
@@ -408,7 +578,11 @@ class WP_User {
 	 * @access public
 	 * @var int
 	 */
+<<<<<<< HEAD
 	var $ID = 0;
+=======
+	public $ID = 0;
+>>>>>>> WPHome/master
 
 	/**
 	 * The individual capabilities the user has been given.
@@ -417,7 +591,11 @@ class WP_User {
 	 * @access public
 	 * @var array
 	 */
+<<<<<<< HEAD
 	var $caps = array();
+=======
+	public $caps = array();
+>>>>>>> WPHome/master
 
 	/**
 	 * User metadata option name.
@@ -426,7 +604,11 @@ class WP_User {
 	 * @access public
 	 * @var string
 	 */
+<<<<<<< HEAD
 	var $cap_key;
+=======
+	public $cap_key;
+>>>>>>> WPHome/master
 
 	/**
 	 * The roles the user is part of.
@@ -435,7 +617,11 @@ class WP_User {
 	 * @access public
 	 * @var array
 	 */
+<<<<<<< HEAD
 	var $roles = array();
+=======
+	public $roles = array();
+>>>>>>> WPHome/master
 
 	/**
 	 * All capabilities the user has, including individual and role based.
@@ -444,7 +630,11 @@ class WP_User {
 	 * @access public
 	 * @var array
 	 */
+<<<<<<< HEAD
 	var $allcaps = array();
+=======
+	public $allcaps = array();
+>>>>>>> WPHome/master
 
 	/**
 	 * The filter context applied to user data fields.
@@ -468,9 +658,14 @@ class WP_User {
 	 * @param int|string|stdClass|WP_User $id User's ID, a WP_User object, or a user object from the DB.
 	 * @param string $name Optional. User's username
 	 * @param int $blog_id Optional Blog ID, defaults to current blog.
+<<<<<<< HEAD
 	 * @return WP_User
 	 */
 	function __construct( $id = 0, $name = '', $blog_id = '' ) {
+=======
+	 */
+	public function __construct( $id = 0, $name = '', $blog_id = '' ) {
+>>>>>>> WPHome/master
 		if ( ! isset( self::$back_compat_keys ) ) {
 			$prefix = $GLOBALS['wpdb']->prefix;
 			self::$back_compat_keys = array(
@@ -483,7 +678,11 @@ class WP_User {
 			);
 		}
 
+<<<<<<< HEAD
 		if ( is_a( $id, 'WP_User' ) ) {
+=======
+		if ( $id instanceof WP_User ) {
+>>>>>>> WPHome/master
 			$this->init( $id->data, $blog_id );
 			return;
 		} elseif ( is_object( $id ) ) {
@@ -496,6 +695,7 @@ class WP_User {
 			$id = 0;
 		}
 
+<<<<<<< HEAD
 		if ( $id )
 			$data = self::get_data_by( 'id', $id );
 		else
@@ -503,6 +703,19 @@ class WP_User {
 
 		if ( $data )
 			$this->init( $data, $blog_id );
+=======
+		if ( $id ) {
+			$data = self::get_data_by( 'id', $id );
+		} else {
+			$data = self::get_data_by( 'login', $name );
+		}
+
+		if ( $data ) {
+			$this->init( $data, $blog_id );
+		} else {
+			$this->data = new stdClass;
+		}
+>>>>>>> WPHome/master
 	}
 
 	/**
@@ -511,7 +724,11 @@ class WP_User {
 	 * @param object $data User DB row object
 	 * @param int $blog_id Optional. The blog id to initialize for
 	 */
+<<<<<<< HEAD
 	function init( $data, $blog_id = '' ) {
+=======
+	public function init( $data, $blog_id = '' ) {
+>>>>>>> WPHome/master
 		$this->data = $data;
 		$this->ID = (int) $data->ID;
 
@@ -525,9 +742,15 @@ class WP_User {
 	 *
 	 * @param string $field The field to query against: 'id', 'slug', 'email' or 'login'
 	 * @param string|int $value The field value
+<<<<<<< HEAD
 	 * @return object Raw user object
 	 */
 	static function get_data_by( $field, $value ) {
+=======
+	 * @return object|false Raw user object
+	 */
+	public static function get_data_by( $field, $value ) {
+>>>>>>> WPHome/master
 		global $wpdb;
 
 		if ( 'id' == $field ) {
@@ -535,7 +758,13 @@ class WP_User {
 			// to int 1.
 			if ( ! is_numeric( $value ) )
 				return false;
+<<<<<<< HEAD
 			$value = absint( $value );
+=======
+			$value = intval( $value );
+			if ( $value < 1 )
+				return false;
+>>>>>>> WPHome/master
 		} else {
 			$value = trim( $value );
 		}
@@ -584,8 +813,15 @@ class WP_User {
 	 * Magic method for checking the existence of a certain custom field
 	 *
 	 * @since 3.3.0
+<<<<<<< HEAD
 	 */
 	function __isset( $key ) {
+=======
+	 * @param string $key
+	 * @return bool
+	 */
+	public function __isset( $key ) {
+>>>>>>> WPHome/master
 		if ( 'id' == $key ) {
 			_deprecated_argument( 'WP_User->id', '2.1', __( 'Use <code>WP_User->ID</code> instead.' ) );
 			$key = 'ID';
@@ -604,8 +840,15 @@ class WP_User {
 	 * Magic method for accessing custom fields
 	 *
 	 * @since 3.3.0
+<<<<<<< HEAD
 	 */
 	function __get( $key ) {
+=======
+	 * @param string $key
+	 * @return mixed
+	 */
+	public function __get( $key ) {
+>>>>>>> WPHome/master
 		if ( 'id' == $key ) {
 			_deprecated_argument( 'WP_User->id', '2.1', __( 'Use <code>WP_User->ID</code> instead.' ) );
 			return $this->ID;
@@ -631,7 +874,11 @@ class WP_User {
 	 *
 	 * @since 3.3.0
 	 */
+<<<<<<< HEAD
 	function __set( $key, $value ) {
+=======
+	public function __set( $key, $value ) {
+>>>>>>> WPHome/master
 		if ( 'id' == $key ) {
 			_deprecated_argument( 'WP_User->id', '2.1', __( 'Use <code>WP_User->ID</code> instead.' ) );
 			$this->ID = $value;
@@ -649,7 +896,11 @@ class WP_User {
 	 *
 	 * @return bool True if user exists in the database, false if not.
 	 */
+<<<<<<< HEAD
 	function exists() {
+=======
+	public function exists() {
+>>>>>>> WPHome/master
 		return ! empty( $this->ID );
 	}
 
@@ -662,7 +913,11 @@ class WP_User {
 	 *
 	 * @param string $key Property
 	 */
+<<<<<<< HEAD
 	function get( $key ) {
+=======
+	public function get( $key ) {
+>>>>>>> WPHome/master
 		return $this->__get( $key );
 	}
 
@@ -675,18 +930,30 @@ class WP_User {
 	 *
 	 * @param string $key Property
 	 */
+<<<<<<< HEAD
 	function has_prop( $key ) {
 		return $this->__isset( $key );
 	}
 
 	/*
+=======
+	public function has_prop( $key ) {
+		return $this->__isset( $key );
+	}
+
+	/**
+>>>>>>> WPHome/master
 	 * Return an array representation.
 	 *
 	 * @since 3.5.0
 	 *
 	 * @return array Array representation.
 	 */
+<<<<<<< HEAD
 	function to_array() {
+=======
+	public function to_array() {
+>>>>>>> WPHome/master
 		return get_object_vars( $this->data );
 	}
 
@@ -707,7 +974,11 @@ class WP_User {
 		global $wpdb;
 
 		if ( empty($cap_key) )
+<<<<<<< HEAD
 			$this->cap_key = $wpdb->prefix . 'capabilities';
+=======
+			$this->cap_key = $wpdb->get_blog_prefix() . 'capabilities';
+>>>>>>> WPHome/master
 		else
 			$this->cap_key = $cap_key;
 
@@ -730,8 +1001,15 @@ class WP_User {
 	 * @since 2.0.0
 	 * @uses $wp_roles
 	 * @access public
+<<<<<<< HEAD
 	 */
 	function get_role_caps() {
+=======
+	 *
+	 * @return array List of all capabilities for the user.
+	 */
+	public function get_role_caps() {
+>>>>>>> WPHome/master
 		global $wp_roles;
 
 		if ( ! isset( $wp_roles ) )
@@ -748,6 +1026,11 @@ class WP_User {
 			$this->allcaps = array_merge( (array) $this->allcaps, (array) $the_role->capabilities );
 		}
 		$this->allcaps = array_merge( (array) $this->allcaps, (array) $this->caps );
+<<<<<<< HEAD
+=======
+
+		return $this->allcaps;
+>>>>>>> WPHome/master
 	}
 
 	/**
@@ -760,7 +1043,11 @@ class WP_User {
 	 *
 	 * @param string $role Role name.
 	 */
+<<<<<<< HEAD
 	function add_role( $role ) {
+=======
+	public function add_role( $role ) {
+>>>>>>> WPHome/master
 		$this->caps[$role] = true;
 		update_user_meta( $this->ID, $this->cap_key, $this->caps );
 		$this->get_role_caps();
@@ -775,7 +1062,11 @@ class WP_User {
 	 *
 	 * @param string $role Role name.
 	 */
+<<<<<<< HEAD
 	function remove_role( $role ) {
+=======
+	public function remove_role( $role ) {
+>>>>>>> WPHome/master
 		if ( !in_array($role, $this->roles) )
 			return;
 		unset( $this->caps[$role] );
@@ -796,13 +1087,21 @@ class WP_User {
 	 *
 	 * @param string $role Role name.
 	 */
+<<<<<<< HEAD
 	function set_role( $role ) {
+=======
+	public function set_role( $role ) {
+>>>>>>> WPHome/master
 		if ( 1 == count( $this->roles ) && $role == current( $this->roles ) )
 			return;
 
 		foreach ( (array) $this->roles as $oldrole )
 			unset( $this->caps[$oldrole] );
 
+<<<<<<< HEAD
+=======
+		$old_roles = $this->roles;
+>>>>>>> WPHome/master
 		if ( !empty( $role ) ) {
 			$this->caps[$role] = true;
 			$this->roles = array( $role => true );
@@ -812,7 +1111,22 @@ class WP_User {
 		update_user_meta( $this->ID, $this->cap_key, $this->caps );
 		$this->get_role_caps();
 		$this->update_user_level_from_caps();
+<<<<<<< HEAD
 		do_action( 'set_user_role', $this->ID, $role );
+=======
+
+		/**
+		 * Fires after the user's role has changed.
+		 *
+		 * @since 2.9.0
+		 * @since 3.6.0 Added $old_roles to include an array of the user's previous roles.
+		 *
+		 * @param int    $user_id   The user ID.
+		 * @param string $role      The new role.
+		 * @param array  $old_roles An array of the user's previous roles.
+		 */
+		do_action( 'set_user_role', $this->ID, $role, $old_roles );
+>>>>>>> WPHome/master
 	}
 
 	/**
@@ -834,7 +1148,11 @@ class WP_User {
 	 * @param string $item Level capability name.
 	 * @return int Max Level.
 	 */
+<<<<<<< HEAD
 	function level_reduction( $max, $item ) {
+=======
+	public function level_reduction( $max, $item ) {
+>>>>>>> WPHome/master
 		if ( preg_match( '/^level_(10|[0-9])$/i', $item, $matches ) ) {
 			$level = intval( $matches[1] );
 			return max( $max, $level );
@@ -853,10 +1171,17 @@ class WP_User {
 	 * @since 2.0.0
 	 * @access public
 	 */
+<<<<<<< HEAD
 	function update_user_level_from_caps() {
 		global $wpdb;
 		$this->user_level = array_reduce( array_keys( $this->allcaps ), array( $this, 'level_reduction' ), 0 );
 		update_user_meta( $this->ID, $wpdb->prefix . 'user_level', $this->user_level );
+=======
+	public function update_user_level_from_caps() {
+		global $wpdb;
+		$this->user_level = array_reduce( array_keys( $this->allcaps ), array( $this, 'level_reduction' ), 0 );
+		update_user_meta( $this->ID, $wpdb->get_blog_prefix() . 'user_level', $this->user_level );
+>>>>>>> WPHome/master
 	}
 
 	/**
@@ -868,9 +1193,17 @@ class WP_User {
 	 * @param string $cap Capability name.
 	 * @param bool $grant Whether to grant capability to user.
 	 */
+<<<<<<< HEAD
 	function add_cap( $cap, $grant = true ) {
 		$this->caps[$cap] = $grant;
 		update_user_meta( $this->ID, $this->cap_key, $this->caps );
+=======
+	public function add_cap( $cap, $grant = true ) {
+		$this->caps[$cap] = $grant;
+		update_user_meta( $this->ID, $this->cap_key, $this->caps );
+		$this->get_role_caps();
+		$this->update_user_level_from_caps();
+>>>>>>> WPHome/master
 	}
 
 	/**
@@ -881,11 +1214,22 @@ class WP_User {
 	 *
 	 * @param string $cap Capability name.
 	 */
+<<<<<<< HEAD
 	function remove_cap( $cap ) {
 		if ( ! isset( $this->caps[$cap] ) )
 			return;
 		unset( $this->caps[$cap] );
 		update_user_meta( $this->ID, $this->cap_key, $this->caps );
+=======
+	public function remove_cap( $cap ) {
+		if ( ! isset( $this->caps[ $cap ] ) ) {
+			return;
+		}
+		unset( $this->caps[ $cap ] );
+		update_user_meta( $this->ID, $this->cap_key, $this->caps );
+		$this->get_role_caps();
+		$this->update_user_level_from_caps();
+>>>>>>> WPHome/master
 	}
 
 	/**
@@ -894,11 +1238,19 @@ class WP_User {
 	 * @since 2.1.0
 	 * @access public
 	 */
+<<<<<<< HEAD
 	function remove_all_caps() {
 		global $wpdb;
 		$this->caps = array();
 		delete_user_meta( $this->ID, $this->cap_key );
 		delete_user_meta( $this->ID, $wpdb->prefix . 'user_level' );
+=======
+	public function remove_all_caps() {
+		global $wpdb;
+		$this->caps = array();
+		delete_user_meta( $this->ID, $this->cap_key );
+		delete_user_meta( $this->ID, $wpdb->get_blog_prefix() . 'user_level' );
+>>>>>>> WPHome/master
 		$this->get_role_caps();
 	}
 
@@ -915,7 +1267,11 @@ class WP_User {
 	 * @param string|int $cap Capability or role name to search.
 	 * @return bool True, if user has capability; false, if user does not have capability.
 	 */
+<<<<<<< HEAD
 	function has_cap( $cap ) {
+=======
+	public function has_cap( $cap ) {
+>>>>>>> WPHome/master
 		if ( is_numeric( $cap ) ) {
 			_deprecated_argument( __FUNCTION__, '2.0', __('Usage of user levels by plugins and themes is deprecated. Use roles and capabilities instead.') );
 			$cap = $this->translate_level_to_cap( $cap );
@@ -932,8 +1288,24 @@ class WP_User {
 			return true;
 		}
 
+<<<<<<< HEAD
 		// Must have ALL requested caps
 		$capabilities = apply_filters( 'user_has_cap', $this->allcaps, $caps, $args );
+=======
+		/**
+		 * Dynamically filter a user's capabilities.
+		 *
+		 * @since 2.0.0
+		 * @since 3.7.0 Added the user object.
+		 *
+		 * @param array   $allcaps An array of all the user's capabilities.
+		 * @param array   $caps    Actual capabilities for meta capability.
+		 * @param array   $args    Optional parameters passed to has_cap(), typically object ID.
+		 * @param WP_User $user    The user object.
+		 */
+		// Must have ALL requested caps
+		$capabilities = apply_filters( 'user_has_cap', $this->allcaps, $caps, $args, $this );
+>>>>>>> WPHome/master
 		$capabilities['exist'] = true; // Everyone is allowed to exist
 		foreach ( (array) $caps as $cap ) {
 			if ( empty( $capabilities[ $cap ] ) )
@@ -954,7 +1326,11 @@ class WP_User {
 	 * @param int $level Level number, 1 to 10.
 	 * @return string
 	 */
+<<<<<<< HEAD
 	function translate_level_to_cap( $level ) {
+=======
+	public function translate_level_to_cap( $level ) {
+>>>>>>> WPHome/master
 		return 'level_' . $level;
 	}
 
@@ -965,7 +1341,11 @@ class WP_User {
 	 *
 	 * @param int $blog_id Optional Blog ID, defaults to current blog.
 	 */
+<<<<<<< HEAD
 	function for_blog( $blog_id = '' ) {
+=======
+	public function for_blog( $blog_id = '' ) {
+>>>>>>> WPHome/master
 		global $wpdb;
 		if ( ! empty( $blog_id ) )
 			$cap_key = $wpdb->get_blog_prefix( $blog_id ) . 'capabilities';
@@ -1030,6 +1410,7 @@ function map_meta_cap( $cap, $user_id ) {
 			break;
 		}
 
+<<<<<<< HEAD
 		$post_author_id = $post->post_author;
 
 		// If no author set yet, default to current user for cap checks.
@@ -1040,12 +1421,22 @@ function map_meta_cap( $cap, $user_id ) {
 
 		// If the user is the author...
 		if ( is_object( $post_author_data ) && $user_id == $post_author_data->ID ) {
+=======
+		// If the post author is set and the user is the author...
+		if ( $post->post_author && $user_id == $post->post_author ) {
+>>>>>>> WPHome/master
 			// If the post is published...
 			if ( 'publish' == $post->post_status ) {
 				$caps[] = $post_type->cap->delete_published_posts;
 			} elseif ( 'trash' == $post->post_status ) {
+<<<<<<< HEAD
 				if ('publish' == get_post_meta($post->ID, '_wp_trash_meta_status', true) )
 					$caps[] = $post_type->cap->delete_published_posts;
+=======
+				if ( 'publish' == get_post_meta( $post->ID, '_wp_trash_meta_status', true ) ) {
+					$caps[] = $post_type->cap->delete_published_posts;
+				}
+>>>>>>> WPHome/master
 			} else {
 				// If the post is draft...
 				$caps[] = $post_type->cap->delete_posts;
@@ -1054,10 +1445,18 @@ function map_meta_cap( $cap, $user_id ) {
 			// The user is trying to edit someone else's post.
 			$caps[] = $post_type->cap->delete_others_posts;
 			// The post is published, extra cap required.
+<<<<<<< HEAD
 			if ( 'publish' == $post->post_status )
 				$caps[] = $post_type->cap->delete_published_posts;
 			elseif ( 'private' == $post->post_status )
 				$caps[] = $post_type->cap->delete_private_posts;
+=======
+			if ( 'publish' == $post->post_status ) {
+				$caps[] = $post_type->cap->delete_published_posts;
+			} elseif ( 'private' == $post->post_status ) {
+				$caps[] = $post_type->cap->delete_private_posts;
+			}
+>>>>>>> WPHome/master
 		}
 		break;
 		// edit_post breaks down to edit_posts, edit_published_posts, or
@@ -1065,6 +1464,11 @@ function map_meta_cap( $cap, $user_id ) {
 	case 'edit_post':
 	case 'edit_page':
 		$post = get_post( $args[0] );
+<<<<<<< HEAD
+=======
+		if ( empty( $post ) )
+			break;
+>>>>>>> WPHome/master
 
 		if ( 'revision' == $post->post_type ) {
 			$post = get_post( $post->post_parent );
@@ -1080,6 +1484,7 @@ function map_meta_cap( $cap, $user_id ) {
 			break;
 		}
 
+<<<<<<< HEAD
 		$post_author_id = $post->post_author;
 
 		// If no author set yet, default to current user for cap checks.
@@ -1090,12 +1495,22 @@ function map_meta_cap( $cap, $user_id ) {
 
 		// If the user is the author...
 		if ( is_object( $post_author_data ) && $user_id == $post_author_data->ID ) {
+=======
+		// If the post author is set and the user is the author...
+		if ( $post->post_author && $user_id == $post->post_author ) {
+>>>>>>> WPHome/master
 			// If the post is published...
 			if ( 'publish' == $post->post_status ) {
 				$caps[] = $post_type->cap->edit_published_posts;
 			} elseif ( 'trash' == $post->post_status ) {
+<<<<<<< HEAD
 				if ('publish' == get_post_meta($post->ID, '_wp_trash_meta_status', true) )
 					$caps[] = $post_type->cap->edit_published_posts;
+=======
+				if ( 'publish' == get_post_meta( $post->ID, '_wp_trash_meta_status', true ) ) {
+					$caps[] = $post_type->cap->edit_published_posts;
+				}
+>>>>>>> WPHome/master
 			} else {
 				// If the post is draft...
 				$caps[] = $post_type->cap->edit_posts;
@@ -1104,10 +1519,18 @@ function map_meta_cap( $cap, $user_id ) {
 			// The user is trying to edit someone else's post.
 			$caps[] = $post_type->cap->edit_others_posts;
 			// The post is published, extra cap required.
+<<<<<<< HEAD
 			if ( 'publish' == $post->post_status )
 				$caps[] = $post_type->cap->edit_published_posts;
 			elseif ( 'private' == $post->post_status )
 				$caps[] = $post_type->cap->edit_private_posts;
+=======
+			if ( 'publish' == $post->post_status ) {
+				$caps[] = $post_type->cap->edit_published_posts;
+			} elseif ( 'private' == $post->post_status ) {
+				$caps[] = $post_type->cap->edit_private_posts;
+			}
+>>>>>>> WPHome/master
 		}
 		break;
 	case 'read_post':
@@ -1134,6 +1557,7 @@ function map_meta_cap( $cap, $user_id ) {
 			break;
 		}
 
+<<<<<<< HEAD
 		$post_author_id = $post->post_author;
 
 		// If no author set yet, default to current user for cap checks.
@@ -1148,6 +1572,15 @@ function map_meta_cap( $cap, $user_id ) {
 			$caps[] = $post_type->cap->read_private_posts;
 		else
 			$caps = map_meta_cap( 'edit_post', $user_id, $post->ID );
+=======
+		if ( $post->post_author && $user_id == $post->post_author ) {
+			$caps[] = $post_type->cap->read;
+		} elseif ( $status_obj->private ) {
+			$caps[] = $post_type->cap->read_private_posts;
+		} else {
+			$caps = map_meta_cap( 'edit_post', $user_id, $post->ID );
+		}
+>>>>>>> WPHome/master
 		break;
 	case 'publish_post':
 		$post = get_post( $args[0] );
@@ -1159,12 +1592,34 @@ function map_meta_cap( $cap, $user_id ) {
 	case 'delete_post_meta':
 	case 'add_post_meta':
 		$post = get_post( $args[0] );
+<<<<<<< HEAD
 		$post_type_object = get_post_type_object( $post->post_type );
 		$caps = map_meta_cap( $post_type_object->cap->edit_post, $user_id, $post->ID );
+=======
+		$caps = map_meta_cap( 'edit_post', $user_id, $post->ID );
+>>>>>>> WPHome/master
 
 		$meta_key = isset( $args[ 1 ] ) ? $args[ 1 ] : false;
 
 		if ( $meta_key && has_filter( "auth_post_meta_{$meta_key}" ) ) {
+<<<<<<< HEAD
+=======
+			/**
+			 * Filter whether the user is allowed to add post meta to a post.
+			 *
+			 * The dynamic portion of the hook name, `$meta_key`, refers to the
+			 * meta key passed to {@see map_meta_cap()}.
+			 *
+			 * @since 3.3.0
+			 *
+			 * @param bool   $allowed  Whether the user can add the post meta. Default false.
+			 * @param string $meta_key The meta key.
+			 * @param int    $post_id  Post ID.
+			 * @param int    $user_id  User ID.
+			 * @param string $cap      Capability name.
+			 * @param array  $caps     User capabilities.
+			 */
+>>>>>>> WPHome/master
 			$allowed = apply_filters( "auth_post_meta_{$meta_key}", false, $meta_key, $post->ID, $user_id, $cap, $caps );
 			if ( ! $allowed )
 				$caps[] = $cap;
@@ -1174,10 +1629,17 @@ function map_meta_cap( $cap, $user_id ) {
 		break;
 	case 'edit_comment':
 		$comment = get_comment( $args[0] );
+<<<<<<< HEAD
 		$post = get_post( $comment->comment_post_ID );
 		$post_type_object = get_post_type_object( $post->post_type );
 
 		$caps = map_meta_cap( $post_type_object->cap->edit_post, $user_id, $post->ID );
+=======
+		if ( empty( $comment ) )
+			break;
+		$post = get_post( $comment->comment_post_ID );
+		$caps = map_meta_cap( 'edit_post', $user_id, $post->ID );
+>>>>>>> WPHome/master
 		break;
 	case 'unfiltered_upload':
 		if ( defined('ALLOW_UNFILTERED_UPLOADS') && ALLOW_UNFILTERED_UPLOADS && ( !is_multisite() || is_super_admin( $user_id ) )  )
@@ -1210,6 +1672,7 @@ function map_meta_cap( $cap, $user_id ) {
 	case 'update_plugins':
 	case 'delete_plugins':
 	case 'install_plugins':
+<<<<<<< HEAD
 	case 'update_themes':
 	case 'delete_themes':
 	case 'install_themes':
@@ -1222,6 +1685,27 @@ function map_meta_cap( $cap, $user_id ) {
 			$caps[] = 'do_not_allow';
 		else
 			$caps[] = $cap;
+=======
+	case 'upload_plugins':
+	case 'update_themes':
+	case 'delete_themes':
+	case 'install_themes':
+	case 'upload_themes':
+	case 'update_core':
+		// Disallow anything that creates, deletes, or updates core, plugin, or theme files.
+		// Files in uploads are excepted.
+		if ( defined( 'DISALLOW_FILE_MODS' ) && DISALLOW_FILE_MODS ) {
+			$caps[] = 'do_not_allow';
+		} elseif ( is_multisite() && ! is_super_admin( $user_id ) ) {
+			$caps[] = 'do_not_allow';
+		} elseif ( 'upload_themes' === $cap ) {
+			$caps[] = 'install_themes';
+		} elseif ( 'upload_plugins' === $cap ) {
+			$caps[] = 'install_plugins';
+		} else {
+			$caps[] = $cap;
+		}
+>>>>>>> WPHome/master
 		break;
 	case 'activate_plugins':
 		$caps[] = $cap;
@@ -1254,6 +1738,15 @@ function map_meta_cap( $cap, $user_id ) {
 		else
 			$caps[] = 'do_not_allow';
 		break;
+<<<<<<< HEAD
+=======
+	case 'customize' :
+		$caps[] = 'edit_theme_options';
+		break;
+	case 'delete_site':
+		$caps[] = 'manage_options';
+		break;
+>>>>>>> WPHome/master
 	default:
 		// Handle meta capabilities for custom post types.
 		$post_type_meta_caps = _post_type_meta_capabilities();
@@ -1266,7 +1759,21 @@ function map_meta_cap( $cap, $user_id ) {
 		$caps[] = $cap;
 	}
 
+<<<<<<< HEAD
 	return apply_filters('map_meta_cap', $caps, $cap, $user_id, $args);
+=======
+	/**
+	 * Filter a user's capabilities depending on specific context and/or privilege.
+	 *
+	 * @since 2.8.0
+	 *
+	 * @param array  $caps    Returns the user's actual capabilities.
+	 * @param string $cap     Capability name.
+	 * @param int    $user_id The user ID.
+	 * @param array  $args    Adds the context to the cap. Typically the object ID.
+	 */
+	return apply_filters( 'map_meta_cap', $caps, $cap, $user_id, $args );
+>>>>>>> WPHome/master
 }
 
 /**
@@ -1299,6 +1806,7 @@ function current_user_can( $capability ) {
  * @return bool
  */
 function current_user_can_for_blog( $blog_id, $capability ) {
+<<<<<<< HEAD
 	if ( is_multisite() )
 		switch_to_blog( $blog_id );
 
@@ -1306,14 +1814,32 @@ function current_user_can_for_blog( $blog_id, $capability ) {
 
 	if ( empty( $current_user ) )
 		return false;
+=======
+	$switched = is_multisite() ? switch_to_blog( $blog_id ) : false;
+
+	$current_user = wp_get_current_user();
+
+	if ( empty( $current_user ) ) {
+		if ( $switched ) {
+			restore_current_blog();
+		}
+		return false;
+	}
+>>>>>>> WPHome/master
 
 	$args = array_slice( func_get_args(), 2 );
 	$args = array_merge( array( $capability ), $args );
 
 	$can = call_user_func_array( array( $current_user, 'has_cap' ), $args );
 
+<<<<<<< HEAD
 	if ( is_multisite() )
 		restore_current_blog();
+=======
+	if ( $switched ) {
+		restore_current_blog();
+	}
+>>>>>>> WPHome/master
 
 	return $can;
 }
@@ -1371,7 +1897,11 @@ function user_can( $user, $capability ) {
  * @since 2.0.0
  *
  * @param string $role Role name.
+<<<<<<< HEAD
  * @return object
+=======
+ * @return WP_Role|null WP_Role object if found, null if the role does not exist.
+>>>>>>> WPHome/master
  */
 function get_role( $role ) {
 	global $wp_roles;
@@ -1391,7 +1921,11 @@ function get_role( $role ) {
  * @param string $role Role name.
  * @param string $display_name Display name for role.
  * @param array $capabilities List of capabilities, e.g. array( 'edit_posts' => true, 'delete_posts' => false );
+<<<<<<< HEAD
  * @return null|WP_Role WP_Role object if role is added, null if already exists.
+=======
+ * @return WP_Role|null WP_Role object if role is added, null if already exists.
+>>>>>>> WPHome/master
  */
 function add_role( $role, $display_name, $capabilities = array() ) {
 	global $wp_roles;
@@ -1409,7 +1943,10 @@ function add_role( $role, $display_name, $capabilities = array() ) {
  * @since 2.0.0
  *
  * @param string $role Role name.
+<<<<<<< HEAD
  * @return null
+=======
+>>>>>>> WPHome/master
  */
 function remove_role( $role ) {
 	global $wp_roles;
@@ -1417,7 +1954,11 @@ function remove_role( $role ) {
 	if ( ! isset( $wp_roles ) )
 		$wp_roles = new WP_Roles();
 
+<<<<<<< HEAD
 	return $wp_roles->remove_role( $role );
+=======
+	$wp_roles->remove_role( $role );
+>>>>>>> WPHome/master
 }
 
 /**

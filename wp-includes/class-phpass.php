@@ -2,7 +2,11 @@
 /**
  * Portable PHP password hashing framework.
  * @package phpass
+<<<<<<< HEAD
  * @since 2.5
+=======
+ * @since 2.5.0
+>>>>>>> WPHome/master
  * @version 0.3 / WordPress
  * @link http://www.openwall.com/phpass/
  */
@@ -31,7 +35,11 @@
  * @package phpass
  * @version 0.3 / WordPress
  * @link http://www.openwall.com/phpass/
+<<<<<<< HEAD
  * @since 2.5
+=======
+ * @since 2.5.0
+>>>>>>> WPHome/master
  */
 class PasswordHash {
 	var $itoa64;
@@ -214,6 +222,13 @@ class PasswordHash {
 
 	function HashPassword($password)
 	{
+<<<<<<< HEAD
+=======
+		if ( strlen( $password ) > 4096 ) {
+			return '*';
+		}
+
+>>>>>>> WPHome/master
 		$random = '';
 
 		if (CRYPT_BLOWFISH == 1 && !$this->portable_hashes) {
@@ -249,11 +264,22 @@ class PasswordHash {
 
 	function CheckPassword($password, $stored_hash)
 	{
+<<<<<<< HEAD
+=======
+		if ( strlen( $password ) > 4096 ) {
+			return false;
+		}
+
+>>>>>>> WPHome/master
 		$hash = $this->crypt_private($password, $stored_hash);
 		if ($hash[0] == '*')
 			$hash = crypt($password, $stored_hash);
 
+<<<<<<< HEAD
 		return $hash == $stored_hash;
+=======
+		return $hash === $stored_hash;
+>>>>>>> WPHome/master
 	}
 }
 

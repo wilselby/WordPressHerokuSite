@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+/* global isRtl */
+>>>>>>> WPHome/master
 (function($) {
 	var frame;
 

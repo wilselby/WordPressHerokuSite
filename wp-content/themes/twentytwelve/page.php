@@ -1,6 +1,10 @@
 <?php
 /**
+<<<<<<< HEAD
  * The template for displaying all pages.
+=======
+ * The template for displaying all pages
+>>>>>>> WPHome/master
  *
  * This is the template that displays all pages by default.
  * Please note that this is the WordPress construct of pages

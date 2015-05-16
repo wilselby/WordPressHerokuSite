@@ -27,7 +27,11 @@ function add_link() {
  */
 function edit_link( $link_id = 0 ) {
 	if ( !current_user_can( 'manage_links' ) )
+<<<<<<< HEAD
 		wp_die( __( 'Cheatin&#8217; uh?' ) );
+=======
+		wp_die( __( 'Cheatin&#8217; uh?' ), 403 );
+>>>>>>> WPHome/master
 
 	$_POST['link_url'] = esc_html( $_POST['link_url'] );
 	$_POST['link_url'] = esc_url($_POST['link_url']);
@@ -50,17 +54,29 @@ function edit_link( $link_id = 0 ) {
  *
  * @since 2.0.0
  *
+<<<<<<< HEAD
  * @return object Default link
+=======
+ * @return stdClass Default link
+>>>>>>> WPHome/master
  */
 function get_default_link_to_edit() {
 	$link = new stdClass;
 	if ( isset( $_GET['linkurl'] ) )
+<<<<<<< HEAD
 		$link->link_url = esc_url( $_GET['linkurl'] );
+=======
+		$link->link_url = esc_url( wp_unslash( $_GET['linkurl'] ) );
+>>>>>>> WPHome/master
 	else
 		$link->link_url = '';
 
 	if ( isset( $_GET['name'] ) )
+<<<<<<< HEAD
 		$link->link_name = esc_attr( $_GET['name'] );
+=======
+		$link->link_name = esc_attr( wp_unslash( $_GET['name'] ) );
+>>>>>>> WPHome/master
 	else
 		$link->link_name = '';
 
@@ -70,7 +86,11 @@ function get_default_link_to_edit() {
 }
 
 /**
+<<<<<<< HEAD
  * Delete link specified from database
+=======
+ * Delete link specified from database.
+>>>>>>> WPHome/master
  *
  * @since 2.0.0
  *
@@ -79,13 +99,33 @@ function get_default_link_to_edit() {
  */
 function wp_delete_link( $link_id ) {
 	global $wpdb;
+<<<<<<< HEAD
 
+=======
+	/**
+	 * Fires before a link is deleted.
+	 *
+	 * @since 2.0.0
+	 *
+	 * @param int $link_id ID of the link to delete.
+	 */
+>>>>>>> WPHome/master
 	do_action( 'delete_link', $link_id );
 
 	wp_delete_object_term_relationships( $link_id, 'link_category' );
 
 	$wpdb->delete( $wpdb->links, array( 'link_id' => $link_id ) );
+<<<<<<< HEAD
 
+=======
+	/**
+	 * Fires after a link has been deleted.
+	 *
+	 * @since 2.2.0
+	 *
+	 * @param int $link_id ID of the deleted link.
+	 */
+>>>>>>> WPHome/master
 	do_action( 'deleted_link', $link_id );
 
 	clean_bookmark_cache( $link_id );
@@ -134,6 +174,7 @@ function wp_insert_link( $linkdata, $wp_error = false ) {
 
 	$defaults = array( 'link_id' => 0, 'link_name' => '', 'link_url' => '', 'link_rating' => 0 );
 
+<<<<<<< HEAD
 	$linkdata = wp_parse_args( $linkdata, $defaults );
 	$linkdata = sanitize_bookmark( $linkdata, 'db' );
 
@@ -143,6 +184,19 @@ function wp_insert_link( $linkdata, $wp_error = false ) {
 
 	if ( !empty( $link_id ) )
 		$update = true;
+=======
+	$args = wp_parse_args( $linkdata, $defaults );
+	$r = wp_unslash( sanitize_bookmark( $args, 'db' ) );
+
+	$link_id   = $r['link_id'];
+	$link_name = $r['link_name'];
+	$link_url  = $r['link_url'];
+
+	$update = false;
+	if ( ! empty( $link_id ) ) {
+		$update = true;
+	}
+>>>>>>> WPHome/master
 
 	if ( trim( $link_name ) == '' ) {
 		if ( trim( $link_url ) != '' ) {
@@ -152,6 +206,7 @@ function wp_insert_link( $linkdata, $wp_error = false ) {
 		}
 	}
 
+<<<<<<< HEAD
 	if ( trim( $link_url ) == '' )
 		return 0;
 
@@ -184,10 +239,30 @@ function wp_insert_link( $linkdata, $wp_error = false ) {
 
 	// Make sure we set a valid category
 	if ( ! isset( $link_category ) || 0 == count( $link_category ) || !is_array( $link_category ) ) {
+=======
+	if ( trim( $link_url ) == '' ) {
+		return 0;
+	}
+
+	$link_rating      = ( ! empty( $r['link_rating'] ) ) ? $r['link_rating'] : 0;
+	$link_image       = ( ! empty( $r['link_image'] ) ) ? $r['link_image'] : '';
+	$link_target      = ( ! empty( $r['link_target'] ) ) ? $r['link_target'] : '';
+	$link_visible     = ( ! empty( $r['link_visible'] ) ) ? $r['link_visible'] : 'Y';
+	$link_owner       = ( ! empty( $r['link_owner'] ) ) ? $r['link_owner'] : get_current_user_id();
+	$link_notes       = ( ! empty( $r['link_notes'] ) ) ? $r['link_notes'] : '';
+	$link_description = ( ! empty( $r['link_description'] ) ) ? $r['link_description'] : '';
+	$link_rss         = ( ! empty( $r['link_rss'] ) ) ? $r['link_rss'] : '';
+	$link_rel         = ( ! empty( $r['link_rel'] ) ) ? $r['link_rel'] : '';
+	$link_category    = ( ! empty( $r['link_category'] ) ) ? $r['link_category'] : array();
+
+	// Make sure we set a valid category
+	if ( ! is_array( $link_category ) || 0 == count( $link_category ) ) {
+>>>>>>> WPHome/master
 		$link_category = array( get_option( 'default_link_category' ) );
 	}
 
 	if ( $update ) {
+<<<<<<< HEAD
 		if ( false === $wpdb->update( $wpdb->links, compact('link_url', 'link_name', 'link_image', 'link_target', 'link_description', 'link_visible', 'link_rating', 'link_rel', 'link_notes', 'link_rss'), compact('link_id') ) ) {
 			if ( $wp_error )
 				return new WP_Error( 'db_update_error', __( 'Could not update link in the database' ), $wpdb->last_error );
@@ -200,17 +275,55 @@ function wp_insert_link( $linkdata, $wp_error = false ) {
 				return new WP_Error( 'db_insert_error', __( 'Could not insert link into the database' ), $wpdb->last_error );
 			else
 				return 0;
+=======
+		if ( false === $wpdb->update( $wpdb->links, compact( 'link_url', 'link_name', 'link_image', 'link_target', 'link_description', 'link_visible', 'link_rating', 'link_rel', 'link_notes', 'link_rss' ), compact( 'link_id' ) ) ) {
+			if ( $wp_error ) {
+				return new WP_Error( 'db_update_error', __( 'Could not update link in the database' ), $wpdb->last_error );
+			} else {
+				return 0;
+			}
+		}
+	} else {
+		if ( false === $wpdb->insert( $wpdb->links, compact( 'link_url', 'link_name', 'link_image', 'link_target', 'link_description', 'link_visible', 'link_owner', 'link_rating', 'link_rel', 'link_notes', 'link_rss' ) ) ) {
+			if ( $wp_error ) {
+				return new WP_Error( 'db_insert_error', __( 'Could not insert link into the database' ), $wpdb->last_error );
+			} else {
+				return 0;
+			}
+>>>>>>> WPHome/master
 		}
 		$link_id = (int) $wpdb->insert_id;
 	}
 
 	wp_set_link_cats( $link_id, $link_category );
 
+<<<<<<< HEAD
 	if ( $update )
 		do_action( 'edit_link', $link_id );
 	else
 		do_action( 'add_link', $link_id );
 
+=======
+	if ( $update ) {
+		/**
+		 * Fires after a link was updated in the database.
+		 *
+		 * @since 2.0.0
+		 *
+		 * @param int $link_id ID of the link that was updated.
+		 */
+		do_action( 'edit_link', $link_id );
+	} else {
+		/**
+		 * Fires after a link was added to the database.
+		 *
+		 * @since 2.0.0
+		 *
+		 * @param int $link_id ID of the link that was added.
+		 */
+		do_action( 'add_link', $link_id );
+	}
+>>>>>>> WPHome/master
 	clean_bookmark_cache( $link_id );
 
 	return $link_id;
@@ -251,7 +364,11 @@ function wp_update_link( $linkdata ) {
 	$link = get_bookmark( $link_id, ARRAY_A );
 
 	// Escape data pulled from DB.
+<<<<<<< HEAD
 	$link = add_magic_quotes( $link );
+=======
+	$link = wp_slash( $link );
+>>>>>>> WPHome/master
 
 	// Passed link category list overwrites existing category list if not empty.
 	if ( isset( $linkdata['link_category'] ) && is_array( $linkdata['link_category'] )

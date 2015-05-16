@@ -8,6 +8,12 @@
  */
 
 /** Load WordPress Administration Bootstrap */
+<<<<<<< HEAD
 require_once( './admin.php' );
 
 require( '../freedoms.php' );
+=======
+require_once( dirname( __FILE__ ) . '/admin.php' );
+
+require( ABSPATH . 'wp-admin/freedoms.php' );
+>>>>>>> WPHome/master

@@ -7,13 +7,21 @@
  */
 
 /** Load WordPress Bootstrap */
+<<<<<<< HEAD
 require_once ('admin.php');
+=======
+require_once( dirname( __FILE__ ) . '/admin.php' );
+>>>>>>> WPHome/master
 
 if ( !current_user_can('export') )
 	wp_die(__('You do not have sufficient permissions to export the content of this site.'));
 
 /** Load WordPress export API */
+<<<<<<< HEAD
 require_once('./includes/export.php');
+=======
+require_once( ABSPATH . 'wp-admin/includes/export.php' );
+>>>>>>> WPHome/master
 $title = __('Export');
 
 /**
@@ -24,7 +32,10 @@ $title = __('Export');
 function export_add_js() {
 ?>
 <script type="text/javascript">
+<<<<<<< HEAD
 //<![CDATA[
+=======
+>>>>>>> WPHome/master
 	jQuery(document).ready(function($){
  		var form = $('#export-filters'),
  			filters = form.find('.export-filters');
@@ -37,7 +48,10 @@ function export_add_js() {
 			}
  		});
 	});
+<<<<<<< HEAD
 //]]>
+=======
+>>>>>>> WPHome/master
 </script>
 <?php
 }
@@ -52,16 +66,28 @@ get_current_screen()->add_help_tab( array(
 
 get_current_screen()->set_help_sidebar(
 	'<p><strong>' . __('For more information:') . '</strong></p>' .
+<<<<<<< HEAD
 	'<p>' . __('<a href="http://codex.wordpress.org/Tools_Export_Screen" target="_blank">Documentation on Export</a>') . '</p>' .
 	'<p>' . __('<a href="http://wordpress.org/support/" target="_blank">Support Forums</a>') . '</p>'
 );
 
+=======
+	'<p>' . __('<a href="https://codex.wordpress.org/Tools_Export_Screen" target="_blank">Documentation on Export</a>') . '</p>' .
+	'<p>' . __('<a href="https://wordpress.org/support/" target="_blank">Support Forums</a>') . '</p>'
+);
+
+// If the 'download' URL parameter is set, a WXR export file is baked and returned.
+>>>>>>> WPHome/master
 if ( isset( $_GET['download'] ) ) {
 	$args = array();
 
 	if ( ! isset( $_GET['content'] ) || 'all' == $_GET['content'] ) {
 		$args['content'] = 'all';
+<<<<<<< HEAD
 	} else if ( 'posts' == $_GET['content'] ) {
+=======
+	} elseif ( 'posts' == $_GET['content'] ) {
+>>>>>>> WPHome/master
 		$args['content'] = 'post';
 
 		if ( $_GET['cat'] )
@@ -77,7 +103,11 @@ if ( isset( $_GET['download'] ) ) {
 
 		if ( $_GET['post_status'] )
 			$args['status'] = $_GET['post_status'];
+<<<<<<< HEAD
 	} else if ( 'pages' == $_GET['content'] ) {
+=======
+	} elseif ( 'pages' == $_GET['content'] ) {
+>>>>>>> WPHome/master
 		$args['content'] = 'page';
 
 		if ( $_GET['page_author'] )
@@ -94,14 +124,39 @@ if ( isset( $_GET['download'] ) ) {
 		$args['content'] = $_GET['content'];
 	}
 
+<<<<<<< HEAD
+=======
+	/**
+	 * Filter the export args.
+	 *
+	 * @since 3.5.0
+	 *
+	 * @param array $args The arguments to send to the exporter.
+	 */
+>>>>>>> WPHome/master
 	$args = apply_filters( 'export_args', $args );
 
 	export_wp( $args );
 	die();
 }
 
+<<<<<<< HEAD
 require_once ('admin-header.php');
 
+=======
+require_once( ABSPATH . 'wp-admin/admin-header.php' );
+
+/**
+ * Create the date options fields for exporting a given post type.
+ *
+ * @global wpdb      $wpdb      WordPress database abstraction object.
+ * @global WP_Locale $wp_locale Date and Time Locale object.
+ *
+ * @since 3.1.0
+ *
+ * @param string $post_type The post type. Default 'post'.
+ */
+>>>>>>> WPHome/master
 function export_date_options( $post_type = 'post' ) {
 	global $wpdb, $wp_locale;
 
@@ -127,7 +182,10 @@ function export_date_options( $post_type = 'post' ) {
 ?>
 
 <div class="wrap">
+<<<<<<< HEAD
 <?php screen_icon(); ?>
+=======
+>>>>>>> WPHome/master
 <h2><?php echo esc_html( $title ); ?></h2>
 
 <p><?php _e('When you click the button below WordPress will create an XML file for you to save to your computer.'); ?></p>
@@ -135,7 +193,11 @@ function export_date_options( $post_type = 'post' ) {
 <p><?php _e('Once you&#8217;ve saved the download file, you can use the Import function in another WordPress installation to import the content from this site.'); ?></p>
 
 <h3><?php _e( 'Choose what to export' ); ?></h3>
+<<<<<<< HEAD
 <form action="" method="get" id="export-filters">
+=======
+<form method="get" id="export-filters">
+>>>>>>> WPHome/master
 <input type="hidden" name="download" value="true" />
 <p><label><input type="radio" name="content" value="all" checked="checked" /> <?php _e( 'All content' ); ?></label></p>
 <p class="description"><?php _e( 'This will contain all of your posts, pages, comments, custom fields, terms, navigation menus and custom posts.' ); ?></p>
@@ -211,10 +273,25 @@ function export_date_options( $post_type = 'post' ) {
 <p><label><input type="radio" name="content" value="<?php echo esc_attr( $post_type->name ); ?>" /> <?php echo esc_html( $post_type->label ); ?></label></p>
 <?php endforeach; ?>
 
+<<<<<<< HEAD
 <?php do_action( 'export_filters' ) ?>
+=======
+<?php
+/**
+ * Fires after the export filters form.
+ *
+ * @since 3.5.0
+ */
+do_action( 'export_filters' );
+?>
+>>>>>>> WPHome/master
 
 <?php submit_button( __('Download Export File') ); ?>
 </form>
 </div>
 
+<<<<<<< HEAD
 <?php include('admin-footer.php'); ?>
+=======
+<?php include( ABSPATH . 'wp-admin/admin-footer.php' ); ?>
+>>>>>>> WPHome/master

@@ -4,7 +4,11 @@
  *
  * This file is deprecated, use 'wp-admin/includes/admin.php' instead.
  *
+<<<<<<< HEAD
  * @deprecated 2.5
+=======
+ * @deprecated 2.5.0
+>>>>>>> WPHome/master
  * @package WordPress
  * @subpackage Administration
  */

@@ -2,6 +2,14 @@
 	var api = wp.customize,
 		debounce;
 
+<<<<<<< HEAD
+=======
+	/**
+	 * Returns a debounced version of the function.
+	 *
+	 * @todo Require Underscore.js for this file and retire this.
+	 */
+>>>>>>> WPHome/master
 	debounce = function( fn, delay, context ) {
 		var timeout;
 		return function() {
@@ -17,6 +25,15 @@
 		};
 	};
 
+<<<<<<< HEAD
+=======
+	/**
+	 * @constructor
+	 * @augments wp.customize.Messenger
+	 * @augments wp.customize.Class
+	 * @mixes wp.customize.Events
+	 */
+>>>>>>> WPHome/master
 	api.Preview = api.Messenger.extend({
 		/**
 		 * Requires params:
@@ -56,14 +73,24 @@
 		if ( ! api.settings )
 			return;
 
+<<<<<<< HEAD
 		var preview, bg;
 
 		preview = new api.Preview({
+=======
+		var bg;
+
+		api.preview = new api.Preview({
+>>>>>>> WPHome/master
 			url: window.location.href,
 			channel: api.settings.channel
 		});
 
+<<<<<<< HEAD
 		preview.bind( 'settings', function( values ) {
+=======
+		api.preview.bind( 'settings', function( values ) {
+>>>>>>> WPHome/master
 			$.each( values, function( id, value ) {
 				if ( api.has( id ) )
 					api( id ).set( value );
@@ -72,9 +99,15 @@
 			});
 		});
 
+<<<<<<< HEAD
 		preview.trigger( 'settings', api.settings.values );
 
 		preview.bind( 'setting', function( args ) {
+=======
+		api.preview.trigger( 'settings', api.settings.values );
+
+		api.preview.bind( 'setting', function( args ) {
+>>>>>>> WPHome/master
 			var value;
 
 			args = args.slice();
@@ -83,6 +116,7 @@
 				value.set.apply( value, args );
 		});
 
+<<<<<<< HEAD
 		preview.bind( 'sync', function( events ) {
 			$.each( events, function( event, args ) {
 				preview.trigger( event, args );
@@ -96,6 +130,38 @@
 	 	});
 
 		preview.send( 'ready' );
+=======
+		api.preview.bind( 'sync', function( events ) {
+			$.each( events, function( event, args ) {
+				api.preview.trigger( event, args );
+			});
+			api.preview.send( 'synced' );
+		});
+
+		api.preview.bind( 'active', function() {
+			if ( api.settings.nonce ) {
+				api.preview.send( 'nonce', api.settings.nonce );
+			}
+
+			api.preview.send( 'documentTitle', document.title );
+		});
+
+		api.preview.send( 'ready', {
+			activePanels: api.settings.activePanels,
+			activeSections: api.settings.activeSections,
+			activeControls: api.settings.activeControls
+		} );
+
+		// Display a loading indicator when preview is reloading, and remove on failure.
+		api.preview.bind( 'loading-initiated', function () {
+			$( 'body' ).addClass( 'wp-customizer-unloading' );
+			$( 'html' ).prop( 'title', api.settings.l10n.loading );
+		});
+		api.preview.bind( 'loading-failed', function () {
+			$( 'body' ).removeClass( 'wp-customizer-unloading' );
+			$( 'html' ).prop( 'title', '' );
+		});
+>>>>>>> WPHome/master
 
 		/* Custom Backgrounds */
 		bg = $.map(['color', 'image', 'position_x', 'repeat', 'attachment'], function( prop ) {
@@ -108,11 +174,14 @@
 				style = $('#custom-background-css'),
 				update;
 
+<<<<<<< HEAD
 			// If custom backgrounds are active and we can't find the
 			// default output, bail.
 			if ( body.hasClass('custom-background') && ! style.length )
 				return;
 
+=======
+>>>>>>> WPHome/master
 			update = function() {
 				var css = '';
 
@@ -141,6 +210,11 @@
 				this.bind( update );
 			});
 		});
+<<<<<<< HEAD
+=======
+
+		api.trigger( 'preview-ready' );
+>>>>>>> WPHome/master
 	});
 
 })( wp, jQuery );

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 var theList, theExtraList, toggleWithKeyboard = false;
 
 (function($) {
@@ -5,13 +6,29 @@ var getCount, updateCount, updatePending, dashboardTotals;
 
 setCommentsList = function() {
 	var totalInput, perPageInput, pageInput, lastConfidentTime = 0, dimAfter, delBefore, updateTotalCount, delAfter, refillTheExtraList;
+=======
+/* global adminCommentsL10n, thousandsSeparator, list_args, QTags, ajaxurl, wpAjax */
+var setCommentsList, theList, theExtraList, commentReply;
+
+(function($) {
+var getCount, updateCount, updatePending;
+
+setCommentsList = function() {
+	var totalInput, perPageInput, pageInput, dimAfter, delBefore, updateTotalCount, delAfter, refillTheExtraList, diff,
+		lastConfidentTime = 0;
+>>>>>>> WPHome/master
 
 	totalInput = $('input[name="_total"]', '#comments-form');
 	perPageInput = $('input[name="_per_page"]', '#comments-form');
 	pageInput = $('input[name="_page"]', '#comments-form');
 
 	dimAfter = function( r, settings ) {
+<<<<<<< HEAD
 		var c = $('#' + settings.element), editRow, replyID, replyButton;
+=======
+		var editRow, replyID, replyButton,
+			c = $( '#' + settings.element );
+>>>>>>> WPHome/master
 
 		editRow = $('#replyrow');
 		replyID = $('#comment_ID', editRow).val();
@@ -29,13 +46,23 @@ setCommentsList = function() {
 			c.find('div.comment_status').html('1');
 		}
 
+<<<<<<< HEAD
 		var diff = $('#' + settings.element).is('.' + settings.dimClass) ? 1 : -1;
+=======
+		diff = $('#' + settings.element).is('.' + settings.dimClass) ? 1 : -1;
+>>>>>>> WPHome/master
 		updatePending( diff );
 	};
 
 	// Send current total, page, per_page and url
 	delBefore = function( settings, list ) {
+<<<<<<< HEAD
 		var wpListsData = $(settings.target).attr('data-wp-lists'), id, el, n, h, a, author, action = false;
+=======
+		var note, id, el, n, h, a, author,
+			action = false,
+			wpListsData = $( settings.target ).attr( 'data-wp-lists' );
+>>>>>>> WPHome/master
 
 		settings.data._total = totalInput.val() || 0;
 		settings.data._per_page = perPageInput.val() || 0;
@@ -74,13 +101,21 @@ setCommentsList = function() {
 			a.attr('href', 'comment.php?action=un' + action + 'comment&c=' + id + '&_wpnonce=' + settings.data._ajax_nonce);
 			a.attr('data-wp-lists', 'delete:the-comment-list:comment-' + id + '::un' + action + '=1');
 			a.attr('class', 'vim-z vim-destructive');
+<<<<<<< HEAD
 			$('.avatar', el).clone().prependTo('#undo-' + id + ' .' + action + '-undo-inside');
+=======
+			$('.avatar', el).first().clone().prependTo('#undo-' + id + ' .' + action + '-undo-inside');
+>>>>>>> WPHome/master
 
 			a.click(function(){
 				list.wpList.del(this);
 				$('#undo-' + id).css( {backgroundColor:'#ceb'} ).fadeOut(350, function(){
 					$(this).remove();
+<<<<<<< HEAD
 					$('#comment-' + id).css('backgroundColor', '').fadeIn(300, function(){ $(this).show() });
+=======
+					$('#comment-' + id).css('backgroundColor', '').fadeIn(300, function(){ $(this).show(); });
+>>>>>>> WPHome/master
 				});
 				return false;
 			});
@@ -100,6 +135,7 @@ setCommentsList = function() {
 		totalInput.val( total.toString() );
 	};
 
+<<<<<<< HEAD
 	dashboardTotals = function(n) {
 		var dash = $('#dashboard_right_now'), total, appr, totalN, apprN;
 
@@ -117,6 +153,8 @@ setCommentsList = function() {
 		updateCount(appr, apprN);
 	};
 
+=======
+>>>>>>> WPHome/master
 	getCount = function(el) {
 		var n = parseInt( el.html().replace(/[^0-9]+/g, ''), 10 );
 		if ( isNaN(n) )
@@ -144,16 +182,26 @@ setCommentsList = function() {
 			var a = $(this), n = getCount(a) + diff;
 			if ( n < 1 )
 				n = 0;
+<<<<<<< HEAD
 			a.closest('.awaiting-mod')[ 0 == n ? 'addClass' : 'removeClass' ]('count-0');
 			updateCount( a, n );
 		});
 
 		dashboardTotals();
+=======
+			a.closest('.awaiting-mod')[ 0 === n ? 'addClass' : 'removeClass' ]('count-0');
+			updateCount( a, n );
+		});
+>>>>>>> WPHome/master
 	};
 
 	// In admin-ajax.php, we send back the unix time stamp instead of 1 on success
 	delAfter = function( r, settings ) {
+<<<<<<< HEAD
 		var total, N, spam, trash, pending,
+=======
+		var total_items_i18n, total, spam, trash, pending,
+>>>>>>> WPHome/master
 			untrash = $(settings.target).parent().is('span.untrash'),
 			unspam = $(settings.target).parent().is('span.unspam'),
 			unapproved = $('#' + settings.element).is('.unapproved');
@@ -199,10 +247,14 @@ setCommentsList = function() {
 			updateCount(a, n);
 		});
 
+<<<<<<< HEAD
 		if ( $('#dashboard_right_now').length ) {
 			N = trash ? -1 * trash : 0;
 			dashboardTotals(N);
 		} else {
+=======
+		if ( ! $('#dashboard_right_now').length ) {
+>>>>>>> WPHome/master
 			total = totalInput.val() ? parseInt( totalInput.val(), 10 ) : 0;
 			if ( $(settings.target).parent().is('span.undo') )
 				total++;
@@ -225,7 +277,11 @@ setCommentsList = function() {
 			}
 		}
 
+<<<<<<< HEAD
 		if ( ! theExtraList || theExtraList.size() == 0 || theExtraList.children().size() == 0 || untrash || unspam ) {
+=======
+		if ( ! theExtraList || theExtraList.size() === 0 || theExtraList.children().size() === 0 || untrash || unspam ) {
+>>>>>>> WPHome/master
 			return;
 		}
 
@@ -283,7 +339,11 @@ setCommentsList = function() {
 			var wpListsData = $(s.target).attr('data-wp-lists'), id = s.element.replace(/[^0-9]+/g, '');
 
 			if ( wpListsData.indexOf(':trash=1') != -1 || wpListsData.indexOf(':spam=1') != -1 )
+<<<<<<< HEAD
 				$('#undo-' + id).fadeIn(300, function(){ $(this).show() });
+=======
+				$('#undo-' + id).fadeIn(300, function(){ $(this).show(); });
+>>>>>>> WPHome/master
 		});
 };
 
@@ -309,7 +369,11 @@ commentReply = {
 			commentReply.toggle($(this).parent());
 		});
 
+<<<<<<< HEAD
 		$('#doaction, #doaction2, #post-query-submit').click(function(e){
+=======
+		$('#doaction, #doaction2, #post-query-submit').click(function(){
+>>>>>>> WPHome/master
 			if ( $('#the-comment-list #replyrow').length > 0 )
 				commentReply.close();
 		});
@@ -355,7 +419,11 @@ commentReply = {
 
 		if ( this.cid && this.act == 'edit-comment' ) {
 			c = $('#comment-' + this.cid);
+<<<<<<< HEAD
 			c.fadeIn(300, function(){ c.show() }).css('backgroundColor', '');
+=======
+			c.fadeIn(300, function(){ c.show(); }).css('backgroundColor', '');
+>>>>>>> WPHome/master
 		}
 
 		// reset the Quicktags buttons
@@ -368,14 +436,26 @@ commentReply = {
 		$('#com-reply').append( replyrow );
 		$('#replycontent').css('height', '').val('');
 		$('#edithead input').val('');
+<<<<<<< HEAD
 		$('.error', replyrow).html('').hide();
 		$('.spinner', replyrow).hide();
+=======
+		$('.error', replyrow).empty().hide();
+		$( '.spinner', replyrow ).removeClass( 'is-active' );
+>>>>>>> WPHome/master
 
 		this.cid = '';
 	},
 
 	open : function(comment_id, post_id, action) {
+<<<<<<< HEAD
 		var t = this, editRow, rowData, act, c = $('#comment-' + comment_id), h = c.height(), replyButton;
+=======
+		var editRow, rowData, act, replyButton, editHeight,
+			t = this,
+			c = $('#comment-' + comment_id),
+			h = c.height();
+>>>>>>> WPHome/master
 
 		t.close();
 		t.cid = comment_id;
@@ -390,9 +470,12 @@ commentReply = {
 		$('#comment_post_ID', editRow).val(post_id);
 		$('#comment_ID', editRow).val(comment_id);
 
+<<<<<<< HEAD
 		if ( h > 120 )
 			$('#replycontent', editRow).css('height', (35+h) + 'px');
 
+=======
+>>>>>>> WPHome/master
 		if ( action == 'edit' ) {
 			$('#author', editRow).val( $('div.author', rowData).text() );
 			$('#author-email', editRow).val( $('div.author-email', rowData).text() );
@@ -402,6 +485,7 @@ commentReply = {
 			$('#edithead, #savebtn', editRow).show();
 			$('#replyhead, #replybtn, #addhead, #addbtn', editRow).hide();
 
+<<<<<<< HEAD
 			c.after( editRow ).fadeOut('fast', function(){
 				$('#replyrow').fadeIn(300, function(){ $(this).show() });
 			});
@@ -412,6 +496,25 @@ commentReply = {
 			$('#replyrow').fadeIn(300);
  		} else {
  			replyButton = $('#replybtn', editRow);
+=======
+			if ( h > 120 ) {
+				// Limit the maximum height when editing very long comments to make it more manageable.
+				// The textarea is resizable in most browsers, so the user can adjust it if needed.
+				editHeight = h > 500 ? 500 : h;
+				$('#replycontent', editRow).css('height', editHeight + 'px');
+			}
+
+			c.after( editRow ).fadeOut('fast', function(){
+				$('#replyrow').fadeIn(300, function(){ $(this).show(); });
+			});
+		} else if ( action == 'add' ) {
+			$('#addhead, #addbtn', editRow).show();
+			$('#replyhead, #replybtn, #edithead, #savebtn', editRow).hide();
+			$('#the-comment-list').prepend(editRow);
+			$('#replyrow').fadeIn(300);
+		} else {
+			replyButton = $('#replybtn', editRow);
+>>>>>>> WPHome/master
 			$('#edithead, #savebtn, #addhead, #addbtn', editRow).hide();
 			$('#replyhead, #replybtn', editRow).show();
 			c.after(editRow);
@@ -422,7 +525,11 @@ commentReply = {
 				replyButton.text(adminCommentsL10n.reply);
 			}
 
+<<<<<<< HEAD
 			$('#replyrow').fadeIn(300, function(){ $(this).show() });
+=======
+			$('#replyrow').fadeIn(300, function(){ $(this).show(); });
+>>>>>>> WPHome/master
 		}
 
 		setTimeout(function() {
@@ -431,7 +538,11 @@ commentReply = {
 			rtop = $('#replyrow').offset().top;
 			rbottom = rtop + $('#replyrow').height();
 			scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+<<<<<<< HEAD
 			vp = document.documentElement.clientHeight || self.innerHeight || 0;
+=======
+			vp = document.documentElement.clientHeight || window.innerHeight || 0;
+>>>>>>> WPHome/master
 			scrollBottom = scrollTop + vp;
 
 			if ( scrollBottom - 20 < rbottom )
@@ -452,7 +563,11 @@ commentReply = {
 		var post = {};
 
 		$('#replysubmit .error').hide();
+<<<<<<< HEAD
 		$('#replysubmit .spinner').show();
+=======
+		$( '#replysubmit .spinner' ).addClass( 'is-active' );
+>>>>>>> WPHome/master
 
 		$('#replyrow input').not(':button').each(function() {
 			var t = $(this);
@@ -495,7 +610,10 @@ commentReply = {
 		t.revert();
 
 		r = r.responses[0];
+<<<<<<< HEAD
 		c = r.data;
+=======
+>>>>>>> WPHome/master
 		id = '#comment-' + r.id;
 
 		if ( 'edit-comment' == t.act )
@@ -513,8 +631,15 @@ commentReply = {
 			}
 		}
 
+<<<<<<< HEAD
 		$(c).hide()
 		$('#replyrow').after(c);
+=======
+		c = $.trim(r.data); // Trim leading whitespaces
+		$(c).hide();
+		$('#replyrow').after(c);
+
+>>>>>>> WPHome/master
 		id = $(id);
 		t.addEvents(id);
 		bg = id.hasClass('unapproved') ? '#FFFFE0' : id.closest('.widefat, .postbox').css('backgroundColor');
@@ -534,7 +659,11 @@ commentReply = {
 	error : function(r) {
 		var er = r.statusText;
 
+<<<<<<< HEAD
 		$('#replysubmit .spinner').hide();
+=======
+		$( '#replysubmit .spinner' ).removeClass( 'is-active' );
+>>>>>>> WPHome/master
 
 		if ( r.responseText )
 			er = r.responseText.replace( /<.[^<>]*?>/g, '' );
@@ -571,7 +700,11 @@ $(document).ready(function(){
 				l = $('.tablenav-pages .'+which+'-page:not(.disabled)');
 				if (l.length)
 					window.location = l[0].href.replace(/\&hotkeys_highlight_(first|last)=1/g, '')+'&hotkeys_highlight_'+first_last+'=1';
+<<<<<<< HEAD
 			}
+=======
+			};
+>>>>>>> WPHome/master
 		};
 
 		edit_comment = function(event, current_row) {
@@ -579,9 +712,13 @@ $(document).ready(function(){
 		};
 
 		toggle_all = function() {
+<<<<<<< HEAD
 			toggleWithKeyboard = true;
 			$('input:checkbox', '#cb').click().prop('checked', false);
 			toggleWithKeyboard = false;
+=======
+			$('#cb-select-all-1').data( 'wp-toggle', 1 ).trigger( 'click' ).removeData( 'wp-toggle' );
+>>>>>>> WPHome/master
 		};
 
 		make_bulk = function(value) {
@@ -589,11 +726,16 @@ $(document).ready(function(){
 				var scope = $('select[name="action"]');
 				$('option[value="' + value + '"]', scope).prop('selected', true);
 				$('#doaction').click();
+<<<<<<< HEAD
 			}
+=======
+			};
+>>>>>>> WPHome/master
 		};
 
 		$.table_hotkeys(
 			$('table.widefat'),
+<<<<<<< HEAD
 			['a', 'u', 's', 'd', 'r', 'q', 'z', ['e', edit_comment], ['shift+x', toggle_all],
 			['shift+a', make_bulk('approve')], ['shift+s', make_bulk('spam')],
 			['shift+d', make_bulk('delete')], ['shift+t', make_bulk('trash')],
@@ -602,6 +744,47 @@ $(document).ready(function(){
 			prev_page_link_cb: make_hotkeys_redirect('prev'), next_page_link_cb: make_hotkeys_redirect('next') }
 		);
 	}
+=======
+			[
+				'a', 'u', 's', 'd', 'r', 'q', 'z',
+				['e', edit_comment],
+				['shift+x', toggle_all],
+				['shift+a', make_bulk('approve')],
+				['shift+s', make_bulk('spam')],
+				['shift+d', make_bulk('delete')],
+				['shift+t', make_bulk('trash')],
+				['shift+z', make_bulk('untrash')],
+				['shift+u', make_bulk('unapprove')]
+			],
+			{
+				highlight_first: adminCommentsL10n.hotkeys_highlight_first,
+				highlight_last: adminCommentsL10n.hotkeys_highlight_last,
+				prev_page_link_cb: make_hotkeys_redirect('prev'),
+				next_page_link_cb: make_hotkeys_redirect('next'),
+				hotkeys_opts: {
+					disableInInput: true,
+					type: 'keypress',
+					noDisable: '.check-column input[type="checkbox"]'
+				},
+				cycle_expr: '#the-comment-list tr',
+				start_row_index: 0
+			}
+		);
+	}
+
+	// Quick Edit and Reply have an inline comment editor.
+	$( '#the-comment-list' ).on( 'click', '.comment-inline', function (e) {
+		e.preventDefault();
+		var $el = $( this ),
+			action = 'replyto';
+
+		if ( 'undefined' !== typeof $el.data( 'action' ) ) {
+			action = $el.data( 'action' );
+		}
+
+		commentReply.open( $el.data( 'commentId' ), $el.data( 'postId' ), action );
+	} );
+>>>>>>> WPHome/master
 });
 
 })(jQuery);

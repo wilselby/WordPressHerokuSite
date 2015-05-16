@@ -23,6 +23,7 @@ define('DOING_CRON', true);
 
 if ( !defined('ABSPATH') ) {
 	/** Set up WordPress environment */
+<<<<<<< HEAD
 	require_once('./wp-load.php');
 }
 
@@ -34,6 +35,30 @@ function _get_cron_lock() {
 	if ( $_wp_using_ext_object_cache ) {
 		// Skip local cache and force refetch of doing_cron transient in case
 		// another processs updated the cache
+=======
+	require_once( dirname( __FILE__ ) . '/wp-load.php' );
+}
+
+/**
+ * Retrieves the cron lock.
+ *
+ * Returns the uncached `doing_cron` transient.
+ *
+ * @ignore
+ * @since 3.3.0
+ *
+ * @return string|false Value of the `doing_cron` transient, 0|false otherwise.
+ */
+function _get_cron_lock() {
+	global $wpdb;
+
+	$value = 0;
+	if ( wp_using_ext_object_cache() ) {
+		/*
+		 * Skip local cache and force re-fetch of doing_cron transient
+		 * in case another process updated the cache.
+		 */
+>>>>>>> WPHome/master
 		$value = wp_cache_get( 'doing_cron', 'transient', true );
 	} else {
 		$row = $wpdb->get_row( $wpdb->prepare( "SELECT option_value FROM $wpdb->options WHERE option_name = %s LIMIT 1", '_transient_doing_cron' ) );
@@ -89,6 +114,18 @@ foreach ( $crons as $timestamp => $cronhooks ) {
 
 			wp_unschedule_event( $timestamp, $hook, $v['args'] );
 
+<<<<<<< HEAD
+=======
+			/**
+			 * Fires scheduled events.
+			 *
+			 * @ignore
+			 * @since 2.1.0
+			 *
+			 * @param string $hook Name of the hook that was scheduled to be fired.
+			 * @param array  $args The arguments to be passed to the hook.
+			 */
+>>>>>>> WPHome/master
  			do_action_ref_array( $hook, $v['args'] );
 
 			// If the hook ran too long and another cron process stole the lock, quit.

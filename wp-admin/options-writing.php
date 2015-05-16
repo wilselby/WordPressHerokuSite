@@ -7,7 +7,11 @@
  */
 
 /** WordPress Administration Bootstrap */
+<<<<<<< HEAD
 require_once('./admin.php');
+=======
+require_once( dirname( __FILE__ ) . '/admin.php' );
+>>>>>>> WPHome/master
 
 if ( ! current_user_can( 'manage_options' ) )
 	wp_die( __( 'You do not have sufficient permissions to manage options for this site.' ) );
@@ -22,12 +26,16 @@ get_current_screen()->add_help_tab( array(
 		'<p>' . __('You must click the Save Changes button at the bottom of the screen for new settings to take effect.') . '</p>',
 ) );
 
+<<<<<<< HEAD
 get_current_screen()->add_help_tab( array(
 	'id'      => 'options-press',
 	'title'   => __('Press This'),
 	'content' => '<p>' . __('Press This is a bookmarklet that makes it easy to blog about something you come across on the web. You can use it to just grab a link, or to post an excerpt. Press This will even allow you to choose from images included on the page and use them in your post. Just drag the Press This link on this screen to your bookmarks bar in your browser, and you&#8217;ll be on your way to easier content creation. Clicking on it while on another website opens a popup window with all these options.') . '</p>',
 ) );
 
+=======
+/** This filter is documented in wp-admin/options.php */
+>>>>>>> WPHome/master
 if ( apply_filters( 'enable_post_by_email_configuration', true ) ) {
 	get_current_screen()->add_help_tab( array(
 		'id'      => 'options-postemail',
@@ -36,6 +44,10 @@ if ( apply_filters( 'enable_post_by_email_configuration', true ) ) {
 	) );
 }
 
+<<<<<<< HEAD
+=======
+/** This filter is documented in wp-admin/options-writing.php */
+>>>>>>> WPHome/master
 if ( apply_filters( 'enable_update_services_configuration', true ) ) {
 	get_current_screen()->add_help_tab( array(
 		'id'      => 'options-services',
@@ -46,6 +58,7 @@ if ( apply_filters( 'enable_update_services_configuration', true ) ) {
 
 get_current_screen()->set_help_sidebar(
 	'<p><strong>' . __('For more information:') . '</strong></p>' .
+<<<<<<< HEAD
 	'<p>' . __('<a href="http://codex.wordpress.org/Settings_Writing_Screen" target="_blank">Documentation on Writing Settings</a>') . '</p>' .
 	'<p>' . __('<a href="http://wordpress.org/support/" target="_blank">Support Forums</a>') . '</p>'
 );
@@ -55,13 +68,28 @@ include('./admin-header.php');
 
 <div class="wrap">
 <?php screen_icon(); ?>
+=======
+	'<p>' . __('<a href="https://codex.wordpress.org/Settings_Writing_Screen" target="_blank">Documentation on Writing Settings</a>') . '</p>' .
+	'<p>' . __('<a href="https://wordpress.org/support/" target="_blank">Support Forums</a>') . '</p>'
+);
+
+include( ABSPATH . 'wp-admin/admin-header.php' );
+?>
+
+<div class="wrap">
+>>>>>>> WPHome/master
 <h2><?php echo esc_html( $title ); ?></h2>
 
 <form method="post" action="options.php">
 <?php settings_fields('writing'); ?>
 
 <table class="form-table">
+<<<<<<< HEAD
 <tr valign="top">
+=======
+<?php if ( get_site_option( 'initial_db_version' ) < 32453 ) : ?>
+<tr>
+>>>>>>> WPHome/master
 <th scope="row"><?php _e('Formatting') ?></th>
 <td><fieldset><legend class="screen-reader-text"><span><?php _e('Formatting') ?></span></legend>
 <label for="use_smilies">
@@ -70,7 +98,12 @@ include('./admin-header.php');
 <label for="use_balanceTags"><input name="use_balanceTags" type="checkbox" id="use_balanceTags" value="1" <?php checked('1', get_option('use_balanceTags')); ?> /> <?php _e('WordPress should correct invalidly nested XHTML automatically') ?></label>
 </fieldset></td>
 </tr>
+<<<<<<< HEAD
 <tr valign="top">
+=======
+<?php endif; ?>
+<tr>
+>>>>>>> WPHome/master
 <th scope="row"><label for="default_category"><?php _e('Default Post Category') ?></label></th>
 <td>
 <?php
@@ -79,6 +112,7 @@ wp_dropdown_categories(array('hide_empty' => 0, 'name' => 'default_category', 'o
 </td>
 </tr>
 <?php
+<<<<<<< HEAD
 if ( current_theme_supports( 'post-formats' ) ) :
 	$post_formats = get_theme_support( 'post-formats' );
 	if ( is_array( $post_formats[0] ) ) :
@@ -90,15 +124,34 @@ if ( current_theme_supports( 'post-formats' ) ) :
 		<option value="0"><?php _e('Standard'); ?></option>
 <?php foreach ( $post_formats[0] as $format ): ?>
 		<option<?php selected( get_option('default_post_format'), $format ); ?> value="<?php echo esc_attr( $format ); ?>"><?php echo esc_html( get_post_format_string( $format ) ); ?></option>
+=======
+$post_formats = get_post_format_strings();
+unset( $post_formats['standard'] );
+?>
+<tr>
+<th scope="row"><label for="default_post_format"><?php _e('Default Post Format') ?></label></th>
+<td>
+	<select name="default_post_format" id="default_post_format">
+		<option value="0"><?php echo get_post_format_string( 'standard' ); ?></option>
+<?php foreach ( $post_formats as $format_slug => $format_name ): ?>
+		<option<?php selected( get_option( 'default_post_format' ), $format_slug ); ?> value="<?php echo esc_attr( $format_slug ); ?>"><?php echo esc_html( $format_name ); ?></option>
+>>>>>>> WPHome/master
 <?php endforeach; ?>
 	</select>
 </td>
 </tr>
+<<<<<<< HEAD
 <?php endif; endif;
 
 if ( get_option( 'link_manager_enabled' ) ) :
 ?>
 <tr valign="top">
+=======
+<?php
+if ( get_option( 'link_manager_enabled' ) ) :
+?>
+<tr>
+>>>>>>> WPHome/master
 <th scope="row"><label for="default_link_category"><?php _e('Default Link Category') ?></label></th>
 <td>
 <?php
@@ -114,6 +167,7 @@ do_settings_fields('writing', 'remote_publishing'); // A deprecated section.
 ?>
 </table>
 
+<<<<<<< HEAD
 <h3 class="title"><?php _e('Press This') ?></h3>
 <p><?php _e('Press This is a bookmarklet: a little app that runs in your browser and lets you grab bits of the web.');?></p>
 <p><?php _e('Use Press This to clip text, images and videos from any web page. Then edit and add more straight from Press This before you save or publish it in a post on your site.'); ?></p>
@@ -130,23 +184,46 @@ do_settings_fields('writing', 'remote_publishing'); // A deprecated section.
 
 <table class="form-table">
 <tr valign="top">
+=======
+<?php
+/** This filter is documented in wp-admin/options.php */
+if ( apply_filters( 'enable_post_by_email_configuration', true ) ) {
+?>
+<h3 class="title"><?php _e('Post via e-mail') ?></h3>
+<p><?php printf(__('To post to WordPress by e-mail you must set up a secret e-mail account with POP3 access. Any mail received at this address will be posted, so it&#8217;s a good idea to keep this address very secret. Here are three random strings you could use: <kbd>%s</kbd>, <kbd>%s</kbd>, <kbd>%s</kbd>.'), wp_generate_password(8, false), wp_generate_password(8, false), wp_generate_password(8, false)) ?></p>
+
+<table class="form-table">
+<tr>
+>>>>>>> WPHome/master
 <th scope="row"><label for="mailserver_url"><?php _e('Mail Server') ?></label></th>
 <td><input name="mailserver_url" type="text" id="mailserver_url" value="<?php form_option('mailserver_url'); ?>" class="regular-text code" />
 <label for="mailserver_port"><?php _e('Port') ?></label>
 <input name="mailserver_port" type="text" id="mailserver_port" value="<?php form_option('mailserver_port'); ?>" class="small-text" />
 </td>
 </tr>
+<<<<<<< HEAD
 <tr valign="top">
 <th scope="row"><label for="mailserver_login"><?php _e('Login Name') ?></label></th>
 <td><input name="mailserver_login" type="text" id="mailserver_login" value="<?php form_option('mailserver_login'); ?>" class="regular-text ltr" /></td>
 </tr>
 <tr valign="top">
+=======
+<tr>
+<th scope="row"><label for="mailserver_login"><?php _e('Login Name') ?></label></th>
+<td><input name="mailserver_login" type="text" id="mailserver_login" value="<?php form_option('mailserver_login'); ?>" class="regular-text ltr" /></td>
+</tr>
+<tr>
+>>>>>>> WPHome/master
 <th scope="row"><label for="mailserver_pass"><?php _e('Password') ?></label></th>
 <td>
 <input name="mailserver_pass" type="text" id="mailserver_pass" value="<?php form_option('mailserver_pass'); ?>" class="regular-text ltr" />
 </td>
 </tr>
+<<<<<<< HEAD
 <tr valign="top">
+=======
+<tr>
+>>>>>>> WPHome/master
 <th scope="row"><label for="default_email_category"><?php _e('Default Mail Category') ?></label></th>
 <td>
 <?php
@@ -158,18 +235,40 @@ wp_dropdown_categories(array('hide_empty' => 0, 'name' => 'default_email_categor
 </table>
 <?php } ?>
 
+<<<<<<< HEAD
 <?php if ( apply_filters( 'enable_update_services_configuration', true ) ) { ?>
 <h3><?php _e('Update Services') ?></h3>
 
 <?php if ( 1 == get_option('blog_public') ) : ?>
 
 <p><label for="ping_sites"><?php _e('When you publish a new post, WordPress automatically notifies the following site update services. For more about this, see <a href="http://codex.wordpress.org/Update_Services">Update Services</a> on the Codex. Separate multiple service <abbr title="Universal Resource Locator">URL</abbr>s with line breaks.') ?></label></p>
+=======
+<?php
+/**
+ * Filter whether to enable the Update Services section in the Writing settings screen.
+ *
+ * @since 3.0.0
+ *
+ * @param bool $enable Whether to enable the Update Services settings area. Default true.
+ */
+if ( apply_filters( 'enable_update_services_configuration', true ) ) {
+?>
+<h3 class="title"><?php _e('Update Services') ?></h3>
+
+<?php if ( 1 == get_option('blog_public') ) : ?>
+
+<p><label for="ping_sites"><?php _e('When you publish a new post, WordPress automatically notifies the following site update services. For more about this, see <a href="https://codex.wordpress.org/Update_Services">Update Services</a> on the Codex. Separate multiple service <abbr title="Universal Resource Locator">URL</abbr>s with line breaks.') ?></label></p>
+>>>>>>> WPHome/master
 
 <textarea name="ping_sites" id="ping_sites" class="large-text code" rows="3"><?php echo esc_textarea( get_option('ping_sites') ); ?></textarea>
 
 <?php else : ?>
 
+<<<<<<< HEAD
 	<p><?php printf(__('WordPress is not notifying any <a href="http://codex.wordpress.org/Update_Services">Update Services</a> because of your site&#8217;s <a href="%s">visibility settings</a>.'), 'options-reading.php'); ?></p>
+=======
+	<p><?php printf(__('WordPress is not notifying any <a href="https://codex.wordpress.org/Update_Services">Update Services</a> because of your site&#8217;s <a href="%s">visibility settings</a>.'), 'options-reading.php'); ?></p>
+>>>>>>> WPHome/master
 
 <?php endif; ?>
 <?php } // multisite ?>
@@ -180,4 +279,8 @@ wp_dropdown_categories(array('hide_empty' => 0, 'name' => 'default_email_categor
 </form>
 </div>
 
+<<<<<<< HEAD
 <?php include('./admin-footer.php') ?>
+=======
+<?php include( ABSPATH . 'wp-admin/admin-footer.php' ); ?>
+>>>>>>> WPHome/master

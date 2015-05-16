@@ -3,7 +3,11 @@
 /**
  * Disable error reporting
  *
+<<<<<<< HEAD
  * Set this to error_reporting( E_ALL ) or error_reporting( E_ALL | E_STRICT ) for debugging
+=======
+ * Set this to error_reporting( -1 ) for debugging
+>>>>>>> WPHome/master
  */
 error_reporting(0);
 
@@ -92,11 +96,19 @@ function get_file($path) {
 	return @file_get_contents($path);
 }
 
+<<<<<<< HEAD
 require(ABSPATH . '/wp-includes/script-loader.php');
 require(ABSPATH . '/wp-includes/version.php');
 
 $load = preg_replace( '/[^a-z0-9,_-]+/i', '', $_GET['load'] );
 $load = explode(',', $load);
+=======
+require( ABSPATH . WPINC . '/script-loader.php' );
+require( ABSPATH . WPINC . '/version.php' );
+
+$load = preg_replace( '/[^a-z0-9,_-]+/i', '', $_GET['load'] );
+$load = array_unique( explode( ',', $load ) );
+>>>>>>> WPHome/master
 
 if ( empty($load) )
 	exit;
@@ -117,6 +129,7 @@ foreach( $load as $handle ) {
 	$style = $wp_styles->registered[$handle];
 	$path = ABSPATH . $style->src;
 
+<<<<<<< HEAD
 	$content = get_file($path) . "\n";
 
 	if ( $rtl && isset($style->extra['rtl']) && $style->extra['rtl'] ) {
@@ -127,12 +140,30 @@ foreach( $load as $handle ) {
 	if ( strpos( $style->src, '/wp-includes/css/' ) === 0 ) {
 		$content = str_replace( '../images/', '../wp-includes/images/', $content );
 		$out .= str_replace( '../js/tinymce/', '../wp-includes/js/tinymce/', $content );
+=======
+	if ( $rtl && ! empty( $style->extra['rtl'] ) ) {
+		// All default styles have fully independent RTL files.
+		$path = str_replace( '.min.css', '-rtl.min.css', $path );
+	}
+
+	$content = get_file( $path ) . "\n";
+
+	if ( strpos( $style->src, '/' . WPINC . '/css/' ) === 0 ) {
+		$content = str_replace( '../images/', '../' . WPINC . '/images/', $content );
+		$content = str_replace( '../js/tinymce/', '../' . WPINC . '/js/tinymce/', $content );
+		$content = str_replace( '../fonts/', '../' . WPINC . '/fonts/', $content );
+		$out .= $content;
+>>>>>>> WPHome/master
 	} else {
 		$out .= str_replace( '../images/', 'images/', $content );
 	}
 }
 
+<<<<<<< HEAD
 header('Content-Type: text/css');
+=======
+header('Content-Type: text/css; charset=UTF-8');
+>>>>>>> WPHome/master
 header('Expires: ' . gmdate( "D, d M Y H:i:s", time() + $expires_offset ) . ' GMT');
 header("Cache-Control: public, max-age=$expires_offset");
 

@@ -15,4 +15,8 @@
 define('IS_PROFILE_PAGE', true);
 
 /** Load User Editing Page */
+<<<<<<< HEAD
 require_once('./user-edit.php');
+=======
+require_once( dirname( __FILE__ ) . '/user-edit.php' );
+>>>>>>> WPHome/master

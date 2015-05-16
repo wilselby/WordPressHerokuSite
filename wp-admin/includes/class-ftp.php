@@ -9,7 +9,11 @@
  * @copyright Alexey Dotsenko
  * @author Alexey Dotsenko
  * @link http://www.phpclasses.org/browse/package/1743.html Site
+<<<<<<< HEAD
  * @license LGPL License http://www.opensource.org/licenses/lgpl-license.html
+=======
+ * @license LGPL http://www.opensource.org/licenses/lgpl-license.html
+>>>>>>> WPHome/master
  */
 
 /**
@@ -504,7 +508,11 @@ class ftp_base {
 		return $this->_list(($arg?" ".$arg:"").($pathname?" ".$pathname:""), "LIST", "rawlist");
 	}
 
+<<<<<<< HEAD
 	function nlist($pathname="") {
+=======
+	function nlist($pathname="", $arg="") {
+>>>>>>> WPHome/master
 		return $this->_list(($arg?" ".$arg:"").($pathname?" ".$pathname:""), "NLST", "nlist");
 	}
 
@@ -903,5 +911,9 @@ if ( ! $mod_sockets && function_exists( 'dl' ) && is_callable( 'dl' ) ) {
 	$mod_sockets = extension_loaded( 'sockets' );
 }
 
+<<<<<<< HEAD
 require_once "class-ftp-" . ( $mod_sockets ? "sockets" : "pure" ) . ".php";
 ?>
+=======
+require_once dirname( __FILE__ ) . "/class-ftp-" . ( $mod_sockets ? "sockets" : "pure" ) . ".php";
+>>>>>>> WPHome/master

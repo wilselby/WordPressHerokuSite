@@ -3,7 +3,11 @@
  * WordPress Upgrade Functions. Old file, must not be used. Include
  * wp-admin/includes/upgrade.php instead.
  *
+<<<<<<< HEAD
  * @deprecated 2.5
+=======
+ * @deprecated 2.5.0
+>>>>>>> WPHome/master
  * @package WordPress
  * @subpackage Administration
  */

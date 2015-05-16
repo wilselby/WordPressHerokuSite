@@ -17,9 +17,14 @@ class WP_Locale {
 	 *
 	 * @since 2.1.0
 	 * @var array
+<<<<<<< HEAD
 	 * @access private
 	 */
 	var $weekday;
+=======
+	 */
+	public $weekday;
+>>>>>>> WPHome/master
 
 	/**
 	 * Stores the translated strings for the one character weekday names.
@@ -31,36 +36,56 @@ class WP_Locale {
 	 *
 	 * @since 2.1.0
 	 * @var array
+<<<<<<< HEAD
 	 * @access private
 	 */
 	var $weekday_initial;
+=======
+	 */
+	public $weekday_initial;
+>>>>>>> WPHome/master
 
 	/**
 	 * Stores the translated strings for the abbreviated weekday names.
 	 *
 	 * @since 2.1.0
 	 * @var array
+<<<<<<< HEAD
 	 * @access private
 	 */
 	var $weekday_abbrev;
+=======
+	 */
+	public $weekday_abbrev;
+>>>>>>> WPHome/master
 
 	/**
 	 * Stores the translated strings for the full month names.
 	 *
 	 * @since 2.1.0
 	 * @var array
+<<<<<<< HEAD
 	 * @access private
 	 */
 	var $month;
+=======
+	 */
+	public $month;
+>>>>>>> WPHome/master
 
 	/**
 	 * Stores the translated strings for the abbreviated month names.
 	 *
 	 * @since 2.1.0
 	 * @var array
+<<<<<<< HEAD
 	 * @access private
 	 */
 	var $month_abbrev;
+=======
+	 */
+	public $month_abbrev;
+>>>>>>> WPHome/master
 
 	/**
 	 * Stores the translated strings for 'am' and 'pm'.
@@ -69,9 +94,14 @@ class WP_Locale {
 	 *
 	 * @since 2.1.0
 	 * @var array
+<<<<<<< HEAD
 	 * @access private
 	 */
 	var $meridiem;
+=======
+	 */
+	public $meridiem;
+>>>>>>> WPHome/master
 
 	/**
 	 * The text direction of the locale language.
@@ -80,9 +110,19 @@ class WP_Locale {
 	 *
 	 * @since 2.1.0
 	 * @var string
+<<<<<<< HEAD
 	 * @access private
 	 */
 	var $text_direction = 'ltr';
+=======
+	 */
+	public $text_direction = 'ltr';
+
+	/**
+	 * @var array
+	 */
+	public $number_format;
+>>>>>>> WPHome/master
 
 	/**
 	 * Sets up the translated strings and object properties.
@@ -183,6 +223,18 @@ class WP_Locale {
 		/* translators: 'rtl' or 'ltr'. This sets the text direction for WordPress. */
 		elseif ( 'rtl' == _x( 'ltr', 'text direction' ) )
 			$this->text_direction = 'rtl';
+<<<<<<< HEAD
+=======
+
+		if ( 'rtl' === $this->text_direction && strpos( $GLOBALS['wp_version'], '-src' ) ) {
+			$this->text_direction = 'ltr';
+			add_action( 'all_admin_notices', array( $this, 'rtl_src_admin_notice' ) );
+		}
+	}
+
+	function rtl_src_admin_notice() {
+		echo '<div class="error"><p>' . 'The <code>build</code> directory of the develop repository must be used for RTL.' . '</p></div>';
+>>>>>>> WPHome/master
 	}
 
 	/**
@@ -311,7 +363,10 @@ class WP_Locale {
 	 * @uses WP_Locale::register_globals()
 	 * @since 2.1.0
 	 *
+<<<<<<< HEAD
 	 * @return WP_Locale
+=======
+>>>>>>> WPHome/master
 	 */
 	function __construct() {
 		$this->init();
@@ -327,6 +382,27 @@ class WP_Locale {
 	function is_rtl() {
 		return 'rtl' == $this->text_direction;
 	}
+<<<<<<< HEAD
+=======
+
+	/**
+	 * Register date/time format strings for general POT.
+	 *
+	 * Private, unused method to add some date/time formats translated
+	 * on wp-admin/options-general.php to the general POT that would
+	 * otherwise be added to the admin POT.
+	 *
+	 * @since 3.6.0
+	 */
+	function _strings_for_pot() {
+		/* translators: localized date format, see http://php.net/date */
+		__( 'F j, Y' );
+		/* translators: localized time format, see http://php.net/date */
+		__( 'g:i a' );
+		/* translators: localized date and time format, see http://php.net/date */
+		__( 'F j, Y g:i a' );
+	}
+>>>>>>> WPHome/master
 }
 
 /**

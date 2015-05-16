@@ -9,8 +9,13 @@
  * The first function, twentyeleven_setup(), sets up the theme by registering support
  * for various features in WordPress, such as post thumbnails, navigation menus, and the like.
  *
+<<<<<<< HEAD
  * When using a child theme (see http://codex.wordpress.org/Theme_Development and
  * http://codex.wordpress.org/Child_Themes), you can override certain functions
+=======
+ * When using a child theme (see https://codex.wordpress.org/Theme_Development and
+ * https://codex.wordpress.org/Child_Themes), you can override certain functions
+>>>>>>> WPHome/master
  * (those wrapped in a function_exists() call) by defining them first in your child theme's
  * functions.php file. The child theme's functions.php file is included before the parent
  * theme's file, so the child theme functions would be used.
@@ -31,13 +36,18 @@
  * }
  * </code>
  *
+<<<<<<< HEAD
  * For more information on hooks, actions, and filters, see http://codex.wordpress.org/Plugin_API.
+=======
+ * For more information on hooks, actions, and filters, see https://codex.wordpress.org/Plugin_API.
+>>>>>>> WPHome/master
  *
  * @package WordPress
  * @subpackage Twenty_Eleven
  * @since Twenty Eleven 1.0
  */
 
+<<<<<<< HEAD
 /**
  * Set the content width based on the theme's design and stylesheet.
  */
@@ -45,13 +55,24 @@ if ( ! isset( $content_width ) )
 	$content_width = 584;
 
 /**
+=======
+// Set the content width based on the theme's design and stylesheet.
+if ( ! isset( $content_width ) )
+	$content_width = 584;
+
+/*
+>>>>>>> WPHome/master
  * Tell WordPress to run twentyeleven_setup() when the 'after_setup_theme' hook is run.
  */
 add_action( 'after_setup_theme', 'twentyeleven_setup' );
 
 if ( ! function_exists( 'twentyeleven_setup' ) ):
 /**
+<<<<<<< HEAD
  * Sets up theme defaults and registers support for various WordPress features.
+=======
+ * Set up theme defaults and registers support for various WordPress features.
+>>>>>>> WPHome/master
  *
  * Note that this function is hooked into the after_setup_theme hook, which runs
  * before the init hook. The init hook is too late for some features, such as indicating
@@ -60,6 +81,7 @@ if ( ! function_exists( 'twentyeleven_setup' ) ):
  * To override twentyeleven_setup() in a child theme, add your own twentyeleven_setup to your child theme's
  * functions.php file.
  *
+<<<<<<< HEAD
  * @uses load_theme_textdomain() For translation/localization support.
  * @uses add_editor_style() To style the visual editor.
  * @uses add_theme_support() To add support for post thumbnails, automatic feed links, custom headers
@@ -67,15 +89,33 @@ if ( ! function_exists( 'twentyeleven_setup' ) ):
  * @uses register_nav_menus() To add support for navigation menus.
  * @uses register_default_headers() To register the default custom header images provided with the theme.
  * @uses set_post_thumbnail_size() To set a custom post thumbnail size.
+=======
+ * @uses load_theme_textdomain()    For translation/localization support.
+ * @uses add_editor_style()         To style the visual editor.
+ * @uses add_theme_support()        To add support for post thumbnails, automatic feed links, custom headers
+ * 	                                and backgrounds, and post formats.
+ * @uses register_nav_menus()       To add support for navigation menus.
+ * @uses register_default_headers() To register the default custom header images provided with the theme.
+ * @uses set_post_thumbnail_size()  To set a custom post thumbnail size.
+>>>>>>> WPHome/master
  *
  * @since Twenty Eleven 1.0
  */
 function twentyeleven_setup() {
 
+<<<<<<< HEAD
 	/* Make Twenty Eleven available for translation.
 	 * Translations can be added to the /languages/ directory.
 	 * If you're building a theme based on Twenty Eleven, use a find and replace
 	 * to change 'twentyeleven' to the name of your theme in all the template files.
+=======
+	/*
+	 * Make Twenty Eleven available for translation.
+	 * Translations can be added to the /languages/ directory.
+	 * If you're building a theme based on Twenty Eleven, use
+	 * a find and replace to change 'twentyeleven' to the name
+	 * of your theme in all the template files.
+>>>>>>> WPHome/master
 	 */
 	load_theme_textdomain( 'twentyeleven', get_template_directory() . '/languages' );
 
@@ -105,8 +145,15 @@ function twentyeleven_setup() {
 
 	// Add support for custom backgrounds.
 	add_theme_support( 'custom-background', array(
+<<<<<<< HEAD
 		// Let WordPress know what our default background color is.
 		// This is dependent on our current color scheme.
+=======
+		/*
+		 * Let WordPress know what our default background color is.
+		 * This is dependent on our current color scheme.
+		 */
+>>>>>>> WPHome/master
 		'default-color' => $default_background_color,
 	) );
 
@@ -118,7 +165,25 @@ function twentyeleven_setup() {
 		// The default header text color.
 		'default-text-color' => '000',
 		// The height and width of our custom header.
+<<<<<<< HEAD
 		'width' => apply_filters( 'twentyeleven_header_image_width', 1000 ),
+=======
+		/**
+		 * Filter the Twenty Eleven default header image width.
+		 *
+		 * @since Twenty Eleven 1.0
+		 *
+		 * @param int The default header image width in pixels. Default 1000.
+		 */
+		'width' => apply_filters( 'twentyeleven_header_image_width', 1000 ),
+		/**
+		 * Filter the Twenty Eleven default header image height.
+		 *
+		 * @since Twenty Eleven 1.0
+		 *
+		 * @param int The default header image height in pixels. Default 288.
+		 */
+>>>>>>> WPHome/master
 		'height' => apply_filters( 'twentyeleven_header_image_height', 288 ),
 		// Support flexible heights.
 		'flex-height' => true,
@@ -144,6 +209,7 @@ function twentyeleven_setup() {
 		add_custom_background();
 	}
 
+<<<<<<< HEAD
 	// We'll be using post thumbnails for custom header images on posts and pages.
 	// We want them to be the size of the header image that we just defined
 	// Larger images will be auto-cropped to fit, smaller ones will be ignored. See header.php.
@@ -151,6 +217,19 @@ function twentyeleven_setup() {
 
 	// Add Twenty Eleven's custom image sizes.
 	// Used for large feature (header) images.
+=======
+	/*
+	 * We'll be using post thumbnails for custom header images on posts and pages.
+	 * We want them to be the size of the header image that we just defined.
+	 * Larger images will be auto-cropped to fit, smaller ones will be ignored. See header.php.
+	 */
+	set_post_thumbnail_size( $custom_header_support['width'], $custom_header_support['height'], true );
+
+	/*
+	 * Add Twenty Eleven's custom image sizes.
+	 * Used for large feature (header) images.
+	 */
+>>>>>>> WPHome/master
 	add_image_size( 'large-feature', $custom_header_support['width'], $custom_header_support['height'], true );
 	// Used for featured posts if a large-feature doesn't exist.
 	add_image_size( 'small-feature', 500, 300 );
@@ -211,7 +290,11 @@ endif; // twentyeleven_setup
 
 if ( ! function_exists( 'twentyeleven_header_style' ) ) :
 /**
+<<<<<<< HEAD
  * Styles the header image and text displayed on the blog
+=======
+ * Styles the header image and text displayed on the blog.
+>>>>>>> WPHome/master
  *
  * @since Twenty Eleven 1.0
  */
@@ -224,14 +307,22 @@ function twentyeleven_header_style() {
 
 	// If we get this far, we have custom styles. Let's do this.
 	?>
+<<<<<<< HEAD
 	<style type="text/css">
+=======
+	<style type="text/css" id="twentyeleven-header-css">
+>>>>>>> WPHome/master
 	<?php
 		// Has the text been hidden?
 		if ( 'blank' == $text_color ) :
 	?>
 		#site-title,
 		#site-description {
+<<<<<<< HEAD
 			position: absolute !important;
+=======
+			position: absolute;
+>>>>>>> WPHome/master
 			clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
 			clip: rect(1px, 1px, 1px, 1px);
 		}
@@ -241,7 +332,11 @@ function twentyeleven_header_style() {
 	?>
 		#site-title a,
 		#site-description {
+<<<<<<< HEAD
 			color: #<?php echo $text_color; ?> !important;
+=======
+			color: #<?php echo $text_color; ?>;
+>>>>>>> WPHome/master
 		}
 	<?php endif; ?>
 	</style>
@@ -259,7 +354,11 @@ if ( ! function_exists( 'twentyeleven_admin_header_style' ) ) :
  */
 function twentyeleven_admin_header_style() {
 ?>
+<<<<<<< HEAD
 	<style type="text/css">
+=======
+	<style type="text/css" id="twentyeleven-admin-header-css">
+>>>>>>> WPHome/master
 	.appearance_page_custom-header #headimg {
 		border: none;
 	}
@@ -312,6 +411,7 @@ function twentyeleven_admin_header_image() { ?>
 		<?php
 		$color = get_header_textcolor();
 		$image = get_header_image();
+<<<<<<< HEAD
 		if ( $color && $color != 'blank' )
 			$style = ' style="color:#' . $color . '"';
 		else
@@ -320,6 +420,16 @@ function twentyeleven_admin_header_image() { ?>
 		<h1><a id="name"<?php echo $style; ?> onclick="return false;" href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php bloginfo( 'name' ); ?></a></h1>
 		<div id="desc"<?php echo $style; ?>><?php bloginfo( 'description' ); ?></div>
 		<?php if ( $image ) : ?>
+=======
+		$style = 'display: none;';
+		if ( $color && $color != 'blank' ) {
+			$style = 'color: #' . $color . ';';
+		}
+		?>
+		<h1 class="displaying-header-text"><a id="name" style="<?php echo esc_attr( $style ); ?>" onclick="return false;" href="<?php echo esc_url( home_url( '/' ) ); ?>" tabindex="-1"><?php bloginfo( 'name' ); ?></a></h1>
+		<div id="desc" class="displaying-header-text" style="<?php echo esc_attr( $style ); ?>"><?php bloginfo( 'description' ); ?></div>
+  		<?php if ( $image ) : ?>
+>>>>>>> WPHome/master
 			<img src="<?php echo esc_url( $image ); ?>" alt="" />
 		<?php endif; ?>
 	</div>
@@ -327,10 +437,23 @@ function twentyeleven_admin_header_image() { ?>
 endif; // twentyeleven_admin_header_image
 
 /**
+<<<<<<< HEAD
  * Sets the post excerpt length to 40 words.
  *
  * To override this length in a child theme, remove the filter and add your own
  * function tied to the excerpt_length filter hook.
+=======
+ * Set the post excerpt length to 40 words.
+ *
+ * To override this length in a child theme, remove
+ * the filter and add your own function tied to
+ * the excerpt_length filter hook.
+ *
+ * @since Twenty Eleven 1.0
+ *
+ * @param int $length The number of excerpt characters.
+ * @return int The filtered number of characters.
+>>>>>>> WPHome/master
  */
 function twentyeleven_excerpt_length( $length ) {
 	return 40;
@@ -339,7 +462,15 @@ add_filter( 'excerpt_length', 'twentyeleven_excerpt_length' );
 
 if ( ! function_exists( 'twentyeleven_continue_reading_link' ) ) :
 /**
+<<<<<<< HEAD
  * Returns a "Continue Reading" link for excerpts
+=======
+ * Return a "Continue Reading" link for excerpts
+ *
+ * @since Twenty Eleven 1.0
+ *
+ * @return string The "Continue Reading" HTML link.
+>>>>>>> WPHome/master
  */
 function twentyeleven_continue_reading_link() {
 	return ' <a href="'. esc_url( get_permalink() ) . '">' . __( 'Continue reading <span class="meta-nav">&rarr;</span>', 'twentyeleven' ) . '</a>';
@@ -347,6 +478,7 @@ function twentyeleven_continue_reading_link() {
 endif; // twentyeleven_continue_reading_link
 
 /**
+<<<<<<< HEAD
  * Replaces "[...]" (appended to automatically generated excerpts) with an ellipsis and twentyeleven_continue_reading_link().
  *
  * To override this in a child theme, remove the filter and add your own
@@ -354,10 +486,30 @@ endif; // twentyeleven_continue_reading_link
  */
 function twentyeleven_auto_excerpt_more( $more ) {
 	return ' &hellip;' . twentyeleven_continue_reading_link();
+=======
+ * Replace "[...]" in the Read More link with an ellipsis.
+ *
+ * The "[...]" is appended to automatically generated excerpts.
+ *
+ * To override this in a child theme, remove the filter and add your own
+ * function tied to the excerpt_more filter hook.
+ *
+ * @since Twenty Eleven 1.0
+ *
+ * @param string $more The Read More text.
+ * @return The filtered Read More text.
+ */
+function twentyeleven_auto_excerpt_more( $more ) {
+	if ( ! is_admin() ) {
+		return ' &hellip;' . twentyeleven_continue_reading_link();
+	}
+	return $more;
+>>>>>>> WPHome/master
 }
 add_filter( 'excerpt_more', 'twentyeleven_auto_excerpt_more' );
 
 /**
+<<<<<<< HEAD
  * Adds a pretty "Continue Reading" link to custom post excerpts.
  *
  * To override this link in a child theme, remove the filter and add your own
@@ -365,6 +517,20 @@ add_filter( 'excerpt_more', 'twentyeleven_auto_excerpt_more' );
  */
 function twentyeleven_custom_excerpt_more( $output ) {
 	if ( has_excerpt() && ! is_attachment() ) {
+=======
+ * Add a pretty "Continue Reading" link to custom post excerpts.
+ *
+ * To override this link in a child theme, remove the filter and add your own
+ * function tied to the get_the_excerpt filter hook.
+ *
+ * @since Twenty Eleven 1.0
+ *
+ * @param string $output The "Continue Reading" link.
+ * @return string The filtered "Continue Reading" link.
+ */
+function twentyeleven_custom_excerpt_more( $output ) {
+	if ( has_excerpt() && ! is_attachment() && ! is_admin() ) {
+>>>>>>> WPHome/master
 		$output .= twentyeleven_continue_reading_link();
 	}
 	return $output;
@@ -372,7 +538,16 @@ function twentyeleven_custom_excerpt_more( $output ) {
 add_filter( 'get_the_excerpt', 'twentyeleven_custom_excerpt_more' );
 
 /**
+<<<<<<< HEAD
  * Get our wp_nav_menu() fallback, wp_page_menu(), to show a home link.
+=======
+ * Show a home link for the wp_nav_menu() fallback, wp_page_menu().
+ *
+ * @since Twenty Eleven 1.0
+ *
+ * @param array $args The page menu arguments. @see wp_page_menu()
+ * @return array The filtered page menu arguments.
+>>>>>>> WPHome/master
  */
 function twentyeleven_page_menu_args( $args ) {
 	if ( ! isset( $args['show_home'] ) )
@@ -382,7 +557,13 @@ function twentyeleven_page_menu_args( $args ) {
 add_filter( 'wp_page_menu_args', 'twentyeleven_page_menu_args' );
 
 /**
+<<<<<<< HEAD
  * Register our sidebars and widgetized areas. Also register the default Epherma widget.
+=======
+ * Register sidebars and widgetized areas.
+ *
+ * Also register the default Epherma widget.
+>>>>>>> WPHome/master
  *
  * @since Twenty Eleven 1.0
  */
@@ -394,7 +575,11 @@ function twentyeleven_widgets_init() {
 		'name' => __( 'Main Sidebar', 'twentyeleven' ),
 		'id' => 'sidebar-1',
 		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
+<<<<<<< HEAD
 		'after_widget' => "</aside>",
+=======
+		'after_widget' => '</aside>',
+>>>>>>> WPHome/master
 		'before_title' => '<h3 class="widget-title">',
 		'after_title' => '</h3>',
 	) );
@@ -404,7 +589,11 @@ function twentyeleven_widgets_init() {
 		'id' => 'sidebar-2',
 		'description' => __( 'The sidebar for the optional Showcase Template', 'twentyeleven' ),
 		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
+<<<<<<< HEAD
 		'after_widget' => "</aside>",
+=======
+		'after_widget' => '</aside>',
+>>>>>>> WPHome/master
 		'before_title' => '<h3 class="widget-title">',
 		'after_title' => '</h3>',
 	) );
@@ -414,7 +603,11 @@ function twentyeleven_widgets_init() {
 		'id' => 'sidebar-3',
 		'description' => __( 'An optional widget area for your site footer', 'twentyeleven' ),
 		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
+<<<<<<< HEAD
 		'after_widget' => "</aside>",
+=======
+		'after_widget' => '</aside>',
+>>>>>>> WPHome/master
 		'before_title' => '<h3 class="widget-title">',
 		'after_title' => '</h3>',
 	) );
@@ -424,7 +617,11 @@ function twentyeleven_widgets_init() {
 		'id' => 'sidebar-4',
 		'description' => __( 'An optional widget area for your site footer', 'twentyeleven' ),
 		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
+<<<<<<< HEAD
 		'after_widget' => "</aside>",
+=======
+		'after_widget' => '</aside>',
+>>>>>>> WPHome/master
 		'before_title' => '<h3 class="widget-title">',
 		'after_title' => '</h3>',
 	) );
@@ -434,7 +631,11 @@ function twentyeleven_widgets_init() {
 		'id' => 'sidebar-5',
 		'description' => __( 'An optional widget area for your site footer', 'twentyeleven' ),
 		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
+<<<<<<< HEAD
 		'after_widget' => "</aside>",
+=======
+		'after_widget' => '</aside>',
+>>>>>>> WPHome/master
 		'before_title' => '<h3 class="widget-title">',
 		'after_title' => '</h3>',
 	) );
@@ -443,7 +644,15 @@ add_action( 'widgets_init', 'twentyeleven_widgets_init' );
 
 if ( ! function_exists( 'twentyeleven_content_nav' ) ) :
 /**
+<<<<<<< HEAD
  * Display navigation to next/previous pages when applicable
+=======
+ * Display navigation to next/previous pages when applicable.
+ *
+ * @since Twenty Eleven 1.0
+ *
+ * @param string $html_id The HTML id attribute.
+>>>>>>> WPHome/master
  */
 function twentyeleven_content_nav( $html_id ) {
 	global $wp_query;
@@ -459,9 +668,37 @@ function twentyeleven_content_nav( $html_id ) {
 endif; // twentyeleven_content_nav
 
 /**
+<<<<<<< HEAD
  * Return the URL for the first link found in the post content.
  *
  * @since Twenty Eleven 1.0
+=======
+ * Return the first link from the post content. If none found, the
+ * post permalink is used as a fallback.
+ *
+ * @since Twenty Eleven 1.0
+ *
+ * @uses get_url_in_content() to get the first URL from the post content.
+ *
+ * @return string The first link.
+ */
+function twentyeleven_get_first_url() {
+	$content = get_the_content();
+	$has_url = function_exists( 'get_url_in_content' ) ? get_url_in_content( $content ) : false;
+
+	if ( ! $has_url )
+		$has_url = twentyeleven_url_grabber();
+
+	/** This filter is documented in wp-includes/link-template.php */
+	return ( $has_url ) ? $has_url : apply_filters( 'the_permalink', get_permalink() );
+}
+
+/**
+ * Return the URL for the first link found in the post content.
+ *
+ * @since Twenty Eleven 1.0
+ *
+>>>>>>> WPHome/master
  * @return string|bool URL or false when no link is present.
  */
 function twentyeleven_url_grabber() {
@@ -472,7 +709,13 @@ function twentyeleven_url_grabber() {
 }
 
 /**
+<<<<<<< HEAD
  * Count the number of footer sidebars to enable dynamic classes for the footer
+=======
+ * Count the number of footer sidebars to enable dynamic classes for the footer.
+ *
+ * @since Twenty Eleven 1.0
+>>>>>>> WPHome/master
  */
 function twentyeleven_footer_sidebar_class() {
 	$count = 0;
@@ -501,7 +744,11 @@ function twentyeleven_footer_sidebar_class() {
 	}
 
 	if ( $class )
+<<<<<<< HEAD
 		echo 'class="' . $class . '"';
+=======
+		echo 'class="' . esc_attr( $class ) . '"';
+>>>>>>> WPHome/master
 }
 
 if ( ! function_exists( 'twentyeleven_comment' ) ) :
@@ -514,6 +761,13 @@ if ( ! function_exists( 'twentyeleven_comment' ) ) :
  * Used as a callback by wp_list_comments() for displaying the comments.
  *
  * @since Twenty Eleven 1.0
+<<<<<<< HEAD
+=======
+ *
+ * @param object $comment The comment object.
+ * @param array  $args    An array of comment arguments. @see get_comment_reply_link()
+ * @param int    $depth   The depth of the comment.
+>>>>>>> WPHome/master
  */
 function twentyeleven_comment( $comment, $args, $depth ) {
 	$GLOBALS['comment'] = $comment;
@@ -575,7 +829,12 @@ endif; // ends check for twentyeleven_comment()
 
 if ( ! function_exists( 'twentyeleven_posted_on' ) ) :
 /**
+<<<<<<< HEAD
  * Prints HTML with meta information for the current post-date/time and author.
+=======
+ * Print HTML with meta information for the current post-date/time and author.
+ *
+>>>>>>> WPHome/master
  * Create your own twentyeleven_posted_on to override in a child theme
  *
  * @since Twenty Eleven 1.0
@@ -594,11 +853,22 @@ function twentyeleven_posted_on() {
 endif;
 
 /**
+<<<<<<< HEAD
  * Adds two classes to the array of body classes.
+=======
+ * Add two classes to the array of body classes.
+ *
+>>>>>>> WPHome/master
  * The first is if the site has only had one author with published posts.
  * The second is if a singular post being displayed
  *
  * @since Twenty Eleven 1.0
+<<<<<<< HEAD
+=======
+ *
+ * @param array $classes Existing body classes.
+ * @return array The filtered array of body classes.
+>>>>>>> WPHome/master
  */
 function twentyeleven_body_classes( $classes ) {
 
@@ -612,3 +882,45 @@ function twentyeleven_body_classes( $classes ) {
 }
 add_filter( 'body_class', 'twentyeleven_body_classes' );
 
+<<<<<<< HEAD
+=======
+/**
+ * Retrieve the IDs for images in a gallery.
+ *
+ * @uses get_post_galleries() First, if available. Falls back to shortcode parsing,
+ *                            then as last option uses a get_posts() call.
+ *
+ * @since Twenty Eleven 1.6
+ *
+ * @return array List of image IDs from the post gallery.
+ */
+function twentyeleven_get_gallery_images() {
+	$images = array();
+
+	if ( function_exists( 'get_post_galleries' ) ) {
+		$galleries = get_post_galleries( get_the_ID(), false );
+		if ( isset( $galleries[0]['ids'] ) )
+			$images = explode( ',', $galleries[0]['ids'] );
+	} else {
+		$pattern = get_shortcode_regex();
+		preg_match( "/$pattern/s", get_the_content(), $match );
+		$atts = shortcode_parse_atts( $match[3] );
+		if ( isset( $atts['ids'] ) )
+			$images = explode( ',', $atts['ids'] );
+	}
+
+	if ( ! $images ) {
+		$images = get_posts( array(
+			'fields'         => 'ids',
+			'numberposts'    => 999,
+			'order'          => 'ASC',
+			'orderby'        => 'menu_order',
+			'post_mime_type' => 'image',
+			'post_parent'    => get_the_ID(),
+			'post_type'      => 'attachment',
+		) );
+	}
+
+	return $images;
+}
+>>>>>>> WPHome/master

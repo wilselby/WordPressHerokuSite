@@ -12,7 +12,11 @@
  * @package WordPress
  */
 
+<<<<<<< HEAD
 require_once('./wp-load.php');
+=======
+require_once( dirname( __FILE__ ) . '/wp-load.php' );
+>>>>>>> WPHome/master
 
 header('Content-Type: text/xml; charset=' . get_option('blog_charset'), true);
 $link_cat = '';
@@ -28,7 +32,18 @@ echo '<?xml version="1.0"?'.">\n";
 	<head>
 		<title><?php printf( __('Links for %s'), esc_attr(get_bloginfo('name', 'display')) ); ?></title>
 		<dateCreated><?php echo gmdate("D, d M Y H:i:s"); ?> GMT</dateCreated>
+<<<<<<< HEAD
 		<?php do_action('opml_head'); ?>
+=======
+		<?php
+		/**
+		 * Fires in the OPML header.
+		 *
+		 * @since 3.0.0
+		 */
+		do_action( 'opml_head' );
+		?>
+>>>>>>> WPHome/master
 	</head>
 	<body>
 <?php
@@ -38,14 +53,36 @@ else
 	$cats = get_categories(array('taxonomy' => 'link_category', 'hierarchical' => 0, 'include' => $link_cat));
 
 foreach ( (array)$cats as $cat ) :
+<<<<<<< HEAD
 	$catname = apply_filters('link_category', $cat->name);
+=======
+	/**
+	 * Filter the OPML outline link category name.
+	 *
+	 * @since 2.2.0
+	 *
+	 * @param string $catname The OPML outline category name.
+	 */
+	$catname = apply_filters( 'link_category', $cat->name );
+>>>>>>> WPHome/master
 
 ?>
 <outline type="category" title="<?php echo esc_attr($catname); ?>">
 <?php
 	$bookmarks = get_bookmarks(array("category" => $cat->term_id));
 	foreach ( (array)$bookmarks as $bookmark ) :
+<<<<<<< HEAD
 		$title = apply_filters('link_title', $bookmark->link_name);
+=======
+		/**
+		 * Filter the OPML outline link title text.
+		 *
+		 * @since 2.2.0
+		 *
+		 * @param string $title The OPML outline title text.
+		 */
+		$title = apply_filters( 'link_title', $bookmark->link_name );
+>>>>>>> WPHome/master
 ?>
 	<outline text="<?php echo esc_attr($title); ?>" type="link" xmlUrl="<?php echo esc_attr($bookmark->link_rss); ?>" htmlUrl="<?php echo esc_attr($bookmark->link_url); ?>" updated="<?php if ('0000-00-00 00:00:00' != $bookmark->link_updated) echo $bookmark->link_updated; ?>" />
 <?php
@@ -56,4 +93,8 @@ foreach ( (array)$cats as $cat ) :
 endforeach; // $cats
 ?>
 </body>
+<<<<<<< HEAD
 </opml>
+=======
+</opml>
+>>>>>>> WPHome/master

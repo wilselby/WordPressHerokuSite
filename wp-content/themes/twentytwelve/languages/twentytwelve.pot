@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Copyright (C) 2013 the WordPress team
 # This file is distributed under the GNU General Public License v2 or later.
 msgid ""
@@ -9,6 +10,19 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "PO-Revision-Date: 2013-MO-DA HO:MI+ZONE\n"
+=======
+# Copyright (C) 2015 the WordPress team
+# This file is distributed under the GNU General Public License v2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Twenty Twelve 1.7\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/support/theme/twentytwelve\n"
+"POT-Creation-Date: 2015-04-23 15:11:25+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2015-MO-DA HO:MI+ZONE\n"
+>>>>>>> WPHome/master
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 
@@ -52,7 +66,11 @@ msgstr ""
 msgid "Author Archives: %s"
 msgstr ""
 
+<<<<<<< HEAD
 #: author.php:53 content.php:53
+=======
+#: author.php:63 content.php:62
+>>>>>>> WPHome/master
 msgid "About %s"
 msgstr ""
 
@@ -82,6 +100,7 @@ msgstr ""
 msgid "Comments are closed."
 msgstr ""
 
+<<<<<<< HEAD
 #: content-aside.php:13 content-aside.php:20 content-image.php:17
 #: content-link.php:18 content-quote.php:17 content-status.php:15
 #: content.php:23
@@ -95,22 +114,49 @@ msgstr ""
 
 #: content-aside.php:23 content-image.php:23 content-link.php:21
 #: content-quote.php:20 content-status.php:27 content.php:28
+=======
+#: content-aside.php:15 content-image.php:13 content-link.php:14
+#: content-quote.php:13 content-status.php:31 content.php:44
+msgid "Continue reading <span class=\"meta-nav\">&rarr;</span>"
+msgstr ""
+
+#: content-aside.php:20 content-link.php:18 content-quote.php:17
+#: content-status.php:15
+msgid "Permalink to %s"
+msgstr ""
+
+#: content-aside.php:23 content-image.php:23 content-link.php:21
+#: content-quote.php:20 content-status.php:37 content.php:33
+>>>>>>> WPHome/master
 msgid "Leave a reply"
 msgstr ""
 
 #: content-aside.php:23 content-image.php:23 content-link.php:21
+<<<<<<< HEAD
 #: content-quote.php:20 content-status.php:27 content.php:28
+=======
+#: content-quote.php:20 content-status.php:37 content.php:33
+>>>>>>> WPHome/master
 msgid "1 Reply"
 msgstr ""
 
 #: content-aside.php:23 content-image.php:23 content-link.php:21
+<<<<<<< HEAD
 #: content-quote.php:20 content-status.php:27 content.php:28
+=======
+#: content-quote.php:20 content-status.php:37 content.php:33
+>>>>>>> WPHome/master
 msgid "% Replies"
 msgstr ""
 
 #: content-aside.php:26 content-image.php:26 content-link.php:24
+<<<<<<< HEAD
 #: content-page.php:21 content-quote.php:23 content-status.php:30
 #: content.php:46 functions.php:309 image.php:37
+=======
+#: content-page.php:24 content-quote.php:23 content-status.php:40
+#: content.php:51 functions.php:343 image.php:37
+>>>>>>> WPHome/master
 msgid "Edit"
 msgstr ""
 
@@ -128,6 +174,7 @@ msgid ""
 "related post."
 msgstr ""
 
+<<<<<<< HEAD
 #: content-page.php:18 content.php:40 image.php:92
 msgid "Pages:"
 msgstr ""
@@ -151,6 +198,29 @@ msgid "Semantic Personal Publishing Platform"
 msgstr ""
 
 #: footer.php:17
+=======
+#: content-page.php:21 content.php:45 image.php:102
+msgid "Pages:"
+msgstr ""
+
+#: content.php:16
+msgid "Featured post"
+msgstr ""
+
+#: content.php:66
+msgid "View all posts by %s <span class=\"meta-nav\">&rarr;</span>"
+msgstr ""
+
+#: footer.php:16
+msgid "http://wordpress.org/"
+msgstr ""
+
+#: footer.php:16
+msgid "Semantic Personal Publishing Platform"
+msgstr ""
+
+#: footer.php:16
+>>>>>>> WPHome/master
 msgid "Proudly powered by %s"
 msgstr ""
 
@@ -159,22 +229,35 @@ msgid "Primary Menu"
 msgstr ""
 
 #. translators: If there are characters in your language that are not supported
+<<<<<<< HEAD
 #. 	   by Open Sans, translate this to 'off'. Do not translate into your own
 #. language.
 #: functions.php:120
+=======
+#. by Open Sans, translate this to 'off'. Do not translate into your own
+#. language.
+#: functions.php:101
+>>>>>>> WPHome/master
 msgctxt "Open Sans font: on or off"
 msgid "on"
 msgstr ""
 
 #. translators: To add an additional Open Sans character subset specific to
+<<<<<<< HEAD
 #. your language, translate
 #. 		   this to 'greek', 'cyrillic' or 'vietnamese'. Do not translate into your
 #. own language.
 #: functions.php:125
+=======
+#. your language, translate this to 'greek', 'cyrillic' or 'vietnamese'. Do not
+#. translate into your own language.
+#: functions.php:107
+>>>>>>> WPHome/master
 msgctxt "Open Sans font: add new subset (greek, cyrillic, vietnamese)"
 msgid "no-subset"
 msgstr ""
 
+<<<<<<< HEAD
 #: functions.php:181
 msgid "Page %s"
 msgstr ""
@@ -184,21 +267,41 @@ msgid "Main Sidebar"
 msgstr ""
 
 #: functions.php:208
+=======
+#: functions.php:213
+msgid "Page %s"
+msgstr ""
+
+#: functions.php:242
+msgid "Main Sidebar"
+msgstr ""
+
+#: functions.php:244
+>>>>>>> WPHome/master
 msgid ""
 "Appears on posts and pages except the optional Front Page template, which "
 "has its own widgets"
 msgstr ""
 
+<<<<<<< HEAD
 #: functions.php:216
 msgid "First Front Page Widget Area"
 msgstr ""
 
 #: functions.php:218 functions.php:228
+=======
+#: functions.php:252
+msgid "First Front Page Widget Area"
+msgstr ""
+
+#: functions.php:254 functions.php:264
+>>>>>>> WPHome/master
 msgid ""
 "Appears when using the optional Front Page template with a page set as "
 "Static Front Page"
 msgstr ""
 
+<<<<<<< HEAD
 #: functions.php:226
 msgid "Second Front Page Widget Area"
 msgstr ""
@@ -224,10 +327,38 @@ msgid "(Edit)"
 msgstr ""
 
 #: functions.php:292
+=======
+#: functions.php:262
+msgid "Second Front Page Widget Area"
+msgstr ""
+
+#: functions.php:284 single.php:20
+msgid "Post navigation"
+msgstr ""
+
+#: functions.php:285
+msgid "<span class=\"meta-nav\">&larr;</span> Older posts"
+msgstr ""
+
+#: functions.php:286
+msgid "Newer posts <span class=\"meta-nav\">&rarr;</span>"
+msgstr ""
+
+#: functions.php:311
+msgid "Pingback:"
+msgstr ""
+
+#: functions.php:311
+msgid "(Edit)"
+msgstr ""
+
+#: functions.php:326
+>>>>>>> WPHome/master
 msgid "Post author"
 msgstr ""
 
 #. translators: 1: date, 2: time
+<<<<<<< HEAD
 #: functions.php:298
 msgid "%1$s at %2$s"
 msgstr ""
@@ -249,18 +380,52 @@ msgid "View all posts by %s"
 msgstr ""
 
 #: functions.php:352
+=======
+#: functions.php:332
+msgid "%1$s at %2$s"
+msgstr ""
+
+#: functions.php:338
+msgid "Your comment is awaiting moderation."
+msgstr ""
+
+#: functions.php:347
+msgid "Reply"
+msgstr ""
+
+#. Translators: used between list items, there is a space after the comma.
+#: functions.php:368 functions.php:371
+msgid ", "
+msgstr ""
+
+#: functions.php:382
+msgid "View all posts by %s"
+msgstr ""
+
+#. Translators: 1 is category, 2 is tag, 3 is the date and 4 is the author's
+#. name.
+#: functions.php:388
+>>>>>>> WPHome/master
 msgid ""
 "This entry was posted in %1$s and tagged %2$s on %3$s<span class=\"by-author"
 "\"> by %4$s</span>."
 msgstr ""
 
+<<<<<<< HEAD
 #: functions.php:354
+=======
+#: functions.php:390
+>>>>>>> WPHome/master
 msgid ""
 "This entry was posted in %1$s on %3$s<span class=\"by-author\"> by %4$s</"
 "span>."
 msgstr ""
 
+<<<<<<< HEAD
 #: functions.php:356
+=======
+#: functions.php:392
+>>>>>>> WPHome/master
 msgid "This entry was posted on %3$s<span class=\"by-author\"> by %4$s</span>."
 msgstr ""
 
@@ -276,8 +441,14 @@ msgstr ""
 msgid ""
 "<span class=\"meta-prep meta-prep-entry-date\">Published </span> <span class="
 "\"entry-date\"><time class=\"entry-date\" datetime=\"%1$s\">%2$s</time></"
+<<<<<<< HEAD
 "span> at <a href=\"%3$s\" title=\"Link to full-size image\">%4$s &times; %5"
 "$s</a> in <a href=\"%6$s\" title=\"Return to %7$s\" rel=\"gallery\">%8$s</a>."
+=======
+"span> at <a href=\"%3$s\" title=\"Link to full-size image\">%4$s &times; "
+"%5$s</a> in <a href=\"%6$s\" title=\"Return to %7$s\" rel=\"gallery\">%8$s</"
+"a>."
+>>>>>>> WPHome/master
 msgstr ""
 
 #: image.php:41
@@ -325,7 +496,11 @@ msgid "Twenty Twelve"
 msgstr ""
 
 #. Theme URI of the plugin/theme
+<<<<<<< HEAD
 msgid "http://wordpress.org/extend/themes/twentytwelve"
+=======
+msgid "https://wordpress.org/themes/twentytwelve/"
+>>>>>>> WPHome/master
 msgstr ""
 
 #. Description of the plugin/theme
@@ -341,6 +516,13 @@ msgstr ""
 msgid "the WordPress team"
 msgstr ""
 
+<<<<<<< HEAD
+=======
+#. Author URI of the plugin/theme
+msgid "https://wordpress.org/"
+msgstr ""
+
+>>>>>>> WPHome/master
 #. Template Name of the plugin/theme
 msgid "Front Page Template"
 msgstr ""

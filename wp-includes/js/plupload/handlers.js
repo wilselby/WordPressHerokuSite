@@ -1,9 +1,15 @@
+<<<<<<< HEAD
 var topWin = window.dialogArguments || opener || parent || top, uploader, uploader_init;
 
 function fileDialogStart() {
 	jQuery("#media-upload-error").empty();
 }
 
+=======
+/* global plupload, pluploadL10n, ajaxurl, post_id, wpUploaderInit, deleteUserSetting, setUserSetting, getUserSetting, shortform */
+var topWin = window.dialogArguments || opener || parent || top, uploader, uploader_init;
+
+>>>>>>> WPHome/master
 // progress and success handlers for media multi uploads
 function fileQueued(fileObj) {
 	// Get rid of unused form
@@ -16,7 +22,16 @@ function fileQueued(fileObj) {
 		items.removeClass('open').find('.slidetoggle').slideUp(200);
 	}
 	// Create a progress bar containing the filename
+<<<<<<< HEAD
 	jQuery('#media-items').append('<div id="media-item-' + fileObj.id + '" class="media-item child-of-' + postid + '"><div class="progress"><div class="percent">0%</div><div class="bar"></div></div><div class="filename original"> ' + fileObj.name + '</div></div>');
+=======
+	jQuery('<div class="media-item">')
+		.attr( 'id', 'media-item-' + fileObj.id )
+		.addClass('child-of-' + postid)
+		.append('<div class="progress"><div class="percent">0%</div><div class="bar"></div></div>',
+			jQuery('<div class="filename original">').text( ' ' + fileObj.name ))
+		.appendTo( jQuery('#media-items' ) );
+>>>>>>> WPHome/master
 
 	// Disable submit
 	jQuery('#insert-gallery').prop('disabled', true);
@@ -39,6 +54,7 @@ function uploadProgress(up, file) {
 }
 
 // check to see if a large file failed to upload
+<<<<<<< HEAD
 function fileUploading(up, file) {
 	var hundredmb = 100 * 1024 * 1024, max = parseInt(up.settings.max_file_size, 10);
 
@@ -53,6 +69,21 @@ function fileUploading(up, file) {
 				up.start(); // restart the queue
 			}
 		}, 10000); // wait for 10 sec. for the file to start uploading
+=======
+function fileUploading( up, file ) {
+	var hundredmb = 100 * 1024 * 1024,
+		max = parseInt( up.settings.max_file_size, 10 );
+
+	if ( max > hundredmb && file.size > hundredmb ) {
+		setTimeout( function() {
+			if ( file.status < 3 && file.loaded === 0 ) { // not uploading
+				wpFileError( file, pluploadL10n.big_upload_failed.replace( '%1$s', '<a class="uploader-html" href="#">' ).replace( '%2$s', '</a>' ) );
+				up.stop(); // stops the whole queue
+				up.removeFile( file );
+				up.start(); // restart the queue
+			}
+		}, 10000 ); // wait for 10 sec. for the file to start uploading
+>>>>>>> WPHome/master
 	}
 }
 
@@ -65,7 +96,11 @@ function updateMediaForm() {
 		jQuery('.insert-gallery').hide();
 	} else if ( items.length > 1 ) {
 		items.removeClass('open');
+<<<<<<< HEAD
 		// Only show Gallery button when there are at least two files.
+=======
+		// Only show Gallery/Playlist buttons when there are at least two files.
+>>>>>>> WPHome/master
 		jQuery('.insert-gallery').show();
 	}
 
@@ -98,6 +133,7 @@ function uploadSuccess(fileObj, serverData) {
 		jQuery('#attachments-count').text(1 * jQuery('#attachments-count').text() + 1);
 }
 
+<<<<<<< HEAD
 function setResize(arg) {
 	if ( arg ) {
 		if ( uploader.features.jpgresize )
@@ -107,6 +143,22 @@ function setResize(arg) {
 	} else {
 		delete(uploader.settings.resize);
 		delete(uploader.settings.multipart_params.image_resize);
+=======
+function setResize( arg ) {
+	if ( arg ) {
+		if ( window.resize_width && window.resize_height ) {
+			uploader.settings.resize = {
+				enabled: true,
+				width: window.resize_width,
+				height: window.resize_height,
+				quality: 100
+			};
+		} else {
+			uploader.settings.multipart_params.image_resize = true;
+		}
+	} else {
+		delete( uploader.settings.multipart_params.image_resize );
+>>>>>>> WPHome/master
 	}
 }
 
@@ -124,7 +176,11 @@ function prepareMediaItem(fileObj, serverData) {
 		item.append(serverData);
 		prepareMediaItemInit(fileObj);
 	} else { // New style: server data is just the attachment ID, fetch the thumbnail and form html from the server
+<<<<<<< HEAD
 		item.load('async-upload.php', {attachment_id:serverData, fetch:f}, function(){prepareMediaItemInit(fileObj);updateMediaForm()});
+=======
+		item.load('async-upload.php', {attachment_id:serverData, fetch:f}, function(){prepareMediaItemInit(fileObj);updateMediaForm();});
+>>>>>>> WPHome/master
 	}
 }
 
@@ -166,8 +222,14 @@ function prepareMediaItemInit(fileObj) {
 				action: 'untrash-post',
 				_ajax_nonce: this.href.replace(/^.*wpnonce=/,'')
 			},
+<<<<<<< HEAD
 			success: function(data, textStatus){
 				var item = jQuery('#media-item-' + fileObj.id);
+=======
+			success: function( ){
+				var type,
+					item = jQuery('#media-item-' + fileObj.id);
+>>>>>>> WPHome/master
 
 				if ( type = jQuery('#type-of-' + fileObj.id).val() )
 					jQuery('#' + type + '-counter').text(jQuery('#' + type + '-counter').text()-0+1);
@@ -205,6 +267,7 @@ function itemAjaxError(id, message) {
 	if ( last_err == id ) // prevent firing an error for the same file twice
 		return;
 
+<<<<<<< HEAD
 	item.html('<div class="error-div">'
 				+ '<a class="dismiss" href="#">' + pluploadL10n.dismiss + '</a>'
 				+ '<strong>' + pluploadL10n.error_uploading.replace('%s', jQuery.trim(filename)) + '</strong> '
@@ -213,13 +276,29 @@ function itemAjaxError(id, message) {
 }
 
 function deleteSuccess(data, textStatus) {
+=======
+	item.html('<div class="error-div">' +
+				'<a class="dismiss" href="#">' + pluploadL10n.dismiss + '</a>' +
+				'<strong>' + pluploadL10n.error_uploading.replace('%s', jQuery.trim(filename)) + '</strong> ' +
+				message +
+				'</div>').data('last-err', id);
+}
+
+function deleteSuccess(data) {
+	var type, id, item;
+>>>>>>> WPHome/master
 	if ( data == '-1' )
 		return itemAjaxError(this.id, 'You do not have permission. Has your session expired?');
 
 	if ( data == '0' )
 		return itemAjaxError(this.id, 'Could not be deleted. Has it been deleted already?');
 
+<<<<<<< HEAD
 	var id = this.id, item = jQuery('#media-item-' + id);
+=======
+	id = this.id;
+	item = jQuery('#media-item-' + id);
+>>>>>>> WPHome/master
 
 	// Decrement the counters.
 	if ( type = jQuery('#type-of-' + id).val() )
@@ -247,7 +326,11 @@ function deleteSuccess(data, textStatus) {
 	return;
 }
 
+<<<<<<< HEAD
 function deleteError(X, textStatus, errorThrown) {
+=======
+function deleteError() {
+>>>>>>> WPHome/master
 	// TODO
 }
 
@@ -268,6 +351,7 @@ function switchUploader(s) {
 	}
 }
 
+<<<<<<< HEAD
 function dndHelper(s) {
 	var d = document.getElementById('dnd-helper');
 
@@ -278,6 +362,8 @@ function dndHelper(s) {
 	}
 }
 
+=======
+>>>>>>> WPHome/master
 function uploadError(fileObj, errorCode, message, uploader) {
 	var hundredmb = 100 * 1024 * 1024, max;
 
@@ -304,10 +390,17 @@ function uploadError(fileObj, errorCode, message, uploader) {
 			wpQueueError(pluploadL10n.upload_failed);
 			break;
 		case plupload.IO_ERROR:
+<<<<<<< HEAD
 			max = parseInt(uploader.settings.max_file_size, 10);
 
 			if ( max > hundredmb && fileObj.size > hundredmb )
 				wpFileError(fileObj, pluploadL10n.big_upload_failed.replace('%1$s', '<a class="uploader-html" href="#">').replace('%2$s', '</a>'));
+=======
+			max = parseInt( uploader.settings.filters.max_file_size, 10 );
+
+			if ( max > hundredmb && fileObj.size > hundredmb )
+				wpFileError( fileObj, pluploadL10n.big_upload_failed.replace('%1$s', '<a class="uploader-html" href="#">').replace('%2$s', '</a>') );
+>>>>>>> WPHome/master
 			else
 				wpQueueError(pluploadL10n.io_error);
 			break;
@@ -401,6 +494,19 @@ jQuery(document).ready(function($){
 
 	// init and set the uploader
 	uploader_init = function() {
+<<<<<<< HEAD
+=======
+		var isIE = navigator.userAgent.indexOf('Trident/') != -1 || navigator.userAgent.indexOf('MSIE ') != -1;
+
+		// Make sure flash sends cookies (seems in IE it does whitout switching to urlstream mode)
+		if ( ! isIE && 'flash' === plupload.predictRuntime( wpUploaderInit ) &&
+			( ! wpUploaderInit.required_features || ! wpUploaderInit.required_features.hasOwnProperty( 'send_binary_string' ) ) ) {
+
+			wpUploaderInit.required_features = wpUploaderInit.required_features || {};
+			wpUploaderInit.required_features.send_binary_string = true;
+		}
+
+>>>>>>> WPHome/master
 		uploader = new plupload.Uploader(wpUploaderInit);
 
 		$('#image_resize').bind('change', function() {
@@ -431,12 +537,19 @@ jQuery(document).ready(function($){
 				$('#drag-drop-area').unbind('.wp-uploader');
 			}
 
+<<<<<<< HEAD
 			if ( up.runtime == 'html4' )
 				$('.upload-flash-bypass').hide();
+=======
+			if ( up.runtime === 'html4' ) {
+				$('.upload-flash-bypass').hide();
+			}
+>>>>>>> WPHome/master
 		});
 
 		uploader.init();
 
+<<<<<<< HEAD
 		uploader.bind('FilesAdded', function(up, files) {
 			var hundredmb = 100 * 1024 * 1024, max = parseInt(up.settings.max_file_size, 10);
 
@@ -448,16 +561,27 @@ jQuery(document).ready(function($){
 					uploadSizeError( up, file, true );
 				else
 					fileQueued(file);
+=======
+		uploader.bind('FilesAdded', function( up, files ) {
+			$('#media-upload-error').empty();
+			uploadStart();
+
+			plupload.each( files, function( file ) {
+				fileQueued( file );
+>>>>>>> WPHome/master
 			});
 
 			up.refresh();
 			up.start();
 		});
 
+<<<<<<< HEAD
 		uploader.bind('BeforeUpload', function(up, file) {
 			// something
 		});
 
+=======
+>>>>>>> WPHome/master
 		uploader.bind('UploadFile', function(up, file) {
 			fileUploading(up, file);
 		});
@@ -475,6 +599,7 @@ jQuery(document).ready(function($){
 			uploadSuccess(file, response.response);
 		});
 
+<<<<<<< HEAD
 		uploader.bind('UploadComplete', function(up, files) {
 			uploadComplete();
 		});
@@ -482,5 +607,15 @@ jQuery(document).ready(function($){
 
 	if ( typeof(wpUploaderInit) == 'object' )
 		uploader_init();
+=======
+		uploader.bind('UploadComplete', function() {
+			uploadComplete();
+		});
+	};
+
+	if ( typeof(wpUploaderInit) == 'object' ) {
+		uploader_init();
+	}
+>>>>>>> WPHome/master
 
 });

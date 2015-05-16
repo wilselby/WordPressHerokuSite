@@ -10,6 +10,10 @@
  *
  * @package External
  * @subpackage MagpieRSS
+<<<<<<< HEAD
+=======
+ * @deprecated 3.0.0 Use SimplePie instead.
+>>>>>>> WPHome/master
  */
 
 /**
@@ -17,10 +21,20 @@
  */
 _deprecated_file( basename( __FILE__ ), '3.0', WPINC . '/class-simplepie.php' );
 
+<<<<<<< HEAD
 /*
  * Hook to use another RSS object instead of MagpieRSS
  */
 do_action('load_feed_engine');
+=======
+/**
+ * Fires before MagpieRSS is loaded, to optionally replace it.
+ *
+ * @since 2.3.0
+ * @deprecated 3.0.0
+ */
+do_action( 'load_feed_engine' );
+>>>>>>> WPHome/master
 
 /** RSS feed constant. */
 define('RSS', 'RSS');
@@ -243,7 +257,11 @@ class MagpieRSS {
 		}
 		elseif ($this->feed_type == ATOM and $this->incontent  ) {
 			// balance tags properly
+<<<<<<< HEAD
 			// note:  i don't think this is actually neccessary
+=======
+			// note: This may not actually be necessary
+>>>>>>> WPHome/master
 			if ( $this->stack[0] == $el )
 			{
 				$this->append_content("</$el>");
@@ -422,7 +440,11 @@ function fetch_rss ($url) {
 	else {
 		// Flow
 		// 1. check cache
+<<<<<<< HEAD
 		// 2. if there is a hit, make sure its fresh
+=======
+		// 2. if there is a hit, make sure it's fresh
+>>>>>>> WPHome/master
 		// 3. if cached obj fails freshness check, fetch remote
 		// 4. if remote fails, return stale object, or error
 
@@ -536,7 +558,11 @@ endif;
  * @return Snoopy style response
  */
 function _fetch_remote_file($url, $headers = "" ) {
+<<<<<<< HEAD
 	$resp = wp_remote_request($url, array('headers' => $headers, 'timeout' => MAGPIE_FETCH_TIME_OUT));
+=======
+	$resp = wp_safe_remote_request( $url, array( 'headers' => $headers, 'timeout' => MAGPIE_FETCH_TIME_OUT ) );
+>>>>>>> WPHome/master
 	if ( is_wp_error($resp) ) {
 		$error = array_shift($resp->errors);
 
@@ -575,8 +601,13 @@ function _fetch_remote_file($url, $headers = "" ) {
  * @package External
  * @subpackage MagpieRSS
  *
+<<<<<<< HEAD
  * @param unknown_type $resp
  * @return unknown
+=======
+ * @param array $resp
+ * @return MagpieRSS|bool
+>>>>>>> WPHome/master
  */
 function _response_to_rss ($resp) {
 	$rss = new MagpieRSS( $resp->results );
@@ -720,7 +751,11 @@ class RSSCache {
 	Function:	set
 	Purpose:	add an item to the cache, keyed on url
 	Input:		url from wich the rss file was fetched
+<<<<<<< HEAD
 	Output:		true on sucess
+=======
+	Output:		true on success
+>>>>>>> WPHome/master
 \*=======================================================================*/
 	function set ($url, $rss) {
 		$cache_option = 'rss_' . $this->file_name( $url );

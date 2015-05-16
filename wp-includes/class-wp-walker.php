@@ -2,6 +2,7 @@
 /**
  * A class for displaying various tree-like structures.
  *
+<<<<<<< HEAD
  * Extend the Walker class to use it, see examples at the below. Child classes
  * do not need to implement all of the abstract methods in the class. The child
  * only needs to implement the methods that are needed. Also, the methods are
@@ -10,6 +11,15 @@
  *
  * @package WordPress
  * @since 2.1.0
+=======
+ * Extend the Walker class to use it, see examples below. Child classes
+ * do not need to implement all of the abstract methods in the class. The child
+ * only needs to implement the methods that are needed.
+ *
+ * @since 2.1.0
+ *
+ * @package WordPress
+>>>>>>> WPHome/master
  * @abstract
  */
 class Walker {
@@ -17,83 +27,161 @@ class Walker {
 	 * What the class handles.
 	 *
 	 * @since 2.1.0
+<<<<<<< HEAD
 	 * @var string
 	 * @access public
 	 */
 	var $tree_type;
+=======
+	 * @access public
+	 * @var string
+	 */
+	public $tree_type;
+>>>>>>> WPHome/master
 
 	/**
 	 * DB fields to use.
 	 *
 	 * @since 2.1.0
 	 * @var array
+<<<<<<< HEAD
 	 * @access protected
 	 */
 	var $db_fields;
+=======
+	 */
+	public $db_fields;
+>>>>>>> WPHome/master
 
 	/**
 	 * Max number of pages walked by the paged walker
 	 *
 	 * @since 2.7.0
 	 * @var int
+<<<<<<< HEAD
 	 * @access protected
 	 */
 	var $max_pages = 1;
+=======
+	 */
+	public $max_pages = 1;
+
+	/**
+	 * Whether the current element has children or not.
+	 *
+	 * To be used in start_el().
+	 *
+	 * @since 4.0.0
+	 * @var bool
+	 */
+	public $has_children;
+>>>>>>> WPHome/master
 
 	/**
 	 * Starts the list before the elements are added.
 	 *
+<<<<<<< HEAD
 	 * Additional parameters are used in child classes. The args parameter holds
 	 * additional values that may be used with the child class methods. This
 	 * method is called at the start of the output list.
+=======
+	 * The $args parameter holds additional values that may be used with the child
+	 * class methods. This method is called at the start of the output list.
+>>>>>>> WPHome/master
 	 *
 	 * @since 2.1.0
 	 * @abstract
 	 *
 	 * @param string $output Passed by reference. Used to append additional content.
+<<<<<<< HEAD
 	 */
 	function start_lvl( &$output, $depth = 0, $args = array() ) {}
+=======
+	 * @param int    $depth  Depth of the item.
+	 * @param array  $args   An array of additional arguments.
+	 */
+	public function start_lvl( &$output, $depth = 0, $args = array() ) {}
+>>>>>>> WPHome/master
 
 	/**
 	 * Ends the list of after the elements are added.
 	 *
+<<<<<<< HEAD
 	 * Additional parameters are used in child classes. The args parameter holds
 	 * additional values that may be used with the child class methods. This
 	 * method finishes the list at the end of output of the elements.
+=======
+	 * The $args parameter holds additional values that may be used with the child
+	 * class methods. This method finishes the list at the end of output of the elements.
+>>>>>>> WPHome/master
 	 *
 	 * @since 2.1.0
 	 * @abstract
 	 *
 	 * @param string $output Passed by reference. Used to append additional content.
+<<<<<<< HEAD
 	 */
 	function end_lvl( &$output, $depth = 0, $args = array() )   {}
+=======
+	 * @param int    $depth  Depth of the item.
+	 * @param array  $args   An array of additional arguments.
+	 */
+	public function end_lvl( &$output, $depth = 0, $args = array() ) {}
+>>>>>>> WPHome/master
 
 	/**
 	 * Start the element output.
 	 *
+<<<<<<< HEAD
 	 * Additional parameters are used in child classes. The args parameter holds
 	 * additional values that may be used with the child class methods. Includes
 	 * the element output also.
+=======
+	 * The $args parameter holds additional values that may be used with the child
+	 * class methods. Includes the element output also.
+>>>>>>> WPHome/master
 	 *
 	 * @since 2.1.0
 	 * @abstract
 	 *
+<<<<<<< HEAD
 	 * @param string $output Passed by reference. Used to append additional content.
 	 */
 	function start_el( &$output, $object, $depth, $args, $current_object_id = 0 )  {}
+=======
+	 * @param string $output            Passed by reference. Used to append additional content.
+	 * @param object $object            The data object.
+	 * @param int    $depth             Depth of the item.
+	 * @param array  $args              An array of additional arguments.
+	 * @param int    $current_object_id ID of the current item.
+	 */
+	public function start_el( &$output, $object, $depth = 0, $args = array(), $current_object_id = 0 ) {}
+>>>>>>> WPHome/master
 
 	/**
 	 * Ends the element output, if needed.
 	 *
+<<<<<<< HEAD
 	 * Additional parameters are used in child classes. The args parameter holds
 	 * additional values that may be used with the child class methods.
+=======
+	 * The $args parameter holds additional values that may be used with the child class methods.
+>>>>>>> WPHome/master
 	 *
 	 * @since 2.1.0
 	 * @abstract
 	 *
 	 * @param string $output Passed by reference. Used to append additional content.
+<<<<<<< HEAD
 	 */
 	function end_el( &$output, $object, $depth = 0, $args = array() )    {}
+=======
+	 * @param object $object The data object.
+	 * @param int    $depth  Depth of the item.
+	 * @param array  $args   An array of additional arguments.
+	 */
+	public function end_el( &$output, $object, $depth = 0, $args = array() ) {}
+>>>>>>> WPHome/master
 
 	/**
 	 * Traverse elements to create list from elements.
@@ -103,6 +191,7 @@ class Walker {
 	 * depth and no ignore elements under that depth. It is possible to set the
 	 * max depth to include all depths, see walk() method.
 	 *
+<<<<<<< HEAD
 	 * This method shouldn't be called directly, use the walk() method instead.
 	 *
 	 * @since 2.5.0
@@ -116,11 +205,27 @@ class Walker {
 	 * @return null Null on failure with no changes to parameters.
 	 */
 	function display_element( $element, &$children_elements, $max_depth, $depth=0, $args, &$output ) {
+=======
+	 * This method should not be called directly, use the walk() method instead.
+	 *
+	 * @since 2.5.0
+	 *
+	 * @param object $element           Data object.
+	 * @param array  $children_elements List of elements to continue traversing.
+	 * @param int    $max_depth         Max depth to traverse.
+	 * @param int    $depth             Depth of current element.
+	 * @param array  $args              An array of arguments.
+	 * @param string $output            Passed by reference. Used to append additional content.
+	 * @return null Null on failure with no changes to parameters.
+	 */
+	public function display_element( $element, &$children_elements, $max_depth, $depth, $args, &$output ) {
+>>>>>>> WPHome/master
 
 		if ( !$element )
 			return;
 
 		$id_field = $this->db_fields['id'];
+<<<<<<< HEAD
 
 		//display this element
 		if ( is_array( $args[0] ) )
@@ -130,6 +235,19 @@ class Walker {
 
 		$id = $element->$id_field;
 
+=======
+		$id       = $element->$id_field;
+
+		//display this element
+		$this->has_children = ! empty( $children_elements[ $id ] );
+		if ( isset( $args[0] ) && is_array( $args[0] ) ) {
+			$args[0]['has_children'] = $this->has_children; // Backwards compatibility.
+		}
+
+		$cb_args = array_merge( array(&$output, $element, $depth), $args);
+		call_user_func_array(array($this, 'start_el'), $cb_args);
+
+>>>>>>> WPHome/master
 		// descend only when the depth is right and there are childrens for this element
 		if ( ($max_depth == 0 || $max_depth > $depth+1 ) && isset( $children_elements[$id]) ) {
 
@@ -160,6 +278,7 @@ class Walker {
 	/**
 	 * Display array of elements hierarchically.
 	 *
+<<<<<<< HEAD
 	 * It is a generic function which does not assume any existing order of
 	 * elements. max_depth = -1 means flatly display every element. max_depth =
 	 * 0 means display all levels. max_depth > 0  specifies the number of
@@ -172,6 +291,21 @@ class Walker {
 	 * @return string
 	 */
 	function walk( $elements, $max_depth) {
+=======
+	 * Does not assume any existing order of elements.
+	 *
+	 * $max_depth = -1 means flatly display every element.
+	 * $max_depth = 0 means display all levels.
+	 * $max_depth > 0 specifies the number of display levels.
+	 *
+	 * @since 2.1.0
+	 *
+	 * @param array $elements  An array of elements.
+	 * @param int   $max_depth The maximum hierarchical depth.
+	 * @return string The hierarchical item output.
+	 */
+	public function walk( $elements, $max_depth) {
+>>>>>>> WPHome/master
 
 		$args = array_slice(func_get_args(), 2);
 		$output = '';
@@ -182,7 +316,10 @@ class Walker {
 		if (empty($elements)) //nothing to walk
 			return $output;
 
+<<<<<<< HEAD
 		$id_field = $this->db_fields['id'];
+=======
+>>>>>>> WPHome/master
 		$parent_field = $this->db_fields['parent'];
 
 		// flat display
@@ -194,10 +331,17 @@ class Walker {
 		}
 
 		/*
+<<<<<<< HEAD
 		 * need to display in hierarchical order
 		 * separate elements into two buckets: top level and children elements
 		 * children_elements is two dimensional array, eg.
 		 * children_elements[10][] contains all sub-elements whose parent is 10.
+=======
+		 * Need to display in hierarchical order.
+		 * Separate elements into two buckets: top level and children elements.
+		 * Children_elements is two dimensional array, eg.
+		 * Children_elements[10][] contains all sub-elements whose parent is 10.
+>>>>>>> WPHome/master
 		 */
 		$top_level_elements = array();
 		$children_elements  = array();
@@ -209,8 +353,13 @@ class Walker {
 		}
 
 		/*
+<<<<<<< HEAD
 		 * when none of the elements is top level
 		 * assume the first one must be root of the sub elements
+=======
+		 * When none of the elements is top level.
+		 * Assume the first one must be root of the sub elements.
+>>>>>>> WPHome/master
 		 */
 		if ( empty($top_level_elements) ) {
 
@@ -231,8 +380,13 @@ class Walker {
 			$this->display_element( $e, $children_elements, $max_depth, 0, $args, $output );
 
 		/*
+<<<<<<< HEAD
 		 * if we are displaying all levels, and remaining children_elements is not empty,
 		 * then we got orphans, which should be displayed regardless
+=======
+		 * If we are displaying all levels, and remaining children_elements is not empty,
+		 * then we got orphans, which should be displayed regardless.
+>>>>>>> WPHome/master
 		 */
 		if ( ( $max_depth == 0 ) && count( $children_elements ) > 0 ) {
 			$empty_array = array();
@@ -251,6 +405,7 @@ class Walker {
  	 * and number of elements per page, this function first determines all top level root elements
  	 * belonging to that page, then lists them and all of their children in hierarchical order.
  	 *
+<<<<<<< HEAD
  	 * @package WordPress
  	 * @since 2.7
  	 * @param int $max_depth = 0 means display all levels; $max_depth > 0 specifies the number of display levels.
@@ -258,6 +413,18 @@ class Walker {
  	 * @return XHTML of the specified page of elements
  	 */
 	function paged_walk( $elements, $max_depth, $page_num, $per_page ) {
+=======
+	 * $max_depth = 0 means display all levels.
+	 * $max_depth > 0 specifies the number of display levels.
+	 *
+ 	 * @since 2.7.0
+	 *
+ 	 * @param int $max_depth The maximum hierarchical depth.
+ 	 * @param int $page_num  The specific page number, beginning with 1.
+ 	 * @return string XHTML of the specified page of elements
+ 	 */
+	public function paged_walk( $elements, $max_depth, $page_num, $per_page ) {
+>>>>>>> WPHome/master
 
 		/* sanity check */
 		if ( empty($elements) || $max_depth < -1 )
@@ -266,7 +433,10 @@ class Walker {
 		$args = array_slice( func_get_args(), 4 );
 		$output = '';
 
+<<<<<<< HEAD
 		$id_field = $this->db_fields['id'];
+=======
+>>>>>>> WPHome/master
 		$parent_field = $this->db_fields['parent'];
 
 		$count = -1;
@@ -309,9 +479,15 @@ class Walker {
 		}
 
 		/*
+<<<<<<< HEAD
 		 * separate elements into two buckets: top level and children elements
 		 * children_elements is two dimensional array, eg.
 		 * children_elements[10][] contains all sub-elements whose parent is 10.
+=======
+		 * Separate elements into two buckets: top level and children elements.
+		 * Children_elements is two dimensional array, e.g.
+		 * $children_elements[10][] contains all sub-elements whose parent is 10.
+>>>>>>> WPHome/master
 		 */
 		$top_level_elements = array();
 		$children_elements  = array();
@@ -342,7 +518,11 @@ class Walker {
 		foreach ( $top_level_elements as $e ) {
 			$count++;
 
+<<<<<<< HEAD
 			//for the last page, need to unset earlier children in order to keep track of orphans
+=======
+			// For the last page, need to unset earlier children in order to keep track of orphans.
+>>>>>>> WPHome/master
 			if ( $end >= $total_top && $count < $start )
 					$this->unset_children( $e, $children_elements );
 
@@ -365,7 +545,11 @@ class Walker {
 		return $output;
 	}
 
+<<<<<<< HEAD
 	function get_number_of_root_elements( $elements ){
+=======
+	public function get_number_of_root_elements( $elements ){
+>>>>>>> WPHome/master
 
 		$num = 0;
 		$parent_field = $this->db_fields['parent'];
@@ -377,8 +561,13 @@ class Walker {
 		return $num;
 	}
 
+<<<<<<< HEAD
 	// unset all the children for a given top level element
 	function unset_children( $e, &$children_elements ){
+=======
+	// Unset all the children for a given top level element.
+	public function unset_children( $e, &$children_elements ){
+>>>>>>> WPHome/master
 
 		if ( !$e || !$children_elements )
 			return;
@@ -394,4 +583,9 @@ class Walker {
 			unset( $children_elements[$id] );
 
 	}
+<<<<<<< HEAD
 }
+=======
+
+} // Walker
+>>>>>>> WPHome/master

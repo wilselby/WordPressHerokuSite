@@ -1,6 +1,10 @@
 <?php
 /**
+<<<<<<< HEAD
  * The Template for displaying all single posts.
+=======
+ * The Template for displaying all single posts
+>>>>>>> WPHome/master
  *
  * @package WordPress
  * @subpackage Twenty_Twelve

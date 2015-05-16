@@ -1,8 +1,14 @@
 <?php
 /**
+<<<<<<< HEAD
  * The sidebar containing the front page widget areas.
  *
  * If no active widgets in either sidebar, they will be hidden completely.
+=======
+ * The sidebar containing the front page widget areas
+ *
+ * If no active widgets are in either sidebar, hide them completely.
+>>>>>>> WPHome/master
  *
  * @package WordPress
  * @subpackage Twenty_Twelve

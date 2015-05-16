@@ -14,9 +14,15 @@
 				else if ( 'left' == side || 'right' == side )
 					inputs[i].style.visibility = 'visible';
 			}
+<<<<<<< HEAD
 		}
 		pr.onclick();
 	}
+=======
+		};
+		pr.onclick();
+	};
+>>>>>>> WPHome/master
 	if ( w && w.addEventListener )
 		w.addEventListener('load', init, false);
 	else if ( w && w.attachEvent )

@@ -124,7 +124,11 @@ class SimplePie_Misc
 						{
 							$attribs[$j][2] = $attribs[$j][1];
 						}
+<<<<<<< HEAD
 						$return[$i]['attribs'][strtolower($attribs[$j][1])]['data'] = SimplePie_Misc::entities_decode(end($attribs[$j]), 'UTF-8');
+=======
+						$return[$i]['attribs'][strtolower($attribs[$j][1])]['data'] = SimplePie_Misc::entities_decode(end($attribs[$j]));
+>>>>>>> WPHome/master
 					}
 				}
 			}

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /*------------------------------------------------------------------------------
 
 
@@ -8579,3 +8580,18 @@ a.widget-control-edit {
 	float: none;
 	margin: -4px 0;
 }
+=======
+@import url(common.css);
+@import url(forms.css);
+@import url(admin-menu.css);
+@import url(dashboard.css);
+@import url(list-tables.css);
+@import url(edit.css);
+@import url(revisions.css);
+@import url(media.css);
+@import url(themes.css);
+@import url(about.css);
+@import url(nav-menus.css);
+@import url(widgets.css);
+@import url(l10n.css);
+>>>>>>> WPHome/master

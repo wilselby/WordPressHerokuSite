@@ -98,7 +98,11 @@ class Text_Diff_Renderer {
                             /* Create a new block with as many lines as we need
                              * for the trailing context. */
                             $context = array_slice($edit->orig, 0, $ntrail);
+<<<<<<< HEAD
                             $block[] = &new Text_Diff_Op_copy($context);
+=======
+                            $block[] = new Text_Diff_Op_copy($context);
+>>>>>>> WPHome/master
                         }
                         /* @todo */
                         $output .= $this->_block($x0, $ntrail + $xi - $x0,
@@ -118,7 +122,11 @@ class Text_Diff_Renderer {
                     $y0 = $yi - count($context);
                     $block = array();
                     if ($context) {
+<<<<<<< HEAD
                         $block[] = &new Text_Diff_Op_copy($context);
+=======
+                        $block[] = new Text_Diff_Op_copy($context);
+>>>>>>> WPHome/master
                     }
                 }
                 $block[] = $edit;

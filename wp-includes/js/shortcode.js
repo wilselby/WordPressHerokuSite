@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 // Utility functions for parsing and handling shortcodes in Javascript.
+=======
+// Utility functions for parsing and handling shortcodes in JavaScript.
+>>>>>>> WPHome/master
 
 // Ensure the global `wp` object exists.
 window.wp = window.wp || {};
@@ -19,12 +23,23 @@ window.wp = window.wp || {};
 			re.lastIndex = index || 0;
 			match = re.exec( text );
 
+<<<<<<< HEAD
 			if ( ! match )
 				return;
 
 			// If we matched an escaped shortcode, try again.
 			if ( match[1] === '[' && match[7] === ']' )
 				return wp.shortcode.next( tag, text, re.lastIndex );
+=======
+			if ( ! match ) {
+				return;
+			}
+
+			// If we matched an escaped shortcode, try again.
+			if ( '[' === match[1] && ']' === match[7] ) {
+				return wp.shortcode.next( tag, text, re.lastIndex );
+			}
+>>>>>>> WPHome/master
 
 			result = {
 				index:     match.index,
@@ -35,13 +50,23 @@ window.wp = window.wp || {};
 			// If we matched a leading `[`, strip it from the match
 			// and increment the index accordingly.
 			if ( match[1] ) {
+<<<<<<< HEAD
 				result.match = result.match.slice( 1 );
+=======
+				result.content = result.content.slice( 1 );
+>>>>>>> WPHome/master
 				result.index++;
 			}
 
 			// If we matched a trailing `]`, strip it from the match.
+<<<<<<< HEAD
 			if ( match[7] )
 				result.match = result.match.slice( 0, -1 );
+=======
+			if ( match[7] ) {
+				result.content = result.content.slice( 0, -1 );
+			}
+>>>>>>> WPHome/master
 
 			return result;
 		},
@@ -56,11 +81,20 @@ window.wp = window.wp || {};
 		// a shortcode `attrs` object, the `content` between shortcode tags,
 		// and a boolean flag to indicate if the match was a `single` tag.
 		replace: function( tag, text, callback ) {
+<<<<<<< HEAD
 			return text.replace( wp.shortcode.regexp( tag ), function( match, left, tag, attrs, slash, content, closing, right, offset ) {
 				// If both extra brackets exist, the shortcode has been
 				// properly escaped.
 				if ( left === '[' && right === ']' )
 					return match;
+=======
+			return text.replace( wp.shortcode.regexp( tag ), function( match, left, tag, attrs, slash, content, closing, right ) {
+				// If both extra brackets exist, the shortcode has been
+				// properly escaped.
+				if ( left === '[' && right === ']' ) {
+					return match;
+				}
+>>>>>>> WPHome/master
 
 				// Create the match object and pass it through the callback.
 				var result = callback( wp.shortcode.fromMatch( arguments ) );
@@ -164,12 +198,22 @@ window.wp = window.wp || {};
 		fromMatch: function( match ) {
 			var type;
 
+<<<<<<< HEAD
 			if ( match[4] )
 				type = 'self-closing';
 			else if ( match[6] )
 				type = 'closed';
 			else
 				type = 'single';
+=======
+			if ( match[4] ) {
+				type = 'self-closing';
+			} else if ( match[6] ) {
+				type = 'closed';
+			} else {
+				type = 'single';
+			}
+>>>>>>> WPHome/master
 
 			return new wp.shortcode({
 				tag:     match[2],
@@ -202,8 +246,14 @@ window.wp = window.wp || {};
 			numeric: []
 		};
 
+<<<<<<< HEAD
 		if ( ! attrs )
 			return;
+=======
+		if ( ! attrs ) {
+			return;
+		}
+>>>>>>> WPHome/master
 
 		// Parse a string of attributes.
 		if ( _.isString( attrs ) ) {
@@ -244,10 +294,18 @@ window.wp = window.wp || {};
 			var text    = '[' + this.tag;
 
 			_.each( this.attrs.numeric, function( value ) {
+<<<<<<< HEAD
 				if ( /\s/.test( value ) )
 					text += ' "' + value + '"';
 				else
 					text += ' ' + value;
+=======
+				if ( /\s/.test( value ) ) {
+					text += ' "' + value + '"';
+				} else {
+					text += ' ' + value;
+				}
+>>>>>>> WPHome/master
 			});
 
 			_.each( this.attrs.named, function( value, name ) {
@@ -256,16 +314,30 @@ window.wp = window.wp || {};
 
 			// If the tag is marked as `single` or `self-closing`, close the
 			// tag and ignore any additional content.
+<<<<<<< HEAD
 			if ( 'single' === this.type )
 				return text + ']';
 			else if ( 'self-closing' === this.type )
 				return text + ' /]';
+=======
+			if ( 'single' === this.type ) {
+				return text + ']';
+			} else if ( 'self-closing' === this.type ) {
+				return text + ' /]';
+			}
+>>>>>>> WPHome/master
 
 			// Complete the opening tag.
 			text += ']';
 
+<<<<<<< HEAD
 			if ( this.content )
 				text += this.content;
+=======
+			if ( this.content ) {
+				text += this.content;
+			}
+>>>>>>> WPHome/master
 
 			// Add the closing tag.
 			return text + '[/' + this.tag + ']';
@@ -291,15 +363,27 @@ window.wp = window.wp || {};
 			var result, attrs;
 
 			// If `content` ends in a slash, strip it.
+<<<<<<< HEAD
 			if ( '/' === content[ content.length - 1 ] )
 				content = content.slice( 0, -1 );
+=======
+			if ( '/' === content[ content.length - 1 ] ) {
+				content = content.slice( 0, -1 );
+			}
+>>>>>>> WPHome/master
 
 			result = wp.shortcode.attrs( content );
 			attrs  = result.named;
 
 			_.each( result.numeric, function( key ) {
+<<<<<<< HEAD
 				if ( /\s/.test( key ) )
 					return;
+=======
+				if ( /\s/.test( key ) ) {
+					return;
+				}
+>>>>>>> WPHome/master
 
 				attrs[ key ] = '';
 			});
@@ -316,19 +400,36 @@ window.wp = window.wp || {};
 				text += ' ' + attr;
 
 				// Use empty attribute notation where possible.
+<<<<<<< HEAD
 				if ( '' === value )
 					return;
 
 				// Convert boolean values to strings.
 				if ( _.isBoolean( value ) )
 					value = value ? 'true' : 'false';
+=======
+				if ( '' === value ) {
+					return;
+				}
+
+				// Convert boolean values to strings.
+				if ( _.isBoolean( value ) ) {
+					value = value ? 'true' : 'false';
+				}
+>>>>>>> WPHome/master
 
 				text += '="' + value + '"';
 			});
 
 			// Return the result if it is a self-closing tag.
+<<<<<<< HEAD
 			if ( options.single )
 				return text + ' />';
+=======
+			if ( options.single ) {
+				return text + ' />';
+			}
+>>>>>>> WPHome/master
 
 			// Complete the opening tag.
 			text += '>';
@@ -339,4 +440,8 @@ window.wp = window.wp || {};
 			return text + '</' + options.tag + '>';
 		}
 	});
+<<<<<<< HEAD
 }());
+=======
+}());
+>>>>>>> WPHome/master

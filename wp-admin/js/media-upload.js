@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // send html to the post editor
 
 var wpActiveEditor;
@@ -44,23 +45,78 @@ function send_to_editor(h) {
 
 	try{tb_remove();}catch(e){};
 }
+=======
+/* global tinymce, QTags */
+// send html to the post editor
+
+var wpActiveEditor, send_to_editor;
+
+send_to_editor = function( html ) {
+	var editor,
+		hasTinymce = typeof tinymce !== 'undefined',
+		hasQuicktags = typeof QTags !== 'undefined';
+
+	if ( ! wpActiveEditor ) {
+		if ( hasTinymce && tinymce.activeEditor ) {
+			editor = tinymce.activeEditor;
+			wpActiveEditor = editor.id;
+		} else if ( ! hasQuicktags ) {
+			return false;
+		}
+	} else if ( hasTinymce ) {
+		editor = tinymce.get( wpActiveEditor );
+	}
+
+	if ( editor && ! editor.isHidden() ) {
+		editor.execCommand( 'mceInsertContent', false, html );
+	} else if ( hasQuicktags ) {
+		QTags.insertContent( html );
+	} else {
+		document.getElementById( wpActiveEditor ).value += html;
+	}
+
+	// If the old thickbox remove function exists, call it
+	if ( window.tb_remove ) {
+		try { window.tb_remove(); } catch( e ) {}
+	}
+};
+>>>>>>> WPHome/master
 
 // thickbox settings
 var tb_position;
 (function($) {
 	tb_position = function() {
+<<<<<<< HEAD
 		var tbWindow = $('#TB_window'), width = $(window).width(), H = $(window).height(), W = ( 720 < width ) ? 720 : width, adminbar_height = 0;
 
 		if ( $('body.admin-bar').length )
 			adminbar_height = 28;
+=======
+		var tbWindow = $('#TB_window'),
+			width = $(window).width(),
+			H = $(window).height(),
+			W = ( 833 < width ) ? 833 : width,
+			adminbar_height = 0;
+
+		if ( $('#wpadminbar').length ) {
+			adminbar_height = parseInt( $('#wpadminbar').css('height'), 10 );
+		}
+>>>>>>> WPHome/master
 
 		if ( tbWindow.size() ) {
 			tbWindow.width( W - 50 ).height( H - 45 - adminbar_height );
 			$('#TB_iframeContent').width( W - 50 ).height( H - 75 - adminbar_height );
+<<<<<<< HEAD
 			tbWindow.css({'margin-left': '-' + parseInt((( W - 50 ) / 2),10) + 'px'});
 			if ( typeof document.body.style.maxWidth != 'undefined' )
 				tbWindow.css({'top': 20 + adminbar_height + 'px','margin-top':'0'});
 		};
+=======
+			tbWindow.css({'margin-left': '-' + parseInt( ( ( W - 50 ) / 2 ), 10 ) + 'px'});
+			if ( typeof document.body.style.maxWidth !== 'undefined' )
+				tbWindow.css({'top': 20 + adminbar_height + 'px', 'margin-top': '0'});
+		}
+>>>>>>> WPHome/master
 
 		return $('a.thickbox').each( function() {
 			var href = $(this).attr('href');
@@ -73,6 +129,7 @@ var tb_position;
 
 	$(window).resize(function(){ tb_position(); });
 
+<<<<<<< HEAD
 	// store caret position in IE
 	$(document).ready(function($){
 		$('a.thickbox').click(function(){
@@ -85,4 +142,6 @@ var tb_position;
 		});
 	});
 
+=======
+>>>>>>> WPHome/master
 })(jQuery);

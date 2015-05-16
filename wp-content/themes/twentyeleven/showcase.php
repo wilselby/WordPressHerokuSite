@@ -1,7 +1,12 @@
 <?php
 /**
  * Template Name: Showcase Template
+<<<<<<< HEAD
  * Description: A Page Template that showcases Sticky Posts, Asides, and Blog Posts
+=======
+ *
+ * Description: A Page Template that showcases Sticky Posts, Asides, and Blog Posts.
+>>>>>>> WPHome/master
  *
  * The showcase template in Twenty Eleven consists of a featured posts section using sticky posts,
  * another recent posts area (with the latest post shown in full and the rest as a list)
@@ -25,7 +30,11 @@ get_header(); ?>
 				<?php while ( have_posts() ) : the_post(); ?>
 
 				<?php
+<<<<<<< HEAD
 					/**
+=======
+					/*
+>>>>>>> WPHome/master
 					 * We are using a heading by rendering the_content
 					 * If we have content for this page, let's display it.
 					 */
@@ -36,7 +45,11 @@ get_header(); ?>
 				<?php endwhile; ?>
 
 				<?php
+<<<<<<< HEAD
 					/**
+=======
+					/*
+>>>>>>> WPHome/master
 					 * Begin the featured posts section.
 					 *
 					 * See if we have any sticky posts and use them to create our featured posts.
@@ -60,7 +73,11 @@ get_header(); ?>
 					// Proceed only if published posts exist
 					if ( $featured->have_posts() ) :
 
+<<<<<<< HEAD
 					/**
+=======
+					/*
+>>>>>>> WPHome/master
 					 * We will need to count featured posts starting from zero
 					 * to create the slider navigation.
 					 */
@@ -83,7 +100,11 @@ get_header(); ?>
 					// Increase the counter.
 					$counter_slider++;
 
+<<<<<<< HEAD
 					/**
+=======
+					/*
+>>>>>>> WPHome/master
 					 * We're going to add a class to our featured post for featured images
 					 * by default it'll have the feature-text class.
 					 */
@@ -104,10 +125,17 @@ get_header(); ?>
 					}
 					?>
 
+<<<<<<< HEAD
 					<section class="featured-post <?php echo $feature_class; ?>" id="featured-post-<?php echo $counter_slider; ?>">
 
 						<?php
 							/**
+=======
+					<section class="featured-post <?php echo esc_attr( $feature_class ); ?>" id="featured-post-<?php echo esc_attr( $counter_slider ); ?>">
+
+						<?php
+							/*
+>>>>>>> WPHome/master
 							 * If the thumbnail is as big as the header image
 							 * make it a large featured post, otherwise render it small
 							 */
@@ -134,6 +162,7 @@ get_header(); ?>
 					<?php
 
 						// Reset the counter so that we end up with matching elements
+<<<<<<< HEAD
 				    	$counter_slider = 0;
 
 						// Begin from zero
@@ -148,6 +177,22 @@ get_header(); ?>
 								$class = '';
 				    	?>
 						<li><a href="#featured-post-<?php echo $counter_slider; ?>" title="<?php echo esc_attr( sprintf( __( 'Featuring: %s', 'twentyeleven' ), the_title_attribute( 'echo=0' ) ) ); ?>" <?php echo $class; ?>></a></li>
+=======
+						$counter_slider = 0;
+
+						// Begin from zero
+						rewind_posts();
+
+						// Let's roll again.
+						while ( $featured->have_posts() ) : $featured->the_post();
+							$counter_slider++;
+							if ( 1 == $counter_slider )
+								$class = ' class="active"';
+							else
+								$class = '';
+						?>
+						<li><a href="#featured-post-<?php echo esc_attr( $counter_slider ); ?>" title="<?php echo esc_attr( sprintf( __( 'Featuring: %s', 'twentyeleven' ), the_title_attribute( 'echo=0' ) ) ); ?>"<?php echo $class; ?>></a></li>
+>>>>>>> WPHome/master
 					<?php endwhile;	?>
 					</ul>
 				</nav>
@@ -196,7 +241,11 @@ get_header(); ?>
 					while ( $recent->have_posts() ) : $recent->the_post(); ?>
 
 						<li class="entry-title">
+<<<<<<< HEAD
 							<a href="<?php the_permalink(); ?>" title="<?php echo esc_attr( sprintf( __( 'Permalink to %s', 'twentyeleven' ), the_title_attribute( 'echo=0' ) ) ); ?>" rel="bookmark"><?php the_title(); ?></a>
+=======
+							<a href="<?php the_permalink(); ?>" rel="bookmark"><?php the_title(); ?></a>
+>>>>>>> WPHome/master
 							<span class="comments-link">
 								<?php comments_popup_link( '<span class="leave-reply">' . __( 'Leave a reply', 'twentyeleven' ) . '</span>', __( '<b>1</b> Reply', 'twentyeleven' ), __( '<b>%</b> Replies', 'twentyeleven' ) ); ?>
 							</span>

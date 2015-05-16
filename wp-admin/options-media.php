@@ -7,7 +7,11 @@
  */
 
 /** WordPress Administration Bootstrap */
+<<<<<<< HEAD
 require_once('./admin.php');
+=======
+require_once( dirname( __FILE__ ) . '/admin.php' );
+>>>>>>> WPHome/master
 
 if ( ! current_user_can( 'manage_options' ) )
 	wp_die( __( 'You do not have sufficient permissions to manage options for this site.' ) );
@@ -31,26 +35,45 @@ get_current_screen()->add_help_tab( array(
 
 get_current_screen()->set_help_sidebar(
 	'<p><strong>' . __('For more information:') . '</strong></p>' .
+<<<<<<< HEAD
 	'<p>' . __('<a href="http://codex.wordpress.org/Settings_Media_Screen" target="_blank">Documentation on Media Settings</a>') . '</p>' .
 	'<p>' . __('<a href="http://wordpress.org/support/" target="_blank">Support Forums</a>') . '</p>'
 );
 
 include('./admin-header.php');
+=======
+	'<p>' . __('<a href="https://codex.wordpress.org/Settings_Media_Screen" target="_blank">Documentation on Media Settings</a>') . '</p>' .
+	'<p>' . __('<a href="https://wordpress.org/support/" target="_blank">Support Forums</a>') . '</p>'
+);
+
+include( ABSPATH . 'wp-admin/admin-header.php' );
+>>>>>>> WPHome/master
 
 ?>
 
 <div class="wrap">
+<<<<<<< HEAD
 <?php screen_icon(); ?>
+=======
+>>>>>>> WPHome/master
 <h2><?php echo esc_html( $title ); ?></h2>
 
 <form action="options.php" method="post">
 <?php settings_fields('media'); ?>
 
+<<<<<<< HEAD
 <h3><?php _e('Image sizes') ?></h3>
 <p><?php _e('The sizes listed below determine the maximum dimensions in pixels to use when inserting an image into the body of a post.'); ?></p>
 
 <table class="form-table">
 <tr valign="top">
+=======
+<h3 class="title"><?php _e('Image sizes') ?></h3>
+<p><?php _e( 'The sizes listed below determine the maximum dimensions in pixels to use when adding an image to the Media Library.' ); ?></p>
+
+<table class="form-table">
+<tr>
+>>>>>>> WPHome/master
 <th scope="row"><?php _e('Thumbnail size') ?></th>
 <td>
 <label for="thumbnail_size_w"><?php _e('Width'); ?></label>
@@ -62,7 +85,11 @@ include('./admin-header.php');
 </td>
 </tr>
 
+<<<<<<< HEAD
 <tr valign="top">
+=======
+<tr>
+>>>>>>> WPHome/master
 <th scope="row"><?php _e('Medium size') ?></th>
 <td><fieldset><legend class="screen-reader-text"><span><?php _e('Medium size'); ?></span></legend>
 <label for="medium_size_w"><?php _e('Max Width'); ?></label>
@@ -72,7 +99,11 @@ include('./admin-header.php');
 </fieldset></td>
 </tr>
 
+<<<<<<< HEAD
 <tr valign="top">
+=======
+<tr>
+>>>>>>> WPHome/master
 <th scope="row"><?php _e('Large size') ?></th>
 <td><fieldset><legend class="screen-reader-text"><span><?php _e('Large size'); ?></span></legend>
 <label for="large_size_w"><?php _e('Max Width'); ?></label>
@@ -86,27 +117,43 @@ include('./admin-header.php');
 </table>
 
 <?php if ( isset( $GLOBALS['wp_settings']['media']['embeds'] ) ) : ?>
+<<<<<<< HEAD
 <h3><?php _e('Embeds') ?></h3>
+=======
+<h3 class="title"><?php _e('Embeds') ?></h3>
+>>>>>>> WPHome/master
 <table class="form-table">
 <?php do_settings_fields( 'media', 'embeds' ); ?>
 </table>
 <?php endif; ?>
 
 <?php if ( !is_multisite() ) : ?>
+<<<<<<< HEAD
 <h3><?php _e('Uploading Files'); ?></h3>
+=======
+<h3 class="title"><?php _e('Uploading Files'); ?></h3>
+>>>>>>> WPHome/master
 <table class="form-table">
 <?php
 // If upload_url_path is not the default (empty), and upload_path is not the default ('wp-content/uploads' or empty)
 if ( get_option('upload_url_path') || ( get_option('upload_path') != 'wp-content/uploads' && get_option('upload_path') ) ) :
 ?>
+<<<<<<< HEAD
 <tr valign="top">
+=======
+<tr>
+>>>>>>> WPHome/master
 <th scope="row"><label for="upload_path"><?php _e('Store uploads in this folder'); ?></label></th>
 <td><input name="upload_path" type="text" id="upload_path" value="<?php echo esc_attr(get_option('upload_path')); ?>" class="regular-text code" />
 <p class="description"><?php _e('Default is <code>wp-content/uploads</code>'); ?></p>
 </td>
 </tr>
 
+<<<<<<< HEAD
 <tr valign="top">
+=======
+<tr>
+>>>>>>> WPHome/master
 <th scope="row"><label for="upload_url_path"><?php _e('Full URL path to files'); ?></label></th>
 <td><input name="upload_url_path" type="text" id="upload_url_path" value="<?php echo esc_attr( get_option('upload_url_path')); ?>" class="regular-text code" />
 <p class="description"><?php _e('Configuring this is optional. By default, it should be blank.'); ?></p>
@@ -134,4 +181,8 @@ if ( get_option('upload_url_path') || ( get_option('upload_path') != 'wp-content
 
 </div>
 
+<<<<<<< HEAD
 <?php include('./admin-footer.php'); ?>
+=======
+<?php include( ABSPATH . 'wp-admin/admin-footer.php' ); ?>
+>>>>>>> WPHome/master

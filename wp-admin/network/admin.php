@@ -15,7 +15,19 @@ require_once( dirname( dirname( __FILE__ ) ) . '/admin.php' );
 if ( ! is_multisite() )
 	wp_die( __( 'Multisite support is not enabled.' ) );
 
+<<<<<<< HEAD
 $redirect_network_admin_request = ( ( $current_blog->domain != $current_site->domain ) || ( $current_blog->path != $current_site->path ) );
+=======
+$redirect_network_admin_request = 0 !== strcasecmp( $current_blog->domain, $current_site->domain ) || 0 !== strcasecmp( $current_blog->path, $current_site->path );
+
+/**
+ * Filter whether to redirect the request to the Network Admin.
+ *
+ * @since 3.2.0
+ *
+ * @param bool $redirect_network_admin_request Whether the request should be redirected.
+ */
+>>>>>>> WPHome/master
 $redirect_network_admin_request = apply_filters( 'redirect_network_admin_request', $redirect_network_admin_request );
 if ( $redirect_network_admin_request ) {
 	wp_redirect( network_admin_url() );

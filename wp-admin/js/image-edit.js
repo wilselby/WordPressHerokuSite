@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 var imageEdit;
 
 (function($) {
@@ -5,6 +6,16 @@ imageEdit = {
 	iasapi : {},
 	hold : {},
 	postid : '',
+=======
+/* global imageEditL10n, ajaxurl, confirm */
+
+(function($) {
+var imageEdit = window.imageEdit = {
+	iasapi : {},
+	hold : {},
+	postid : '',
+	_view : false,
+>>>>>>> WPHome/master
 
 	intval : function(f) {
 		return f | 0;
@@ -20,11 +31,16 @@ imageEdit = {
 		}
 	},
 
+<<<<<<< HEAD
 	init : function(postid, nonce) {
+=======
+	init : function(postid) {
+>>>>>>> WPHome/master
 		var t = this, old = $('#image-editor-' + t.postid),
 			x = t.intval( $('#imgedit-x-' + postid).val() ),
 			y = t.intval( $('#imgedit-y-' + postid).val() );
 
+<<<<<<< HEAD
 		if ( t.postid != postid && old.length )
 			t.close(t.postid);
 
@@ -32,16 +48,34 @@ imageEdit = {
 		t.hold['h'] = t.hold['oh'] = y;
 		t.hold['xy_ratio'] = x / y;
 		t.hold['sizer'] = parseFloat( $('#imgedit-sizer-' + postid).val() );
+=======
+		if ( t.postid !== postid && old.length ) {
+			t.close(t.postid);
+		}
+
+		t.hold.w = t.hold.ow = x;
+		t.hold.h = t.hold.oh = y;
+		t.hold.xy_ratio = x / y;
+		t.hold.sizer = parseFloat( $('#imgedit-sizer-' + postid).val() );
+>>>>>>> WPHome/master
 		t.postid = postid;
 		$('#imgedit-response-' + postid).empty();
 
 		$('input[type="text"]', '#imgedit-panel-' + postid).keypress(function(e) {
 			var k = e.keyCode;
 
+<<<<<<< HEAD
 			if ( 36 < k && k < 41 )
 				$(this).blur()
 
 			if ( 13 == k ) {
+=======
+			if ( 36 < k && k < 41 ) {
+				$(this).blur();
+			}
+
+			if ( 13 === k ) {
+>>>>>>> WPHome/master
 				e.preventDefault();
 				e.stopPropagation();
 				return false;
@@ -52,6 +86,7 @@ imageEdit = {
 	toggleEditor : function(postid, toggle) {
 		var wait = $('#imgedit-wait-' + postid);
 
+<<<<<<< HEAD
 		if ( toggle )
 			wait.height( $('#imgedit-panel-' + postid).height() ).fadeIn('fast');
 		else
@@ -60,6 +95,17 @@ imageEdit = {
 
 	toggleHelp : function(el) {
 		$(el).siblings('.imgedit-help').slideToggle('fast');
+=======
+		if ( toggle ) {
+			wait.height( $('#imgedit-panel-' + postid).height() ).fadeIn('fast');
+		} else {
+			wait.fadeOut('fast');
+		}
+	},
+
+	toggleHelp : function(el) {
+		$( el ).parents( '.imgedit-group-top' ).toggleClass( 'imgedit-help-toggled' ).find( '.imgedit-help' ).slideToggle( 'fast' );
+>>>>>>> WPHome/master
 		return false;
 	},
 
@@ -72,6 +118,7 @@ imageEdit = {
 		warn = $('#imgedit-scale-warn-' + postid), w1 = '', h1 = '';
 
 		if ( x ) {
+<<<<<<< HEAD
 			h1 = (w.val() != '') ? Math.round( w.val() / this.hold['xy_ratio'] ) : '';
 			h.val( h1 );
 		} else {
@@ -95,6 +142,34 @@ imageEdit = {
 
 		if ( x && y )
 			return x + ':' + y;
+=======
+			h1 = ( w.val() !== '' ) ? Math.round( w.val() / this.hold.xy_ratio ) : '';
+			h.val( h1 );
+		} else {
+			w1 = ( h.val() !== '' ) ? Math.round( h.val() * this.hold.xy_ratio ) : '';
+			w.val( w1 );
+		}
+
+		if ( ( h1 && h1 > this.hold.oh ) || ( w1 && w1 > this.hold.ow ) ) {
+			warn.css('visibility', 'visible');
+		} else {
+			warn.css('visibility', 'hidden');
+		}
+	},
+
+	getSelRatio : function(postid) {
+		var x = this.hold.w, y = this.hold.h,
+			X = this.intval( $('#imgedit-crop-width-' + postid).val() ),
+			Y = this.intval( $('#imgedit-crop-height-' + postid).val() );
+
+		if ( X && Y ) {
+			return X + ':' + Y;
+		}
+
+		if ( x && y ) {
+			return x + ':' + y;
+		}
+>>>>>>> WPHome/master
 
 		return '1:1';
 	},
@@ -103,7 +178,11 @@ imageEdit = {
 		// apply undo state to history
 		var history = $('#imgedit-history-' + postid).val(), pop, n, o, i, op = [];
 
+<<<<<<< HEAD
 		if ( history != '' ) {
+=======
+		if ( history !== '' ) {
+>>>>>>> WPHome/master
 			history = JSON.parse(history);
 			pop = this.intval( $('#imgedit-undone-' + postid).val() );
 			if ( pop > 0 ) {
@@ -115,8 +194,13 @@ imageEdit = {
 
 			if ( setSize ) {
 				if ( !history.length ) {
+<<<<<<< HEAD
 					this.hold['w'] = this.hold['ow'];
 					this.hold['h'] = this.hold['oh'];
+=======
+					this.hold.w = this.hold.ow;
+					this.hold.h = this.hold.oh;
+>>>>>>> WPHome/master
 					return '';
 				}
 
@@ -125,8 +209,13 @@ imageEdit = {
 				o = o.c || o.r || o.f || false;
 
 				if ( o ) {
+<<<<<<< HEAD
 					this.hold['w'] = o.fw;
 					this.hold['h'] = o.fh;
+=======
+					this.hold.w = o.fw;
+					this.hold.h = o.fh;
+>>>>>>> WPHome/master
 				}
 			}
 
@@ -158,6 +247,7 @@ imageEdit = {
 			'rand': t.intval(Math.random() * 1000000)
 		};
 
+<<<<<<< HEAD
 		img = $('<img id="image-preview-' + postid + '" />');
 		img.load( function() {
 			var max1, max2, parent = $('#imgedit-crop-' + postid), t = imageEdit;
@@ -185,13 +275,52 @@ imageEdit = {
 			$('#imgedit-crop-' + postid).empty().append('<div class="error"><p>' + imageEditL10n.error + '</p></div>');
 			t.toggleEditor(postid, 0);
 		}).attr('src', ajaxurl + '?' + $.param(data));
+=======
+		img = $('<img id="image-preview-' + postid + '" />')
+			.on('load', function() {
+				var max1, max2, parent = $('#imgedit-crop-' + postid), t = imageEdit;
+
+				parent.empty().append(img);
+
+				// w, h are the new full size dims
+				max1 = Math.max( t.hold.w, t.hold.h );
+				max2 = Math.max( $(img).width(), $(img).height() );
+				t.hold.sizer = max1 > max2 ? max2 / max1 : 1;
+
+				t.initCrop(postid, img, parent);
+				t.setCropSelection(postid, 0);
+
+				if ( (typeof callback !== 'undefined') && callback !== null ) {
+					callback();
+				}
+
+				if ( $('#imgedit-history-' + postid).val() && $('#imgedit-undone-' + postid).val() === '0' ) {
+					$('input.imgedit-submit-btn', '#imgedit-panel-' + postid).removeAttr('disabled');
+				} else {
+					$('input.imgedit-submit-btn', '#imgedit-panel-' + postid).prop('disabled', true);
+				}
+
+				t.toggleEditor(postid, 0);
+			})
+			.on('error', function() {
+				$('#imgedit-crop-' + postid).empty().append('<div class="error"><p>' + imageEditL10n.error + '</p></div>');
+				t.toggleEditor(postid, 0);
+			})
+			.attr('src', ajaxurl + '?' + $.param(data));
+>>>>>>> WPHome/master
 	},
 
 	action : function(postid, nonce, action) {
 		var t = this, data, w, h, fw, fh;
 
+<<<<<<< HEAD
 		if ( t.notsaved(postid) )
 			return false;
+=======
+		if ( t.notsaved(postid) ) {
+			return false;
+		}
+>>>>>>> WPHome/master
 
 		data = {
 			'action': 'image-editor',
@@ -199,7 +328,11 @@ imageEdit = {
 			'postid': postid
 		};
 
+<<<<<<< HEAD
 		if ( 'scale' == action ) {
+=======
+		if ( 'scale' === action ) {
+>>>>>>> WPHome/master
 			w = $('#imgedit-scale-width-' + postid),
 			h = $('#imgedit-scale-height-' + postid),
 			fw = t.intval(w.val()),
@@ -213,6 +346,7 @@ imageEdit = {
 				return false;
 			}
 
+<<<<<<< HEAD
 			if ( fw == t.hold.ow || fh == t.hold.oh )
 				return false;
 
@@ -220,6 +354,16 @@ imageEdit = {
 			data['fwidth'] = fw;
 			data['fheight'] = fh;
 		} else if ( 'restore' == action ) {
+=======
+			if ( fw === t.hold.ow || fh === t.hold.oh ) {
+				return false;
+			}
+
+			data['do'] = 'scale';
+			data.fwidth = fw;
+			data.fheight = fh;
+		} else if ( 'restore' === action ) {
+>>>>>>> WPHome/master
 			data['do'] = 'restore';
 		} else {
 			return false;
@@ -229,14 +373,32 @@ imageEdit = {
 		$.post(ajaxurl, data, function(r) {
 			$('#image-editor-' + postid).empty().append(r);
 			t.toggleEditor(postid, 0);
+<<<<<<< HEAD
+=======
+			// refresh the attachment model so that changes propagate
+			if ( t._view ) {
+				t._view.refresh();
+			}
+>>>>>>> WPHome/master
 		});
 	},
 
 	save : function(postid, nonce) {
+<<<<<<< HEAD
 		var data, target = this.getTarget(postid), history = this.filterHistory(postid, 0);
 
 		if ( '' == history )
 			return false;
+=======
+		var data,
+			target = this.getTarget(postid),
+			history = this.filterHistory(postid, 0),
+			self = this;
+
+		if ( '' === history ) {
+			return false;
+		}
+>>>>>>> WPHome/master
 
 		this.toggleEditor(postid, 1);
 		data = {
@@ -253,11 +415,16 @@ imageEdit = {
 			var ret = JSON.parse(r);
 
 			if ( ret.error ) {
+<<<<<<< HEAD
 				$('#imgedit-response-' + postid).html('<div class="error"><p>' + ret.error + '</p><div>');
+=======
+				$('#imgedit-response-' + postid).html('<div class="error"><p>' + ret.error + '</p></div>');
+>>>>>>> WPHome/master
 				imageEdit.close(postid);
 				return;
 			}
 
+<<<<<<< HEAD
 			if ( ret.fw && ret.fh )
 				$('#media-dims-' + postid).html( ret.fw + ' &times; ' + ret.fh );
 
@@ -277,6 +444,36 @@ imageEdit = {
 
 		btn.prop('disabled', true);
 		spin.show();
+=======
+			if ( ret.fw && ret.fh ) {
+				$('#media-dims-' + postid).html( ret.fw + ' &times; ' + ret.fh );
+			}
+
+			if ( ret.thumbnail ) {
+				$('.thumbnail', '#thumbnail-head-' + postid).attr('src', ''+ret.thumbnail);
+			}
+
+			if ( ret.msg ) {
+				$('#imgedit-response-' + postid).html('<div class="updated"><p>' + ret.msg + '</p></div>');
+			}
+
+			if ( self._view ) {
+				self._view.save();
+			} else {
+				imageEdit.close(postid);
+			}
+		});
+	},
+
+	open : function( postid, nonce, view ) {
+		this._view = view;
+
+		var dfd, data, elem = $('#image-editor-' + postid), head = $('#media-head-' + postid),
+			btn = $('#imgedit-open-btn-' + postid), spin = btn.siblings('.spinner');
+
+		btn.prop('disabled', true);
+		spin.addClass( 'is-active' );
+>>>>>>> WPHome/master
 
 		data = {
 			'action': 'image-editor',
@@ -285,6 +482,7 @@ imageEdit = {
 			'do': 'open'
 		};
 
+<<<<<<< HEAD
 		elem.load(ajaxurl, data, function() {
 			elem.fadeIn('fast');
 			head.fadeOut('fast', function(){
@@ -292,6 +490,22 @@ imageEdit = {
 				spin.hide();
 			});
 		});
+=======
+		dfd = $.ajax({
+			url:  ajaxurl,
+			type: 'post',
+			data: data
+		}).done(function( html ) {
+			elem.html( html );
+			head.fadeOut('fast', function(){
+				elem.fadeIn('fast');
+				btn.removeAttr('disabled');
+				spin.removeClass( 'is-active' );
+			});
+		});
+
+		return dfd;
+>>>>>>> WPHome/master
 	},
 
 	imgLoaded : function(postid) {
@@ -303,8 +517,15 @@ imageEdit = {
 	},
 
 	initCrop : function(postid, image, parent) {
+<<<<<<< HEAD
 		var t = this, selW = $('#imgedit-sel-width-' + postid),
 			selH = $('#imgedit-sel-height-' + postid);
+=======
+		var t = this,
+			selW = $('#imgedit-sel-width-' + postid),
+			selH = $('#imgedit-sel-height-' + postid),
+			$img;
+>>>>>>> WPHome/master
 
 		t.iasapi = $(image).imgAreaSelect({
 			parent: parent,
@@ -314,7 +535,17 @@ imageEdit = {
 			minWidth: 3,
 			minHeight: 3,
 
+<<<<<<< HEAD
 			onInit: function(img, c) {
+=======
+			onInit: function( img ) {
+				// Ensure that the imgareaselect wrapper elements are position:absolute
+				// (even if we're in a position:fixed modal)
+				$img = $( img );
+				$img.next().css( 'position', 'absolute' )
+					.nextAll( '.imgareaselect-outer' ).css( 'position', 'absolute' );
+
+>>>>>>> WPHome/master
 				parent.children().mousedown(function(e){
 					var ratio = false, sel, defRatio;
 
@@ -330,7 +561,11 @@ imageEdit = {
 				});
 			},
 
+<<<<<<< HEAD
 			onSelectStart: function(img, c) {
+=======
+			onSelectStart: function() {
+>>>>>>> WPHome/master
 				imageEdit.setDisabled($('#imgedit-crop-sel-' + postid), 1);
 			},
 
@@ -347,10 +582,16 @@ imageEdit = {
 	},
 
 	setCropSelection : function(postid, c) {
+<<<<<<< HEAD
 		var sel, min = $('#imgedit-minthumb-' + postid).val() || '128:128',
 			sizer = this.hold['sizer'];
 			min = min.split(':');
 			c = c || 0;
+=======
+		var sel;
+
+		c = c || 0;
+>>>>>>> WPHome/master
 
 		if ( !c || ( c.width < 3 && c.height < 3 ) ) {
 			this.setDisabled($('.imgedit-crop', '#imgedit-panel-' + postid), 0);
@@ -361,12 +602,15 @@ imageEdit = {
 			return false;
 		}
 
+<<<<<<< HEAD
 		if ( c.width < (min[0] * sizer) && c.height < (min[1] * sizer) ) {
 			this.setDisabled($('.imgedit-crop', '#imgedit-panel-' + postid), 0);
 			$('#imgedit-selection-' + postid).val('');
 			return false;
 		}
 
+=======
+>>>>>>> WPHome/master
 		sel = { 'x': c.x1, 'y': c.y1, 'w': c.width, 'h': c.height };
 		this.setDisabled($('.imgedit-crop', '#imgedit-panel-' + postid), 1);
 		$('#imgedit-selection-' + postid).val( JSON.stringify(sel) );
@@ -375,6 +619,7 @@ imageEdit = {
 	close : function(postid, warn) {
 		warn = warn || false;
 
+<<<<<<< HEAD
 		if ( warn && this.notsaved(postid) )
 			return false;
 
@@ -384,16 +629,50 @@ imageEdit = {
 			$('#media-head-' + postid).fadeIn('fast');
 			$(this).empty();
 		});
+=======
+		if ( warn && this.notsaved(postid) ) {
+			return false;
+		}
+
+		this.iasapi = {};
+		this.hold = {};
+
+		// If we've loaded the editor in the context of a Media Modal, then switch to the previous view,
+		// whatever that might have been.
+		if ( this._view ){
+			this._view.back();
+		}
+
+		// In case we are not accessing the image editor in the context of a View, close the editor the old-skool way
+		else {
+			$('#image-editor-' + postid).fadeOut('fast', function() {
+				$('#media-head-' + postid).fadeIn('fast');
+				$(this).empty();
+			});
+		}
+
+
+>>>>>>> WPHome/master
 	},
 
 	notsaved : function(postid) {
 		var h = $('#imgedit-history-' + postid).val(),
+<<<<<<< HEAD
 			history = (h != '') ? JSON.parse(h) : new Array(),
 			pop = this.intval( $('#imgedit-undone-' + postid).val() );
 
 		if ( pop < history.length ) {
 			if ( confirm( $('#imgedit-leaving-' + postid).html() ) )
 				return false;
+=======
+			history = ( h !== '' ) ? JSON.parse(h) : [],
+			pop = this.intval( $('#imgedit-undone-' + postid).val() );
+
+		if ( pop < history.length ) {
+			if ( confirm( $('#imgedit-leaving-' + postid).html() ) ) {
+				return false;
+			}
+>>>>>>> WPHome/master
 			return true;
 		}
 		return false;
@@ -401,7 +680,11 @@ imageEdit = {
 
 	addStep : function(op, postid, nonce) {
 		var t = this, elem = $('#imgedit-history-' + postid),
+<<<<<<< HEAD
 		history = (elem.val() != '') ? JSON.parse(elem.val()) : new Array(),
+=======
+		history = ( elem.val() !== '' ) ? JSON.parse( elem.val() ) : [],
+>>>>>>> WPHome/master
 		undone = $('#imgedit-undone-' + postid),
 		pop = t.intval(undone.val());
 
@@ -421,6 +704,7 @@ imageEdit = {
 	},
 
 	rotate : function(angle, postid, nonce, t) {
+<<<<<<< HEAD
 		if ( $(t).hasClass('disabled') )
 			return false;
 
@@ -432,6 +716,21 @@ imageEdit = {
 			return false;
 
 		this.addStep({ 'f': { 'f': axis, 'fw': this.hold['w'], 'fh': this.hold['h'] }}, postid, nonce);
+=======
+		if ( $(t).hasClass('disabled') ) {
+			return false;
+		}
+
+		this.addStep({ 'r': { 'r': angle, 'fw': this.hold.h, 'fh': this.hold.w }}, postid, nonce);
+	},
+
+	flip : function (axis, postid, nonce, t) {
+		if ( $(t).hasClass('disabled') ) {
+			return false;
+		}
+
+		this.addStep({ 'f': { 'f': axis, 'fw': this.hold.w, 'fh': this.hold.h }}, postid, nonce);
+>>>>>>> WPHome/master
 	},
 
 	crop : function (postid, nonce, t) {
@@ -439,6 +738,7 @@ imageEdit = {
 			w = this.intval( $('#imgedit-sel-width-' + postid).val() ),
 			h = this.intval( $('#imgedit-sel-height-' + postid).val() );
 
+<<<<<<< HEAD
 		if ( $(t).hasClass('disabled') || sel == '' )
 			return false;
 
@@ -446,6 +746,16 @@ imageEdit = {
 		if ( sel.w > 0 && sel.h > 0 && w > 0 && h > 0 ) {
 			sel['fw'] = w;
 			sel['fh'] = h;
+=======
+		if ( $(t).hasClass('disabled') || sel === '' ) {
+			return false;
+		}
+
+		sel = JSON.parse(sel);
+		if ( sel.w > 0 && sel.h > 0 && w > 0 && h > 0 ) {
+			sel.fw = w;
+			sel.fh = h;
+>>>>>>> WPHome/master
 			this.addStep({ 'c': sel }, postid, nonce);
 		}
 	},
@@ -454,13 +764,23 @@ imageEdit = {
 		var t = this, button = $('#image-undo-' + postid), elem = $('#imgedit-undone-' + postid),
 			pop = t.intval( elem.val() ) + 1;
 
+<<<<<<< HEAD
 		if ( button.hasClass('disabled') )
 			return;
+=======
+		if ( button.hasClass('disabled') ) {
+			return;
+		}
+>>>>>>> WPHome/master
 
 		elem.val(pop);
 		t.refreshEditor(postid, nonce, function() {
 			var elem = $('#imgedit-history-' + postid),
+<<<<<<< HEAD
 			history = (elem.val() != '') ? JSON.parse(elem.val()) : new Array();
+=======
+			history = ( elem.val() !== '' ) ? JSON.parse( elem.val() ) : [];
+>>>>>>> WPHome/master
 
 			t.setDisabled($('#image-redo-' + postid), true);
 			t.setDisabled(button, pop < history.length);
@@ -471,8 +791,14 @@ imageEdit = {
 		var t = this, button = $('#image-redo-' + postid), elem = $('#imgedit-undone-' + postid),
 			pop = t.intval( elem.val() ) - 1;
 
+<<<<<<< HEAD
 		if ( button.hasClass('disabled') )
 			return;
+=======
+		if ( button.hasClass('disabled') ) {
+			return;
+		}
+>>>>>>> WPHome/master
 
 		elem.val(pop);
 		t.refreshEditor(postid, nonce, function() {
@@ -485,7 +811,11 @@ imageEdit = {
 		var sel, elX = $('#imgedit-sel-width-' + postid), elY = $('#imgedit-sel-height-' + postid),
 			x = this.intval( elX.val() ), y = this.intval( elY.val() ),
 			img = $('#image-preview-' + postid), imgh = img.height(), imgw = img.width(),
+<<<<<<< HEAD
 			sizer = this.hold['sizer'], x1, y1, x2, y2, ias = this.iasapi;
+=======
+			sizer = this.hold.sizer, x1, y1, x2, y2, ias = this.iasapi;
+>>>>>>> WPHome/master
 
 		if ( x < 1 ) {
 			elX.val('');
@@ -525,6 +855,7 @@ imageEdit = {
 		var s;
 		num = Math.round(num);
 
+<<<<<<< HEAD
 		if ( this.hold.sizer > 0.6 )
 			return num;
 
@@ -534,6 +865,19 @@ imageEdit = {
 			return num - 1;
 		else if ( '9' == s )
 			return num + 1;
+=======
+		if ( this.hold.sizer > 0.6 ) {
+			return num;
+		}
+
+		s = num.toString().slice(-1);
+
+		if ( '1' === s ) {
+			return num - 1;
+		} else if ( '9' === s ) {
+			return num + 1;
+		}
+>>>>>>> WPHome/master
 
 		return num;
 	},
@@ -554,6 +898,7 @@ imageEdit = {
 			});
 
 			if ( sel = this.iasapi.getSelection(true) ) {
+<<<<<<< HEAD
 				r = Math.ceil( sel.y1 + ((sel.x2 - sel.x1) / (x / y)) );
 
 				if ( r > h ) {
@@ -562,6 +907,17 @@ imageEdit = {
 						$('#imgedit-crop-height-' + postid).val('');
 					else
 						$('#imgedit-crop-width-' + postid).val('');
+=======
+				r = Math.ceil( sel.y1 + ( ( sel.x2 - sel.x1 ) / ( x / y ) ) );
+
+				if ( r > h ) {
+					r = h;
+					if ( n ) {
+						$('#imgedit-crop-height-' + postid).val('');
+					} else {
+						$('#imgedit-crop-width-' + postid).val('');
+					}
+>>>>>>> WPHome/master
 				}
 
 				this.iasapi.setSelection( sel.x1, sel.y1, sel.x2, r );
@@ -569,5 +925,9 @@ imageEdit = {
 			}
 		}
 	}
+<<<<<<< HEAD
 }
+=======
+};
+>>>>>>> WPHome/master
 })(jQuery);

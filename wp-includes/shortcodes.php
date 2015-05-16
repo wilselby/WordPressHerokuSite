@@ -21,6 +21,7 @@
  *
  * To apply shortcode tags to content:
  *
+<<<<<<< HEAD
  * <code>
  * $out = do_shortcode($content);
  * </code>
@@ -30,12 +31,26 @@
  * @package WordPress
  * @subpackage Shortcodes
  * @since 2.5
+=======
+ *     $out = do_shortcode( $content );
+ *
+ * @link https://codex.wordpress.org/Shortcode_API
+ *
+ * @package WordPress
+ * @subpackage Shortcodes
+ * @since 2.5.0
+>>>>>>> WPHome/master
  */
 
 /**
  * Container for storing shortcode tags and their hook to call for the shortcode
  *
+<<<<<<< HEAD
  * @since 2.5
+=======
+ * @since 2.5.0
+ *
+>>>>>>> WPHome/master
  * @name $shortcode_tags
  * @var array
  * @global array $shortcode_tags
@@ -51,6 +66,7 @@ $shortcode_tags = array();
  *
  * Simplest example of a shortcode tag using the API:
  *
+<<<<<<< HEAD
  * <code>
  * // [footag foo="bar"]
  * function footag_func($atts) {
@@ -85,6 +101,39 @@ $shortcode_tags = array();
  * </code>
  *
  * @since 2.5
+=======
+ *     // [footag foo="bar"]
+ *     function footag_func( $atts ) {
+ *         return "foo = {
+ *             $atts[foo]
+ *         }";
+ *     }
+ *     add_shortcode( 'footag', 'footag_func' );
+ *
+ * Example with nice attribute defaults:
+ *
+ *     // [bartag foo="bar"]
+ *     function bartag_func( $atts ) {
+ *         $args = shortcode_atts( array(
+ *             'foo' => 'no foo',
+ *             'baz' => 'default baz',
+ *         ), $atts );
+ *
+ *         return "foo = {$args['foo']}";
+ *     }
+ *     add_shortcode( 'bartag', 'bartag_func' );
+ *
+ * Example with enclosed content:
+ *
+ *     // [baztag]content[/baztag]
+ *     function baztag_func( $atts, $content = '' ) {
+ *         return "content = $content";
+ *     }
+ *     add_shortcode( 'baztag', 'baztag_func' );
+ *
+ * @since 2.5.0
+ *
+>>>>>>> WPHome/master
  * @uses $shortcode_tags
  *
  * @param string $tag Shortcode tag to be searched in post content.
@@ -100,10 +149,18 @@ function add_shortcode($tag, $func) {
 /**
  * Removes hook for shortcode.
  *
+<<<<<<< HEAD
  * @since 2.5
  * @uses $shortcode_tags
  *
  * @param string $tag shortcode tag to remove hook for.
+=======
+ * @since 2.5.0
+ *
+ * @uses $shortcode_tags
+ *
+ * @param string $tag Shortcode tag to remove hook for.
+>>>>>>> WPHome/master
  */
 function remove_shortcode($tag) {
 	global $shortcode_tags;
@@ -118,7 +175,12 @@ function remove_shortcode($tag) {
  * shortcodes global by a empty array. This is actually a very efficient method
  * for removing all shortcodes.
  *
+<<<<<<< HEAD
  * @since 2.5
+=======
+ * @since 2.5.0
+ *
+>>>>>>> WPHome/master
  * @uses $shortcode_tags
  */
 function remove_all_shortcodes() {
@@ -128,22 +190,87 @@ function remove_all_shortcodes() {
 }
 
 /**
+<<<<<<< HEAD
+=======
+ * Whether a registered shortcode exists named $tag
+ *
+ * @since 3.6.0
+ *
+ * @global array $shortcode_tags List of shortcode tags and their callback hooks.
+ *
+ * @param string $tag Shortcode tag to check.
+ * @return bool Whether the given shortcode exists.
+ */
+function shortcode_exists( $tag ) {
+	global $shortcode_tags;
+	return array_key_exists( $tag, $shortcode_tags );
+}
+
+/**
+ * Whether the passed content contains the specified shortcode
+ *
+ * @since 3.6.0
+ *
+ * @global array $shortcode_tags
+ *
+ * @param string $content Content to search for shortcodes.
+ * @param string $tag     Shortcode tag to check.
+ * @return bool Whether the passed content contains the given shortcode.
+ */
+function has_shortcode( $content, $tag ) {
+	if ( false === strpos( $content, '[' ) ) {
+		return false;
+	}
+
+	if ( shortcode_exists( $tag ) ) {
+		preg_match_all( '/' . get_shortcode_regex() . '/s', $content, $matches, PREG_SET_ORDER );
+		if ( empty( $matches ) )
+			return false;
+
+		foreach ( $matches as $shortcode ) {
+			if ( $tag === $shortcode[2] ) {
+				return true;
+			} elseif ( ! empty( $shortcode[5] ) && has_shortcode( $shortcode[5], $tag ) ) {
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
+/**
+>>>>>>> WPHome/master
  * Search content for shortcodes and filter shortcodes through their hooks.
  *
  * If there are no shortcode tags defined, then the content will be returned
  * without any filtering. This might cause issues when plugins are disabled but
  * the shortcode will still show up in the post or content.
  *
+<<<<<<< HEAD
  * @since 2.5
  * @uses $shortcode_tags
  * @uses get_shortcode_regex() Gets the search pattern for searching shortcodes.
  *
  * @param string $content Content to search for shortcodes
+=======
+ * @since 2.5.0
+ *
+ * @global array $shortcode_tags List of shortcode tags and their callback hooks.
+ *
+ * @param string $content Content to search for shortcodes.
+>>>>>>> WPHome/master
  * @return string Content with shortcodes filtered out.
  */
 function do_shortcode($content) {
 	global $shortcode_tags;
 
+<<<<<<< HEAD
+=======
+	if ( false === strpos( $content, '[' ) ) {
+		return $content;
+	}
+
+>>>>>>> WPHome/master
 	if (empty($shortcode_tags) || !is_array($shortcode_tags))
 		return $content;
 
@@ -166,7 +293,12 @@ function do_shortcode($content) {
  * 5 - The content of a shortcode when it wraps some content.
  * 6 - An extra ] to allow for escaping shortcodes with double [[]]
  *
+<<<<<<< HEAD
  * @since 2.5
+=======
+ * @since 2.5.0
+ *
+>>>>>>> WPHome/master
  * @uses $shortcode_tags
  *
  * @return string The shortcode search regular expression
@@ -213,7 +345,11 @@ function get_shortcode_regex() {
  * Regular Expression callable for do_shortcode() for calling shortcode hook.
  * @see get_shortcode_regex for details of the match array contents.
  *
+<<<<<<< HEAD
  * @since 2.5
+=======
+ * @since 2.5.0
+>>>>>>> WPHome/master
  * @access private
  * @uses $shortcode_tags
  *
@@ -247,7 +383,11 @@ function do_shortcode_tag( $m ) {
  * attribute as the value in the key/value pair. This allows for easier
  * retrieval of the attributes, since all attributes have to be known.
  *
+<<<<<<< HEAD
  * @since 2.5
+=======
+ * @since 2.5.0
+>>>>>>> WPHome/master
  *
  * @param string $text
  * @return array List of attributes and their value.
@@ -264,7 +404,11 @@ function shortcode_parse_atts($text) {
 				$atts[strtolower($m[3])] = stripcslashes($m[4]);
 			elseif (!empty($m[5]))
 				$atts[strtolower($m[5])] = stripcslashes($m[6]);
+<<<<<<< HEAD
 			elseif (isset($m[7]) and strlen($m[7]))
+=======
+			elseif (isset($m[7]) && strlen($m[7]))
+>>>>>>> WPHome/master
 				$atts[] = stripcslashes($m[7]);
 			elseif (isset($m[8]))
 				$atts[] = stripcslashes($m[8]);
@@ -285,6 +429,7 @@ function shortcode_parse_atts($text) {
  * If the $atts list has unsupported attributes, then they will be ignored and
  * removed from the final returned list.
  *
+<<<<<<< HEAD
  * @since 2.5
  *
  * @param array $pairs Entire list of supported attributes and their defaults.
@@ -292,6 +437,16 @@ function shortcode_parse_atts($text) {
  * @return array Combined and filtered attribute list.
  */
 function shortcode_atts($pairs, $atts) {
+=======
+ * @since 2.5.0
+ *
+ * @param array $pairs Entire list of supported attributes and their defaults.
+ * @param array $atts User defined attributes in shortcode tag.
+ * @param string $shortcode Optional. The name of the shortcode, provided for context to enable filtering
+ * @return array Combined and filtered attribute list.
+ */
+function shortcode_atts( $pairs, $atts, $shortcode = '' ) {
+>>>>>>> WPHome/master
 	$atts = (array)$atts;
 	$out = array();
 	foreach($pairs as $name => $default) {
@@ -300,13 +455,36 @@ function shortcode_atts($pairs, $atts) {
 		else
 			$out[$name] = $default;
 	}
+<<<<<<< HEAD
+=======
+	/**
+	 * Filter a shortcode's default attributes.
+	 *
+	 * If the third parameter of the shortcode_atts() function is present then this filter is available.
+	 * The third parameter, $shortcode, is the name of the shortcode.
+	 *
+	 * @since 3.6.0
+	 *
+	 * @param array $out The output array of shortcode attributes.
+	 * @param array $pairs The supported attributes and their defaults.
+	 * @param array $atts The user defined shortcode attributes.
+	 */
+	if ( $shortcode )
+		$out = apply_filters( "shortcode_atts_{$shortcode}", $out, $pairs, $atts );
+
+>>>>>>> WPHome/master
 	return $out;
 }
 
 /**
  * Remove all shortcode tags from the given content.
  *
+<<<<<<< HEAD
  * @since 2.5
+=======
+ * @since 2.5.0
+ *
+>>>>>>> WPHome/master
  * @uses $shortcode_tags
  *
  * @param string $content Content to remove shortcode tags.
@@ -315,6 +493,13 @@ function shortcode_atts($pairs, $atts) {
 function strip_shortcodes( $content ) {
 	global $shortcode_tags;
 
+<<<<<<< HEAD
+=======
+	if ( false === strpos( $content, '[' ) ) {
+		return $content;
+	}
+
+>>>>>>> WPHome/master
 	if (empty($shortcode_tags) || !is_array($shortcode_tags))
 		return $content;
 
@@ -331,5 +516,8 @@ function strip_shortcode_tag( $m ) {
 
 	return $m[1] . $m[6];
 }
+<<<<<<< HEAD
 
 add_filter('the_content', 'do_shortcode', 11); // AFTER wpautop()
+=======
+>>>>>>> WPHome/master

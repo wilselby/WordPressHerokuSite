@@ -8,13 +8,21 @@
  */
 
 /** Load WordPress Administration Bootstrap */
+<<<<<<< HEAD
 require_once( './admin.php' );
+=======
+require_once( dirname( __FILE__ ) . '/admin.php' );
+>>>>>>> WPHome/master
 
 if ( ! is_multisite() )
 	wp_die( __( 'Multisite support is not enabled.' ) );
 
 if ( ! current_user_can( 'manage_sites' ) )
+<<<<<<< HEAD
 	wp_die( __( 'You do not have permission to access this page.' ) );
+=======
+	wp_die( __( 'You do not have permission to access this page.' ), 403 );
+>>>>>>> WPHome/master
 
 $wp_list_table = _get_list_table( 'WP_MS_Sites_List_Table' );
 $pagenum = $wp_list_table->get_pagenum();
@@ -22,7 +30,11 @@ $pagenum = $wp_list_table->get_pagenum();
 $title = __( 'Sites' );
 $parent_file = 'sites.php';
 
+<<<<<<< HEAD
 add_screen_option( 'per_page', array( 'label' => _x( 'Sites', 'sites per page (screen options)' ) ) );
+=======
+add_screen_option( 'per_page' );
+>>>>>>> WPHome/master
 
 get_current_screen()->add_help_tab( array(
 	'id'      => 'overview',
@@ -42,14 +54,24 @@ get_current_screen()->add_help_tab( array(
 
 get_current_screen()->set_help_sidebar(
 	'<p><strong>' . __('For more information:') . '</strong></p>' .
+<<<<<<< HEAD
 	'<p>' . __('<a href="http://codex.wordpress.org/Network_Admin_Sites_Screen" target="_blank">Documentation on Site Management</a>') . '</p>' .
 	'<p>' . __('<a href="http://wordpress.org/support/forum/multisite/" target="_blank">Support Forums</a>') . '</p>'
+=======
+	'<p>' . __('<a href="https://codex.wordpress.org/Network_Admin_Sites_Screen" target="_blank">Documentation on Site Management</a>') . '</p>' .
+	'<p>' . __('<a href="https://wordpress.org/support/forum/multisite/" target="_blank">Support Forums</a>') . '</p>'
+>>>>>>> WPHome/master
 );
 
 $id = isset( $_REQUEST['id'] ) ? intval( $_REQUEST['id'] ) : 0;
 
 if ( isset( $_GET['action'] ) ) {
+<<<<<<< HEAD
 	do_action( 'wpmuadminedit' , '' );
+=======
+	/** This action is documented in wp-admin/network/edit.php */
+	do_action( 'wpmuadminedit' );
+>>>>>>> WPHome/master
 
 	if ( 'confirm' === $_GET['action'] ) {
 		check_admin_referer( 'confirm' );
@@ -58,6 +80,7 @@ if ( isset( $_GET['action'] ) ) {
 			nocache_headers();
 			header( 'Content-Type: text/html; charset=utf-8' );
 		}
+<<<<<<< HEAD
 		if ( $current_site->blog_id == $id )
 			wp_die( __( 'You are not allowed to change the current site.' ) );
 		?>
@@ -74,17 +97,37 @@ if ( isset( $_GET['action'] ) ) {
 			</head>
 			<body class="wp-core-ui">
 				<h1 id="logo"><a href="<?php esc_attr_e( 'http://wordpress.org/' ); ?>"><?php _e( 'WordPress' ); ?></a></h1>
+=======
+
+		if ( $current_site->blog_id == $id ) {
+			wp_die( __( 'You are not allowed to change the current site.' ) );
+		}
+
+		require_once( ABSPATH . 'wp-admin/admin-header.php' );
+		?>
+			<div class="wrap">
+				<h2><?php _e( 'Confirm your action' ); ?></h2>
+>>>>>>> WPHome/master
 				<form action="sites.php?action=<?php echo esc_attr( $_GET['action2'] ) ?>" method="post">
 					<input type="hidden" name="action" value="<?php echo esc_attr( $_GET['action2'] ) ?>" />
 					<input type="hidden" name="id" value="<?php echo esc_attr( $id ); ?>" />
 					<input type="hidden" name="_wp_http_referer" value="<?php echo esc_attr( wp_get_referer() ); ?>" />
 					<?php wp_nonce_field( $_GET['action2'], '_wpnonce', false ); ?>
+<<<<<<< HEAD
 					<p><?php echo esc_html( stripslashes( $_GET['msg'] ) ); ?></p>
 					<?php submit_button( __('Confirm'), 'button' ); ?>
 				</form>
 			</body>
 		</html>
 		<?php
+=======
+					<p><?php echo esc_html( wp_unslash( $_GET['msg'] ) ); ?></p>
+					<?php submit_button( __( 'Confirm' ), 'button' ); ?>
+				</form>
+			</div>
+		<?php
+		require_once( ABSPATH . 'wp-admin/admin-footer.php' );
+>>>>>>> WPHome/master
 		exit();
 	}
 
@@ -103,7 +146,11 @@ if ( isset( $_GET['action'] ) ) {
 
 		case 'deleteblog':
 			if ( ! current_user_can( 'delete_sites' ) )
+<<<<<<< HEAD
 				wp_die( __( 'You do not have permission to access this page.' ) );
+=======
+				wp_die( __( 'You do not have permission to access this page.' ), '', array( 'response' => 403 ) );
+>>>>>>> WPHome/master
 
 			$updated_action = 'not_deleted';
 			if ( $id != '0' && $id != $current_site->blog_id && current_user_can( 'delete_site', $id ) ) {
@@ -150,10 +197,31 @@ if ( isset( $_GET['action'] ) ) {
 
 		case 'activateblog':
 			update_blog_status( $id, 'deleted', '0' );
+<<<<<<< HEAD
+=======
+
+			/**
+			 * Fires after a network site is activated.
+			 *
+			 * @since MU
+			 *
+			 * @param string $id The ID of the activated site.
+			 */
+>>>>>>> WPHome/master
 			do_action( 'activate_blog', $id );
 		break;
 
 		case 'deactivateblog':
+<<<<<<< HEAD
+=======
+			/**
+			 * Fires before a network site is deactivated.
+			 *
+			 * @since MU
+			 *
+			 * @param string $id The ID of the site being deactivated.
+			 */
+>>>>>>> WPHome/master
 			do_action( 'deactivate_blog', $id );
 			update_blog_status( $id, 'deleted', '1' );
 		break;
@@ -215,21 +283,45 @@ if ( isset( $_GET['updated'] ) ) {
 			$msg = __( 'Site marked as spam.' );
 		break;
 		default:
+<<<<<<< HEAD
+=======
+			/**
+			 * Filter a specific, non-default site-updated message in the Network admin.
+			 *
+			 * The dynamic portion of the hook name, `$_GET['updated']`, refers to the
+			 * non-default site update action.
+			 *
+			 * @since 3.1.0
+			 *
+			 * @param string $msg The update message. Default 'Settings saved'.
+			 */
+>>>>>>> WPHome/master
 			$msg = apply_filters( 'network_sites_updated_message_' . $_GET['updated'], __( 'Settings saved.' ) );
 		break;
 	}
 
 	if ( ! empty( $msg ) )
+<<<<<<< HEAD
 		$msg = '<div class="updated" id="message"><p>' . $msg . '</p></div>';
+=======
+		$msg = '<div class="updated" id="message notice is-dismissible"><p>' . $msg . '</p></div>';
+>>>>>>> WPHome/master
 }
 
 $wp_list_table->prepare_items();
 
+<<<<<<< HEAD
 require_once( '../admin-header.php' );
 ?>
 
 <div class="wrap">
 <?php screen_icon( 'ms-admin' ); ?>
+=======
+require_once( ABSPATH . 'wp-admin/admin-header.php' );
+?>
+
+<div class="wrap">
+>>>>>>> WPHome/master
 <h2><?php _e( 'Sites' ) ?>
 
 <?php if ( current_user_can( 'create_sites') ) : ?>
@@ -243,7 +335,11 @@ require_once( '../admin-header.php' );
 
 <?php echo $msg; ?>
 
+<<<<<<< HEAD
 <form action="" method="get" id="ms-search">
+=======
+<form method="get" id="ms-search">
+>>>>>>> WPHome/master
 <?php $wp_list_table->search_box( __( 'Search Sites' ), 'site' ); ?>
 <input type="hidden" name="action" value="blogs" />
 </form>
@@ -254,4 +350,8 @@ require_once( '../admin-header.php' );
 </div>
 <?php
 
+<<<<<<< HEAD
 require_once( '../admin-footer.php' ); ?>
+=======
+require_once( ABSPATH . 'wp-admin/admin-footer.php' ); ?>
+>>>>>>> WPHome/master

@@ -1,8 +1,16 @@
 <?php
 /**
+<<<<<<< HEAD
  * The template for displaying posts in the Aside Post Format on index and archive pages
  *
  * Learn more: http://codex.wordpress.org/Post_Formats
+=======
+ * Template for displaying posts in the Aside Post Format
+ *
+ * Used on index and archive pages.
+ *
+ * @link https://codex.wordpress.org/Post_Formats
+>>>>>>> WPHome/master
  *
  * @package WordPress
  * @subpackage Twenty_Eleven
@@ -13,7 +21,11 @@
 	<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 		<header class="entry-header">
 			<hgroup>
+<<<<<<< HEAD
 				<h2 class="entry-title"><a href="<?php the_permalink(); ?>" title="<?php echo esc_attr( sprintf( __( 'Permalink to %s', 'twentyeleven' ), the_title_attribute( 'echo=0' ) ) ); ?>" rel="bookmark"><?php the_title(); ?></a></h2>
+=======
+				<h2 class="entry-title"><a href="<?php the_permalink(); ?>" rel="bookmark"><?php the_title(); ?></a></h2>
+>>>>>>> WPHome/master
 				<h3 class="entry-format"><?php _e( 'Aside', 'twentyeleven' ); ?></h3>
 			</hgroup>
 

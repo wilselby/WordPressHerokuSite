@@ -7,7 +7,11 @@
  */
 
 /** WordPress Administration Bootstrap */
+<<<<<<< HEAD
 require_once('./admin.php');
+=======
+require_once( dirname( __FILE__ ) . '/admin.php' );
+>>>>>>> WPHome/master
 
 if ( is_multisite() && ! is_network_admin() ) {
 	wp_redirect( network_admin_url( 'theme-editor.php' ) );
@@ -26,21 +30,37 @@ get_current_screen()->add_help_tab( array(
 'content'	=>
 	'<p>' . __('You can use the Theme Editor to edit the individual CSS and PHP files which make up your theme.') . '</p>
 	<p>' . __('Begin by choosing a theme to edit from the dropdown menu and clicking Select. A list then appears of all the template files. Clicking once on any file name causes the file to appear in the large Editor box.') . '</p>
+<<<<<<< HEAD
 	<p>' . __('For PHP files, you can use the Documentation dropdown to select from functions recognized in that file. Lookup takes you to a web page with reference material about that particular function.') . '</p>
 	<p id="newcontent-description">' . __('In the editing area the Tab key enters a tab character. To move below this area by pressing Tab, press the Esc key followed by the Tab key.') . '</p>
 	<p>' . __('After typing in your edits, click Update File.') . '</p>
 	<p>' . __('<strong>Advice:</strong> think very carefully about your site crashing if you are live-editing the theme currently in use.') . '</p>
 	<p>' . __('Upgrading to a newer version of the same theme will override changes made here. To avoid this, consider creating a <a href="http://codex.wordpress.org/Child_Themes" target="_blank">child theme</a> instead.') . '</p>' .
+=======
+	<p>' . __('For PHP files, you can use the Documentation dropdown to select from functions recognized in that file. Look Up takes you to a web page with reference material about that particular function.') . '</p>
+	<p id="newcontent-description">' . __( 'In the editing area the Tab key enters a tab character. To move below this area by pressing Tab, press the Esc key followed by the Tab key. In some cases the Esc key will need to be pressed twice before the Tab key will allow you to continue.' ) . '</p>
+	<p>' . __('After typing in your edits, click Update File.') . '</p>
+	<p>' . __('<strong>Advice:</strong> think very carefully about your site crashing if you are live-editing the theme currently in use.') . '</p>
+	<p>' . sprintf( __('Upgrading to a newer version of the same theme will override changes made here. To avoid this, consider creating a <a href="%s" target="_blank">child theme</a> instead.'), __('https://codex.wordpress.org/Child_Themes') ) . '</p>' .
+>>>>>>> WPHome/master
 	( is_network_admin() ? '<p>' . __('Any edits to files from this screen will be reflected on all sites in the network.') . '</p>' : '' )
 ) );
 
 get_current_screen()->set_help_sidebar(
 	'<p><strong>' . __('For more information:') . '</strong></p>' .
+<<<<<<< HEAD
 	'<p>' . __('<a href="http://codex.wordpress.org/Theme_Development" target="_blank">Documentation on Theme Development</a>') . '</p>' .
 	'<p>' . __('<a href="http://codex.wordpress.org/Using_Themes" target="_blank">Documentation on Using Themes</a>') . '</p>' .
 	'<p>' . __('<a href="http://codex.wordpress.org/Editing_Files" target="_blank">Documentation on Editing Files</a>') . '</p>' .
 	'<p>' . __('<a href="http://codex.wordpress.org/Template_Tags" target="_blank">Documentation on Template Tags</a>') . '</p>' .
 	'<p>' . __('<a href="http://wordpress.org/support/" target="_blank">Support Forums</a>') . '</p>'
+=======
+	'<p>' . __('<a href="https://codex.wordpress.org/Theme_Development" target="_blank">Documentation on Theme Development</a>') . '</p>' .
+	'<p>' . __('<a href="https://codex.wordpress.org/Using_Themes" target="_blank">Documentation on Using Themes</a>') . '</p>' .
+	'<p>' . __('<a href="https://codex.wordpress.org/Editing_Files" target="_blank">Documentation on Editing Files</a>') . '</p>' .
+	'<p>' . __('<a href="https://codex.wordpress.org/Template_Tags" target="_blank">Documentation on Template Tags</a>') . '</p>' .
+	'<p>' . __('<a href="https://wordpress.org/support/" target="_blank">Support Forums</a>') . '</p>'
+>>>>>>> WPHome/master
 );
 
 wp_reset_vars( array( 'action', 'error', 'file', 'theme' ) );
@@ -68,7 +88,11 @@ if ( empty( $file ) ) {
 	$relative_file = 'style.css';
 	$file = $allowed_files['style.css'];
 } else {
+<<<<<<< HEAD
 	$relative_file = stripslashes( $file );
+=======
+	$relative_file = $file;
+>>>>>>> WPHome/master
 	$file = $theme->get_stylesheet_directory() . '/' . $relative_file;
 }
 
@@ -78,10 +102,17 @@ $scrollto = isset( $_REQUEST['scrollto'] ) ? (int) $_REQUEST['scrollto'] : 0;
 switch( $action ) {
 case 'update':
 	check_admin_referer( 'edit-theme_' . $file . $stylesheet );
+<<<<<<< HEAD
 	$newcontent = stripslashes( $_POST['newcontent'] );
 	$location = 'theme-editor.php?file=' . urlencode( $relative_file ) . '&theme=' . urlencode( $stylesheet ) . '&scrollto=' . $scrollto;
 	if ( is_writeable( $file ) ) {
 		//is_writable() not always reliable, check return value. see comments @ http://uk.php.net/is_writable
+=======
+	$newcontent = wp_unslash( $_POST['newcontent'] );
+	$location = 'theme-editor.php?file=' . urlencode( $relative_file ) . '&theme=' . urlencode( $stylesheet ) . '&scrollto=' . $scrollto;
+	if ( is_writeable( $file ) ) {
+		// is_writable() not always reliable, check return value. see comments @ http://uk.php.net/is_writable
+>>>>>>> WPHome/master
 		$f = fopen( $file, 'w+' );
 		if ( $f !== false ) {
 			fwrite( $f, $newcontent );
@@ -92,7 +123,10 @@ case 'update':
 	}
 	wp_redirect( $location );
 	exit;
+<<<<<<< HEAD
 break;
+=======
+>>>>>>> WPHome/master
 
 default:
 
@@ -112,7 +146,11 @@ default:
 			$functions = wp_doc_link_parse( $content );
 
 			$docs_select = '<select name="docs-list" id="docs-list">';
+<<<<<<< HEAD
 			$docs_select .= '<option value="">' . esc_attr__( 'Function Name...' ) . '</option>';
+=======
+			$docs_select .= '<option value="">' . esc_attr__( 'Function Name&hellip;' ) . '</option>';
+>>>>>>> WPHome/master
 			foreach ( $functions as $function ) {
 				$docs_select .= '<option value="' . esc_attr( urlencode( $function ) ) . '">' . htmlspecialchars( $function ) . '()</option>';
 			}
@@ -122,9 +160,14 @@ default:
 		$content = esc_textarea( $content );
 	}
 
+<<<<<<< HEAD
 	?>
 <?php if ( isset( $_GET['updated'] ) ) : ?>
  <div id="message" class="updated"><p><?php _e( 'File edited successfully.' ) ?></p></div>
+=======
+	if ( isset( $_GET['updated'] ) ) : ?>
+ <div id="message" class="updated notice is-dismissible"><p><?php _e( 'File edited successfully.' ) ?></p></div>
+>>>>>>> WPHome/master
 <?php endif;
 
 $description = get_file_description( $file );
@@ -133,7 +176,10 @@ if ( $description != $file_show )
 	$description .= ' <span>(' . $file_show . ')</span>';
 ?>
 <div class="wrap">
+<<<<<<< HEAD
 <?php screen_icon(); ?>
+=======
+>>>>>>> WPHome/master
 <h2><?php echo esc_html( $title ); ?></h2>
 
 <div class="fileedit-sub">
@@ -209,7 +255,11 @@ else : ?>
 		<div id="documentation" class="hide-if-no-js">
 		<label for="docs-list"><?php _e('Documentation:') ?></label>
 		<?php echo $docs_select; ?>
+<<<<<<< HEAD
 		<input type="button" class="button" value=" <?php esc_attr_e( 'Lookup' ); ?> " onclick="if ( '' != jQuery('#docs-list').val() ) { window.open( 'http://api.wordpress.org/core/handbook/1.0/?function=' + escape( jQuery( '#docs-list' ).val() ) + '&amp;locale=<?php echo urlencode( get_locale() ) ?>&amp;version=<?php echo urlencode( $wp_version ) ?>&amp;redirect=true'); }" />
+=======
+		<input type="button" class="button" value=" <?php esc_attr_e( 'Look Up' ); ?> " onclick="if ( '' != jQuery('#docs-list').val() ) { window.open( 'http://api.wordpress.org/core/handbook/1.0/?function=' + escape( jQuery( '#docs-list' ).val() ) + '&amp;locale=<?php echo urlencode( get_locale() ) ?>&amp;version=<?php echo urlencode( $wp_version ) ?>&amp;redirect=true'); }" />
+>>>>>>> WPHome/master
 		</div>
 	<?php endif; ?>
 
@@ -222,7 +272,11 @@ else : ?>
 	if ( is_writeable( $file ) ) :
 		submit_button( __( 'Update File' ), 'primary', 'submit', true );
 	else : ?>
+<<<<<<< HEAD
 <p><em><?php _e('You need to make this file writable before you can save your changes. See <a href="http://codex.wordpress.org/Changing_File_Permissions">the Codex</a> for more information.'); ?></em></p>
+=======
+<p><em><?php _e('You need to make this file writable before you can save your changes. See <a href="https://codex.wordpress.org/Changing_File_Permissions">the Codex</a> for more information.'); ?></em></p>
+>>>>>>> WPHome/master
 <?php endif; ?>
 		</div>
 	</form>
@@ -232,12 +286,18 @@ endif; // $error
 <br class="clear" />
 </div>
 <script type="text/javascript">
+<<<<<<< HEAD
 /* <![CDATA[ */
+=======
+>>>>>>> WPHome/master
 jQuery(document).ready(function($){
 	$('#template').submit(function(){ $('#scrollto').val( $('#newcontent').scrollTop() ); });
 	$('#newcontent').scrollTop( $('#scrollto').val() );
 });
+<<<<<<< HEAD
 /* ]]> */
+=======
+>>>>>>> WPHome/master
 </script>
 <?php
 break;

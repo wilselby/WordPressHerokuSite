@@ -1,6 +1,10 @@
 <?php
 /**
+<<<<<<< HEAD
  * The Header for our theme.
+=======
+ * The Header template for our theme
+>>>>>>> WPHome/master
  *
  * Displays all of the <head> section and everything up till <div id="main">
  *
@@ -15,7 +19,11 @@
 <!--[if IE 8]>
 <html class="ie ie8" <?php language_attributes(); ?>>
 <![endif]-->
+<<<<<<< HEAD
 <!--[if !(IE 7) | !(IE 8)  ]><!-->
+=======
+<!--[if !(IE 7) & !(IE 8)]><!-->
+>>>>>>> WPHome/master
 <html <?php language_attributes(); ?>>
 <!--<![endif]-->
 <head>
@@ -40,14 +48,23 @@
 		</hgroup>
 
 		<nav id="site-navigation" class="main-navigation" role="navigation">
+<<<<<<< HEAD
 			<h3 class="menu-toggle"><?php _e( 'Menu', 'twentytwelve' ); ?></h3>
+=======
+			<button class="menu-toggle"><?php _e( 'Menu', 'twentytwelve' ); ?></button>
+>>>>>>> WPHome/master
 			<a class="assistive-text" href="#content" title="<?php esc_attr_e( 'Skip to content', 'twentytwelve' ); ?>"><?php _e( 'Skip to content', 'twentytwelve' ); ?></a>
 			<?php wp_nav_menu( array( 'theme_location' => 'primary', 'menu_class' => 'nav-menu' ) ); ?>
 		</nav><!-- #site-navigation -->
 
+<<<<<<< HEAD
 		<?php $header_image = get_header_image();
 		if ( ! empty( $header_image ) ) : ?>
 			<a href="<?php echo esc_url( home_url( '/' ) ); ?>"><img src="<?php echo esc_url( $header_image ); ?>" class="header-image" width="<?php echo get_custom_header()->width; ?>" height="<?php echo get_custom_header()->height; ?>" alt="" /></a>
+=======
+		<?php if ( get_header_image() ) : ?>
+		<a href="<?php echo esc_url( home_url( '/' ) ); ?>"><img src="<?php header_image(); ?>" class="header-image" width="<?php echo esc_attr( get_custom_header()->width ); ?>" height="<?php echo esc_attr( get_custom_header()->height ); ?>" alt="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" /></a>
+>>>>>>> WPHome/master
 		<?php endif; ?>
 	</header><!-- #masthead -->
 

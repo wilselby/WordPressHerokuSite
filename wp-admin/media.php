@@ -7,14 +7,22 @@
  */
 
 /** Load WordPress Administration Bootstrap */
+<<<<<<< HEAD
 require_once('./admin.php');
+=======
+require_once( dirname( __FILE__ ) . '/admin.php' );
+>>>>>>> WPHome/master
 
 $parent_file = 'upload.php';
 $submenu_file = 'upload.php';
 
 wp_reset_vars(array('action'));
 
+<<<<<<< HEAD
 switch( $action ) :
+=======
+switch ( $action ) {
+>>>>>>> WPHome/master
 case 'editattachment' :
 	$attachment_id = (int) $_POST['attachment_id'];
 	check_admin_referer('media-form');
@@ -40,7 +48,11 @@ case 'editattachment' :
 		exit;
 	}
 
+<<<<<<< HEAD
 	// no break
+=======
+	// No break.
+>>>>>>> WPHome/master
 case 'edit' :
 	$title = __('Edit Media');
 
@@ -80,22 +92,39 @@ case 'edit' :
 
 	get_current_screen()->set_help_sidebar(
 	'<p><strong>' . __('For more information:') . '</strong></p>' .
+<<<<<<< HEAD
 	'<p>' . __('<a href="http://codex.wordpress.org/Media_Add_New_Screen#Edit_Media" target="_blank">Documentation on Edit Media</a>') . '</p>' .
 	'<p>' . __('<a href="http://wordpress.org/support/" target="_blank">Support Forums</a>') . '</p>'
 	);
 
 	require( './admin-header.php' );
+=======
+	'<p>' . __('<a href="https://codex.wordpress.org/Media_Add_New_Screen#Edit_Media" target="_blank">Documentation on Edit Media</a>') . '</p>' .
+	'<p>' . __('<a href="https://wordpress.org/support/" target="_blank">Support Forums</a>') . '</p>'
+	);
+
+	require( ABSPATH . 'wp-admin/admin-header.php' );
+>>>>>>> WPHome/master
 
 	$parent_file = 'upload.php';
 	$message = '';
 	$class = '';
 	if ( isset($_GET['message']) ) {
+<<<<<<< HEAD
 		switch ( $_GET['message'] ) :
 		case 'updated' :
 			$message = __('Media attachment updated.');
 			$class = 'updated';
 			break;
 		endswitch;
+=======
+		switch ( $_GET['message'] ) {
+			case 'updated' :
+				$message = __('Media attachment updated.');
+				$class = 'updated';
+				break;
+		}
+>>>>>>> WPHome/master
 	}
 	if ( $message )
 		echo "<div id='message' class='$class'><p>$message</p></div>\n";
@@ -103,7 +132,10 @@ case 'edit' :
 ?>
 
 <div class="wrap">
+<<<<<<< HEAD
 <?php screen_icon(); ?>
+=======
+>>>>>>> WPHome/master
 <h2>
 <?php
 echo esc_html( $title );
@@ -112,13 +144,21 @@ if ( current_user_can( 'upload_files' ) ) { ?>
 <?php } ?>
 </h2>
 
+<<<<<<< HEAD
 <form method="post" action="" class="media-upload-form" id="media-single-form">
+=======
+<form method="post" class="media-upload-form" id="media-single-form">
+>>>>>>> WPHome/master
 <p class="submit" style="padding-bottom: 0;">
 <?php submit_button( __( 'Update Media' ), 'primary', 'save', false ); ?>
 </p>
 
 <div class="media-single">
+<<<<<<< HEAD
 <div id='media-item-<?php echo $att_id; ?>' class='media-item'>
+=======
+<div id="media-item-<?php echo $att_id; ?>" class="media-item">
+>>>>>>> WPHome/master
 <?php echo get_media_item( $att_id, array( 'toggle' => false, 'send' => false, 'delete' => false, 'show_title' => false, 'errors' => !empty($errors[$att_id]) ? $errors[$att_id] : null ) ); ?>
 </div>
 </div>
@@ -136,7 +176,11 @@ if ( current_user_can( 'upload_files' ) ) { ?>
 
 <?php
 
+<<<<<<< HEAD
 	require( './admin-footer.php' );
+=======
+	require( ABSPATH . 'wp-admin/admin-footer.php' );
+>>>>>>> WPHome/master
 
 	exit;
 
@@ -144,4 +188,8 @@ default:
 	wp_redirect( admin_url('upload.php') );
 	exit;
 
+<<<<<<< HEAD
 endswitch;
+=======
+}
+>>>>>>> WPHome/master

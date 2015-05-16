@@ -1,6 +1,10 @@
 <?php
 /**
+<<<<<<< HEAD
  * The template for displaying Archive pages.
+=======
+ * The template for displaying Archive pages
+>>>>>>> WPHome/master
  *
  * Used to display archive-type pages if nothing more specific matches a query.
  * For example, puts together date-based pages if no date.php file exists.
@@ -10,7 +14,11 @@
  * has tag.php for Tag archives, category.php for Category archives, and
  * author.php for Author archives.
  *
+<<<<<<< HEAD
  * Learn more: http://codex.wordpress.org/Template_Hierarchy
+=======
+ * @link https://codex.wordpress.org/Template_Hierarchy
+>>>>>>> WPHome/master
  *
  * @package WordPress
  * @subpackage Twenty_Twelve
@@ -60,4 +68,8 @@ get_header(); ?>
 	</section><!-- #primary -->
 
 <?php get_sidebar(); ?>
+<<<<<<< HEAD
 <?php get_footer(); ?>
+=======
+<?php get_footer(); ?>
+>>>>>>> WPHome/master

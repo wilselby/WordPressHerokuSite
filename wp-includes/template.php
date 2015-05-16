@@ -18,7 +18,11 @@
  *
  * @param string $type Filename without extension.
  * @param array $templates An optional list of template candidates
+<<<<<<< HEAD
  * @return string Full path to file.
+=======
+ * @return string Full path to template file.
+>>>>>>> WPHome/master
  */
 function get_query_template( $type, $templates = array() ) {
 	$type = preg_replace( '|[^a-z0-9-]+|', '', $type );
@@ -26,15 +30,41 @@ function get_query_template( $type, $templates = array() ) {
 	if ( empty( $templates ) )
 		$templates = array("{$type}.php");
 
+<<<<<<< HEAD
 	return apply_filters( "{$type}_template", locate_template( $templates ) );
+=======
+	$template = locate_template( $templates );
+	/**
+	 * Filter the path of the queried template by type.
+	 *
+	 * The dynamic portion of the hook name, `$type`, refers to the filename
+	 * -- minus the extension -- of the file to load. This hook also applies
+	 * to various types of files loaded as part of the Template Hierarchy.
+	 *
+	 * @since 1.5.0
+	 *
+	 * @param string $template Path to the template. See {@see locate_template()}.
+	 */
+	return apply_filters( "{$type}_template", $template );
+>>>>>>> WPHome/master
 }
 
 /**
  * Retrieve path of index template in current or parent template.
  *
+<<<<<<< HEAD
  * @since 3.0.0
  *
  * @return string
+=======
+ * The template path is filterable via the 'index_template' hook.
+ *
+ * @since 3.0.0
+ *
+ * @see get_query_template()
+ *
+ * @return string Full path to index template file.
+>>>>>>> WPHome/master
  */
 function get_index_template() {
 	return get_query_template('index');
@@ -43,9 +73,19 @@ function get_index_template() {
 /**
  * Retrieve path of 404 template in current or parent template.
  *
+<<<<<<< HEAD
  * @since 1.5.0
  *
  * @return string
+=======
+ * The template path is filterable via the '404_template' hook.
+ *
+ * @since 1.5.0
+ *
+ * @see get_query_template()
+ *
+ * @return string Full path to 404 template file.
+>>>>>>> WPHome/master
  */
 function get_404_template() {
 	return get_query_template('404');
@@ -54,9 +94,19 @@ function get_404_template() {
 /**
  * Retrieve path of archive template in current or parent template.
  *
+<<<<<<< HEAD
  * @since 1.5.0
  *
  * @return string
+=======
+ * The template path is filterable via the 'archive_template' hook.
+ *
+ * @since 1.5.0
+ *
+ * @see get_query_template()
+ *
+ * @return string Full path to archive template file.
+>>>>>>> WPHome/master
  */
 function get_archive_template() {
 	$post_types = array_filter( (array) get_query_var( 'post_type' ) );
@@ -73,18 +123,57 @@ function get_archive_template() {
 }
 
 /**
+<<<<<<< HEAD
  * Retrieve path of author template in current or parent template.
  *
  * @since 1.5.0
  *
  * @return string
+=======
+ * Retrieve path of post type archive template in current or parent template.
+ *
+ * The template path is filterable via the 'archive_template' hook.
+ *
+ * @since 3.7.0
+ *
+ * @see get_archive_template()
+ *
+ * @return string Full path to archive template file.
+ */
+function get_post_type_archive_template() {
+	$post_type = get_query_var( 'post_type' );
+	if ( is_array( $post_type ) )
+		$post_type = reset( $post_type );
+
+	$obj = get_post_type_object( $post_type );
+	if ( ! $obj->has_archive )
+		return '';
+
+	return get_archive_template();
+}
+
+/**
+ * Retrieve path of author template in current or parent template.
+ *
+ * The template path is filterable via the 'author_template' hook.
+ *
+ * @since 1.5.0
+ *
+ * @see get_query_template()
+ *
+ * @return string Full path to author template file.
+>>>>>>> WPHome/master
  */
 function get_author_template() {
 	$author = get_queried_object();
 
 	$templates = array();
 
+<<<<<<< HEAD
 	if ( $author ) {
+=======
+	if ( $author instanceof WP_User ) {
+>>>>>>> WPHome/master
 		$templates[] = "author-{$author->user_nicename}.php";
 		$templates[] = "author-{$author->ID}.php";
 	}
@@ -96,6 +185,7 @@ function get_author_template() {
 /**
  * Retrieve path of category template in current or parent template.
  *
+<<<<<<< HEAD
  * Works by first retrieving the current slug for example 'category-default.php' and then
  * trying category ID, for example 'category-1.php' and will finally fallback to category.php
  * template, if those files don't exist.
@@ -104,13 +194,30 @@ function get_author_template() {
  * @uses apply_filters() Calls 'category_template' on file path of category template.
  *
  * @return string
+=======
+ * Works by first retrieving the current slug, for example 'category-default.php', and then
+ * trying category ID, for example 'category-1.php', and will finally fall back to category.php
+ * template, if those files don't exist.
+ *
+ * The template path is filterable via the 'category_template' hook.
+ *
+ * @since 1.5.0
+ *
+ * @see get_query_template()
+ *
+ * @return string Full path to category template file.
+>>>>>>> WPHome/master
  */
 function get_category_template() {
 	$category = get_queried_object();
 
 	$templates = array();
 
+<<<<<<< HEAD
 	if ( $category ) {
+=======
+	if ( ! empty( $category->slug ) ) {
+>>>>>>> WPHome/master
 		$templates[] = "category-{$category->slug}.php";
 		$templates[] = "category-{$category->term_id}.php";
 	}
@@ -122,6 +229,7 @@ function get_category_template() {
 /**
  * Retrieve path of tag template in current or parent template.
  *
+<<<<<<< HEAD
  * Works by first retrieving the current tag name, for example 'tag-wordpress.php' and then
  * trying tag ID, for example 'tag-1.php' and will finally fallback to tag.php
  * template, if those files don't exist.
@@ -130,13 +238,30 @@ function get_category_template() {
  * @uses apply_filters() Calls 'tag_template' on file path of tag template.
  *
  * @return string
+=======
+ * Works by first retrieving the current tag name, for example 'tag-wordpress.php', and then
+ * trying tag ID, for example 'tag-1.php', and will finally fall back to tag.php
+ * template, if those files don't exist.
+ *
+ * The template path is filterable via the 'tag_template' hook.
+ *
+ * @since 2.3.0
+ *
+ * @see get_query_template()
+ *
+ * @return string Full path to tag template file.
+>>>>>>> WPHome/master
  */
 function get_tag_template() {
 	$tag = get_queried_object();
 
 	$templates = array();
 
+<<<<<<< HEAD
 	if ( $tag ) {
+=======
+	if ( ! empty( $tag->slug ) ) {
+>>>>>>> WPHome/master
 		$templates[] = "tag-{$tag->slug}.php";
 		$templates[] = "tag-{$tag->term_id}.php";
 	}
@@ -157,17 +282,31 @@ function get_tag_template() {
  * template is used. If none of the files exist, then it will fall back on to
  * index.php.
  *
+<<<<<<< HEAD
  * @since 2.5.0
  * @uses apply_filters() Calls 'taxonomy_template' filter on found path.
  *
  * @return string
+=======
+ * The template path is filterable via the 'taxonomy_template' hook.
+ *
+ * @since 2.5.0
+ *
+ * @see get_query_template()
+ *
+ * @return string Full path to taxonomy template file.
+>>>>>>> WPHome/master
  */
 function get_taxonomy_template() {
 	$term = get_queried_object();
 
 	$templates = array();
 
+<<<<<<< HEAD
 	if ( $term ) {
+=======
+	if ( ! empty( $term->slug ) ) {
+>>>>>>> WPHome/master
 		$taxonomy = $term->taxonomy;
 		$templates[] = "taxonomy-$taxonomy-{$term->slug}.php";
 		$templates[] = "taxonomy-$taxonomy.php";
@@ -180,9 +319,19 @@ function get_taxonomy_template() {
 /**
  * Retrieve path of date template in current or parent template.
  *
+<<<<<<< HEAD
  * @since 1.5.0
  *
  * @return string
+=======
+ * The template path is filterable via the 'date_template' hook.
+ *
+ * @since 1.5.0
+ *
+ * @see get_query_template()
+ *
+ * @return string Full path to date template file.
+>>>>>>> WPHome/master
  */
 function get_date_template() {
 	return get_query_template('date');
@@ -191,6 +340,7 @@ function get_date_template() {
 /**
  * Retrieve path of home template in current or parent template.
  *
+<<<<<<< HEAD
  * This is the template used for the page containing the blog posts
  *
  * Attempts to locate 'home.php' first before falling back to 'index.php'.
@@ -199,6 +349,18 @@ function get_date_template() {
  * @uses apply_filters() Calls 'home_template' on file path of home template.
  *
  * @return string
+=======
+ * This is the template used for the page containing the blog posts.
+ * Attempts to locate 'home.php' first before falling back to 'index.php'.
+ *
+ * The template path is filterable via the 'home_template' hook.
+ *
+ * @since 1.5.0
+ *
+ * @see get_query_template()
+ *
+ * @return string Full path to home template file.
+>>>>>>> WPHome/master
  */
 function get_home_template() {
 	$templates = array( 'home.php', 'index.php' );
@@ -209,12 +371,23 @@ function get_home_template() {
 /**
  * Retrieve path of front-page template in current or parent template.
  *
+<<<<<<< HEAD
  * Looks for 'front-page.php'.
  *
  * @since 3.0.0
  * @uses apply_filters() Calls 'front_page_template' on file path of template.
  *
  * @return string
+=======
+ * Looks for 'front-page.php'. The template path is filterable via the
+ * 'front_page_template' hook.
+ *
+ * @since 3.0.0
+ *
+ * @see get_query_template()
+ *
+ * @return string Full path to front page template file.
+>>>>>>> WPHome/master
  */
 function get_front_page_template() {
 	$templates = array('front-page.php');
@@ -225,6 +398,7 @@ function get_front_page_template() {
 /**
  * Retrieve path of page template in current or parent template.
  *
+<<<<<<< HEAD
  * Will first look for the specifically assigned page template
  * The will search for 'page-{slug}.php' followed by 'page-id.php'
  * and finally 'page.php'
@@ -232,6 +406,19 @@ function get_front_page_template() {
  * @since 1.5.0
  *
  * @return string
+=======
+ * Will first look for the specifically assigned page template.
+ * Then will search for 'page-{slug}.php', followed by 'page-{id}.php',
+ * and finally 'page.php'.
+ *
+ * The template path is filterable via the 'page_template' hook.
+ *
+ * @since 1.5.0
+ *
+ * @see get_query_template()
+ *
+ * @return string Full path to page template file.
+>>>>>>> WPHome/master
  */
 function get_page_template() {
 	$id = get_queried_object_id();
@@ -241,7 +428,12 @@ function get_page_template() {
 	if ( ! $pagename && $id ) {
 		// If a static page is set as the front page, $pagename will not be set. Retrieve it from the queried object
 		$post = get_queried_object();
+<<<<<<< HEAD
 		$pagename = $post->post_name;
+=======
+		if ( $post )
+			$pagename = $post->post_name;
+>>>>>>> WPHome/master
 	}
 
 	$templates = array();
@@ -259,9 +451,19 @@ function get_page_template() {
 /**
  * Retrieve path of paged template in current or parent template.
  *
+<<<<<<< HEAD
  * @since 1.5.0
  *
  * @return string
+=======
+ * The template path is filterable via the 'paged_template' hook.
+ *
+ * @since 1.5.0
+ *
+ * @see get_query_template()
+ *
+ * @return string Full path to paged template file.
+>>>>>>> WPHome/master
  */
 function get_paged_template() {
 	return get_query_template('paged');
@@ -270,9 +472,19 @@ function get_paged_template() {
 /**
  * Retrieve path of search template in current or parent template.
  *
+<<<<<<< HEAD
  * @since 1.5.0
  *
  * @return string
+=======
+ * The template path is filterable via the 'search_template' hook.
+ *
+ * @since 1.5.0
+ *
+ * @see get_query_template()
+ *
+ * @return string Full path to search template file.
+>>>>>>> WPHome/master
  */
 function get_search_template() {
 	return get_query_template('search');
@@ -281,16 +493,30 @@ function get_search_template() {
 /**
  * Retrieve path of single template in current or parent template.
  *
+<<<<<<< HEAD
  * @since 1.5.0
  *
  * @return string
+=======
+ * The template path is filterable via the 'single_template' hook.
+ *
+ * @since 1.5.0
+ *
+ * @see get_query_template()
+ *
+ * @return string Full path to single template file.
+>>>>>>> WPHome/master
  */
 function get_single_template() {
 	$object = get_queried_object();
 
 	$templates = array();
 
+<<<<<<< HEAD
 	if ( $object )
+=======
+	if ( ! empty( $object->post_type ) )
+>>>>>>> WPHome/master
 		$templates[] = "single-{$object->post_type}.php";
 	$templates[] = "single.php";
 
@@ -308,9 +534,19 @@ function get_single_template() {
  * Some examples for the 'text/plain' mime type are 'text.php', 'plain.php', and
  * finally 'text_plain.php'.
  *
+<<<<<<< HEAD
  * @since 2.0.0
  *
  * @return string
+=======
+ * The template path is filterable via the 'attachment_template' hook.
+ *
+ * @since 2.0.0
+ *
+ * @see get_query_template()
+ *
+ * @return string Full path to attachment template file.
+>>>>>>> WPHome/master
  */
 function get_attachment_template() {
 	global $posts;
@@ -321,10 +557,19 @@ function get_attachment_template() {
 		if ( ! empty( $type ) ) {
 			if ( $template = get_query_template( $type[0] ) )
 				return $template;
+<<<<<<< HEAD
 			elseif ( $template = get_query_template( $type[1] ) )
 				return $template;
 			elseif ( $template = get_query_template( "$type[0]_$type[1]" ) )
 				return $template;
+=======
+			elseif ( ! empty( $type[1] ) ) {
+				if ( $template = get_query_template( $type[1] ) )
+					return $template;
+				elseif ( $template = get_query_template( "$type[0]_$type[1]" ) )
+					return $template;
+			}
+>>>>>>> WPHome/master
 		}
 	}
 
@@ -337,10 +582,20 @@ function get_attachment_template() {
  * Checks for comment popup template in current template, if it exists or in the
  * parent template.
  *
+<<<<<<< HEAD
  * @since 1.5.0
  * @uses apply_filters() Calls 'comments_popup_template' filter on path.
  *
  * @return string
+=======
+ * The template path is filterable via the 'comments_popup_template' hook.
+ *
+ * @since 1.5.0
+ *
+ * @see get_query_template()
+ *
+ * @return string Full path to comments popup template file.
+>>>>>>> WPHome/master
  */
 function get_comments_popup_template() {
 	$template = get_query_template( 'comments_popup', array( 'comments-popup.php' ) );
@@ -373,7 +628,11 @@ function locate_template($template_names, $load = false, $require_once = true ) 
 		if ( file_exists(STYLESHEETPATH . '/' . $template_name)) {
 			$located = STYLESHEETPATH . '/' . $template_name;
 			break;
+<<<<<<< HEAD
 		} else if ( file_exists(TEMPLATEPATH . '/' . $template_name) ) {
+=======
+		} elseif ( file_exists(TEMPLATEPATH . '/' . $template_name) ) {
+>>>>>>> WPHome/master
 			$located = TEMPLATEPATH . '/' . $template_name;
 			break;
 		}
@@ -400,6 +659,7 @@ function locate_template($template_names, $load = false, $require_once = true ) 
 function load_template( $_template_file, $require_once = true ) {
 	global $posts, $post, $wp_did_header, $wp_query, $wp_rewrite, $wpdb, $wp_version, $wp, $id, $comment, $user_ID;
 
+<<<<<<< HEAD
 	if ( is_array( $wp_query->query_vars ) )
 		extract( $wp_query->query_vars, EXTR_SKIP );
 
@@ -407,5 +667,20 @@ function load_template( $_template_file, $require_once = true ) {
 		require_once( $_template_file );
 	else
 		require( $_template_file );
+=======
+	if ( is_array( $wp_query->query_vars ) ) {
+		extract( $wp_query->query_vars, EXTR_SKIP );
+	}
+
+	if ( isset( $s ) ) {
+		$s = esc_attr( $s );
+	}
+
+	if ( $require_once ) {
+		require_once( $_template_file );
+	} else {
+		require( $_template_file );
+	}
+>>>>>>> WPHome/master
 }
 

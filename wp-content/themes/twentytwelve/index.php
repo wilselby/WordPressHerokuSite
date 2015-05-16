@@ -1,13 +1,21 @@
 <?php
 /**
+<<<<<<< HEAD
  * The main template file.
+=======
+ * The main template file
+>>>>>>> WPHome/master
  *
  * This is the most generic template file in a WordPress theme
  * and one of the two required files for a theme (the other being style.css).
  * It is used to display a page when nothing more specific matches a query.
  * For example, it puts together the home page when no home.php file exists.
  *
+<<<<<<< HEAD
  * Learn more: http://codex.wordpress.org/Template_Hierarchy
+=======
+ * @link https://codex.wordpress.org/Template_Hierarchy
+>>>>>>> WPHome/master
  *
  * @package WordPress
  * @subpackage Twenty_Twelve
@@ -63,4 +71,8 @@ get_header(); ?>
 	</div><!-- #primary -->
 
 <?php get_sidebar(); ?>
+<<<<<<< HEAD
 <?php get_footer(); ?>
+=======
+<?php get_footer(); ?>
+>>>>>>> WPHome/master

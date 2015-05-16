@@ -1,6 +1,10 @@
 <?php
 /**
+<<<<<<< HEAD
  * The Sidebar containing the main widget area.
+=======
+ * Sidebar containing the main widget area
+>>>>>>> WPHome/master
  *
  * @package WordPress
  * @subpackage Twenty_Eleven

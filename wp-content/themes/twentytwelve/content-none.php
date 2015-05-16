@@ -1,6 +1,10 @@
 <?php
 /**
+<<<<<<< HEAD
  * The template for displaying a "No posts found" message.
+=======
+ * The template for displaying a "No posts found" message
+>>>>>>> WPHome/master
  *
  * @package WordPress
  * @subpackage Twenty_Twelve

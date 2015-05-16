@@ -1,6 +1,10 @@
 <?php
 /**
+<<<<<<< HEAD
  * The template for displaying search forms in Twenty Eleven
+=======
+ * Template for displaying search forms in Twenty Eleven
+>>>>>>> WPHome/master
  *
  * @package WordPress
  * @subpackage Twenty_Eleven

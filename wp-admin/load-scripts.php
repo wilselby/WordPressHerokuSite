@@ -3,7 +3,11 @@
 /**
  * Disable error reporting
  *
+<<<<<<< HEAD
  * Set this to error_reporting( E_ALL ) or error_reporting( E_ALL | E_STRICT ) for debugging
+=======
+ * Set this to error_reporting( -1 ) for debugging.
+>>>>>>> WPHome/master
  */
 error_reporting(0);
 
@@ -119,7 +123,11 @@ if ( is_array( $load ) )
 	$load = implode( '', $load );
 
 $load = preg_replace( '/[^a-z0-9,_-]+/i', '', $load );
+<<<<<<< HEAD
 $load = explode(',', $load);
+=======
+$load = array_unique( explode( ',', $load ) );
+>>>>>>> WPHome/master
 
 if ( empty($load) )
 	exit;
@@ -143,7 +151,11 @@ foreach( $load as $handle ) {
 	$out .= get_file($path) . "\n";
 }
 
+<<<<<<< HEAD
 header('Content-Type: application/x-javascript; charset=UTF-8');
+=======
+header('Content-Type: application/javascript; charset=UTF-8');
+>>>>>>> WPHome/master
 header('Expires: ' . gmdate( "D, d M Y H:i:s", time() + $expires_offset ) . ' GMT');
 header("Cache-Control: public, max-age=$expires_offset");
 

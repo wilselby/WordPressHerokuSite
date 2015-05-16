@@ -15,11 +15,21 @@
  * @uses WP_Image_Editor Extends class
  */
 class WP_Image_Editor_Imagick extends WP_Image_Editor {
+<<<<<<< HEAD
 
 	protected $image = null; // Imagick Object
 
 	function __destruct() {
 		if ( $this->image ) {
+=======
+	/**
+	 * @var Imagick
+	 */
+	protected $image; // Imagick Object
+
+	public function __destruct() {
+		if ( $this->image instanceof Imagick ) {
+>>>>>>> WPHome/master
 			// we don't need the original in memory anymore
 			$this->image->clear();
 			$this->image->destroy();
@@ -97,7 +107,11 @@ class WP_Image_Editor_Imagick extends WP_Image_Editor {
 				return false;
 
 		try {
+<<<<<<< HEAD
 			return ( (bool) Imagick::queryFormats( $imagick_extension ) );
+=======
+			return ( (bool) @Imagick::queryFormats( $imagick_extension ) );
+>>>>>>> WPHome/master
 		}
 		catch ( Exception $e ) {
 			return false;
@@ -113,12 +127,20 @@ class WP_Image_Editor_Imagick extends WP_Image_Editor {
 	 * @return boolean|WP_Error True if loaded; WP_Error on failure.
 	 */
 	public function load() {
+<<<<<<< HEAD
 		if ( $this->image )
+=======
+		if ( $this->image instanceof Imagick )
+>>>>>>> WPHome/master
 			return true;
 
 		if ( ! is_file( $this->file ) && ! preg_match( '|^https?://|', $this->file ) )
 			return new WP_Error( 'error_loading_image', __('File doesn&#8217;t exist?'), $this->file );
 
+<<<<<<< HEAD
+=======
+		/** This filter is documented in wp-includes/class-wp-image-editor-imagick.php */
+>>>>>>> WPHome/master
 		// Even though Imagick uses less PHP memory than GD, set higher limit for users that have low PHP.ini limits
 		@ini_set( 'memory_limit', apply_filters( 'image_memory_limit', WP_MAX_MEMORY_LIMIT ) );
 
@@ -139,8 +161,14 @@ class WP_Image_Editor_Imagick extends WP_Image_Editor {
 		}
 
 		$updated_size = $this->update_size();
+<<<<<<< HEAD
 		if ( is_wp_error( $updated_size ) )
 				return $updated_size;
+=======
+		if ( is_wp_error( $updated_size ) ) {
+			return $updated_size;
+		}
+>>>>>>> WPHome/master
 
 		return $this->set_quality();
 	}
@@ -152,6 +180,7 @@ class WP_Image_Editor_Imagick extends WP_Image_Editor {
 	 * @access public
 	 *
 	 * @param int $quality Compression Quality. Range: [1,100]
+<<<<<<< HEAD
 	 * @return boolean|WP_Error
 	 */
 	public function set_quality( $quality = null ) {
@@ -161,6 +190,21 @@ class WP_Image_Editor_Imagick extends WP_Image_Editor {
 		try {
 			if( 'image/jpeg' == $this->mime_type ) {
 				$this->image->setImageCompressionQuality( apply_filters( 'jpeg_quality', $quality, 'image_resize' ) );
+=======
+	 * @return boolean|WP_Error True if set successfully; WP_Error on failure.
+	 */
+	public function set_quality( $quality = null ) {
+		$quality_result = parent::set_quality( $quality );
+		if ( is_wp_error( $quality_result ) ) {
+			return $quality_result;
+		} else {
+			$quality = $this->get_quality();
+		}
+
+		try {
+			if ( 'image/jpeg' == $this->mime_type ) {
+				$this->image->setImageCompressionQuality( $quality );
+>>>>>>> WPHome/master
 				$this->image->setImageCompression( imagick::COMPRESSION_JPEG );
 			}
 			else {
@@ -171,7 +215,11 @@ class WP_Image_Editor_Imagick extends WP_Image_Editor {
 			return new WP_Error( 'image_quality_error', $e->getMessage() );
 		}
 
+<<<<<<< HEAD
 		return parent::set_quality( $quality );
+=======
+		return true;
+>>>>>>> WPHome/master
 	}
 
 	/**
@@ -182,6 +230,11 @@ class WP_Image_Editor_Imagick extends WP_Image_Editor {
 	 *
 	 * @param int $width
 	 * @param int $height
+<<<<<<< HEAD
+=======
+	 *
+	 * @return true|WP_Error
+>>>>>>> WPHome/master
 	 */
 	protected function update_size( $width = null, $height = null ) {
 		$size = null;
@@ -206,12 +259,25 @@ class WP_Image_Editor_Imagick extends WP_Image_Editor {
 	/**
 	 * Resizes current image.
 	 *
+<<<<<<< HEAD
 	 * @since 3.5.0
 	 * @access public
 	 *
 	 * @param int $max_w
 	 * @param int $max_h
 	 * @param boolean $crop
+=======
+	 * At minimum, either a height or width must be provided.
+	 * If one of the two is set to null, the resize will
+	 * maintain aspect ratio according to the provided dimension.
+	 *
+	 * @since 3.5.0
+	 * @access public
+	 *
+	 * @param  int|null $max_w Image width.
+	 * @param  int|null $max_h Image height.
+	 * @param  boolean  $crop
+>>>>>>> WPHome/master
 	 * @return boolean|WP_Error
 	 */
 	public function resize( $max_w, $max_h, $crop = false ) {
@@ -242,14 +308,35 @@ class WP_Image_Editor_Imagick extends WP_Image_Editor {
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Processes current image and saves to disk
 	 * multiple sizes from single source.
+=======
+	 * Resize multiple images from a single source.
+>>>>>>> WPHome/master
 	 *
 	 * @since 3.5.0
 	 * @access public
 	 *
+<<<<<<< HEAD
 	 * @param array $sizes { {'width'=>int, 'height'=>int, 'crop'=>bool}, ... }
 	 * @return array
+=======
+	 * @param array $sizes {
+	 *     An array of image size arrays. Default sizes are 'small', 'medium', 'large'.
+	 *
+	 *     Either a height or width must be provided.
+	 *     If one of the two is set to null, the resize will
+	 *     maintain aspect ratio according to the provided dimension.
+	 *
+	 *     @type array $size {
+	 *         @type int  ['width']  Optional. Image width.
+	 *         @type int  ['height'] Optional. Image height.
+	 *         @type bool $crop   Optional. Whether to crop the image. Default false.
+	 *     }
+	 * }
+	 * @return array An array of resized images' metadata by size.
+>>>>>>> WPHome/master
 	 */
 	public function multi_resize( $sizes ) {
 		$metadata = array();
@@ -260,9 +347,31 @@ class WP_Image_Editor_Imagick extends WP_Image_Editor {
 			if ( ! $this->image )
 				$this->image = $orig_image->getImage();
 
+<<<<<<< HEAD
 			$resize_result = $this->resize( $size_data['width'], $size_data['height'], $size_data['crop'] );
 
 			if( ! is_wp_error( $resize_result ) ) {
+=======
+			if ( ! isset( $size_data['width'] ) && ! isset( $size_data['height'] ) ) {
+				continue;
+			}
+
+			if ( ! isset( $size_data['width'] ) ) {
+				$size_data['width'] = null;
+			}
+			if ( ! isset( $size_data['height'] ) ) {
+				$size_data['height'] = null;
+			}
+
+			if ( ! isset( $size_data['crop'] ) ) {
+				$size_data['crop'] = false;
+			}
+
+			$resize_result = $this->resize( $size_data['width'], $size_data['height'], $size_data['crop'] );
+			$duplicate = ( ( $orig_size['width'] == $size_data['width'] ) && ( $orig_size['height'] == $size_data['height'] ) );
+
+			if ( ! is_wp_error( $resize_result ) && ! $duplicate ) {
+>>>>>>> WPHome/master
 				$resized = $this->_save( $this->image );
 
 				$this->image->clear();
@@ -289,7 +398,10 @@ class WP_Image_Editor_Imagick extends WP_Image_Editor {
 	 * @since 3.5.0
 	 * @access public
 	 *
+<<<<<<< HEAD
 	 * @param string|int $src The source file or Attachment ID.
+=======
+>>>>>>> WPHome/master
 	 * @param int $src_x The start x position to crop from.
 	 * @param int $src_y The start y position to crop from.
 	 * @param int $src_w The width to crop.
@@ -343,11 +455,25 @@ class WP_Image_Editor_Imagick extends WP_Image_Editor {
 		 */
 		try {
 			$this->image->rotateImage( new ImagickPixel('none'), 360-$angle );
+<<<<<<< HEAD
+=======
+
+			// Since this changes the dimensions of the image, update the size.
+			$result = $this->update_size();
+			if ( is_wp_error( $result ) )
+				return $result;
+
+			$this->image->setImagePage( $this->size['width'], $this->size['height'], 0, 0 );
+>>>>>>> WPHome/master
 		}
 		catch ( Exception $e ) {
 			return new WP_Error( 'image_rotate_error', $e->getMessage() );
 		}
+<<<<<<< HEAD
 		return $this->update_size();
+=======
+		return true;
+>>>>>>> WPHome/master
 	}
 
 	/**
@@ -356,8 +482,13 @@ class WP_Image_Editor_Imagick extends WP_Image_Editor {
 	 * @since 3.5.0
 	 * @access public
 	 *
+<<<<<<< HEAD
 	 * @param boolean $horz Horizontal Flip
 	 * @param boolean $vert Vertical Flip
+=======
+	 * @param boolean $horz Flip along Horizontal Axis
+	 * @param boolean $vert Flip along Vertical Axis
+>>>>>>> WPHome/master
 	 * @returns boolean|WP_Error
 	 */
 	public function flip( $horz, $vert ) {
@@ -427,11 +558,20 @@ class WP_Image_Editor_Imagick extends WP_Image_Editor {
 		$perms = $stat['mode'] & 0000666; //same permissions as parent folder, strip off the executable bits
 		@ chmod( $filename, $perms );
 
+<<<<<<< HEAD
 		return array(
 			'path' => $filename,
 			'file' => wp_basename( apply_filters( 'image_make_intermediate_size', $filename ) ),
 			'width' => $this->size['width'],
 			'height' => $this->size['height'],
+=======
+		/** This filter is documented in wp-includes/class-wp-image-editor-gd.php */
+		return array(
+			'path'      => $filename,
+			'file'      => wp_basename( apply_filters( 'image_make_intermediate_size', $filename ) ),
+			'width'     => $this->size['width'],
+			'height'    => $this->size['height'],
+>>>>>>> WPHome/master
 			'mime-type' => $mime_type,
 		);
 	}
