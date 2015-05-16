@@ -4,11 +4,6 @@
  * @package WordPress
  */
 if ( defined('WP_USE_THEMES') && WP_USE_THEMES )
-<<<<<<< HEAD
-	do_action('template_redirect');
-
-// Halt template load for HEAD requests. Performance bump. See #14348
-=======
 	/**
 	 * Fires before determining which template to load.
 	 *
@@ -26,22 +21,17 @@ if ( defined('WP_USE_THEMES') && WP_USE_THEMES )
  *
  * @param bool $exit Whether to exit without generating any content for 'HEAD' requests. Default true.
  */
->>>>>>> WPHome/master
 if ( 'HEAD' === $_SERVER['REQUEST_METHOD'] && apply_filters( 'exit_on_http_head', true ) )
 	exit();
 
 // Process feeds and trackbacks even if not using themes.
 if ( is_robots() ) :
-<<<<<<< HEAD
-	do_action('do_robots');
-=======
 	/**
 	 * Fired when the template loader determines a robots.txt request.
 	 *
 	 * @since 2.1.0
 	 */
 	do_action( 'do_robots' );
->>>>>>> WPHome/master
 	return;
 elseif ( is_feed() ) :
 	do_feed();
@@ -55,16 +45,10 @@ if ( defined('WP_USE_THEMES') && WP_USE_THEMES ) :
 	$template = false;
 	if     ( is_404()            && $template = get_404_template()            ) :
 	elseif ( is_search()         && $template = get_search_template()         ) :
-<<<<<<< HEAD
-	elseif ( is_tax()            && $template = get_taxonomy_template()       ) :
-	elseif ( is_front_page()     && $template = get_front_page_template()     ) :
-	elseif ( is_home()           && $template = get_home_template()           ) :
-=======
 	elseif ( is_front_page()     && $template = get_front_page_template()     ) :
 	elseif ( is_home()           && $template = get_home_template()           ) :
 	elseif ( is_post_type_archive() && $template = get_post_type_archive_template() ) :
 	elseif ( is_tax()            && $template = get_taxonomy_template()       ) :
->>>>>>> WPHome/master
 	elseif ( is_attachment()     && $template = get_attachment_template()     ) :
 		remove_filter('the_content', 'prepend_attachment');
 	elseif ( is_single()         && $template = get_single_template()         ) :
@@ -79,8 +63,6 @@ if ( defined('WP_USE_THEMES') && WP_USE_THEMES ) :
 	else :
 		$template = get_index_template();
 	endif;
-<<<<<<< HEAD
-=======
 	/**
 	 * Filter the path of the current template before including it.
 	 *
@@ -88,7 +70,6 @@ if ( defined('WP_USE_THEMES') && WP_USE_THEMES ) :
 	 *
 	 * @param string $template The path of the template to include.
 	 */
->>>>>>> WPHome/master
 	if ( $template = apply_filters( 'template_include', $template ) )
 		include( $template );
 	return;

@@ -1,21 +1,3 @@
-<<<<<<< HEAD
-var ajaxWidgets, ajaxPopulateWidgets, quickPressLoad;
-
-jQuery(document).ready( function($) {
-	/* Dashboard Welcome Panel */
-	var welcomePanel = $('#welcome-panel'),
-		welcomePanelHide = $('#wp_welcome_panel-hide'),
-	 	updateWelcomePanel = function( visible ) {
-			$.post( ajaxurl, {
-				action: 'update-welcome-panel',
-				visible: visible,
-				welcomepanelnonce: $('#welcomepanelnonce').val()
-			});
-		};
-
-	if ( welcomePanel.hasClass('hidden') && welcomePanelHide.prop('checked') )
-		welcomePanel.removeClass('hidden');
-=======
 /* global pagenow, ajaxurl, postboxes, wpActiveEditor:true */
 var ajaxWidgets, ajaxPopulateWidgets, quickPressLoad;
 
@@ -35,7 +17,6 @@ jQuery(document).ready( function($) {
 	if ( welcomePanel.hasClass('hidden') && welcomePanelHide.prop('checked') ) {
 		welcomePanel.removeClass('hidden');
 	}
->>>>>>> WPHome/master
 
 	$('.welcome-panel-close, .welcome-panel-dismiss a', welcomePanel).click( function(e) {
 		e.preventDefault();
@@ -50,16 +31,7 @@ jQuery(document).ready( function($) {
 	});
 
 	// These widgets are sometimes populated via ajax
-<<<<<<< HEAD
-	ajaxWidgets = [
-		'dashboard_incoming_links',
-		'dashboard_primary',
-		'dashboard_secondary',
-		'dashboard_plugins'
-	];
-=======
 	ajaxWidgets = ['dashboard_primary'];
->>>>>>> WPHome/master
 
 	ajaxPopulateWidgets = function(el) {
 		function show(i, id) {
@@ -67,11 +39,7 @@ jQuery(document).ready( function($) {
 			if ( e.length ) {
 				p = e.parent();
 				setTimeout( function(){
-<<<<<<< HEAD
-					p.load( ajaxurl + '?action=dashboard-widgets&widget=' + id, '', function() {
-=======
 					p.load( ajaxurl + '?action=dashboard-widgets&widget=' + id + '&pagenow=' + pagenow, '', function() {
->>>>>>> WPHome/master
 						p.hide().slideDown('normal', function(){
 							$(this).css('display', '');
 						});
@@ -82,14 +50,9 @@ jQuery(document).ready( function($) {
 
 		if ( el ) {
 			el = el.toString();
-<<<<<<< HEAD
-			if ( $.inArray(el, ajaxWidgets) != -1 )
-				show(0, el);
-=======
 			if ( $.inArray(el, ajaxWidgets) !== -1 ) {
 				show(0, el);
 			}
->>>>>>> WPHome/master
 		} else {
 			$.each( ajaxWidgets, show );
 		}
@@ -101,31 +64,13 @@ jQuery(document).ready( function($) {
 	/* QuickPress */
 	quickPressLoad = function() {
 		var act = $('#quickpost-action'), t;
-<<<<<<< HEAD
-=======
 
 		$( '#quick-press .submit input[type="submit"], #quick-press .submit input[type="reset"]' ).prop( 'disabled' , false );
 
->>>>>>> WPHome/master
 		t = $('#quick-press').submit( function() {
 			$('#dashboard_quick_press #publishing-action .spinner').show();
 			$('#quick-press .submit input[type="submit"], #quick-press .submit input[type="reset"]').prop('disabled', true);
 
-<<<<<<< HEAD
-			if ( 'post' == act.val() ) {
-				act.val( 'post-quickpress-publish' );
-			}
-
-			$('#dashboard_quick_press div.inside').load( t.attr( 'action' ), t.serializeArray(), function() {
-				$('#dashboard_quick_press #publishing-action .spinner').hide();
-				$('#quick-press .submit input[type="submit"], #quick-press .submit input[type="reset"]').prop('disabled', false);
-				$('#dashboard_quick_press ul').next('p').remove();
-				$('#dashboard_quick_press ul').find('li').each( function() {
-					$('#dashboard_recent_drafts ul').prepend( this );
-				} ).end().remove();
-				quickPressLoad();
-			} );
-=======
 			$.post( t.attr( 'action' ), t.serializeArray(), function( data ) {
 				// Replace the form, and prepend the published post.
 				$('#dashboard_quick_press .inside').html( data );
@@ -143,26 +88,17 @@ jQuery(document).ready( function($) {
 				}, 1000);
 			}
 
->>>>>>> WPHome/master
 			return false;
 		} );
 
 		$('#publish').click( function() { act.val( 'post-quickpress-publish' ); } );
 
-<<<<<<< HEAD
-		$('#title, #tags-input').each( function() {
-			var input = $(this), prompt = $('#' + this.id + '-prompt-text');
-
-			if ( '' === this.value )
-				prompt.removeClass('screen-reader-text');
-=======
 		$('#title, #tags-input, #content').each( function() {
 			var input = $(this), prompt = $('#' + this.id + '-prompt-text');
 
 			if ( '' === this.value ) {
 				prompt.removeClass('screen-reader-text');
 			}
->>>>>>> WPHome/master
 
 			prompt.click( function() {
 				$(this).addClass('screen-reader-text');
@@ -170,14 +106,9 @@ jQuery(document).ready( function($) {
 			});
 
 			input.blur( function() {
-<<<<<<< HEAD
-				if ( '' === this.value )
-					prompt.removeClass('screen-reader-text');
-=======
 				if ( '' === this.value ) {
 					prompt.removeClass('screen-reader-text');
 				}
->>>>>>> WPHome/master
 			});
 
 			input.focus( function() {
@@ -188,17 +119,12 @@ jQuery(document).ready( function($) {
 		$('#quick-press').on( 'click focusin', function() {
 			wpActiveEditor = 'content';
 		});
-<<<<<<< HEAD
-	};
-	quickPressLoad();
-
-=======
 
 		autoResizeTextarea();
 	};
 	quickPressLoad();
 
-	$( '.meta-box-sortables' ).sortable( 'option', 'containment', '#wpwrap' );
+	$( '.meta-box-sortables' ).sortable( 'option', 'containment', 'document' );
 
 	function autoResizeTextarea() {
 		if ( document.documentMode && document.documentMode < 9 ) {
@@ -261,5 +187,4 @@ jQuery(document).ready( function($) {
 		});
 	}
 
->>>>>>> WPHome/master
 } );

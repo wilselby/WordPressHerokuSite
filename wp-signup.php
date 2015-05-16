@@ -5,20 +5,13 @@ require( dirname(__FILE__) . '/wp-load.php' );
 
 add_action( 'wp_head', 'wp_no_robots' );
 
-<<<<<<< HEAD
-require( './wp-blog-header.php' );
-=======
 require( dirname( __FILE__ ) . '/wp-blog-header.php' );
->>>>>>> WPHome/master
 
 if ( is_array( get_site_option( 'illegal_names' )) && isset( $_GET[ 'new' ] ) && in_array( $_GET[ 'new' ], get_site_option( 'illegal_names' ) ) == true ) {
 	wp_redirect( network_home_url() );
 	die();
 }
 
-<<<<<<< HEAD
-function do_signup_header() {
-=======
 /**
  * Prints signup_header via wp_head
  *
@@ -30,7 +23,6 @@ function do_signup_header() {
 	 *
 	 * @since 3.0.0
 	 */
->>>>>>> WPHome/master
 	do_action( 'signup_header' );
 }
 add_action( 'wp_head', 'do_signup_header' );
@@ -48,14 +40,11 @@ if ( !is_main_site() ) {
 // Fix for page title
 $wp_query->is_404 = false;
 
-<<<<<<< HEAD
-=======
 /**
  * Prints styles for front-end Multisite signup pages
  *
  * @since MU
  */
->>>>>>> WPHome/master
 function wpmu_signup_stylesheet() {
 	?>
 	<style type="text/css">
@@ -79,23 +68,16 @@ function wpmu_signup_stylesheet() {
 add_action( 'wp_head', 'wpmu_signup_stylesheet' );
 get_header();
 
-<<<<<<< HEAD
-=======
 /**
  * Fires before the site sign-up form.
  *
  * @since 3.0.0
  */
->>>>>>> WPHome/master
 do_action( 'before_signup_form' );
 ?>
 <div id="content" class="widecolumn">
 <div class="mu_register">
 <?php
-<<<<<<< HEAD
-function show_blog_form($blogname = '', $blog_title = '', $errors = '') {
-	global $current_site;
-=======
 /**
  * Generates and displays the Signup and Create Site forms
  *
@@ -107,7 +89,6 @@ function show_blog_form($blogname = '', $blog_title = '', $errors = '') {
  */
 function show_blog_form( $blogname = '', $blog_title = '', $errors = '' ) {
 	$current_site = get_current_site();
->>>>>>> WPHome/master
 	// Blog name
 	if ( !is_subdomain_install() )
 		echo '<label for="blogname">' . __('Site Name:') . '</label>';
@@ -157,11 +138,6 @@ function show_blog_form( $blogname = '', $blog_title = '', $errors = '' ) {
 	</div>
 
 	<?php
-<<<<<<< HEAD
-	do_action('signup_blogform', $errors);
-}
-
-=======
 	/**
 	 * Fires after the site sign-up form.
 	 *
@@ -179,7 +155,6 @@ function show_blog_form( $blogname = '', $blog_title = '', $errors = '' ) {
  *
  * @return array Contains the new site data and error messages.
  */
->>>>>>> WPHome/master
 function validate_blog_form() {
 	$user = '';
 	if ( is_user_logged_in() )
@@ -188,8 +163,6 @@ function validate_blog_form() {
 	return wpmu_validate_blog_signup($_POST['blogname'], $_POST['blog_title'], $user);
 }
 
-<<<<<<< HEAD
-=======
 /**
  * Display user registration form
  *
@@ -199,7 +172,6 @@ function validate_blog_form() {
  * @param string $user_email The entered email address
  * @param array $errors
  */
->>>>>>> WPHome/master
 function show_user_form($user_name = '', $user_email = '', $errors = '') {
 	// User name
 	echo '<label for="user_name">' . __('Username:') . '</label>';
@@ -214,20 +186,11 @@ function show_user_form($user_name = '', $user_email = '', $errors = '') {
 	<?php if ( $errmsg = $errors->get_error_message('user_email') ) { ?>
 		<p class="error"><?php echo $errmsg ?></p>
 	<?php } ?>
-<<<<<<< HEAD
-	<input name="user_email" type="text" id="user_email" value="<?php  echo esc_attr($user_email) ?>" maxlength="200" /><br /><?php _e('We send your registration email to this address. (Double-check your email address before continuing.)') ?>
-=======
 	<input name="user_email" type="email" id="user_email" value="<?php  echo esc_attr($user_email) ?>" maxlength="200" /><br /><?php _e('We send your registration email to this address. (Double-check your email address before continuing.)') ?>
->>>>>>> WPHome/master
 	<?php
 	if ( $errmsg = $errors->get_error_message('generic') ) {
 		echo '<p class="error">' . $errmsg . '</p>';
 	}
-<<<<<<< HEAD
-	do_action( 'signup_extra_fields', $errors );
-}
-
-=======
 	/**
 	 * Fires at the end of the user registration form on the site sign-up form.
 	 *
@@ -245,15 +208,10 @@ function show_user_form($user_name = '', $user_email = '', $errors = '') {
  *
  * @return array Contains username, email, and error messages.
  */
->>>>>>> WPHome/master
 function validate_user_form() {
 	return wpmu_validate_user_signup($_POST['user_name'], $_POST['user_email']);
 }
 
-<<<<<<< HEAD
-function signup_another_blog($blogname = '', $blog_title = '', $errors = '') {
-	global $current_site;
-=======
 /**
  * Allow returning users to sign up for another site
  *
@@ -264,17 +222,12 @@ function signup_another_blog($blogname = '', $blog_title = '', $errors = '') {
  * @param array $errors
  */
 function signup_another_blog( $blogname = '', $blog_title = '', $errors = '' ) {
->>>>>>> WPHome/master
 	$current_user = wp_get_current_user();
 
 	if ( ! is_wp_error($errors) ) {
 		$errors = new WP_Error();
 	}
 
-<<<<<<< HEAD
-	// allow definition of default variables
-	$filtered_results = apply_filters('signup_another_blog_init', array('blogname' => $blogname, 'blog_title' => $blog_title, 'errors' => $errors ));
-=======
 	$signup_defaults = array(
 		'blogname'   => $blogname,
 		'blog_title' => $blog_title,
@@ -296,16 +249,11 @@ function signup_another_blog( $blogname = '', $blog_title = '', $errors = '' ) {
 	 */
 	$filtered_results = apply_filters( 'signup_another_blog_init', $signup_defaults );
 
->>>>>>> WPHome/master
 	$blogname = $filtered_results['blogname'];
 	$blog_title = $filtered_results['blog_title'];
 	$errors = $filtered_results['errors'];
 
-<<<<<<< HEAD
-	echo '<h2>' . sprintf( __( 'Get <em>another</em> %s site in seconds' ), $current_site->site_name ) . '</h2>';
-=======
 	echo '<h2>' . sprintf( __( 'Get <em>another</em> %s site in seconds' ), get_current_site()->site_name ) . '</h2>';
->>>>>>> WPHome/master
 
 	if ( $errors->get_error_code() ) {
 		echo '<p>' . __( 'There was a problem, please correct the form below and try again.' ) . '</p>';
@@ -329,9 +277,6 @@ function signup_another_blog( $blogname = '', $blog_title = '', $errors = '' ) {
 	<p><?php _e( 'If you&#8217;re not going to use a great site domain, leave it for a new user. Now have at it!' ) ?></p>
 	<form id="setupform" method="post" action="wp-signup.php">
 		<input type="hidden" name="stage" value="gimmeanotherblog" />
-<<<<<<< HEAD
-		<?php do_action( 'signup_hidden_fields' ); ?>
-=======
 		<?php
 		/**
 		 * Hidden sign-up form fields output when creating another site or user.
@@ -343,23 +288,12 @@ function signup_another_blog( $blogname = '', $blog_title = '', $errors = '' ) {
 		 */
 		do_action( 'signup_hidden_fields', 'create-another-site' );
 		?>
->>>>>>> WPHome/master
 		<?php show_blog_form($blogname, $blog_title, $errors); ?>
 		<p class="submit"><input type="submit" name="submit" class="submit" value="<?php esc_attr_e( 'Create Site' ) ?>" /></p>
 	</form>
 	<?php
 }
 
-<<<<<<< HEAD
-function validate_another_blog_signup() {
-	global $wpdb, $blogname, $blog_title, $errors, $domain, $path;
-	$current_user = wp_get_current_user();
-	if ( !is_user_logged_in() )
-		die();
-
-	$result = validate_blog_form();
-	extract($result);
-=======
 /**
  * Validate a new blog signup
  *
@@ -383,7 +317,6 @@ function validate_another_blog_signup() {
 	$blogname = $result['blogname'];
 	$blog_title = $result['blog_title'];
 	$errors = $result['errors'];
->>>>>>> WPHome/master
 
 	if ( $errors->get_error_code() ) {
 		signup_another_blog($blogname, $blog_title, $errors);
@@ -391,10 +324,6 @@ function validate_another_blog_signup() {
 	}
 
 	$public = (int) $_POST['blog_public'];
-<<<<<<< HEAD
-	$meta = apply_filters( 'signup_create_blog_meta', array( 'lang_id' => 1, 'public' => $public ) ); // deprecated
-	$meta = apply_filters( 'add_signup_meta', $meta );
-=======
 
 	$blog_meta_defaults = array(
 		'lang_id' => 1,
@@ -423,16 +352,12 @@ function validate_another_blog_signup() {
 	 * }
 	 */
 	$meta = apply_filters( 'add_signup_meta', $meta_defaults );
->>>>>>> WPHome/master
 
 	wpmu_create_blog( $domain, $path, $blog_title, $current_user->ID, $meta, $wpdb->siteid );
 	confirm_another_blog_signup($domain, $path, $blog_title, $current_user->user_login, $current_user->user_email, $meta);
 	return true;
 }
 
-<<<<<<< HEAD
-function confirm_another_blog_signup($domain, $path, $blog_title, $user_name, $user_email = '', $meta = '') {
-=======
 /**
  * Confirm a new site signup
  *
@@ -445,20 +370,12 @@ function confirm_another_blog_signup($domain, $path, $blog_title, $user_name, $u
  * @param array $meta Any additional meta from the 'add_signup_meta' filter in validate_blog_signup()
  */
 function confirm_another_blog_signup( $domain, $path, $blog_title, $user_name, $user_email = '', $meta = array() ) {
->>>>>>> WPHome/master
 	?>
 	<h2><?php printf( __( 'The site %s is yours.' ), "<a href='http://{$domain}{$path}'>{$blog_title}</a>" ) ?></h2>
 	<p>
 		<?php printf( __( '<a href="http://%1$s">http://%2$s</a> is your new site. <a href="%3$s">Log in</a> as &#8220;%4$s&#8221; using your existing password.' ), $domain.$path, $domain.$path, "http://" . $domain.$path . "wp-login.php", $user_name ) ?>
 	</p>
 	<?php
-<<<<<<< HEAD
-	do_action( 'signup_finished' );
-}
-
-function signup_user($user_name = '', $user_email = '', $errors = '') {
-	global $current_site, $active_signup;
-=======
 	/**
 	 * Fires when the site or user sign-up process is complete.
 	 *
@@ -478,17 +395,12 @@ function signup_user($user_name = '', $user_email = '', $errors = '') {
  */
 function signup_user( $user_name = '', $user_email = '', $errors = '' ) {
 	global $active_signup;
->>>>>>> WPHome/master
 
 	if ( !is_wp_error($errors) )
 		$errors = new WP_Error();
 
 	$signup_for = isset( $_POST[ 'signup_for' ] ) ? esc_html( $_POST[ 'signup_for' ] ) : 'blog';
 
-<<<<<<< HEAD
-	// allow definition of default variables
-	$filtered_results = apply_filters('signup_user_init', array('user_name' => $user_name, 'user_email' => $user_email, 'errors' => $errors ));
-=======
 	$signup_user_defaults = array(
 		'user_name'  => $user_name,
 		'user_email' => $user_email,
@@ -509,19 +421,12 @@ function signup_user( $user_name = '', $user_email = '', $errors = '' ) {
 	 * }
 	 */
 	$filtered_results = apply_filters( 'signup_user_init', $signup_user_defaults );
->>>>>>> WPHome/master
 	$user_name = $filtered_results['user_name'];
 	$user_email = $filtered_results['user_email'];
 	$errors = $filtered_results['errors'];
 
 	?>
 
-<<<<<<< HEAD
-	<h2><?php printf( __( 'Get your own %s account in seconds' ), $current_site->site_name ) ?></h2>
-	<form id="setupform" method="post" action="wp-signup.php">
-		<input type="hidden" name="stage" value="validate-user-signup" />
-		<?php do_action( 'signup_hidden_fields' ); ?>
-=======
 	<h2><?php printf( __( 'Get your own %s account in seconds' ), get_current_site()->site_name ) ?></h2>
 	<form id="setupform" method="post" action="wp-signup.php" novalidate="novalidate">
 		<input type="hidden" name="stage" value="validate-user-signup" />
@@ -529,7 +434,6 @@ function signup_user( $user_name = '', $user_email = '', $errors = '' ) {
 		/** This action is documented in wp-signup.php */
 		do_action( 'signup_hidden_fields', 'validate-user' );
 		?>
->>>>>>> WPHome/master
 		<?php show_user_form($user_name, $user_email, $errors); ?>
 
 		<p>
@@ -551,11 +455,6 @@ function signup_user( $user_name = '', $user_email = '', $errors = '' ) {
 	<?php
 }
 
-<<<<<<< HEAD
-function validate_user_signup() {
-	$result = validate_user_form();
-	extract($result);
-=======
 /**
  * Validate the new user signup
  *
@@ -568,7 +467,6 @@ function validate_user_signup() {
 	$user_name = $result['user_name'];
 	$user_email = $result['user_email'];
 	$errors = $result['errors'];
->>>>>>> WPHome/master
 
 	if ( $errors->get_error_code() ) {
 		signup_user($user_name, $user_email, $errors);
@@ -580,19 +478,13 @@ function validate_user_signup() {
 		return false;
 	}
 
-<<<<<<< HEAD
-	wpmu_signup_user($user_name, $user_email, apply_filters( 'add_signup_meta', array() ) );
-=======
 	/** This filter is documented in wp-signup.php */
 	wpmu_signup_user( $user_name, $user_email, apply_filters( 'add_signup_meta', array() ) );
->>>>>>> WPHome/master
 
 	confirm_user_signup($user_name, $user_email);
 	return true;
 }
 
-<<<<<<< HEAD
-=======
 /**
  * New user signup confirmation
  *
@@ -601,7 +493,6 @@ function validate_user_signup() {
  * @param string $user_name The username
  * @param string $user_email The user's email address
  */
->>>>>>> WPHome/master
 function confirm_user_signup($user_name, $user_email) {
 	?>
 	<h2><?php printf( __( '%s is your new username' ), $user_name) ?></h2>
@@ -609,11 +500,6 @@ function confirm_user_signup($user_name, $user_email) {
 	<p><?php printf( __( 'Check your inbox at <strong>%s</strong> and click the link given.' ), $user_email ); ?></p>
 	<p><?php _e( 'If you do not activate your username within two days, you will have to sign up again.' ); ?></p>
 	<?php
-<<<<<<< HEAD
-	do_action( 'signup_finished' );
-}
-
-=======
 	/** This action is documented in wp-signup.php */
 	do_action( 'signup_finished' );
 }
@@ -629,15 +515,10 @@ function confirm_user_signup($user_name, $user_email) {
  * @param string $blog_title The site title
  * @param array $errors
  */
->>>>>>> WPHome/master
 function signup_blog($user_name = '', $user_email = '', $blogname = '', $blog_title = '', $errors = '') {
 	if ( !is_wp_error($errors) )
 		$errors = new WP_Error();
 
-<<<<<<< HEAD
-	// allow definition of default variables
-	$filtered_results = apply_filters('signup_blog_init', array('user_name' => $user_name, 'user_email' => $user_email, 'blogname' => $blogname, 'blog_title' => $blog_title, 'errors' => $errors ));
-=======
 	$signup_blog_defaults = array(
 		'user_name'  => $user_name,
 		'user_email' => $user_email,
@@ -663,7 +544,6 @@ function signup_blog($user_name = '', $user_email = '', $blogname = '', $blog_ti
 	 */
 	$filtered_results = apply_filters( 'signup_blog_init', $signup_blog_defaults );
 
->>>>>>> WPHome/master
 	$user_name = $filtered_results['user_name'];
 	$user_email = $filtered_results['user_email'];
 	$blogname = $filtered_results['blogname'];
@@ -677,34 +557,16 @@ function signup_blog($user_name = '', $user_email = '', $blogname = '', $blog_ti
 		<input type="hidden" name="stage" value="validate-blog-signup" />
 		<input type="hidden" name="user_name" value="<?php echo esc_attr($user_name) ?>" />
 		<input type="hidden" name="user_email" value="<?php echo esc_attr($user_email) ?>" />
-<<<<<<< HEAD
-		<?php do_action( 'signup_hidden_fields' ); ?>
-=======
 		<?php
 		/** This action is documented in wp-signup.php */
 		do_action( 'signup_hidden_fields', 'validate-site' );
 		?>
->>>>>>> WPHome/master
 		<?php show_blog_form($blogname, $blog_title, $errors); ?>
 		<p class="submit"><input type="submit" name="submit" class="submit" value="<?php esc_attr_e('Signup') ?>" /></p>
 	</form>
 	<?php
 }
 
-<<<<<<< HEAD
-function validate_blog_signup() {
-	// Re-validate user info.
-	$result = wpmu_validate_user_signup($_POST['user_name'], $_POST['user_email']);
-	extract($result);
-
-	if ( $errors->get_error_code() ) {
-		signup_user($user_name, $user_email, $errors);
-		return false;
-	}
-
-	$result = wpmu_validate_blog_signup($_POST['blogname'], $_POST['blog_title']);
-	extract($result);
-=======
 /**
  * Validate new site signup
  *
@@ -730,7 +592,6 @@ function validate_blog_signup() {
 	$blogname = $result['blogname'];
 	$blog_title = $result['blog_title'];
 	$errors = $result['errors'];
->>>>>>> WPHome/master
 
 	if ( $errors->get_error_code() ) {
 		signup_blog($user_name, $user_email, $blogname, $blog_title, $errors);
@@ -738,24 +599,16 @@ function validate_blog_signup() {
 	}
 
 	$public = (int) $_POST['blog_public'];
-<<<<<<< HEAD
-	$meta = array ('lang_id' => 1, 'public' => $public);
-	$meta = apply_filters( 'add_signup_meta', $meta );
-=======
 	$signup_meta = array ('lang_id' => 1, 'public' => $public);
 
 	/** This filter is documented in wp-signup.php */
 	$meta = apply_filters( 'add_signup_meta', $signup_meta );
->>>>>>> WPHome/master
 
 	wpmu_signup_blog($domain, $path, $blog_title, $user_name, $user_email, $meta);
 	confirm_blog_signup($domain, $path, $blog_title, $user_name, $user_email, $meta);
 	return true;
 }
 
-<<<<<<< HEAD
-function confirm_blog_signup($domain, $path, $blog_title, $user_name = '', $user_email = '', $meta) {
-=======
 /**
  * New site signup confirmation
  *
@@ -769,7 +622,6 @@ function confirm_blog_signup($domain, $path, $blog_title, $user_name = '', $user
  * @param array $meta Any additional meta from the 'add_signup_meta' filter in validate_blog_signup()
  */
 function confirm_blog_signup( $domain, $path, $blog_title, $user_name = '', $user_email = '', $meta = array() ) {
->>>>>>> WPHome/master
 	?>
 	<h2><?php printf( __( 'Congratulations! Your new site, %s, is almost ready.' ), "<a href='http://{$domain}{$path}'>{$blog_title}</a>" ) ?></h2>
 
@@ -782,29 +634,15 @@ function confirm_blog_signup( $domain, $path, $blog_title, $user_name = '', $use
 		<ul id="noemail-tips">
 			<li><p><strong><?php _e( 'Wait a little longer. Sometimes delivery of email can be delayed by processes outside of our control.' ) ?></strong></p></li>
 			<li><p><?php _e( 'Check the junk or spam folder of your email client. Sometime emails wind up there by mistake.' ) ?></p></li>
-<<<<<<< HEAD
-			<li><?php printf( __( 'Have you entered your email correctly?  You have entered %s, if it&#8217;s incorrect, you will not receive your email.' ), $user_email ) ?></li>
-		</ul>
-	</p>
-	<?php
-=======
 			<li><?php printf( __( 'Have you entered your email correctly? You have entered %s, if it&#8217;s incorrect, you will not receive your email.' ), $user_email ) ?></li>
 		</ul>
 	</p>
 	<?php
 	/** This action is documented in wp-signup.php */
->>>>>>> WPHome/master
 	do_action( 'signup_finished' );
 }
 
 // Main
-<<<<<<< HEAD
-$active_signup = get_site_option( 'registration' );
-if ( !$active_signup )
-	$active_signup = 'all';
-
-$active_signup = apply_filters( 'wpmu_active_signup', $active_signup ); // return "all", "none", "blog" or "user"
-=======
 $active_signup = get_site_option( 'registration', 'none' );
 /**
  * Filter the type of site sign-up.
@@ -815,7 +653,6 @@ $active_signup = get_site_option( 'registration', 'none' );
  *                              'all', 'none', 'blog', or 'user'.
  */
 $active_signup = apply_filters( 'wpmu_active_signup', $active_signup );
->>>>>>> WPHome/master
 
 // Make the signup type translatable.
 $i18n_signup['all'] = _x('all', 'Multisite active signup type');
@@ -855,16 +692,12 @@ if ( $active_signup == 'none' ) {
 		case 'default':
 		default :
 			$user_email = isset( $_POST[ 'user_email' ] ) ? $_POST[ 'user_email' ] : '';
-<<<<<<< HEAD
-			do_action( 'preprocess_signup_form' ); // populate the form from invites, elsewhere?
-=======
 			/**
 			 * Fires when the site sign-up form is sent.
 			 *
 			 * @since 3.0.0
 			 */
 			do_action( 'preprocess_signup_form' );
->>>>>>> WPHome/master
 			if ( is_user_logged_in() && ( $active_signup == 'all' || $active_signup == 'blog' ) )
 				signup_another_blog($newblogname);
 			elseif ( is_user_logged_in() == false && ( $active_signup == 'all' || $active_signup == 'user' ) )
@@ -878,15 +711,9 @@ if ( $active_signup == 'none' ) {
 				$newblog = get_blogaddress_by_name( $newblogname );
 
 				if ( $active_signup == 'blog' || $active_signup == 'all' )
-<<<<<<< HEAD
-					printf( __( '<p><em>The site you were looking for, <strong>%s</strong> does not exist, but you can create it now!</em></p>' ), $newblog );
-				else
-					printf( __( '<p><em>The site you were looking for, <strong>%s</strong>, does not exist.</em></p>' ), $newblog );
-=======
 					printf( '<p><em>' . __( 'The site you were looking for, <strong>%s</strong>, does not exist, but you can create it now!' ) . '</em></p>', $newblog );
 				else
 					printf( '<p><em>' . __( 'The site you were looking for, <strong>%s</strong>, does not exist.' ) . '</em></p>', $newblog );
->>>>>>> WPHome/master
 			}
 			break;
 	}
@@ -894,9 +721,6 @@ if ( $active_signup == 'none' ) {
 ?>
 </div>
 </div>
-<<<<<<< HEAD
-<?php do_action( 'after_signup_form' ); ?>
-=======
 <?php
 /**
  * Fires after the sign-up forms, before wp_footer.
@@ -904,6 +728,5 @@ if ( $active_signup == 'none' ) {
  * @since 3.0.0
  */
 do_action( 'after_signup_form' ); ?>
->>>>>>> WPHome/master
 
 <?php get_footer(); ?>

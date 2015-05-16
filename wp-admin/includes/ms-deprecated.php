@@ -14,11 +14,7 @@
  */
 function wpmu_menu() {
 	_deprecated_function(__FUNCTION__, '3.0' );
-<<<<<<< HEAD
-	// deprecated. See #11763
-=======
 	// Deprecated. See #11763.
->>>>>>> WPHome/master
 }
 
 /**
@@ -57,10 +53,7 @@ function activate_sitewide_plugin() {
  */
 function deactivate_sitewide_plugin( $plugin = false ) {
 	_deprecated_function(__FUNCTION__, '3.0', 'deactivate_plugin()' );
-<<<<<<< HEAD
 	return;
-=======
->>>>>>> WPHome/master
 }
 
 /**

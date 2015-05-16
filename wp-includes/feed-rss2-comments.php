@@ -5,28 +5,18 @@
  * @package WordPress
  */
 
-<<<<<<< HEAD
 header('Content-Type: ' . feed_content_type('rss-http') . '; charset=' . get_option('blog_charset'), true);
-
-echo '<?xml version="1.0" encoding="'.get_option('blog_charset').'"?'.'>';
-=======
-header('Content-Type: ' . feed_content_type('rss2') . '; charset=' . get_option('blog_charset'), true);
 
 echo '<?xml version="1.0" encoding="'.get_option('blog_charset').'"?'.'>';
 
 /** This action is documented in wp-includes/feed-rss2.php */
 do_action( 'rss_tag_pre', 'rss2-comments' );
->>>>>>> WPHome/master
 ?>
 <rss version="2.0"
 	xmlns:content="http://purl.org/rss/1.0/modules/content/"
 	xmlns:dc="http://purl.org/dc/elements/1.1/"
 	xmlns:atom="http://www.w3.org/2005/Atom"
 	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
-<<<<<<< HEAD
-	<?php do_action('rss2_ns'); do_action('rss2_comments_ns'); ?>
-	>
-=======
 	<?php
 	/** This action is documented in wp-includes/feed-rss2.php */
 	do_action( 'rss2_ns' );
@@ -41,7 +31,6 @@ do_action( 'rss_tag_pre', 'rss2-comments' );
 	do_action( 'rss2_comments_ns' );
 	?>
 >
->>>>>>> WPHome/master
 <channel>
 	<title><?php
 		if ( is_singular() )
@@ -55,15 +44,6 @@ do_action( 'rss_tag_pre', 'rss2-comments' );
 	<link><?php (is_single()) ? the_permalink_rss() : bloginfo_rss("url") ?></link>
 	<description><?php bloginfo_rss("description") ?></description>
 	<lastBuildDate><?php echo mysql2date('r', get_lastcommentmodified('GMT')); ?></lastBuildDate>
-<<<<<<< HEAD
-	<sy:updatePeriod><?php echo apply_filters( 'rss_update_period', 'hourly' ); ?></sy:updatePeriod>
-	<sy:updateFrequency><?php echo apply_filters( 'rss_update_frequency', '1' ); ?></sy:updateFrequency>
-	<?php do_action('commentsrss2_head'); ?>
-<?php
-if ( have_comments() ) : while ( have_comments() ) : the_comment();
-	$comment_post = $GLOBALS['post'] = get_post( $comment->comment_post_ID );
-?>
-=======
 	<sy:updatePeriod><?php
 		/** This filter is documented in wp-includes/feed-rss2.php */
 		echo apply_filters( 'rss_update_period', 'hourly' );
@@ -83,28 +63,19 @@ if ( have_comments() ) : while ( have_comments() ) : the_comment();
 	if ( have_comments() ) : while ( have_comments() ) : the_comment();
 		$comment_post = $GLOBALS['post'] = get_post( $comment->comment_post_ID );
 	?>
->>>>>>> WPHome/master
 	<item>
 		<title><?php
 			if ( !is_singular() ) {
 				$title = get_the_title($comment_post->ID);
-<<<<<<< HEAD
-				$title = apply_filters('the_title_rss', $title);
-=======
 				/** This filter is documented in wp-includes/feed.php */
 				$title = apply_filters( 'the_title_rss', $title );
->>>>>>> WPHome/master
 				printf(ent2ncr(__('Comment on %1$s by %2$s')), $title, get_comment_author_rss());
 			} else {
 				printf(ent2ncr(__('By: %s')), get_comment_author_rss());
 			}
 		?></title>
 		<link><?php comment_link() ?></link>
-<<<<<<< HEAD
-		<dc:creator><?php echo get_comment_author_rss() ?></dc:creator>
-=======
 		<dc:creator><![CDATA[<?php echo get_comment_author_rss() ?>]]></dc:creator>
->>>>>>> WPHome/master
 		<pubDate><?php echo mysql2date('D, d M Y H:i:s +0000', get_comment_time('Y-m-d H:i:s', true, false), false); ?></pubDate>
 		<guid isPermaLink="false"><?php comment_guid() ?></guid>
 <?php if ( post_password_required($comment_post) ) : ?>
@@ -114,9 +85,6 @@ if ( have_comments() ) : while ( have_comments() ) : the_comment();
 		<description><![CDATA[<?php comment_text_rss() ?>]]></description>
 		<content:encoded><![CDATA[<?php comment_text() ?>]]></content:encoded>
 <?php endif; // post pass
-<<<<<<< HEAD
-	do_action('commentrss2_item', $comment->comment_ID, $comment_post->ID);
-=======
 	/**
 	 * Fires at the end of each RSS2 comment feed item.
 	 *
@@ -126,7 +94,6 @@ if ( have_comments() ) : while ( have_comments() ) : the_comment();
 	 * @param int $comment_post->ID    The ID of the post the comment is connected to.
 	 */
 	do_action( 'commentrss2_item', $comment->comment_ID, $comment_post->ID );
->>>>>>> WPHome/master
 ?>
 	</item>
 <?php endwhile; endif; ?>

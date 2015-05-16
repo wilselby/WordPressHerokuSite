@@ -7,11 +7,7 @@
  *
  * @author Elias Torres <elias@torrez.us>
  * @version 0.4
-<<<<<<< HEAD
- * @since 2.3
-=======
  * @since 2.3.0
->>>>>>> WPHome/master
  */
 
 /**
@@ -134,16 +130,9 @@ class AtomParser {
             if($this->debug) $this->content .= $data;
 
             if(!xml_parse($parser, $data, feof($fp))) {
-<<<<<<< HEAD
                 trigger_error(sprintf(__('XML error: %s at line %d')."\n",
-                    xml_error_string(xml_get_error_code($xml_parser)),
-                    xml_get_current_line_number($xml_parser)));
-=======
-                /* translators: 1: error message, 2: line number */
-                trigger_error(sprintf(__('XML Error: %1$s at line %2$s')."\n",
                     xml_error_string(xml_get_error_code($parser)),
                     xml_get_current_line_number($parser)));
->>>>>>> WPHome/master
                 $ret = false;
                 break;
             }

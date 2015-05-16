@@ -9,9 +9,6 @@
  */
 class WP_Plugins_List_Table extends WP_List_Table {
 
-<<<<<<< HEAD
-	function __construct( $args = array() ) {
-=======
 	/**
 	 * Constructor.
 	 *
@@ -23,7 +20,6 @@ class WP_Plugins_List_Table extends WP_List_Table {
 	 * @param array $args An associative array of arguments.
 	 */
 	public function __construct( $args = array() ) {
->>>>>>> WPHome/master
 		global $status, $page;
 
 		parent::__construct( array(
@@ -36,26 +32,11 @@ class WP_Plugins_List_Table extends WP_List_Table {
 			$status = $_REQUEST['plugin_status'];
 
 		if ( isset($_REQUEST['s']) )
-<<<<<<< HEAD
-			$_SERVER['REQUEST_URI'] = add_query_arg('s', stripslashes($_REQUEST['s']) );
-=======
 			$_SERVER['REQUEST_URI'] = add_query_arg('s', wp_unslash($_REQUEST['s']) );
->>>>>>> WPHome/master
 
 		$page = $this->get_pagenum();
 	}
 
-<<<<<<< HEAD
-	function get_table_classes() {
-		return array( 'widefat', $this->_args['plural'] );
-	}
-
-	function ajax_user_can() {
-		return current_user_can('activate_plugins');
-	}
-
-	function prepare_items() {
-=======
 	protected function get_table_classes() {
 		return array( 'widefat', $this->_args['plural'] );
 	}
@@ -65,13 +46,10 @@ class WP_Plugins_List_Table extends WP_List_Table {
 	}
 
 	public function prepare_items() {
->>>>>>> WPHome/master
 		global $status, $plugins, $totals, $page, $orderby, $order, $s;
 
 		wp_reset_vars( array( 'orderby', 'order', 's' ) );
 
-<<<<<<< HEAD
-=======
 		/**
 		 * Filter the full array of plugins to list in the Plugins list table.
 		 *
@@ -81,7 +59,6 @@ class WP_Plugins_List_Table extends WP_List_Table {
 		 *
 		 * @param array $plugins An array of plugins to display in the list table.
 		 */
->>>>>>> WPHome/master
 		$plugins = array(
 			'all' => apply_filters( 'all_plugins', get_plugins() ),
 			'search' => array(),
@@ -95,11 +72,6 @@ class WP_Plugins_List_Table extends WP_List_Table {
 
 		$screen = $this->screen;
 
-<<<<<<< HEAD
-		if ( ! is_multisite() || ( $screen->is_network && current_user_can('manage_network_plugins') ) ) {
-			if ( apply_filters( 'show_advanced_plugins', true, 'mustuse' ) )
-				$plugins['mustuse'] = get_mu_plugins();
-=======
 		if ( ! is_multisite() || ( $screen->in_admin( 'network' ) && current_user_can( 'manage_network_plugins' ) ) ) {
 
 			/**
@@ -122,7 +94,6 @@ class WP_Plugins_List_Table extends WP_List_Table {
 			}
 
 			/** This action is documented in wp-admin/includes/class-wp-plugins-list-table.php */
->>>>>>> WPHome/master
 			if ( apply_filters( 'show_advanced_plugins', true, 'dropins' ) )
 				$plugins['dropins'] = get_dropins();
 
@@ -139,11 +110,7 @@ class WP_Plugins_List_Table extends WP_List_Table {
 
 		set_transient( 'plugin_slugs', array_keys( $plugins['all'] ), DAY_IN_SECONDS );
 
-<<<<<<< HEAD
-		if ( ! $screen->is_network ) {
-=======
 		if ( ! $screen->in_admin( 'network' ) ) {
->>>>>>> WPHome/master
 			$recently_activated = get_option( 'recently_activated', array() );
 
 			foreach ( $recently_activated as $key => $time )
@@ -152,37 +119,14 @@ class WP_Plugins_List_Table extends WP_List_Table {
 			update_option( 'recently_activated', $recently_activated );
 		}
 
-<<<<<<< HEAD
-		foreach ( (array) $plugins['all'] as $plugin_file => $plugin_data ) {
-			// Filter into individual sections
-			if ( is_multisite() && ! $screen->is_network && is_network_only_plugin( $plugin_file ) ) {
-				unset( $plugins['all'][ $plugin_file ] );
-			} elseif ( ! $screen->is_network && is_plugin_active_for_network( $plugin_file ) ) {
-				unset( $plugins['all'][ $plugin_file ] );
-			} elseif ( ( ! $screen->is_network && is_plugin_active( $plugin_file ) )
-				|| ( $screen->is_network && is_plugin_active_for_network( $plugin_file ) ) ) {
-				$plugins['active'][ $plugin_file ] = $plugin_data;
-			} else {
-				if ( ! $screen->is_network && isset( $recently_activated[ $plugin_file ] ) ) // Was the plugin recently activated?
-					$plugins['recently_activated'][ $plugin_file ] = $plugin_data;
-=======
 		$plugin_info = get_site_transient( 'update_plugins' );
 
 		foreach ( (array) $plugins['all'] as $plugin_file => $plugin_data ) {
 			// Extra info if known. array_merge() ensures $plugin_data has precedence if keys collide.
 			if ( isset( $plugin_info->response[ $plugin_file ] ) ) {
 				$plugins['all'][ $plugin_file ] = $plugin_data = array_merge( (array) $plugin_info->response[ $plugin_file ], $plugin_data );
-				// Make sure that $plugins['upgrade'] also receives the extra info since it is used on ?plugin_status=upgrade
-				if ( isset( $plugins['upgrade'][ $plugin_file ] ) ) {
-					$plugins['upgrade'][ $plugin_file ] = $plugin_data = array_merge( (array) $plugin_info->response[ $plugin_file ], $plugin_data );
-				}
-
 			} elseif ( isset( $plugin_info->no_update[ $plugin_file ] ) ) {
 				$plugins['all'][ $plugin_file ] = $plugin_data = array_merge( (array) $plugin_info->no_update[ $plugin_file ], $plugin_data );
-				// Make sure that $plugins['upgrade'] also receives the extra info since it is used on ?plugin_status=upgrade
-				if ( isset( $plugins['upgrade'][ $plugin_file ] ) ) {
-					$plugins['upgrade'][ $plugin_file ] = $plugin_data = array_merge( (array) $plugin_info->no_update[ $plugin_file ], $plugin_data );
-				}
 			}
 
 			// Filter into individual sections
@@ -203,18 +147,13 @@ class WP_Plugins_List_Table extends WP_List_Table {
 					$plugins['recently_activated'][ $plugin_file ] = $plugin_data;
 				}
 				// Populate the inactive list with plugins that aren't activated
->>>>>>> WPHome/master
 				$plugins['inactive'][ $plugin_file ] = $plugin_data;
 			}
 		}
 
 		if ( $s ) {
 			$status = 'search';
-<<<<<<< HEAD
-			$plugins['search'] = array_filter( $plugins['all'], array( &$this, '_search_callback' ) );
-=======
 			$plugins['search'] = array_filter( $plugins['all'], array( $this, '_search_callback' ) );
->>>>>>> WPHome/master
 		}
 
 		$totals = array();
@@ -236,11 +175,7 @@ class WP_Plugins_List_Table extends WP_List_Table {
 			$orderby = ucfirst( $orderby );
 			$order = strtoupper( $order );
 
-<<<<<<< HEAD
-			uasort( $this->items, array( &$this, '_order_callback' ) );
-=======
 			uasort( $this->items, array( $this, '_order_callback' ) );
->>>>>>> WPHome/master
 		}
 
 		$plugins_per_page = $this->get_items_per_page( str_replace( '-', '_', $screen->id . '_per_page' ), 999 );
@@ -256,16 +191,6 @@ class WP_Plugins_List_Table extends WP_List_Table {
 		) );
 	}
 
-<<<<<<< HEAD
-	function _search_callback( $plugin ) {
-		static $term;
-		if ( is_null( $term ) )
-			$term = stripslashes( $_REQUEST['s'] );
-
-		foreach ( $plugin as $value )
-			if ( stripos( $value, $term ) !== false )
-				return true;
-=======
 	/**
 	 * @staticvar string $term
 	 * @param array $plugin
@@ -281,14 +206,10 @@ class WP_Plugins_List_Table extends WP_List_Table {
 				return true;
 			}
 		}
->>>>>>> WPHome/master
 
 		return false;
 	}
 
-<<<<<<< HEAD
-	function _order_callback( $plugin_a, $plugin_b ) {
-=======
 	/**
 	 * @global string $orderby
 	 * @global string $order
@@ -297,7 +218,6 @@ class WP_Plugins_List_Table extends WP_List_Table {
 	 * @return int
 	 */
 	public function _order_callback( $plugin_a, $plugin_b ) {
->>>>>>> WPHome/master
 		global $orderby, $order;
 
 		$a = $plugin_a[$orderby];
@@ -312,11 +232,7 @@ class WP_Plugins_List_Table extends WP_List_Table {
 			return ( $a < $b ) ? -1 : 1;
 	}
 
-<<<<<<< HEAD
-	function no_items() {
-=======
 	public function no_items() {
->>>>>>> WPHome/master
 		global $plugins;
 
 		if ( !empty( $plugins['all'] ) )
@@ -325,11 +241,7 @@ class WP_Plugins_List_Table extends WP_List_Table {
 			_e( 'You do not appear to have any plugins available at this time.' );
 	}
 
-<<<<<<< HEAD
-	function get_columns() {
-=======
 	public function get_columns() {
->>>>>>> WPHome/master
 		global $status;
 
 		return array(
@@ -339,19 +251,11 @@ class WP_Plugins_List_Table extends WP_List_Table {
 		);
 	}
 
-<<<<<<< HEAD
-	function get_sortable_columns() {
-		return array();
-	}
-
-	function get_views() {
-=======
 	protected function get_sortable_columns() {
 		return array();
 	}
 
 	protected function get_views() {
->>>>>>> WPHome/master
 		global $totals, $status;
 
 		$status_links = array();
@@ -395,31 +299,18 @@ class WP_Plugins_List_Table extends WP_List_Table {
 		return $status_links;
 	}
 
-<<<<<<< HEAD
-	function get_bulk_actions() {
-=======
 	protected function get_bulk_actions() {
->>>>>>> WPHome/master
 		global $status;
 
 		$actions = array();
 
 		if ( 'active' != $status )
-<<<<<<< HEAD
-			$actions['activate-selected'] = $this->screen->is_network ? __( 'Network Activate' ) : __( 'Activate' );
-
-		if ( 'inactive' != $status && 'recent' != $status )
-			$actions['deactivate-selected'] = $this->screen->is_network ? __( 'Network Deactivate' ) : __( 'Deactivate' );
-
-		if ( !is_multisite() || $this->screen->is_network ) {
-=======
 			$actions['activate-selected'] = $this->screen->in_admin( 'network' ) ? __( 'Network Activate' ) : __( 'Activate' );
 
 		if ( 'inactive' != $status && 'recent' != $status )
 			$actions['deactivate-selected'] = $this->screen->in_admin( 'network' ) ? __( 'Network Deactivate' ) : __( 'Deactivate' );
 
 		if ( !is_multisite() || $this->screen->in_admin( 'network' ) ) {
->>>>>>> WPHome/master
 			if ( current_user_can( 'update_plugins' ) )
 				$actions['update-selected'] = __( 'Update' );
 			if ( current_user_can( 'delete_plugins' ) && ( 'active' != $status ) )
@@ -429,27 +320,17 @@ class WP_Plugins_List_Table extends WP_List_Table {
 		return $actions;
 	}
 
-<<<<<<< HEAD
-	function bulk_actions() {
-=======
 	/**
 	 * @global string $status
 	 * @param string $which
 	 * @return null
 	 */
 	public function bulk_actions( $which = '' ) {
->>>>>>> WPHome/master
 		global $status;
 
 		if ( in_array( $status, array( 'mustuse', 'dropins' ) ) )
 			return;
 
-<<<<<<< HEAD
-		parent::bulk_actions();
-	}
-
-	function extra_tablenav( $which ) {
-=======
 		parent::bulk_actions( $which );
 	}
 
@@ -459,7 +340,6 @@ class WP_Plugins_List_Table extends WP_List_Table {
 	 * @return null
 	 */
 	protected function extra_tablenav( $which ) {
->>>>>>> WPHome/master
 		global $status;
 
 		if ( ! in_array($status, array('recently_activated', 'mustuse', 'dropins') ) )
@@ -467,11 +347,7 @@ class WP_Plugins_List_Table extends WP_List_Table {
 
 		echo '<div class="alignleft actions">';
 
-<<<<<<< HEAD
-		if ( ! $this->screen->is_network && 'recently_activated' == $status )
-=======
 		if ( ! $this->screen->in_admin( 'network' ) && 'recently_activated' == $status )
->>>>>>> WPHome/master
 			submit_button( __( 'Clear List' ), 'button', 'clear-recent-list', false );
 		elseif ( 'top' == $which && 'mustuse' == $status )
 			echo '<p>' . sprintf( __( 'Files in the <code>%s</code> directory are executed automatically.' ), str_replace( ABSPATH, '/', WPMU_PLUGIN_DIR ) ) . '</p>';
@@ -481,37 +357,23 @@ class WP_Plugins_List_Table extends WP_List_Table {
 		echo '</div>';
 	}
 
-<<<<<<< HEAD
-	function current_action() {
-=======
 	public function current_action() {
->>>>>>> WPHome/master
 		if ( isset($_POST['clear-recent-list']) )
 			return 'clear-recent-list';
 
 		return parent::current_action();
 	}
 
-<<<<<<< HEAD
-	function display_rows() {
-		global $status;
-
-		if ( is_multisite() && ! $this->screen->is_network && in_array( $status, array( 'mustuse', 'dropins' ) ) )
-=======
 	public function display_rows() {
 		global $status;
 
 		if ( is_multisite() && ! $this->screen->in_admin( 'network' ) && in_array( $status, array( 'mustuse', 'dropins' ) ) )
->>>>>>> WPHome/master
 			return;
 
 		foreach ( $this->items as $plugin_file => $plugin_data )
 			$this->single_row( array( $plugin_file, $plugin_data ) );
 	}
 
-<<<<<<< HEAD
-	function single_row( $item ) {
-=======
 	/**
 	 * @global string $status
 	 * @global int $page
@@ -520,25 +382,17 @@ class WP_Plugins_List_Table extends WP_List_Table {
 	 * @param array $item
 	 */
 	public function single_row( $item ) {
->>>>>>> WPHome/master
 		global $status, $page, $s, $totals;
 
 		list( $plugin_file, $plugin_data ) = $item;
 		$context = $status;
 		$screen = $this->screen;
 
-<<<<<<< HEAD
-		// preorder
-		$actions = array(
-			'deactivate' => '',
-			'activate' => '',
-=======
 		// Pre-order.
 		$actions = array(
 			'deactivate' => '',
 			'activate' => '',
 			'details' => '',
->>>>>>> WPHome/master
 			'edit' => '',
 			'delete' => '',
 		);
@@ -553,11 +407,7 @@ class WP_Plugins_List_Table extends WP_List_Table {
 			if ( true === ( $dropins[ $plugin_file ][1] ) ) { // Doesn't require a constant
 				$is_active = true;
 				$description = '<p><strong>' . $dropins[ $plugin_file ][0] . '</strong></p>';
-<<<<<<< HEAD
-			} elseif ( constant( $dropins[ $plugin_file ][1] ) ) { // Constant is true
-=======
 			} elseif ( defined( $dropins[ $plugin_file ][1] ) && constant( $dropins[ $plugin_file ][1] ) ) { // Constant is true
->>>>>>> WPHome/master
 				$is_active = true;
 				$description = '<p><strong>' . $dropins[ $plugin_file ][0] . '</strong></p>';
 			} else {
@@ -567,20 +417,12 @@ class WP_Plugins_List_Table extends WP_List_Table {
 			if ( $plugin_data['Description'] )
 				$description .= '<p>' . $plugin_data['Description'] . '</p>';
 		} else {
-<<<<<<< HEAD
-			if ( $screen->is_network )
-=======
 			if ( $screen->in_admin( 'network' ) )
->>>>>>> WPHome/master
 				$is_active = is_plugin_active_for_network( $plugin_file );
 			else
 				$is_active = is_plugin_active( $plugin_file );
 
-<<<<<<< HEAD
-			if ( $screen->is_network ) {
-=======
 			if ( $screen->in_admin( 'network' ) ) {
->>>>>>> WPHome/master
 				if ( $is_active ) {
 					if ( current_user_can( 'manage_network_plugins' ) )
 						$actions['deactivate'] = '<a href="' . wp_nonce_url('plugins.php?action=deactivate&amp;plugin=' . $plugin_file . '&amp;plugin_status=' . $context . '&amp;paged=' . $page . '&amp;s=' . $s, 'deactivate-plugin_' . $plugin_file) . '" title="' . esc_attr__('Deactivate this plugin') . '">' . __('Network Deactivate') . '</a>';
@@ -599,16 +441,6 @@ class WP_Plugins_List_Table extends WP_List_Table {
 					if ( ! is_multisite() && current_user_can('delete_plugins') )
 						$actions['delete'] = '<a href="' . wp_nonce_url('plugins.php?action=delete-selected&amp;checked[]=' . $plugin_file . '&amp;plugin_status=' . $context . '&amp;paged=' . $page . '&amp;s=' . $s, 'bulk-plugins') . '" title="' . esc_attr__('Delete this plugin') . '" class="delete">' . __('Delete') . '</a>';
 				} // end if $is_active
-<<<<<<< HEAD
-			 } // end if $screen->is_network
-
-			if ( ( ! is_multisite() || $screen->is_network ) && current_user_can('edit_plugins') && is_writable(WP_PLUGIN_DIR . '/' . $plugin_file) )
-				$actions['edit'] = '<a href="plugin-editor.php?file=' . $plugin_file . '" title="' . esc_attr__('Open this file in the Plugin Editor') . '" class="edit">' . __('Edit') . '</a>';
-		} // end if $context
-
-		$prefix = $screen->is_network ? 'network_admin_' : '';
-		$actions = apply_filters( $prefix . 'plugin_action_links', array_filter( $actions ), $plugin_file, $plugin_data, $context );
-=======
 
 			 } // end if $screen->in_admin( 'network' )
 
@@ -664,7 +496,6 @@ class WP_Plugins_List_Table extends WP_List_Table {
 		 *                            'Inactive', 'Recently Activated', 'Upgrade',
 		 *                            'Must-Use', 'Drop-ins', 'Search'.
 		 */
->>>>>>> WPHome/master
 		$actions = apply_filters( $prefix . "plugin_action_links_$plugin_file", $actions, $plugin_file, $plugin_data, $context );
 
 		$class = $is_active ? 'active' : 'inactive';
@@ -684,16 +515,7 @@ class WP_Plugins_List_Table extends WP_List_Table {
 		if ( ! empty( $totals['upgrade'] ) && ! empty( $plugin_data['update'] ) )
 			$class .= ' update';
 
-<<<<<<< HEAD
 		echo "<tr id='$id' class='$class'>";
-=======
-		$plugin_slug = ( isset( $plugin_data['slug'] ) ) ? $plugin_data['slug'] : '';
-		printf( "<tr id='%s' class='%s' data-slug='%s'>",
-			$id,
-			$class,
-			$plugin_slug
-		);
->>>>>>> WPHome/master
 
 		list( $columns, $hidden ) = $this->get_column_info();
 
@@ -722,14 +544,6 @@ class WP_Plugins_List_Table extends WP_List_Table {
 					if ( !empty( $plugin_data['Author'] ) ) {
 						$author = $plugin_data['Author'];
 						if ( !empty( $plugin_data['AuthorURI'] ) )
-<<<<<<< HEAD
-							$author = '<a href="' . $plugin_data['AuthorURI'] . '" title="' . esc_attr__( 'Visit author homepage' ) . '">' . $plugin_data['Author'] . '</a>';
-						$plugin_meta[] = sprintf( __( 'By %s' ), $author );
-					}
-					if ( ! empty( $plugin_data['PluginURI'] ) )
-						$plugin_meta[] = '<a href="' . $plugin_data['PluginURI'] . '" title="' . esc_attr__( 'Visit plugin site' ) . '">' . __( 'Visit plugin site' ) . '</a>';
-
-=======
 							$author = '<a href="' . $plugin_data['AuthorURI'] . '">' . $plugin_data['Author'] . '</a>';
 						$plugin_meta[] = sprintf( __( 'By %s' ), $author );
 					}
@@ -764,7 +578,6 @@ class WP_Plugins_List_Table extends WP_List_Table {
 					 *                            'Inactive', 'Recently Activated', 'Upgrade', 'Must-Use',
 					 *                            'Drop-ins', 'Search'.
 					 */
->>>>>>> WPHome/master
 					$plugin_meta = apply_filters( 'plugin_row_meta', $plugin_meta, $plugin_file, $plugin_data, $status );
 					echo implode( ' | ', $plugin_meta );
 
@@ -772,8 +585,6 @@ class WP_Plugins_List_Table extends WP_List_Table {
 					break;
 				default:
 					echo "<td class='$column_name column-$column_name'$style>";
-<<<<<<< HEAD
-=======
 
 					/**
 					 * Fires inside each custom column of the Plugins list table.
@@ -784,7 +595,6 @@ class WP_Plugins_List_Table extends WP_List_Table {
 					 * @param string $plugin_file Path to the plugin file.
 					 * @param array  $plugin_data An array of plugin data.
 					 */
->>>>>>> WPHome/master
 					do_action( 'manage_plugins_custom_column', $column_name, $plugin_file, $plugin_data );
 					echo "</td>";
 			}
@@ -792,9 +602,6 @@ class WP_Plugins_List_Table extends WP_List_Table {
 
 		echo "</tr>";
 
-<<<<<<< HEAD
-		do_action( 'after_plugin_row', $plugin_file, $plugin_data, $status );
-=======
 		/**
 		 * Fires after each row in the Plugins list table.
 		 *
@@ -822,7 +629,6 @@ class WP_Plugins_List_Table extends WP_List_Table {
 		 *                            'Inactive', 'Recently Activated', 'Upgrade', 'Must-Use',
 		 *                            'Drop-ins', 'Search'.
 		 */
->>>>>>> WPHome/master
 		do_action( "after_plugin_row_$plugin_file", $plugin_file, $plugin_data, $status );
 	}
 }

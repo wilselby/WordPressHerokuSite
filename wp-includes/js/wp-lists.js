@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-=======
 /* global ajaxurl, wpAjax */
->>>>>>> WPHome/master
 (function($) {
 var fs = {add:'ajaxAdd',del:'ajaxDel',dim:'ajaxDim',process:'process',recolor:'recolor'}, wpList;
 
@@ -212,11 +209,7 @@ wpList = {
 					s.delAfter( rres, _s );
 				}).dequeue();
 			}
-<<<<<<< HEAD
-		}
-=======
 		};
->>>>>>> WPHome/master
 
 		$.ajax( s );
 		return false;
@@ -316,15 +309,11 @@ wpList = {
 	},
 
 	add: function( e, s ) {
-<<<<<<< HEAD
-		e = $(e);
-=======
 		if ( 'string' == typeof e ) {
 			e = $( $.trim( e ) ); // Trim leading whitespaces
 		} else {
 			e = $( e );
 		}
->>>>>>> WPHome/master
 
 		var list = $(this), old = false, _s = { pos: 0, id: 0, oldId: null }, ba, ref, color;
 

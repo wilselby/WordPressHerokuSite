@@ -5,11 +5,7 @@
 	cursor: crosshair;
 }
 
-<<<<<<< HEAD
-/* an extra classname is applied for Opera < 9.0 to fix it's lack of opacity support */
-=======
 /* an extra classname is applied for Opera < 9.0 to fix its lack of opacity support */
->>>>>>> WPHome/master
 .imgCrop_wrap.opera8 .imgCrop_overlay,
 .imgCrop_wrap.opera8 .imgCrop_clickArea { 
 	background-color: transparent;

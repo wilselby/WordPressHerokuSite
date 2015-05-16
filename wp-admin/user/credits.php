@@ -8,12 +8,6 @@
  */
 
 /** Load WordPress Administration Bootstrap */
-<<<<<<< HEAD
-require_once( './admin.php' );
-
-require( '../credits.php' );
-=======
 require_once( dirname( __FILE__ ) . '/admin.php' );
 
 require( ABSPATH . 'wp-admin/credits.php' );
->>>>>>> WPHome/master

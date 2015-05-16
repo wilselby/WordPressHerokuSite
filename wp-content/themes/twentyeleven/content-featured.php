@@ -1,10 +1,6 @@
 <?php
 /**
-<<<<<<< HEAD
- * The template for displaying content featured in the showcase.php page template
-=======
  * Template for displaying content featured in the showcase.php page template
->>>>>>> WPHome/master
  *
  * @package WordPress
  * @subpackage Twenty_Eleven
@@ -15,11 +11,7 @@ global $feature_class;
 ?>
 <article id="post-<?php the_ID(); ?>" <?php post_class( $feature_class ); ?>>
 	<header class="entry-header">
-<<<<<<< HEAD
-		<h2 class="entry-title"><a href="<?php the_permalink(); ?>" title="<?php echo esc_attr( sprintf( __( 'Permalink to %s', 'twentyeleven' ), the_title_attribute( 'echo=0' ) ) ); ?>" rel="bookmark"><?php the_title(); ?></a></h2>
-=======
 		<h2 class="entry-title"><a href="<?php the_permalink(); ?>" rel="bookmark"><?php the_title(); ?></a></h2>
->>>>>>> WPHome/master
 
 		<div class="entry-meta">
 			<?php twentyeleven_posted_on(); ?>

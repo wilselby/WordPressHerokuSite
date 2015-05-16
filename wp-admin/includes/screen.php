@@ -20,10 +20,6 @@ function get_column_headers( $screen ) {
 
 	static $column_headers = array();
 
-<<<<<<< HEAD
-	if ( ! isset( $column_headers[ $screen->id ] ) )
-		$column_headers[ $screen->id ] = apply_filters( 'manage_' . $screen->id . '_columns', array() );
-=======
 	if ( ! isset( $column_headers[ $screen->id ] ) ) {
 
 		/**
@@ -40,7 +36,6 @@ function get_column_headers( $screen ) {
 		 */
 		$column_headers[ $screen->id ] = apply_filters( "manage_{$screen->id}_columns", array() );
 	}
->>>>>>> WPHome/master
 
 	return $column_headers[ $screen->id ];
 }
@@ -65,11 +60,7 @@ function get_hidden_columns( $screen ) {
  *
  * @since 2.7.0
  *
-<<<<<<< HEAD
- * @param string|WP_Screen $screen
-=======
  * @param WP_Screen $screen
->>>>>>> WPHome/master
  */
 function meta_box_prefs( $screen ) {
 	global $wp_meta_boxes;
@@ -124,11 +115,6 @@ function get_hidden_meta_boxes( $screen ) {
 			else
 				$hidden = array( 'slugdiv' );
 		}
-<<<<<<< HEAD
-		$hidden = apply_filters( 'default_hidden_meta_boxes', $hidden, $screen );
-	}
-
-=======
 
 		/**
 		 * Filter the default list of hidden meta boxes.
@@ -151,7 +137,6 @@ function get_hidden_meta_boxes( $screen ) {
 	 * @param bool      $use_defaults Whether to show the default meta boxes.
 	 *                                Default true.
 	 */
->>>>>>> WPHome/master
 	return apply_filters( 'hidden_meta_boxes', $hidden, $screen, $use_defaults );
 }
 
@@ -173,55 +158,6 @@ function add_screen_option( $option, $args = array() ) {
 }
 
 /**
-<<<<<<< HEAD
- * Displays a screen icon.
- *
- * @uses get_screen_icon()
- * @since 2.7.0
- *
- * @param string|WP_Screen $screen Optional. Accepts a screen object (and defaults to the current screen object)
- * 	which it uses to determine an icon HTML ID. Or, if a string is provided, it is used to form the icon HTML ID.
- */
-function screen_icon( $screen = '' ) {
-	echo get_screen_icon( $screen );
-}
-
-/**
- * Gets a screen icon.
- *
- * @since 3.2.0
- *
- * @param string|WP_Screen $screen Optional. Accepts a screen object (and defaults to the current screen object)
- * 	which it uses to determine an icon HTML ID. Or, if a string is provided, it is used to form the icon HTML ID.
- * @return string HTML for the screen icon.
- */
-function get_screen_icon( $screen = '' ) {
-	if ( empty( $screen ) )
-		$screen = get_current_screen();
-	elseif ( is_string( $screen ) )
-		$icon_id = $screen;
-
-	$class = 'icon32';
-
-	if ( empty( $icon_id ) ) {
-		if ( ! empty( $screen->parent_base ) )
-			$icon_id = $screen->parent_base;
-		else
-			$icon_id = $screen->base;
-
-		if ( 'page' == $screen->post_type )
-			$icon_id = 'edit-pages';
-
-		if ( $screen->post_type )
-			$class .= ' ' . sanitize_html_class( 'icon32-posts-' . $screen->post_type );
-	}
-
-	return '<div id="icon-' . esc_attr( $icon_id ) . '" class="' . $class . '"><br /></div>';
-}
-
-/**
-=======
->>>>>>> WPHome/master
  * Get the current screen object
  *
  * @since 3.1.0
@@ -241,10 +177,6 @@ function get_current_screen() {
  * Set the current screen object
  *
  * @since 3.0.0
-<<<<<<< HEAD
- * @uses $current_screen
-=======
->>>>>>> WPHome/master
  *
  * @param mixed $hook_name Optional. The hook name (also known as the hook suffix) used to determine the screen,
  *	or an existing screen object.
@@ -373,16 +305,6 @@ final class WP_Screen {
 
 	/**
 	 * The help tab data associated with the screen, if any.
-<<<<<<< HEAD
- 	 *
- 	 * @since 3.3.0
- 	 * @var array
- 	 * @access private
- 	 */
-	private $_help_tabs = array();
-
- 	/**
-=======
 	 *
 	 * @since 3.3.0
 	 * @var array
@@ -391,17 +313,12 @@ final class WP_Screen {
 	private $_help_tabs = array();
 
 	/**
->>>>>>> WPHome/master
 	 * The help sidebar data associated with screen, if any.
 	 *
 	 * @since 3.3.0
 	 * @var string
 	 * @access private
-<<<<<<< HEAD
- 	 */
-=======
 	 */
->>>>>>> WPHome/master
 	private $_help_sidebar = '';
 
 	/**
@@ -445,38 +362,20 @@ final class WP_Screen {
 	 */
 	private $_screen_settings;
 
-<<<<<<< HEAD
- 	/**
-	 * Fetches a screen object.
- 	 *
- 	 * @since 3.3.0
-	 * @access public
- 	 *
-	 * @param string $hook_name Optional. The hook name (also known as the hook suffix) used to determine the screen.
-	 * 	Defaults to the current $hook_suffix global.
-	 * @return WP_Screen Screen object.
- 	 */
-	public static function get( $hook_name = '' ) {
-
-		if ( is_a( $hook_name, 'WP_Screen' ) )
-			return $hook_name;
-=======
 	/**
 	 * Fetches a screen object.
 	 *
 	 * @since 3.3.0
 	 * @access public
 	 *
-	 * @param string|WP_Screen $hook_name Optional. The hook name (also known as the hook suffix) used to determine the screen.
+	 * @param string $hook_name Optional. The hook name (also known as the hook suffix) used to determine the screen.
 	 * 	Defaults to the current $hook_suffix global.
 	 * @return WP_Screen Screen object.
 	 */
 	public static function get( $hook_name = '' ) {
 
-		if ( $hook_name instanceof WP_Screen ) {
+		if ( is_a( $hook_name, 'WP_Screen' ) )
 			return $hook_name;
-		}
->>>>>>> WPHome/master
 
 		$post_type = $taxonomy = null;
 		$in_admin = false;
@@ -514,21 +413,13 @@ final class WP_Screen {
 			if ( 'edit-comments' != $id && 'edit-tags' != $id && 'edit-' == substr( $id, 0, 5 ) ) {
 				$maybe = substr( $id, 5 );
 				if ( taxonomy_exists( $maybe ) ) {
-<<<<<<< HEAD
- 					$id = 'edit-tags';
-=======
 					$id = 'edit-tags';
->>>>>>> WPHome/master
 					$taxonomy = $maybe;
 				} elseif ( post_type_exists( $maybe ) ) {
 					$id = 'edit';
 					$post_type = $maybe;
 				}
-<<<<<<< HEAD
- 			}
-=======
 			}
->>>>>>> WPHome/master
 
 			if ( ! $in_admin )
 				$in_admin = 'site';
@@ -575,11 +466,7 @@ final class WP_Screen {
 						$post_type = 'post';
 					break;
 			}
-<<<<<<< HEAD
- 		}
-=======
 		}
->>>>>>> WPHome/master
 
 		switch ( $base ) {
 			case 'post' :
@@ -612,11 +499,7 @@ final class WP_Screen {
 		} elseif ( 'user' == $in_admin ) {
 			$id   .= '-user';
 			$base .= '-user';
-<<<<<<< HEAD
- 		}
-=======
 		}
->>>>>>> WPHome/master
 
 		if ( isset( self::$_registry[ $id ] ) ) {
 			$screen = self::$_registry[ $id ];
@@ -638,11 +521,7 @@ final class WP_Screen {
 		self::$_registry[ $id ] = $screen;
 
 		return $screen;
-<<<<<<< HEAD
- 	}
-=======
 	}
->>>>>>> WPHome/master
 
 	/**
 	 * Makes the screen object the current screen.
@@ -650,17 +529,11 @@ final class WP_Screen {
 	 * @see set_current_screen()
 	 * @since 3.3.0
 	 */
-<<<<<<< HEAD
-	function set_current_screen() {
-=======
 	public function set_current_screen() {
->>>>>>> WPHome/master
 		global $current_screen, $taxnow, $typenow;
 		$current_screen = $this;
 		$taxnow = $this->taxonomy;
 		$typenow = $this->post_type;
-<<<<<<< HEAD
-=======
 
 		/**
 		 * Fires after the current screen has been set.
@@ -669,7 +542,6 @@ final class WP_Screen {
 		 *
 		 * @param WP_Screen $current_screen Current WP_Screen object.
 		 */
->>>>>>> WPHome/master
 		do_action( 'current_screen', $current_screen );
 	}
 
@@ -708,11 +580,7 @@ final class WP_Screen {
 	 * @param WP_Screen $screen A screen object.
 	 * @param string $help Help text.
 	 */
-<<<<<<< HEAD
-	static function add_old_compat_help( $screen, $help ) {
-=======
 	public static function add_old_compat_help( $screen, $help ) {
->>>>>>> WPHome/master
 		self::$_old_compat_help[ $screen->id ] = $help;
 	}
 
@@ -724,11 +592,7 @@ final class WP_Screen {
 	 *
 	 * @param string $parent_file The parent file of the screen. Typically the $parent_file global.
 	 */
-<<<<<<< HEAD
-	function set_parentage( $parent_file ) {
-=======
 	public function set_parentage( $parent_file ) {
->>>>>>> WPHome/master
 		$this->parent_file = $parent_file;
 		list( $this->parent_base ) = explode( '?', $parent_file );
 		$this->parent_base = str_replace( '.php', '', $this->parent_base );
@@ -748,8 +612,6 @@ final class WP_Screen {
 	}
 
 	/**
-<<<<<<< HEAD
-=======
 	 * Remove an option from the screen.
 	 *
 	 * @since 3.8.0
@@ -781,20 +643,14 @@ final class WP_Screen {
 	}
 
 	/**
->>>>>>> WPHome/master
 	 * Gets the arguments for an option for the screen.
 	 *
 	 * @since 3.3.0
 	 *
-<<<<<<< HEAD
-	 * @param string $option Option ID.
-	 * @param mixed $key Optional. Specific array key for when the option is an array.
-=======
 	 * @param string $option Option name.
 	 * @param string $key    Optional. Specific array key for when the option is an array.
 	 *                       Default false.
 	 * @return string The option value if set, null otherwise.
->>>>>>> WPHome/master
 	 */
 	public function get_option( $option, $key = false ) {
 		if ( ! isset( $this->_options[ $option ] ) )
@@ -933,12 +789,6 @@ final class WP_Screen {
 	 */
 	public function render_screen_meta() {
 
-<<<<<<< HEAD
-		// Call old contextual_help_list filter.
-		self::$_old_compat_help = apply_filters( 'contextual_help_list', self::$_old_compat_help, $this );
-
-		$old_help = isset( self::$_old_compat_help[ $this->id ] ) ? self::$_old_compat_help[ $this->id ] : '';
-=======
 		/**
 		 * Filter the legacy contextual help list.
 		 *
@@ -965,13 +815,10 @@ final class WP_Screen {
 		 * @param WP_Screen $this      Current WP_Screen instance.
 		 *
 		 */
->>>>>>> WPHome/master
 		$old_help = apply_filters( 'contextual_help', $old_help, $this->id, $this );
 
 		// Default help only if there is no old-style block of text and no new-style help tabs.
 		if ( empty( $old_help ) && ! $this->get_help_tabs() ) {
-<<<<<<< HEAD
-=======
 
 			/**
 			 * Filter the default legacy contextual help text.
@@ -982,7 +829,6 @@ final class WP_Screen {
 			 *
 			 * @param string $old_help_default Default contextual help text.
 			 */
->>>>>>> WPHome/master
 			$default_help = apply_filters( 'default_contextual_help', '' );
 			if ( $default_help )
 				$old_help = '<p>' . $default_help . '</p>';
@@ -1063,9 +909,6 @@ final class WP_Screen {
 		<?php
 		// Setup layout columns
 
-<<<<<<< HEAD
-		// Back compat for plugins using the filter instead of add_screen_option()
-=======
 		/**
 		 * Filter the array of screen layout columns.
 		 *
@@ -1078,7 +921,6 @@ final class WP_Screen {
 		 * @param string    $screen_id     Screen ID.
 		 * @param WP_Screen $this          Current WP_Screen instance.
 		 */
->>>>>>> WPHome/master
 		$columns = apply_filters( 'screen_layout_columns', array(), $this->id, $this );
 
 		if ( ! empty( $columns ) && isset( $columns[ $this->id ] ) )
@@ -1126,19 +968,6 @@ final class WP_Screen {
 
 		$show_screen = ! empty( $wp_meta_boxes[ $this->id ] ) || $columns || $this->get_option( 'per_page' );
 
-<<<<<<< HEAD
-		$this->_screen_settings = apply_filters( 'screen_settings', '', $this );
-
-		switch ( $this->id ) {
-			case 'widgets':
-				$this->_screen_settings = '<p><a id="access-on" href="widgets.php?widgets-access=on">' . __('Enable accessibility mode') . '</a><a id="access-off" href="widgets.php?widgets-access=off">' . __('Disable accessibility mode') . "</a></p>\n";
-				break;
-		}
-
-		if ( $this->_screen_settings || $this->_options )
-			$show_screen = true;
-
-=======
 		switch ( $this->base ) {
 			case 'widgets':
 				$this->_screen_settings = '<p><a id="access-on" href="widgets.php?widgets-access=on">' . __('Enable accessibility mode') . '</a><a id="access-off" href="widgets.php?widgets-access=off">' . __('Disable accessibility mode') . "</a></p>\n";
@@ -1179,7 +1008,6 @@ final class WP_Screen {
 		 *                               Default true.
 		 * @param WP_Screen $this        Current WP_Screen instance.
 		 */
->>>>>>> WPHome/master
 		$this->_show_screen_options = apply_filters( 'screen_options_show_screen', $show_screen, $this );
 		return $this->_show_screen_options;
 	}
@@ -1190,22 +1018,14 @@ final class WP_Screen {
 	 * @since 3.3.0
 	 */
 	public function render_screen_options() {
-<<<<<<< HEAD
-		global $wp_meta_boxes, $wp_list_table;
-=======
 		global $wp_meta_boxes;
->>>>>>> WPHome/master
 
 		$columns = get_column_headers( $this );
 		$hidden  = get_hidden_columns( $this );
 
 		?>
 		<div id="screen-options-wrap" class="hidden" tabindex="-1" aria-label="<?php esc_attr_e('Screen Options Tab'); ?>">
-<<<<<<< HEAD
 		<form id="adv-settings" action="" method="post">
-=======
-		<form id="adv-settings" method="post">
->>>>>>> WPHome/master
 		<?php if ( isset( $wp_meta_boxes[ $this->id ] ) || $this->get_option( 'per_page' ) || ( $columns && empty( $columns['_title'] ) ) ) : ?>
 			<h5><?php _e( 'Show on screen' ); ?></h5>
 		<?php
@@ -1276,11 +1096,7 @@ final class WP_Screen {
 	 *
 	 * @since 3.3.0
 	 */
-<<<<<<< HEAD
-	function render_screen_layout() {
-=======
 	public function render_screen_layout() {
->>>>>>> WPHome/master
 		if ( ! $this->get_option('layout_columns') )
 			return;
 
@@ -1309,8 +1125,7 @@ final class WP_Screen {
 	 *
 	 * @since 3.3.0
 	 */
-<<<<<<< HEAD
-	function render_per_page_options() {
+	public function render_per_page_options() {
 		if ( ! $this->get_option( 'per_page' ) )
 			return;
 
@@ -1319,44 +1134,16 @@ final class WP_Screen {
 		$option = $this->get_option( 'per_page', 'option' );
 		if ( ! $option )
 			$option = str_replace( '-', '_', "{$this->id}_per_page" );
-=======
-	public function render_per_page_options() {
-		if ( null === $this->get_option( 'per_page' ) ) {
-			return;
-		}
-
-		$per_page_label = $this->get_option( 'per_page', 'label' );
-		if ( null === $per_page_label ) {
-			$per_page_label = __( 'Number of items per page:' );
-		}
-
-		$option = $this->get_option( 'per_page', 'option' );
-		if ( ! $option ) {
-			$option = str_replace( '-', '_', "{$this->id}_per_page" );
-		}
->>>>>>> WPHome/master
 
 		$per_page = (int) get_user_option( $option );
 		if ( empty( $per_page ) || $per_page < 1 ) {
 			$per_page = $this->get_option( 'per_page', 'default' );
-<<<<<<< HEAD
 			if ( ! $per_page )
 				$per_page = 20;
-=======
-			if ( ! $per_page ) {
-				$per_page = 20;
-			}
->>>>>>> WPHome/master
 		}
 
 		if ( 'edit_comments_per_page' == $option ) {
 			$comment_status = isset( $_REQUEST['comment_status'] ) ? $_REQUEST['comment_status'] : 'all';
-<<<<<<< HEAD
-			$per_page = apply_filters( 'comments_per_page', $per_page, $comment_status );
-		} elseif ( 'categories_per_page' == $option ) {
-			$per_page = apply_filters( 'edit_categories_per_page', $per_page );
-		} else {
-=======
 
 			/** This filter is documented in wp-admin/includes/class-wp-comments-list-table.php */
 			$per_page = apply_filters( 'comments_per_page', $per_page, $comment_status );
@@ -1365,25 +1152,18 @@ final class WP_Screen {
 			$per_page = apply_filters( 'edit_categories_per_page', $per_page );
 		} else {
 			/** This filter is documented in wp-admin/includes/class-wp-list-table.php */
->>>>>>> WPHome/master
 			$per_page = apply_filters( $option, $per_page );
 		}
 
 		// Back compat
-<<<<<<< HEAD
-		if ( isset( $this->post_type ) )
-			$per_page = apply_filters( 'edit_posts_per_page', $per_page, $this->post_type );
-=======
 		if ( isset( $this->post_type ) ) {
 			/** This filter is documented in wp-admin/includes/class-wp-posts-list-table.php */
 			$per_page = apply_filters( 'edit_posts_per_page', $per_page, $this->post_type );
 		}
->>>>>>> WPHome/master
 
 		?>
 		<div class="screen-options">
 			<?php if ( $per_page_label ) : ?>
-<<<<<<< HEAD
 				<input type="number" step="1" min="1" max="999" class="screen-per-page" name="wp_screen_options[value]"
 					id="<?php echo esc_attr( $option ); ?>" maxlength="3"
 					value="<?php echo esc_attr( $per_page ); ?>" />
@@ -1394,16 +1174,6 @@ final class WP_Screen {
 
 			echo get_submit_button( __( 'Apply' ), 'button', 'screen-options-apply', false ); ?>
 			<input type='hidden' name='wp_screen_options[option]' value='<?php echo esc_attr($option); ?>' />
-=======
-				<label for="<?php echo esc_attr( $option ); ?>"><?php echo $per_page_label; ?></label>
-				<input type="number" step="1" min="1" max="999" class="screen-per-page" name="wp_screen_options[value]"
-					id="<?php echo esc_attr( $option ); ?>" maxlength="3"
-					value="<?php echo esc_attr( $per_page ); ?>" />
-			<?php endif;
-
-			echo get_submit_button( __( 'Apply' ), 'button', 'screen-options-apply', false ); ?>
-			<input type="hidden" name="wp_screen_options[option]" value="<?php echo esc_attr( $option ); ?>" />
->>>>>>> WPHome/master
 		</div>
 		<?php
 	}

@@ -11,32 +11,12 @@ if ( !defined('ABSPATH') )
 	die('-1');
 
 if ( empty($tag_ID) ) { ?>
-<<<<<<< HEAD
 	<div id="message" class="updated"><p><strong><?php _e( 'You did not select an item for editing.' ); ?></strong></p></div>
-=======
-	<div id="message" class="updated notice is-dismissible"><p><strong><?php _e( 'You did not select an item for editing.' ); ?></strong></p></div>
->>>>>>> WPHome/master
 <?php
 	return;
 }
 
 // Back compat hooks
-<<<<<<< HEAD
-if ( 'category' == $taxonomy )
-	do_action('edit_category_form_pre', $tag );
-elseif ( 'link_category' == $taxonomy )
-	do_action('edit_link_category_form_pre', $tag );
-else
-	do_action('edit_tag_form_pre', $tag);
-
-do_action($taxonomy . '_pre_edit_form', $tag, $taxonomy); ?>
-
-<div class="wrap">
-<?php screen_icon(); ?>
-<h2><?php echo $tax->labels->edit_item; ?></h2>
-<div id="ajax-response"></div>
-<form name="edittag" id="edittag" method="post" action="edit-tags.php" class="validate">
-=======
 if ( 'category' == $taxonomy ) {
 	/**
  	 * Fires before the Edit Category form.
@@ -96,99 +76,43 @@ do_action( "{$taxonomy}_pre_edit_form", $tag, $taxonomy ); ?>
  */
 do_action( "{$taxonomy}_term_edit_form_tag" );
 ?>>
->>>>>>> WPHome/master
 <input type="hidden" name="action" value="editedtag" />
 <input type="hidden" name="tag_ID" value="<?php echo esc_attr($tag->term_id) ?>" />
 <input type="hidden" name="taxonomy" value="<?php echo esc_attr($taxonomy) ?>" />
 <?php wp_original_referer_field(true, 'previous'); wp_nonce_field('update-tag_' . $tag_ID); ?>
 	<table class="form-table">
-<<<<<<< HEAD
-		<tr class="form-field form-required">
-			<th scope="row" valign="top"><label for="name"><?php _ex('Name', 'Taxonomy Name'); ?></label></th>
-=======
 		<tr class="form-field form-required term-name-wrap">
 			<th scope="row"><label for="name"><?php _ex( 'Name', 'term name' ); ?></label></th>
->>>>>>> WPHome/master
 			<td><input name="name" id="name" type="text" value="<?php if ( isset( $tag->name ) ) echo esc_attr($tag->name); ?>" size="40" aria-required="true" />
 			<p class="description"><?php _e('The name is how it appears on your site.'); ?></p></td>
 		</tr>
 <?php if ( !global_terms_enabled() ) { ?>
-<<<<<<< HEAD
-		<tr class="form-field">
-			<th scope="row" valign="top"><label for="slug"><?php _ex('Slug', 'Taxonomy Slug'); ?></label></th>
-			<td><input name="slug" id="slug" type="text" value="<?php if ( isset( $tag->slug ) ) echo esc_attr(apply_filters('editable_slug', $tag->slug)); ?>" size="40" />
-=======
 		<tr class="form-field term-slug-wrap">
 			<th scope="row"><label for="slug"><?php _e( 'Slug' ); ?></label></th>
 			<?php
 			/**
-			 * Filter the editable slug.
-			 *
-			 * Note: This is a multi-use hook in that it is leveraged both for editable
-			 * post URIs and term slugs.
+			 * Filter the editable term slug.
 			 *
 			 * @since 2.6.0
 			 *
-			 * @param string $slug The editable slug. Will be either a term slug or post URI depending
-			 *                     upon the context in which it is evaluated.
+			 * @param string $slug The current term slug.
 			 */
-			$slug = isset( $tag->slug ) ? apply_filters( 'editable_slug', $tag->slug ) : '';
 			?>
-			<td><input name="slug" id="slug" type="text" value="<?php echo esc_attr( $slug ); ?>" size="40" />
->>>>>>> WPHome/master
+			<td><input name="slug" id="slug" type="text" value="<?php if ( isset( $tag->slug ) ) echo esc_attr( apply_filters( 'editable_slug', $tag->slug ) ); ?>" size="40" />
 			<p class="description"><?php _e('The &#8220;slug&#8221; is the URL-friendly version of the name. It is usually all lowercase and contains only letters, numbers, and hyphens.'); ?></p></td>
 		</tr>
 <?php } ?>
 <?php if ( is_taxonomy_hierarchical($taxonomy) ) : ?>
-<<<<<<< HEAD
-		<tr class="form-field">
-			<th scope="row" valign="top"><label for="parent"><?php _ex('Parent', 'Taxonomy Parent'); ?></label></th>
-			<td>
-				<?php wp_dropdown_categories(array('hide_empty' => 0, 'hide_if_empty' => false, 'name' => 'parent', 'orderby' => 'name', 'taxonomy' => $taxonomy, 'selected' => $tag->parent, 'exclude_tree' => $tag->term_id, 'hierarchical' => true, 'show_option_none' => __('None'))); ?>
-=======
 		<tr class="form-field term-parent-wrap">
 			<th scope="row"><label for="parent"><?php _ex( 'Parent', 'term parent' ); ?></label></th>
 			<td>
-				<?php
-				$dropdown_args = array(
-					'hide_empty'       => 0,
-					'hide_if_empty'    => false,
-					'taxonomy'         => $taxonomy,
-					'name'             => 'parent',
-					'orderby'          => 'name',
-					'selected'         => $tag->parent,
-					'exclude_tree'     => $tag->term_id,
-					'hierarchical'     => true,
-					'show_option_none' => __( 'None' ),
-				);
-
-				/** This filter is documented in wp-admin/edit-tags.php */
-				$dropdown_args = apply_filters( 'taxonomy_parent_dropdown_args', $dropdown_args, $taxonomy, 'edit' );
-				wp_dropdown_categories( $dropdown_args ); ?>
->>>>>>> WPHome/master
+				<?php wp_dropdown_categories(array('hide_empty' => 0, 'hide_if_empty' => false, 'name' => 'parent', 'orderby' => 'name', 'taxonomy' => $taxonomy, 'selected' => $tag->parent, 'exclude_tree' => $tag->term_id, 'hierarchical' => true, 'show_option_none' => __('None'))); ?>
 				<?php if ( 'category' == $taxonomy ) : ?>
 				<p class="description"><?php _e('Categories, unlike tags, can have a hierarchy. You might have a Jazz category, and under that have children categories for Bebop and Big Band. Totally optional.'); ?></p>
 				<?php endif; ?>
 			</td>
 		</tr>
 <?php endif; // is_taxonomy_hierarchical() ?>
-<<<<<<< HEAD
-		<tr class="form-field">
-			<th scope="row" valign="top"><label for="description"><?php _ex('Description', 'Taxonomy Description'); ?></label></th>
-			<td><textarea name="description" id="description" rows="5" cols="50" class="large-text"><?php echo $tag->description; // textarea_escaped ?></textarea><br />
-			<span class="description"><?php _e('The description is not prominent by default; however, some themes may show it.'); ?></span></td>
-		</tr>
-		<?php
-		// Back compat hooks
-		if ( 'category' == $taxonomy )
-			do_action('edit_category_form_fields', $tag);
-		elseif ( 'link_category' == $taxonomy )
-			do_action('edit_link_category_form_fields', $tag);
-		else
-			do_action('edit_tag_form_fields', $tag);
-
-		do_action($taxonomy . '_edit_form_fields', $tag, $taxonomy);
-=======
 		<tr class="form-field term-description-wrap">
 			<th scope="row"><label for="description"><?php _e( 'Description' ); ?></label></th>
 			<td><textarea name="description" id="description" rows="5" cols="50" class="large-text"><?php echo $tag->description; // textarea_escaped ?></textarea>
@@ -239,21 +163,10 @@ do_action( "{$taxonomy}_term_edit_form_tag" );
 		 * @param string $taxonomy Current taxonomy slug.
 		 */
 		do_action( "{$taxonomy}_edit_form_fields", $tag, $taxonomy );
->>>>>>> WPHome/master
 		?>
 	</table>
 <?php
 // Back compat hooks
-<<<<<<< HEAD
-if ( 'category' == $taxonomy )
-	do_action('edit_category_form', $tag);
-elseif ( 'link_category' == $taxonomy )
-	do_action('edit_link_category_form', $tag);
-else
-	do_action('edit_tag_form', $tag);
-
-do_action($taxonomy . '_edit_form', $tag, $taxonomy);
-=======
 if ( 'category' == $taxonomy ) {
 	/** This action is documented in wp-admin/edit-tags.php */
 	do_action( 'edit_category_form', $tag );
@@ -282,21 +195,14 @@ if ( 'category' == $taxonomy ) {
  * @param string $taxonomy Current taxonomy slug.
  */
 do_action( "{$taxonomy}_edit_form", $tag, $taxonomy );
->>>>>>> WPHome/master
 
 submit_button( __('Update') );
 ?>
 </form>
 </div>
-<<<<<<< HEAD
-<script type="text/javascript">
-try{document.forms.edittag.name.focus();}catch(e){}
-</script>
-=======
 
 <?php if ( ! wp_is_mobile() ) : ?>
 <script type="text/javascript">
 try{document.forms.edittag.name.focus();}catch(e){}
 </script>
 <?php endif;
->>>>>>> WPHome/master

@@ -1,10 +1,6 @@
 <?php
 /**
-<<<<<<< HEAD
- * The template used to display Tag Archive pages
-=======
  * Template used to display Tag Archive pages
->>>>>>> WPHome/master
  *
  * @package WordPress
  * @subpackage Twenty_Eleven
@@ -25,10 +21,6 @@ get_header(); ?>
 
 					<?php
 						$tag_description = tag_description();
-<<<<<<< HEAD
-						if ( ! empty( $tag_description ) )
-							echo apply_filters( 'tag_archive_meta', '<div class="tag-archive-meta">' . $tag_description . '</div>' );
-=======
 						if ( ! empty( $tag_description ) ) {
 							/**
 							 * Filter the default Twenty Eleven tag description.
@@ -39,7 +31,6 @@ get_header(); ?>
 							 */
 							echo apply_filters( 'tag_archive_meta', '<div class="tag-archive-meta">' . $tag_description . '</div>' );
 						}
->>>>>>> WPHome/master
 					?>
 				</header>
 
@@ -49,17 +40,11 @@ get_header(); ?>
 				<?php while ( have_posts() ) : the_post(); ?>
 
 					<?php
-<<<<<<< HEAD
-						/* Include the Post-Format-specific template for the content.
-						 * If you want to overload this in a child theme then include a file
-						 * called content-___.php (where ___ is the Post Format name) and that will be used instead.
-=======
 						/*
 						 * Include the Post-Format-specific template for the content.
 						 * If you want to overload this in a child theme then include a file
 						 * called content-___.php (where ___ is the Post Format name) and that
 						 * will be used instead.
->>>>>>> WPHome/master
 						 */
 						get_template_part( 'content', get_post_format() );
 					?>

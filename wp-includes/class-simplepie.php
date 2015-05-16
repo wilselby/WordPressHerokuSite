@@ -26,11 +26,7 @@ function wp_simplepie_autoload( $class ) {
 		return;
 
 	$file = ABSPATH . WPINC . '/' . str_replace( '_', '/', $class ) . '.php';
-<<<<<<< HEAD
-	include $file;
-=======
 	include( $file );
->>>>>>> WPHome/master
 }
 
 if ( function_exists( 'spl_autoload_register' ) ) {
@@ -1616,11 +1612,7 @@ class SimplePie
 	}
 
 	/**
-<<<<<<< HEAD
-	 * Get the error message for the occured error
-=======
 	 * Get the error message for the occurred error.
->>>>>>> WPHome/master
 	 *
 	 * @return string|array Error message, or array of messages for multifeeds
 	 */

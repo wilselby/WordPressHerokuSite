@@ -16,18 +16,10 @@ class WP_Admin_Bar {
 		switch ( $name ) {
 			case 'proto' :
 				return is_ssl() ? 'https://' : 'http://';
-<<<<<<< HEAD
-				break;
-			case 'menu' :
-				_deprecated_argument( 'WP_Admin_Bar', '3.3', 'Modify admin bar nodes with WP_Admin_Bar::get_node(), WP_Admin_Bar::add_node(), and WP_Admin_Bar::remove_node(), not the <code>menu</code> property.' );
-				return array(); // Sorry, folks.
-				break;
-=======
 
 			case 'menu' :
 				_deprecated_argument( 'WP_Admin_Bar', '3.3', 'Modify admin bar nodes with WP_Admin_Bar::get_node(), WP_Admin_Bar::add_node(), and WP_Admin_Bar::remove_node(), not the <code>menu</code> property.' );
 				return array(); // Sorry, folks.
->>>>>>> WPHome/master
 		}
 	}
 
@@ -53,15 +45,11 @@ class WP_Admin_Bar {
 		add_action( 'admin_head', 'wp_admin_bar_header' );
 
 		if ( current_theme_supports( 'admin-bar' ) ) {
-<<<<<<< HEAD
-			$admin_bar_args = get_theme_support( 'admin-bar' ); // add_theme_support( 'admin-bar', array( 'callback' => '__return_false') );
-=======
 			/**
 			 * To remove the default padding styles from WordPress for the Toolbar, use the following code:
 			 * add_theme_support( 'admin-bar', array( 'callback' => '__return_false' ) );
 			 */
 			$admin_bar_args = get_theme_support( 'admin-bar' );
->>>>>>> WPHome/master
 			$header_callback = $admin_bar_args[0]['callback'];
 		}
 
@@ -73,14 +61,11 @@ class WP_Admin_Bar {
 		wp_enqueue_script( 'admin-bar' );
 		wp_enqueue_style( 'admin-bar' );
 
-<<<<<<< HEAD
-=======
 		/**
 		 * Fires after WP_Admin_Bar is initialized.
 		 *
 		 * @since 3.1.0
 		 */
->>>>>>> WPHome/master
 		do_action( 'admin_bar_init' );
 	}
 
@@ -95,15 +80,6 @@ class WP_Admin_Bar {
 	/**
 	 * Add a node to the menu.
 	 *
-<<<<<<< HEAD
-	 * @param array $args - The arguments for each node.
-	 * - id         - string    - The ID of the item.
-	 * - title      - string    - The title of the node.
-	 * - parent     - string    - The ID of the parent node. Optional.
-	 * - href       - string    - The link for the item. Optional.
-	 * - group      - boolean   - If the node is a group. Optional. Default false.
-	 * - meta       - array     - Meta data including the following keys: html, class, onclick, target, title, tabindex.
-=======
 	 * @param array $args {
 	 *     Arguments for adding a node.
 	 *
@@ -115,7 +91,6 @@ class WP_Admin_Bar {
 	 *     @type array  $meta   Meta data including the following keys: 'html', 'class', 'rel',
 	 *                          'onclick', 'target', 'title', 'tabindex'. Default empty.
 	 * }
->>>>>>> WPHome/master
 	 */
 	public function add_node( $args ) {
 		// Shim for old method signature: add_node( $parent_id, $menu_obj, $args )
@@ -215,12 +190,6 @@ class WP_Admin_Bar {
 	 *
 	 * @since 3.3.0
 	 *
-<<<<<<< HEAD
-	 * @param array $args - The arguments for each node.
-	 * - id         - string    - The ID of the item.
-	 * - parent     - string    - The ID of the parent node. Optional. Default root.
-	 * - meta       - array     - Meta data including the following keys: class, onclick, target, title.
-=======
 	 * @param array $args {
 	 *     Array of arguments for adding a group.
 	 *
@@ -229,7 +198,6 @@ class WP_Admin_Bar {
 	 *     @type array  $meta   Meta data for the group including the following keys:
 	 *                         'class', 'onclick', 'target', and 'title'.
 	 * }
->>>>>>> WPHome/master
 	 */
 	final public function add_group( $args ) {
 		$args['group'] = true;
@@ -395,28 +363,16 @@ class WP_Admin_Bar {
 		}
 
 		?>
-<<<<<<< HEAD
 		<div id="wpadminbar" class="<?php echo $class; ?>" role="navigation">
 			<a class="screen-reader-shortcut" href="#wp-toolbar" tabindex="1"><?php _e('Skip to toolbar'); ?></a>
 			<div class="quicklinks" id="wp-toolbar" role="navigation" aria-label="<?php esc_attr_e('Top navigation toolbar.'); ?>" tabindex="0">
-=======
-		<div id="wpadminbar" class="<?php echo $class; ?>">
-			<?php if ( ! is_admin() ) { ?>
-				<a class="screen-reader-shortcut" href="#wp-toolbar" tabindex="1"><?php _e( 'Skip to toolbar' ); ?></a>
-			<?php } ?>
-			<div class="quicklinks" id="wp-toolbar" role="navigation" aria-label="<?php esc_attr_e( 'Toolbar' ); ?>" tabindex="0">
->>>>>>> WPHome/master
 				<?php foreach ( $root->children as $group ) {
 					$this->_render_group( $group );
 				} ?>
 			</div>
-<<<<<<< HEAD
-			<a class="screen-reader-shortcut" href="<?php echo esc_url( wp_logout_url() ); ?>"><?php _e('Log Out'); ?></a>
-=======
 			<?php if ( is_user_logged_in() ) : ?>
 			<a class="screen-reader-shortcut" href="<?php echo esc_url( wp_logout_url() ); ?>"><?php _e('Log Out'); ?></a>
 			<?php endif; ?>
->>>>>>> WPHome/master
 		</div>
 
 		<?php
@@ -489,12 +445,9 @@ class WP_Admin_Bar {
 				if ( ! empty( $node->meta['title'] ) ) :
 					?> title="<?php echo esc_attr( $node->meta['title'] ); ?>"<?php
 				endif;
-<<<<<<< HEAD
-=======
 				if ( ! empty( $node->meta['rel'] ) ) :
 					?> rel="<?php echo esc_attr( $node->meta['rel'] ); ?>"<?php
 				endif;
->>>>>>> WPHome/master
 				?>><?php
 			else:
 				?><div class="ab-item ab-empty-item" <?php echo $aria_attributes;
@@ -539,10 +492,7 @@ class WP_Admin_Bar {
 		add_action( 'admin_bar_menu', 'wp_admin_bar_my_account_item', 7 );
 
 		// Site related.
-<<<<<<< HEAD
-=======
 		add_action( 'admin_bar_menu', 'wp_admin_bar_sidebar_toggle', 0 );
->>>>>>> WPHome/master
 		add_action( 'admin_bar_menu', 'wp_admin_bar_wp_menu', 10 );
 		add_action( 'admin_bar_menu', 'wp_admin_bar_my_sites_menu', 20 );
 		add_action( 'admin_bar_menu', 'wp_admin_bar_site_menu', 30 );
@@ -557,14 +507,11 @@ class WP_Admin_Bar {
 
 		add_action( 'admin_bar_menu', 'wp_admin_bar_add_secondary_groups', 200 );
 
-<<<<<<< HEAD
-=======
 		/**
 		 * Fires after menus are added to the menu bar.
 		 *
 		 * @since 3.1.0
 		 */
->>>>>>> WPHome/master
 		do_action( 'add_admin_bar_menus' );
 	}
 }

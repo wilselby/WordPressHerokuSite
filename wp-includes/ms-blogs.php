@@ -17,9 +17,6 @@ function wpmu_update_blogs_date() {
 	global $wpdb;
 
 	update_blog_details( $wpdb->blogid, array('last_updated' => current_time('mysql', true)) );
-<<<<<<< HEAD
-
-=======
 	/**
 	 * Fires after the blog details are updated.
 	 *
@@ -27,7 +24,6 @@ function wpmu_update_blogs_date() {
 	 *
 	 * @param int $blog_id Blog ID.
 	 */
->>>>>>> WPHome/master
 	do_action( 'wpmu_blog_updated', $wpdb->blogid );
 }
 
@@ -37,19 +33,11 @@ function wpmu_update_blogs_date() {
  * @since MU
  *
  * @param int $blog_id Blog ID
-<<<<<<< HEAD
  * @return string
  */
 function get_blogaddress_by_id( $blog_id ) {
 	$bloginfo = get_blog_details( (int) $blog_id, false ); // only get bare details!
 	return esc_url( 'http://' . $bloginfo->domain . $bloginfo->path );
-=======
- * @return string Full URL of the blog if found. Empty string if not.
- */
-function get_blogaddress_by_id( $blog_id ) {
-	$bloginfo = get_blog_details( (int) $blog_id, false ); // only get bare details!
-	return ( $bloginfo ) ? esc_url( 'http://' . $bloginfo->domain . $bloginfo->path ) : '';
->>>>>>> WPHome/master
 }
 
 /**
@@ -61,21 +49,12 @@ function get_blogaddress_by_id( $blog_id ) {
  * @return string
  */
 function get_blogaddress_by_name( $blogname ) {
-<<<<<<< HEAD
-	global $current_site;
-
-=======
->>>>>>> WPHome/master
 	if ( is_subdomain_install() ) {
 		if ( $blogname == 'main' )
 			$blogname = 'www';
 		$url = rtrim( network_home_url(), '/' );
 		if ( !empty( $blogname ) )
-<<<<<<< HEAD
-			$url = preg_replace( '|^([^\.]+://)|', '$1' . $blogname . '.', $url );
-=======
 			$url = preg_replace( '|^([^\.]+://)|', "\${1}" . $blogname . '.', $url );
->>>>>>> WPHome/master
 	} else {
 		$url = network_home_url( $blogname );
 	}
@@ -83,37 +62,7 @@ function get_blogaddress_by_name( $blogname ) {
 }
 
 /**
-<<<<<<< HEAD
- * Get a full blog URL, given a domain and a path.
- *
- * @since MU
- *
- * @param string $domain
- * @param string $path
- * @return string
- */
-function get_blogaddress_by_domain( $domain, $path ) {
-	if ( is_subdomain_install() ) {
-		$url = "http://" . $domain.$path;
-	} else {
-		if ( $domain != $_SERVER['HTTP_HOST'] ) {
-			$blogname = substr( $domain, 0, strpos( $domain, '.' ) );
-			$url = 'http://' . substr( $domain, strpos( $domain, '.' ) + 1 ) . $path;
-			// we're not installing the main blog
-			if ( $blogname != 'www.' )
-				$url .= $blogname . '/';
-		} else { // main blog
-			$url = 'http://' . $domain . $path;
-		}
-	}
-	return esc_url( $url );
-}
-
-/**
- * Given a blog's (subdomain or directory) slug, retrieve it's id.
-=======
  * Given a blog's (subdomain or directory) slug, retrieve its id.
->>>>>>> WPHome/master
  *
  * @since MU
  *
@@ -121,14 +70,9 @@ function get_blogaddress_by_domain( $domain, $path ) {
  * @return int A blog id
  */
 function get_id_from_blogname( $slug ) {
-<<<<<<< HEAD
-	global $wpdb, $current_site;
-
-=======
 	global $wpdb;
 
 	$current_site = get_current_site();
->>>>>>> WPHome/master
 	$slug = trim( $slug, '/' );
 
 	$blog_id = wp_cache_get( 'get_id_from_blogname_' . $slug, 'blog-details' );
@@ -155,11 +99,7 @@ function get_id_from_blogname( $slug ) {
  *
  * @param int|string|array $fields A blog ID, a blog slug, or an array of fields to query against. Optional. If not specified the current blog ID is used.
  * @param bool $get_all Whether to retrieve all details or only the details in the blogs table. Default is true.
-<<<<<<< HEAD
  * @return object Blog details.
-=======
- * @return object|false Blog details on success. False on failure.
->>>>>>> WPHome/master
  */
 function get_blog_details( $fields = null, $get_all = true ) {
 	global $wpdb;
@@ -273,8 +213,6 @@ function get_blog_details( $fields = null, $get_all = true ) {
 	$details->post_count	= get_option( 'post_count' );
 	restore_current_blog();
 
-<<<<<<< HEAD
-=======
 	/**
 	 * Filter a blog's details.
 	 *
@@ -282,7 +220,6 @@ function get_blog_details( $fields = null, $get_all = true ) {
 	 *
 	 * @param object $details The blog details.
 	 */
->>>>>>> WPHome/master
 	$details = apply_filters( 'blog_details', $details );
 
 	wp_cache_set( $blog_id . $all, $details, 'blog-details' );
@@ -298,16 +235,6 @@ function get_blog_details( $fields = null, $get_all = true ) {
  *
  * @since MU
  *
-<<<<<<< HEAD
- * @param int $blog_id Blog ID
- */
-function refresh_blog_details( $blog_id ) {
-	$blog_id = (int) $blog_id;
-	$details = get_blog_details( $blog_id, false );
-
-	clean_blog_cache( $details );
-
-=======
  * @param int $blog_id Optional. Blog ID. Defaults to current blog.
  */
 function refresh_blog_details( $blog_id = 0 ) {
@@ -337,7 +264,6 @@ function refresh_blog_details( $blog_id = 0 ) {
 	 *
 	 * @param int $blog_id Blog ID.
 	 */
->>>>>>> WPHome/master
 	do_action( 'refresh_blog_details', $blog_id );
 }
 
@@ -370,18 +296,8 @@ function update_blog_details( $blog_id, $details = array() ) {
 
 	$update_details = array();
 	$fields = array( 'site_id', 'domain', 'path', 'registered', 'last_updated', 'public', 'archived', 'mature', 'spam', 'deleted', 'lang_id');
-<<<<<<< HEAD
 	foreach ( array_intersect( array_keys( $details ), $fields ) as $field )
 		$update_details[$field] = $details[$field];
-=======
-	foreach ( array_intersect( array_keys( $details ), $fields ) as $field ) {
-		if ( 'path' === $field ) {
-			$details[ $field ] = trailingslashit( '/' . trim( $details[ $field ], '/' ) );
-		}
-
-		$update_details[ $field ] = $details[ $field ];
-	}
->>>>>>> WPHome/master
 
 	$result = $wpdb->update( $wpdb->blogs, $update_details, array('blog_id' => $blog_id) );
 
@@ -389,42 +305,6 @@ function update_blog_details( $blog_id, $details = array() ) {
 		return false;
 
 	// If spam status changed, issue actions.
-<<<<<<< HEAD
-	if ( $details[ 'spam' ] != $current_details[ 'spam' ] ) {
-		if ( $details[ 'spam' ] == 1 )
-			do_action( 'make_spam_blog', $blog_id );
-		else
-			do_action( 'make_ham_blog', $blog_id );
-	}
-
-	// If mature status changed, issue actions.
-	if ( $details[ 'mature' ] != $current_details[ 'mature' ] ) {
-		if ( $details[ 'mature' ] == 1 )
-			do_action( 'mature_blog', $blog_id );
-		else
-			do_action( 'unmature_blog', $blog_id );
-	}
-
-	// If archived status changed, issue actions.
-	if ( $details[ 'archived' ] != $current_details[ 'archived' ] ) {
-		if ( $details[ 'archived' ] == 1 )
-			do_action( 'archive_blog', $blog_id );
-		else
-			do_action( 'unarchive_blog', $blog_id );
-	}
-
-	// If deleted status changed, issue actions.
-	if ( $details[ 'deleted' ] != $current_details[ 'deleted' ] ) {
-		if ( $details[ 'deleted' ] == 1 )
-			do_action( 'make_delete_blog', $blog_id );
-		else
-			do_action( 'make_undelete_blog', $blog_id );
-	}
-
-	if ( isset( $details[ 'public' ] ) ) {
-		switch_to_blog( $blog_id );
-		update_option( 'blog_public', $details[ 'public' ] );
-=======
 	if ( $details['spam'] != $current_details['spam'] ) {
 		if ( $details['spam'] == 1 ) {
 			/**
@@ -519,7 +399,6 @@ function update_blog_details( $blog_id, $details = array() ) {
 	if ( isset( $details['public'] ) ) {
 		switch_to_blog( $blog_id );
 		update_option( 'blog_public', $details['public'] );
->>>>>>> WPHome/master
 		restore_current_blog();
 	}
 
@@ -578,9 +457,6 @@ function get_blog_option( $id, $option, $default = false ) {
 	$value = get_option( $option, $default );
 	restore_current_blog();
 
-<<<<<<< HEAD
-	return apply_filters( 'blog_option_' . $option, $value, $id );
-=======
 	/**
 	 * Filter a blog option value.
 	 *
@@ -592,7 +468,6 @@ function get_blog_option( $id, $option, $default = false ) {
 	 * @param int     $id    Blog ID.
 	 */
 	return apply_filters( "blog_option_{$option}", $value, $id );
->>>>>>> WPHome/master
 }
 
 /**
@@ -663,11 +538,7 @@ function delete_blog_option( $id, $option ) {
  * @param int $id The blog id
  * @param string $option The option key
  * @param mixed $value The option value
-<<<<<<< HEAD
- * @return bool True on success, false on failrue.
-=======
  * @return bool True on success, false on failure.
->>>>>>> WPHome/master
  */
 function update_blog_option( $id, $option, $value, $deprecated = null ) {
 	$id = (int) $id;
@@ -702,11 +573,7 @@ function update_blog_option( $id, $option, $value, $deprecated = null ) {
  *
  * @param int $new_blog The id of the blog you want to switch to. Default: current blog
  * @param bool $deprecated Deprecated argument
-<<<<<<< HEAD
- * @return bool True on success, false if the validation failed
-=======
  * @return bool Always returns True.
->>>>>>> WPHome/master
  */
 function switch_to_blog( $new_blog, $deprecated = null ) {
 	global $wpdb, $wp_roles;
@@ -716,12 +583,6 @@ function switch_to_blog( $new_blog, $deprecated = null ) {
 
 	$GLOBALS['_wp_switched_stack'][] = $GLOBALS['blog_id'];
 
-<<<<<<< HEAD
-	/* If we're switching to the same blog id that we're on,
-	* set the right vars, do the associated actions, but skip
-	* the extra unnecessary work */
-	if ( $new_blog == $GLOBALS['blog_id'] ) {
-=======
 	/*
 	 * If we're switching to the same blog id that we're on,
 	 * set the right vars, do the associated actions, but skip
@@ -736,18 +597,13 @@ function switch_to_blog( $new_blog, $deprecated = null ) {
 		 * @param int $new_blog New blog ID.
 		 * @param int $new_blog Blog ID.
 		 */
->>>>>>> WPHome/master
 		do_action( 'switch_blog', $new_blog, $new_blog );
 		$GLOBALS['switched'] = true;
 		return true;
 	}
 
 	$wpdb->set_blog_id( $new_blog );
-<<<<<<< HEAD
-	$GLOBALS['table_prefix'] = $wpdb->prefix;
-=======
 	$GLOBALS['table_prefix'] = $wpdb->get_blog_prefix();
->>>>>>> WPHome/master
 	$prev_blog_id = $GLOBALS['blog_id'];
 	$GLOBALS['blog_id'] = $new_blog;
 
@@ -764,18 +620,10 @@ function switch_to_blog( $new_blog, $deprecated = null ) {
 		wp_cache_init();
 
 		if ( function_exists( 'wp_cache_add_global_groups' ) ) {
-<<<<<<< HEAD
 			if ( is_array( $global_groups ) )
 				wp_cache_add_global_groups( $global_groups );
 			else
 				wp_cache_add_global_groups( array( 'users', 'userlogins', 'usermeta', 'user_meta', 'site-transient', 'site-options', 'site-lookup', 'blog-lookup', 'blog-details', 'rss', 'global-posts', ' blog-id-cache' ) );
-=======
-			if ( is_array( $global_groups ) ) {
-				wp_cache_add_global_groups( $global_groups );
-			} else {
-				wp_cache_add_global_groups( array( 'users', 'userlogins', 'usermeta', 'user_meta', 'useremail', 'userslugs', 'site-transient', 'site-options', 'site-lookup', 'blog-lookup', 'blog-details', 'rss', 'global-posts', 'blog-id-cache' ) );
-			}
->>>>>>> WPHome/master
 			wp_cache_add_non_persistent_groups( array( 'comment', 'counts', 'plugins' ) );
 		}
 	}
@@ -786,10 +634,7 @@ function switch_to_blog( $new_blog, $deprecated = null ) {
 		$current_user->for_blog( $new_blog );
 	}
 
-<<<<<<< HEAD
-=======
 	/** This filter is documented in wp-includes/ms-blogs.php */
->>>>>>> WPHome/master
 	do_action( 'switch_blog', $new_blog, $prev_blog_id );
 	$GLOBALS['switched'] = true;
 
@@ -813,10 +658,7 @@ function restore_current_blog() {
 	$blog = array_pop( $GLOBALS['_wp_switched_stack'] );
 
 	if ( $GLOBALS['blog_id'] == $blog ) {
-<<<<<<< HEAD
-=======
 		/** This filter is documented in wp-includes/ms-blogs.php */
->>>>>>> WPHome/master
 		do_action( 'switch_blog', $blog, $blog );
 		// If we still have items in the switched stack, consider ourselves still 'switched'
 		$GLOBALS['switched'] = ! empty( $GLOBALS['_wp_switched_stack'] );
@@ -826,11 +668,7 @@ function restore_current_blog() {
 	$wpdb->set_blog_id( $blog );
 	$prev_blog_id = $GLOBALS['blog_id'];
 	$GLOBALS['blog_id'] = $blog;
-<<<<<<< HEAD
-	$GLOBALS['table_prefix'] = $wpdb->prefix;
-=======
 	$GLOBALS['table_prefix'] = $wpdb->get_blog_prefix();
->>>>>>> WPHome/master
 
 	if ( function_exists( 'wp_cache_switch_to_blog' ) ) {
 		wp_cache_switch_to_blog( $blog );
@@ -845,18 +683,10 @@ function restore_current_blog() {
 		wp_cache_init();
 
 		if ( function_exists( 'wp_cache_add_global_groups' ) ) {
-<<<<<<< HEAD
 			if ( is_array( $global_groups ) )
 				wp_cache_add_global_groups( $global_groups );
 			else
 				wp_cache_add_global_groups( array( 'users', 'userlogins', 'usermeta', 'user_meta', 'site-transient', 'site-options', 'site-lookup', 'blog-lookup', 'blog-details', 'rss', 'global-posts', ' blog-id-cache' ) );
-=======
-			if ( is_array( $global_groups ) ) {
-				wp_cache_add_global_groups( $global_groups );
-			} else {
-				wp_cache_add_global_groups( array( 'users', 'userlogins', 'usermeta', 'user_meta', 'useremail', 'userslugs', 'site-transient', 'site-options', 'site-lookup', 'blog-lookup', 'blog-details', 'rss', 'global-posts', 'blog-id-cache' ) );
-			}
->>>>>>> WPHome/master
 			wp_cache_add_non_persistent_groups( array( 'comment', 'counts', 'plugins' ) );
 		}
 	}
@@ -867,10 +697,7 @@ function restore_current_blog() {
 		$current_user->for_blog( $blog );
 	}
 
-<<<<<<< HEAD
-=======
 	/** This filter is documented in wp-includes/ms-blogs.php */
->>>>>>> WPHome/master
 	do_action( 'switch_blog', $blog, $prev_blog_id );
 
 	// If we still have items in the switched stack, consider ourselves still 'switched'
@@ -942,16 +769,6 @@ function update_blog_status( $blog_id, $pref, $value, $deprecated = null ) {
 
 	refresh_blog_details( $blog_id );
 
-<<<<<<< HEAD
-	if ( 'spam' == $pref )
-		( $value == 1 ) ? do_action( 'make_spam_blog', $blog_id ) :	do_action( 'make_ham_blog', $blog_id );
-	elseif ( 'mature' == $pref )
-		( $value == 1 ) ? do_action( 'mature_blog', $blog_id ) : do_action( 'unmature_blog', $blog_id );
-	elseif ( 'archived' == $pref )
-		( $value == 1 ) ? do_action( 'archive_blog', $blog_id ) : do_action( 'unarchive_blog', $blog_id );
-	elseif ( 'deleted' == $pref )
-		( $value == 1 ) ? do_action( 'make_delete_blog', $blog_id ) : do_action( 'make_undelete_blog', $blog_id );
-=======
 	if ( 'spam' == $pref ) {
 		if ( $value == 1 ) {
 			/** This filter is documented in wp-includes/ms-blogs.php */
@@ -995,7 +812,6 @@ function update_blog_status( $blog_id, $pref, $value, $deprecated = null ) {
  		 */
 		do_action( 'update_blog_public', $blog_id, $value ); // Moved here from update_blog_public().
 	}
->>>>>>> WPHome/master
 
 	return $value;
 }
@@ -1049,13 +865,6 @@ function get_last_updated( $deprecated = '', $start = 0, $quantity = 40 ) {
  */
 function _update_blog_date_on_post_publish( $new_status, $old_status, $post ) {
 	$post_type_obj = get_post_type_object( $post->post_type );
-<<<<<<< HEAD
-	if ( ! $post_type_obj->public )
-		return;
-
-	if ( 'publish' != $new_status && 'publish' != $old_status )
-		return;
-=======
 	if ( ! $post_type_obj || ! $post_type_obj->public ) {
 		return;
 	}
@@ -1063,7 +872,6 @@ function _update_blog_date_on_post_publish( $new_status, $old_status, $post ) {
 	if ( 'publish' != $new_status && 'publish' != $old_status ) {
 		return;
 	}
->>>>>>> WPHome/master
 
 	// Post was freshly published, published post was saved, or published post was unpublished.
 
@@ -1081,13 +889,6 @@ function _update_blog_date_on_post_delete( $post_id ) {
 	$post = get_post( $post_id );
 
 	$post_type_obj = get_post_type_object( $post->post_type );
-<<<<<<< HEAD
-	if ( ! $post_type_obj->public )
-		return;
-
-	if ( 'publish' != $post->post_status )
-		return;
-=======
 	if ( ! $post_type_obj || ! $post_type_obj->public ) {
 		return;
 	}
@@ -1095,13 +896,10 @@ function _update_blog_date_on_post_delete( $post_id ) {
 	if ( 'publish' != $post->post_status ) {
 		return;
 	}
->>>>>>> WPHome/master
 
 	wpmu_update_blogs_date();
 }
 
-<<<<<<< HEAD
-=======
 /**
  * Handler for updating the blog posts count date when a post is deleted.
  *
@@ -1139,4 +937,3 @@ function _update_posts_count_on_transition_post_status( $new_status, $old_status
 	update_posts_count();
 }
 
->>>>>>> WPHome/master

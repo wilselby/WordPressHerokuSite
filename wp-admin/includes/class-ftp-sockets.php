@@ -3,21 +3,13 @@
  * PemFTP - A Ftp implementation in pure PHP
  *
  * @package PemFTP
-<<<<<<< HEAD
- * @since 2.5
-=======
  * @since 2.5.0
->>>>>>> WPHome/master
  *
  * @version 1.0
  * @copyright Alexey Dotsenko
  * @author Alexey Dotsenko
  * @link http://www.phpclasses.org/browse/package/1743.html Site
-<<<<<<< HEAD
- * @license LGPL License http://www.opensource.org/licenses/lgpl-license.html
-=======
  * @license LGPL http://www.opensource.org/licenses/lgpl-license.html
->>>>>>> WPHome/master
  */
 
 /**
@@ -25,21 +17,13 @@
  *
  * @package PemFTP
  * @subpackage Socket
-<<<<<<< HEAD
- * @since 2.5
-=======
  * @since 2.5.0
->>>>>>> WPHome/master
  *
  * @version 1.0
  * @copyright Alexey Dotsenko
  * @author Alexey Dotsenko
  * @link http://www.phpclasses.org/browse/package/1743.html Site
-<<<<<<< HEAD
- * @license LGPL License http://www.opensource.org/licenses/lgpl-license.html
-=======
  * @license LGPL http://www.opensource.org/licenses/lgpl-license.html
->>>>>>> WPHome/master
  */
 class ftp extends ftp_base {
 

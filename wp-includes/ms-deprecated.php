@@ -14,8 +14,6 @@
  */
 
 /**
-<<<<<<< HEAD
-=======
  * Get the "dashboard blog", the blog where users without a blog edit their profile data.
  * Dashboard blog functionality was removed in WordPress 3.1, replaced by the user admin.
  *
@@ -33,7 +31,6 @@ function get_dashboard_blog() {
 }
 
 /**
->>>>>>> WPHome/master
  * @since MU
  * @deprecated 3.0.0
  * @deprecated Use wp_generate_password()
@@ -89,11 +86,7 @@ function graceful_fail( $message ) {
 	$message = apply_filters( 'graceful_fail', $message );
 	$message_template = apply_filters( 'graceful_fail_template',
 '<!DOCTYPE html>
-<<<<<<< HEAD
-<html xmlns="http://www.w3.org/1999/xhtml"><head profile="http://gmpg.org/xfn/11">
-=======
 <html xmlns="http://www.w3.org/1999/xhtml"><head>
->>>>>>> WPHome/master
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>Error!</title>
 <style type="text/css">
@@ -168,24 +161,15 @@ function validate_email( $email, $check_domain = true) {
  * @deprecated No alternative available. For performance reasons this function is not recommended.
  */
 function get_blog_list( $start = 0, $num = 10, $deprecated = '' ) {
-<<<<<<< HEAD
-	_deprecated_function( __FUNCTION__, '3.0' );
-=======
 	_deprecated_function( __FUNCTION__, '3.0', 'wp_get_sites()' );
->>>>>>> WPHome/master
 
 	global $wpdb;
 	$blogs = $wpdb->get_results( $wpdb->prepare("SELECT blog_id, domain, path FROM $wpdb->blogs WHERE site_id = %d AND public = '1' AND archived = '0' AND mature = '0' AND spam = '0' AND deleted = '0' ORDER BY registered DESC", $wpdb->siteid), ARRAY_A );
 
-<<<<<<< HEAD
-=======
-	$blog_list = array();
->>>>>>> WPHome/master
 	foreach ( (array) $blogs as $details ) {
 		$blog_list[ $details['blog_id'] ] = $details;
 		$blog_list[ $details['blog_id'] ]['postcount'] = $wpdb->get_var( "SELECT COUNT(ID) FROM " . $wpdb->get_blog_prefix( $details['blog_id'] ). "posts WHERE post_status='publish' AND post_type='post'" );
 	}
-<<<<<<< HEAD
 	unset( $blogs );
 	$blogs = $blog_list;
 
@@ -196,18 +180,6 @@ function get_blog_list( $start = 0, $num = 10, $deprecated = '' ) {
 		return array_slice( $blogs, $start, count( $blogs ) );
 	else
 		return array_slice( $blogs, $start, $num );
-=======
-
-	if ( ! $blog_list ) {
-		return array();
-	}
-
-	if ( $num == 'all' ) {
-		return array_slice( $blog_list, $start, count( $blog_list ) );
-	} else {
-		return array_slice( $blog_list, $start, $num );
-	}
->>>>>>> WPHome/master
 }
 
 /**
@@ -221,27 +193,15 @@ function get_most_active_blogs( $num = 10, $display = true ) {
 	$blogs = get_blog_list( 0, 'all', false ); // $blog_id -> $details
 	if ( is_array( $blogs ) ) {
 		reset( $blogs );
-<<<<<<< HEAD
-=======
-		$most_active = array();
-		$blog_list = array();
->>>>>>> WPHome/master
 		foreach ( (array) $blogs as $key => $details ) {
 			$most_active[ $details['blog_id'] ] = $details['postcount'];
 			$blog_list[ $details['blog_id'] ] = $details; // array_slice() removes keys!!
 		}
 		arsort( $most_active );
 		reset( $most_active );
-<<<<<<< HEAD
 		foreach ( (array) $most_active as $key => $details )
 			$t[ $key ] = $blog_list[ $key ];
 
-=======
-		$t = array();
-		foreach ( (array) $most_active as $key => $details ) {
-			$t[ $key ] = $blog_list[ $key ];
-		}
->>>>>>> WPHome/master
 		unset( $most_active );
 		$most_active = $t;
 	}
@@ -272,10 +232,6 @@ function get_most_active_blogs( $num = 10, $display = true ) {
  * @since MU
  * @deprecated 3.3.0
  * @deprecated Use wp_redirect()
-<<<<<<< HEAD
- * @uses wpmu_admin_redirect_add_updated_param()
-=======
->>>>>>> WPHome/master
  *
  * @param string $url
  */
@@ -330,8 +286,6 @@ function wpmu_admin_redirect_add_updated_param( $url = '' ) {
 	}
 	return $url;
 }
-<<<<<<< HEAD
-=======
 
 /**
  * Get a numeric user ID from either an email address or a login.
@@ -389,4 +343,3 @@ function get_blogaddress_by_domain( $domain, $path ) {
 	}
 	return esc_url_raw( $url );
 }
->>>>>>> WPHome/master

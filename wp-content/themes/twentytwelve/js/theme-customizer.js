@@ -1,13 +1,7 @@
 /**
-<<<<<<< HEAD
- * Theme Customizer enhancements for a better user experience.
- *
- * Contains handlers to make Theme Customizer preview reload changes asynchronously.
-=======
  * Customizer enhancements for a better user experience.
  *
  * Contains handlers to make Customizer preview reload changes asynchronously.
->>>>>>> WPHome/master
  * Things like site title, description, and background color changes.
  */
 
@@ -15,33 +9,11 @@
 	// Site title and description.
 	wp.customize( 'blogname', function( value ) {
 		value.bind( function( to ) {
-<<<<<<< HEAD
-			$( '.site-title a' ).html( to );
-=======
 			$( '.site-title a' ).text( to );
->>>>>>> WPHome/master
 		} );
 	} );
 	wp.customize( 'blogdescription', function( value ) {
 		value.bind( function( to ) {
-<<<<<<< HEAD
-			$( '.site-description' ).html( to );
-		} );
-	} );
-
-	// Hook into background color change and adjust body class value as needed.
-	wp.customize( 'background_color', function( value ) {
-		value.bind( function( to ) {
-			if ( '#ffffff' == to || '#fff' == to )
-				$( 'body' ).addClass( 'custom-background-white' );
-			else if ( '' == to )
-				$( 'body' ).addClass( 'custom-background-empty' );
-			else
-				$( 'body' ).removeClass( 'custom-background-empty custom-background-white' );
-		} );
-	} );
-} )( jQuery );
-=======
 			$( '.site-description' ).text( to );
 		} );
 	} );
@@ -91,4 +63,3 @@
 		} );
 	} );
 } )( jQuery );
->>>>>>> WPHome/master

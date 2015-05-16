@@ -37,13 +37,6 @@ final class WP_Theme implements ArrayAccess {
 	 * @var array
 	 */
 	private static $default_themes = array(
-<<<<<<< HEAD
-		'classic'      => 'WordPress Classic',
-		'default'      => 'WordPress Default',
-		'twentyten'    => 'Twenty Ten',
-		'twentyeleven' => 'Twenty Eleven',
-		'twentytwelve' => 'Twenty Twelve',
-=======
 		'classic'        => 'WordPress Classic',
 		'default'        => 'WordPress Default',
 		'twentyten'      => 'Twenty Ten',
@@ -60,7 +53,6 @@ final class WP_Theme implements ArrayAccess {
 	private static $tag_map = array(
 		'fixed-width'    => 'fixed-layout',
 		'flexible-width' => 'fluid-layout',
->>>>>>> WPHome/master
 	);
 
 	/**
@@ -105,11 +97,7 @@ final class WP_Theme implements ArrayAccess {
 	/**
 	 * The directory name of the theme's files, inside the theme root.
 	 *
-<<<<<<< HEAD
-	 * In the case of a child theme, this is directory name of the the child theme.
-=======
 	 * In the case of a child theme, this is directory name of the child theme.
->>>>>>> WPHome/master
 	 * Otherwise, 'stylesheet' is the same as 'template'.
 	 *
 	 * @access private
@@ -192,10 +180,7 @@ final class WP_Theme implements ArrayAccess {
 
 		// Initialize caching on first run.
 		if ( ! isset( self::$persistently_cache ) ) {
-<<<<<<< HEAD
-=======
 			/** This action is documented in wp-includes/theme.php */
->>>>>>> WPHome/master
 			self::$persistently_cache = apply_filters( 'wp_cache_themes_persistently', false, 'WP_Theme' );
 			if ( self::$persistently_cache ) {
 				wp_cache_add_global_groups( 'themes' );
@@ -232,11 +217,7 @@ final class WP_Theme implements ArrayAccess {
 		} elseif ( ! file_exists( $this->theme_root . '/' . $theme_file ) ) {
 			$this->headers['Name'] = $this->stylesheet;
 			if ( ! file_exists( $this->theme_root . '/' . $this->stylesheet ) )
-<<<<<<< HEAD
-				$this->errors = new WP_Error( 'theme_not_found', __( 'The theme directory does not exist.' ) );
-=======
 				$this->errors = new WP_Error( 'theme_not_found', sprintf( __( 'The theme directory "%s" does not exist.' ), $this->stylesheet ) );
->>>>>>> WPHome/master
 			else
 				$this->errors = new WP_Error( 'theme_no_stylesheet', __( 'Stylesheet is missing.' ) );
 			$this->template = $this->stylesheet;
@@ -293,11 +274,7 @@ final class WP_Theme implements ArrayAccess {
 		// Set the parent, if we're a child theme.
 		if ( $this->template != $this->stylesheet ) {
 			// If we are a parent, then there is a problem. Only two generations allowed! Cancel things out.
-<<<<<<< HEAD
 			if ( is_a( $_child, 'WP_Theme' ) && $_child->template == $this->stylesheet ) {
-=======
-			if ( $_child instanceof WP_Theme && $_child->template == $this->stylesheet ) {
->>>>>>> WPHome/master
 				$_child->parent = null;
 				$_child->errors = new WP_Error( 'theme_parent_invalid', sprintf( __( 'The "%s" theme is not a valid parent theme.' ), $_child->template ) );
 				$_child->cache_add( 'theme', array( 'headers' => $_child->headers, 'errors' => $_child->errors, 'stylesheet' => $_child->stylesheet, 'template' => $_child->template ) );
@@ -559,11 +536,7 @@ final class WP_Theme implements ArrayAccess {
 	 * @since 3.4.0
 	 *
 	 * @param string $header Theme header. Name, Description, Author, Version, ThemeURI, AuthorURI, Status, Tags.
-<<<<<<< HEAD
-	 * @return string String on success, false on failure.
-=======
 	 * @return string|bool String on success, false on failure.
->>>>>>> WPHome/master
 	 */
 	public function get( $header ) {
 		if ( ! isset( $this->headers[ $header ] ) )
@@ -599,12 +572,6 @@ final class WP_Theme implements ArrayAccess {
 	 * @param string $header Theme header. Name, Description, Author, Version, ThemeURI, AuthorURI, Status, Tags.
 	 * @param bool $markup Optional. Whether to mark up the header. Defaults to true.
 	 * @param bool $translate Optional. Whether to translate the header. Defaults to true.
-<<<<<<< HEAD
-	 * @return string Processed header, false on failure.
-	 */
-	public function display( $header, $markup = true, $translate = true ) {
-		$value = $this->get( $header );
-=======
 	 * @return string|bool Processed header, false on failure.
 	 */
 	public function display( $header, $markup = true, $translate = true ) {
@@ -612,7 +579,6 @@ final class WP_Theme implements ArrayAccess {
 		if ( false === $value ) {
 			return false;
 		}
->>>>>>> WPHome/master
 
 		if ( $translate && ( empty( $value ) || ! $this->load_textdomain() ) )
 			$translate = false;
@@ -670,12 +636,6 @@ final class WP_Theme implements ArrayAccess {
 			case 'Tags' :
 				$value = array_filter( array_map( 'trim', explode( ',', strip_tags( $value ) ) ) );
 				break;
-<<<<<<< HEAD
-=======
-			case 'Version' :
-				$value = strip_tags( $value );
-				break;
->>>>>>> WPHome/master
 		}
 
 		return $value;
@@ -703,14 +663,7 @@ final class WP_Theme implements ArrayAccess {
 				break;
 			case 'Author' :
 				if ( $this->get('AuthorURI') ) {
-<<<<<<< HEAD
-					static $attr = null;
-					if ( ! isset( $attr ) )
-						$attr = esc_attr__( 'Visit author homepage' );
-					$value = sprintf( '<a href="%1$s" title="%2$s">%3$s</a>', $this->display( 'AuthorURI', true, $translate ), $attr, $value );
-=======
 					$value = sprintf( '<a href="%1$s">%2$s</a>', $this->display( 'AuthorURI', true, $translate ), $value );
->>>>>>> WPHome/master
 				} elseif ( ! $value ) {
 					$value = __( 'Anonymous' );
 				}
@@ -763,14 +716,6 @@ final class WP_Theme implements ArrayAccess {
 				}
 
 				foreach ( $value as &$tag ) {
-<<<<<<< HEAD
-					if ( isset( $tags_list[ $tag ] ) )
-						$tag = $tags_list[ $tag ];
-				}
-
-				return $value;
-				break;
-=======
 					if ( isset( $tags_list[ $tag ] ) ) {
 						$tag = $tags_list[ $tag ];
 					} elseif ( isset( self::$tag_map[ $tag ] ) ) {
@@ -780,7 +725,6 @@ final class WP_Theme implements ArrayAccess {
 
 				return $value;
 
->>>>>>> WPHome/master
 			default :
 				$value = translate( $value, $this->get('TextDomain') );
 		}
@@ -790,11 +734,7 @@ final class WP_Theme implements ArrayAccess {
 	/**
 	 * The directory name of the theme's "stylesheet" files, inside the theme root.
 	 *
-<<<<<<< HEAD
-	 * In the case of a child theme, this is directory name of the the child theme.
-=======
 	 * In the case of a child theme, this is directory name of the child theme.
->>>>>>> WPHome/master
 	 * Otherwise, get_stylesheet() is the same as get_template().
 	 *
 	 * @since 3.4.0
@@ -915,11 +855,6 @@ final class WP_Theme implements ArrayAccess {
 	 * for all other URLs returned by WP_Theme, so we pass it to the public function
 	 * get_theme_root_uri() and allow it to run the theme_root_uri filter.
 	 *
-<<<<<<< HEAD
-	 * @uses get_theme_root_uri()
-	 *
-=======
->>>>>>> WPHome/master
 	 * @since 3.4.0
 	 * @access public
 	 *
@@ -995,16 +930,10 @@ final class WP_Theme implements ArrayAccess {
 	 * @since 3.4.0
 	 * @access public
 	 *
-<<<<<<< HEAD
-	 * @return array Array of page templates, keyed by filename, with the value of the translated header name.
-	 */
-	public function get_page_templates() {
-=======
 	 * @param WP_Post|null $post Optional. The post being edited, provided for context.
 	 * @return array Array of page templates, keyed by filename, with the value of the translated header name.
 	 */
 	public function get_page_templates( $post = null ) {
->>>>>>> WPHome/master
 		// If you screw up your current theme and we invalidate your parent, most things still work. Let it slide.
 		if ( $this->errors() && $this->errors()->get_error_codes() !== array( 'theme_parent_invalid' ) )
 			return array();
@@ -1032,11 +961,6 @@ final class WP_Theme implements ArrayAccess {
 		}
 
 		if ( $this->parent() )
-<<<<<<< HEAD
-			$page_templates += $this->parent()->get_page_templates();
-
-		return $page_templates;
-=======
 			$page_templates += $this->parent()->get_page_templates( $post );
 
 		/**
@@ -1054,14 +978,12 @@ final class WP_Theme implements ArrayAccess {
 		$return = apply_filters( 'theme_page_templates', $page_templates, $this, $post );
 
 		return array_intersect_assoc( $return, $page_templates );
->>>>>>> WPHome/master
 	}
 
 	/**
 	 * Scans a directory for files of a certain extension.
 	 *
 	 * @since 3.4.0
-<<<<<<< HEAD
 	 * @access private
 	 *
 	 * @param string $path Absolute path to search.
@@ -1069,21 +991,6 @@ final class WP_Theme implements ArrayAccess {
 	 * @param int $depth How deep to search for files. Optional, defaults to a flat scan (0 depth). -1 depth is infinite.
 	 * @param string $relative_path The basename of the absolute path. Used to control the returned path
 	 * 	for the found files, particularly when this function recurses to lower depths.
-=======
-	 * @static
-	 * @access private
-	 *
-	 * @param string            $path          Absolute path to search.
-	 * @param array|string|null $extensions    Optional. Array of extensions to find, string of a single extension,
-	 *                                         or null for all extensions. Default null.
-	 * @param int               $depth         Optional. How many levels deep to search for files. Accepts 0, 1+, or
-	 *                                         -1 (infinite depth). Default 0.
-	 * @param string            $relative_path Optional. The basename of the absolute path. Used to control the
-	 *                                         returned path for the found files, particularly when this function
-	 *                                         recurses to lower depths. Default empty.
-	 * @return array|false Array of files, keyed by the path to the file relative to the `$path` directory prepended
-	 *                     with `$relative_path`, with the values being absolute paths. False otherwise.
->>>>>>> WPHome/master
 	 */
 	private static function scandir( $path, $extensions = null, $depth = 0, $relative_path = '' ) {
 		if ( ! is_dir( $path ) )
@@ -1126,13 +1033,8 @@ final class WP_Theme implements ArrayAccess {
 	 * @since 3.4.0
 	 * @access public
 	 *
-<<<<<<< HEAD
-	 * @return True if the textdomain was successfully loaded or has already been loaded. False if
+	 * @return bool If the textdomain was successfully loaded or has already been loaded. False if
 	 * 	no textdomain was specified in the file headers, or if the domain could not be loaded.
-=======
-	 * @return bool True if the textdomain was successfully loaded or has already been loaded.
-	 * 	False if no textdomain was specified in the file headers, or if the domain could not be loaded.
->>>>>>> WPHome/master
 	 */
 	public function load_textdomain() {
 		if ( isset( $this->textdomain_loaded ) )
@@ -1199,8 +1101,6 @@ final class WP_Theme implements ArrayAccess {
 	 * @return array Array of stylesheet names.
 	 */
 	public static function get_allowed( $blog_id = null ) {
-<<<<<<< HEAD
-=======
 		/**
 		 * Filter the array of themes allowed on the site or network.
 		 *
@@ -1208,7 +1108,6 @@ final class WP_Theme implements ArrayAccess {
 		 *
 		 * @param array $allowed_themes An array of theme stylesheet names.
 		 */
->>>>>>> WPHome/master
 		$network = (array) apply_filters( 'allowed_themes', self::get_allowed_on_network() );
 		return $network + self::get_allowed_on_site( $blog_id );
 	}

@@ -13,45 +13,26 @@ if ( !defined('ABSPATH') )
 <form name="post" action="comment.php" method="post" id="post">
 <?php wp_nonce_field('update-comment_' . $comment->comment_ID) ?>
 <div class="wrap">
-<<<<<<< HEAD
-<?php screen_icon(); ?>
 <h2><?php _e('Edit Comment'); ?></h2>
 
 <div id="poststuff">
 <input type="hidden" name="user_ID" value="<?php echo (int) $user_ID; ?>" />
-=======
-<h2><?php _e('Edit Comment'); ?></h2>
-
-<div id="poststuff">
->>>>>>> WPHome/master
 <input type="hidden" name="action" value="editedcomment" />
 <input type="hidden" name="comment_ID" value="<?php echo esc_attr( $comment->comment_ID ); ?>" />
 <input type="hidden" name="comment_post_ID" value="<?php echo esc_attr( $comment->comment_post_ID ); ?>" />
 
 <div id="post-body" class="metabox-holder columns-2">
-<<<<<<< HEAD
-<div id="post-body-content">
-=======
 <div id="post-body-content" class="edit-form-section">
->>>>>>> WPHome/master
 <div id="namediv" class="stuffbox">
 <h3><label for="name"><?php _e( 'Author' ) ?></label></h3>
 <div class="inside">
 <table class="form-table editcomment">
 <tbody>
-<<<<<<< HEAD
-<tr valign="top">
-	<td class="first"><?php _e( 'Name:' ); ?></td>
-	<td><input type="text" name="newcomment_author" size="30" value="<?php echo esc_attr( $comment->comment_author ); ?>" id="name" /></td>
-</tr>
-<tr valign="top">
-=======
 <tr>
 	<td class="first"><?php _e( 'Name:' ); ?></td>
 	<td><input type="text" name="newcomment_author" size="30" value="<?php echo esc_attr( $comment->comment_author ); ?>" id="name" /></td>
 </tr>
 <tr>
->>>>>>> WPHome/master
 	<td class="first">
 	<?php
 		if ( $comment->comment_author_email ) {
@@ -62,22 +43,13 @@ if ( !defined('ABSPATH') )
 ?></td>
 	<td><input type="text" name="newcomment_author_email" size="30" value="<?php echo $comment->comment_author_email; ?>" id="email" /></td>
 </tr>
-<<<<<<< HEAD
-<tr valign="top">
-=======
 <tr>
->>>>>>> WPHome/master
 	<td class="first">
 	<?php
 		if ( ! empty( $comment->comment_author_url ) && 'http://' != $comment->comment_author_url ) {
 			$link = '<a href="' . $comment->comment_author_url . '" rel="external nofollow" target="_blank">' . __('visit site') . '</a>';
-<<<<<<< HEAD
-			printf( __( 'URL (%s):' ), apply_filters('get_comment_author_link', $link ) );
-=======
-			$author = get_comment_author( $comment->comment_ID );
 			/** This filter is documented in wp-includes/comment-template.php */
-			printf( __( 'URL (%s):' ), apply_filters( 'get_comment_author_link', $link, $author, $comment->comment_ID ) );
->>>>>>> WPHome/master
+			printf( __( 'URL (%s):' ), apply_filters( 'get_comment_author_link', $link ) );
 		} else {
 			_e( 'URL:' );
 		} ?></td>
@@ -91,11 +63,7 @@ if ( !defined('ABSPATH') )
 
 <div id="postdiv" class="postarea">
 <?php
-<<<<<<< HEAD
-	$quicktags_settings = array( 'buttons' => 'strong,em,link,block,del,ins,img,ul,ol,li,code,spell,close' );
-=======
 	$quicktags_settings = array( 'buttons' => 'strong,em,link,block,del,ins,img,ul,ol,li,code,close' );
->>>>>>> WPHome/master
 	wp_editor( $comment->comment_content, 'content', array( 'media_buttons' => false, 'tinymce' => false, 'quicktags' => $quicktags_settings ) );
 	wp_nonce_field( 'closedpostboxes', 'closedpostboxesnonce', false ); ?>
 </div>
@@ -103,11 +71,7 @@ if ( !defined('ABSPATH') )
 
 <div id="postbox-container-1" class="postbox-container">
 <div id="submitdiv" class="stuffbox" >
-<<<<<<< HEAD
-<h3><span class='hndle'><?php _e('Status') ?></span></h3>
-=======
 <h3><span class="hndle"><?php _e('Status') ?></span></h3>
->>>>>>> WPHome/master
 <div class="inside">
 <div class="submitbox" id="submitcomment">
 <div id="minor-publishing">
@@ -121,22 +85,12 @@ if ( !defined('ABSPATH') )
 
 <div id="misc-publishing-actions">
 
-<<<<<<< HEAD
-<div class="misc-pub-section" id="comment-status-radio">
-=======
 <div class="misc-pub-section misc-pub-comment-status" id="comment-status-radio">
->>>>>>> WPHome/master
 <label class="approved"><input type="radio"<?php checked( $comment->comment_approved, '1' ); ?> name="comment_status" value="1" /><?php /* translators: comment type radio button */ _ex('Approved', 'adjective') ?></label><br />
 <label class="waiting"><input type="radio"<?php checked( $comment->comment_approved, '0' ); ?> name="comment_status" value="0" /><?php /* translators: comment type radio button */ _ex('Pending', 'adjective') ?></label><br />
 <label class="spam"><input type="radio"<?php checked( $comment->comment_approved, 'spam' ); ?> name="comment_status" value="spam" /><?php /* translators: comment type radio button */ _ex('Spam', 'adjective'); ?></label>
 </div>
 
-<<<<<<< HEAD
-<div class="misc-pub-section curtime">
-<?php
-// translators: Publish box date format, see http://php.net/date
-$datef = __( 'M j, Y @ G:i' );
-=======
 <?php if ( $ip = get_comment_author_IP() ) : ?>
 <div class="misc-pub-section misc-pub-comment-author-ip">
 	<?php _e( 'IP address:' ); ?> <strong><a href="<?php echo esc_url( sprintf( 'http://whois.arin.net/rest/ip/%s', $ip ) ); ?>"><?php echo esc_html( $ip ); ?></a></strong>
@@ -146,43 +100,13 @@ $datef = __( 'M j, Y @ G:i' );
 <div class="misc-pub-section curtime misc-pub-curtime">
 <?php
 /* translators: Publish box date format, see http://php.net/date */
-$datef = __( 'M j, Y @ H:i' );
->>>>>>> WPHome/master
+$datef = __( 'M j, Y @ G:i' );
 $stamp = __('Submitted on: <b>%1$s</b>');
 $date = date_i18n( $datef, strtotime( $comment->comment_date ) );
 ?>
 <span id="timestamp"><?php printf($stamp, $date); ?></span>&nbsp;<a href="#edit_timestamp" class="edit-timestamp hide-if-no-js"><?php _e('Edit') ?></a>
 <div id='timestampdiv' class='hide-if-js'><?php touch_time(('editcomment' == $action), 0); ?></div>
 </div>
-<<<<<<< HEAD
-=======
-
-<?php
-$post_id = $comment->comment_post_ID;
-if ( current_user_can( 'edit_post', $post_id ) ) {
-	$post_link = "<a href='" . esc_url( get_edit_post_link( $post_id ) ) . "'>";
-	$post_link .= esc_html( get_the_title( $post_id ) ) . '</a>';
-} else {
-	$post_link = esc_html( get_the_title( $post_id ) );
-}
-?>
-
-<div class="misc-pub-section misc-pub-response-to">
-	<?php printf( __( 'In response to: <b>%s</b>' ), $post_link ); ?>
-</div>
-
-<?php
-if ( $comment->comment_parent ) :
-	$parent      = get_comment( $comment->comment_parent );
-	$parent_link = esc_url( get_comment_link( $comment->comment_parent ) );
-	$name        = get_comment_author( $parent->comment_ID );
-?>
-<div class="misc-pub-section misc-pub-reply-to">
-	<?php printf( __( 'In reply to: <b><a href="%1$s">%2$s</a></b>' ), $parent_link, $name ); ?>
-</div>
-<?php endif; ?>
-
->>>>>>> WPHome/master
 </div> <!-- misc actions -->
 <div class="clear"></div>
 </div>
@@ -203,14 +127,6 @@ if ( $comment->comment_parent ) :
 
 <div id="postbox-container-2" class="postbox-container">
 <?php
-<<<<<<< HEAD
-
-do_action('add_meta_boxes', 'comment', $comment);
-do_action('add_meta_boxes_comment', $comment);
-
-do_meta_boxes(null, 'normal', $comment);
-
-=======
 /** This action is documented in wp-admin/edit-form-advanced.php */
 do_action( 'add_meta_boxes', 'comment', $comment );
 
@@ -225,18 +141,12 @@ do_action( 'add_meta_boxes_comment', $comment );
 
 do_meta_boxes(null, 'normal', $comment);
 
-$referer = wp_get_referer();
->>>>>>> WPHome/master
 ?>
 </div>
 
 <input type="hidden" name="c" value="<?php echo esc_attr($comment->comment_ID) ?>" />
 <input type="hidden" name="p" value="<?php echo esc_attr($comment->comment_post_ID) ?>" />
-<<<<<<< HEAD
-<input name="referredby" type="hidden" id="referredby" value="<?php echo esc_url(stripslashes(wp_get_referer())); ?>" />
-=======
-<input name="referredby" type="hidden" id="referredby" value="<?php echo $referer ? esc_url( $referer ) : ''; ?>" />
->>>>>>> WPHome/master
+<input name="referredby" type="hidden" id="referredby" value="<?php echo esc_url( wp_get_referer() ); ?>" />
 <?php wp_original_referer_field(true, 'previous'); ?>
 <input type="hidden" name="noredir" value="1" />
 
@@ -245,14 +155,8 @@ $referer = wp_get_referer();
 </div>
 </form>
 
-<<<<<<< HEAD
-<script type="text/javascript">
-try{document.post.name.focus();}catch(e){}
-</script>
-=======
 <?php if ( ! wp_is_mobile() ) : ?>
 <script type="text/javascript">
 try{document.post.name.focus();}catch(e){}
 </script>
 <?php endif;
->>>>>>> WPHome/master

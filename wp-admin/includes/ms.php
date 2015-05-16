@@ -35,32 +35,15 @@ function check_upload_size( $file ) {
 	if ( upload_is_user_over_quota( false ) ) {
 		$file['error'] = __( 'You have used your space quota. Please delete files before uploading.' );
 	}
-<<<<<<< HEAD
-	if ( $file['error'] != '0' && !isset($_POST['html-upload']) )
-		wp_die( $file['error'] . ' <a href="javascript:history.go(-1)">' . __( 'Back' ) . '</a>' );
-=======
 	if ( $file['error'] != '0' && ! isset( $_POST['html-upload'] ) && ( ! defined( 'DOING_AJAX' ) || ! DOING_AJAX ) ) {
 		wp_die( $file['error'] . ' <a href="javascript:history.go(-1)">' . __( 'Back' ) . '</a>' );
 	}
->>>>>>> WPHome/master
 
 	return $file;
 }
 add_filter( 'wp_handle_upload_prefilter', 'check_upload_size' );
 
 /**
-<<<<<<< HEAD
- * Delete a blog
- *
- * @since 3.0.0
- *
- * @param int $blog_id Blog ID
- * @param bool $drop True if blog's table should be dropped. Default is false.
- * @return void
- */
-function wpmu_delete_blog( $blog_id, $drop = false ) {
-	global $wpdb, $current_site;
-=======
  * Delete a blog.
  *
  * @since 3.0.0
@@ -70,7 +53,6 @@ function wpmu_delete_blog( $blog_id, $drop = false ) {
  */
 function wpmu_delete_blog( $blog_id, $drop = false ) {
 	global $wpdb;
->>>>>>> WPHome/master
 
 	$switch = false;
 	if ( get_current_blog_id() != $blog_id ) {
@@ -79,9 +61,6 @@ function wpmu_delete_blog( $blog_id, $drop = false ) {
 	}
 
 	$blog = get_blog_details( $blog_id );
-<<<<<<< HEAD
-
-=======
 	/**
 	 * Fires before a blog is deleted.
 	 *
@@ -90,7 +69,6 @@ function wpmu_delete_blog( $blog_id, $drop = false ) {
 	 * @param int  $blog_id The blog ID.
 	 * @param bool $drop    True if blog's table should be dropped. Default is false.
 	 */
->>>>>>> WPHome/master
 	do_action( 'delete_blog', $blog_id, $drop );
 
 	$users = get_users( array( 'blog_id' => $blog_id, 'fields' => 'ids' ) );
@@ -104,14 +82,6 @@ function wpmu_delete_blog( $blog_id, $drop = false ) {
 
 	update_blog_status( $blog_id, 'deleted', 1 );
 
-<<<<<<< HEAD
-	// Don't destroy the initial, main, or root blog.
-	if ( $drop && ( 1 == $blog_id || is_main_site( $blog_id ) || ( $blog->path == $current_site->path && $blog->domain == $current_site->domain ) ) )
-		$drop = false;
-
-	if ( $drop ) {
-		$drop_tables = apply_filters( 'wpmu_drop_tables', $wpdb->tables( 'blog' ) );
-=======
 	$current_site = get_current_site();
 
 	// If a full blog object is not available, do not destroy anything.
@@ -144,7 +114,6 @@ function wpmu_delete_blog( $blog_id, $drop = false ) {
 		 * @param int   $blog_id The ID of the blog to drop tables for.
 		 */
 		$drop_tables = apply_filters( 'wpmu_drop_tables', $tables, $blog_id );
->>>>>>> WPHome/master
 
 		foreach ( (array) $drop_tables as $table ) {
 			$wpdb->query( "DROP TABLE IF EXISTS `$table`" );
@@ -152,9 +121,6 @@ function wpmu_delete_blog( $blog_id, $drop = false ) {
 
 		$wpdb->delete( $wpdb->blogs, array( 'blog_id' => $blog_id ) );
 
-<<<<<<< HEAD
-		$uploads = wp_upload_dir();
-=======
 		/**
 		 * Filter the upload base directory to delete when the blog is deleted.
 		 *
@@ -163,7 +129,6 @@ function wpmu_delete_blog( $blog_id, $drop = false ) {
 		 * @param string $uploads['basedir'] Uploads path without subdirectory. @see wp_upload_dir()
 		 * @param int    $blog_id            The blog ID.
 		 */
->>>>>>> WPHome/master
 		$dir = apply_filters( 'wpmu_delete_blog_upload_dir', $uploads['basedir'], $blog_id );
 		$dir = rtrim( $dir, DIRECTORY_SEPARATOR );
 		$top_dir = $dir;
@@ -171,11 +136,7 @@ function wpmu_delete_blog( $blog_id, $drop = false ) {
 		$index = 0;
 
 		while ( $index < count( $stack ) ) {
-<<<<<<< HEAD
 			# Get indexed directory from stack
-=======
-			// Get indexed directory from stack
->>>>>>> WPHome/master
 			$dir = $stack[$index];
 
 			$dh = @opendir( $dir );
@@ -184,18 +145,10 @@ function wpmu_delete_blog( $blog_id, $drop = false ) {
 					if ( $file == '.' || $file == '..' )
 						continue;
 
-<<<<<<< HEAD
 					if ( @is_dir( $dir . DIRECTORY_SEPARATOR . $file ) )
 						$stack[] = $dir . DIRECTORY_SEPARATOR . $file;
 					else if ( @is_file( $dir . DIRECTORY_SEPARATOR . $file ) )
 						@unlink( $dir . DIRECTORY_SEPARATOR . $file );
-=======
-					if ( @is_dir( $dir . DIRECTORY_SEPARATOR . $file ) ) {
-						$stack[] = $dir . DIRECTORY_SEPARATOR . $file;
-					} elseif ( @is_file( $dir . DIRECTORY_SEPARATOR . $file ) ) {
-						@unlink( $dir . DIRECTORY_SEPARATOR . $file );
-					}
->>>>>>> WPHome/master
 				}
 				@closedir( $dh );
 			}
@@ -215,9 +168,6 @@ function wpmu_delete_blog( $blog_id, $drop = false ) {
 		restore_current_blog();
 }
 
-<<<<<<< HEAD
-// @todo Merge with wp_delete_user() ?
-=======
 /**
  * Delete a user from the network and remove from all sites.
  *
@@ -228,15 +178,12 @@ function wpmu_delete_blog( $blog_id, $drop = false ) {
  * @param int $id The user ID.
  * @return bool True if the user was deleted, otherwise false.
  */
->>>>>>> WPHome/master
 function wpmu_delete_user( $id ) {
 	global $wpdb;
 
 	$id = (int) $id;
 	$user = new WP_User( $id );
 
-<<<<<<< HEAD
-=======
 	if ( !$user->exists() )
 		return false;
 	/**
@@ -246,7 +193,6 @@ function wpmu_delete_user( $id ) {
 	 *
 	 * @param int $id ID of the user about to be deleted from the network.
 	 */
->>>>>>> WPHome/master
 	do_action( 'wpmu_delete_user', $id );
 
 	$blogs = get_blogs_of_user( $id );
@@ -281,20 +227,12 @@ function wpmu_delete_user( $id ) {
 
 	clean_user_cache( $user );
 
-<<<<<<< HEAD
-	// allow for commit transaction
-=======
 	/** This action is documented in wp-admin/includes/user.php */
->>>>>>> WPHome/master
 	do_action( 'deleted_user', $id );
 
 	return true;
 }
 
-<<<<<<< HEAD
-function update_option_new_admin_email( $old_value, $value ) {
-	$email = get_option( 'admin_email' );
-=======
 /**
  * Sends an email when a site administrator email address is changed.
  *
@@ -304,7 +242,6 @@ function update_option_new_admin_email( $old_value, $value ) {
  * @param string $value     The new email address.
  */
 function update_option_new_admin_email( $old_value, $value ) {
->>>>>>> WPHome/master
 	if ( $value == get_option( 'admin_email' ) || !is_email( $value ) )
 		return;
 
@@ -315,19 +252,10 @@ function update_option_new_admin_email( $old_value, $value ) {
 	);
 	update_option( 'adminhash', $new_admin_email );
 
-<<<<<<< HEAD
-	$content = apply_filters( 'new_admin_email_content', __( "Dear user,
+	$email_text = __( 'Dear user,
 
 You recently requested to have the administration email address on
 your site changed.
-=======
-	/* translators: Do not translate USERNAME, ADMIN_URL, EMAIL, SITENAME, SITEURL: those are placeholders. */
-	$email_text = __( 'Howdy ###USERNAME###,
-
-You recently requested to have the administration email address on
-your site changed.
-
->>>>>>> WPHome/master
 If this is correct, please click on the following link to change it:
 ###ADMIN_URL###
 
@@ -338,18 +266,13 @@ This email has been sent to ###EMAIL###
 
 Regards,
 All at ###SITENAME###
-<<<<<<< HEAD
-###SITEURL### "), $new_admin_email );
-
-=======
 ###SITEURL###' );
 
 	/**
 	 * Filter the email text sent when the site admin email is changed.
 	 *
 	 * The following strings have a special meaning and will get replaced dynamically:
-	 * ###USERNAME###  The current user's username.
-	 * ###ADMIN_URL### The link to click on to confirm the email change.
+	 * ###ADMIN_URL### The link to click on to confirm the email change. Required otherwise this functunalty is will break.
 	 * ###EMAIL###     The new email.
 	 * ###SITENAME###  The name of the site.
 	 * ###SITEURL###   The URL to the site.
@@ -361,24 +284,16 @@ All at ###SITENAME###
 	 */
 	$content = apply_filters( 'new_admin_email_content', $email_text, $new_admin_email );
 
-	$content = str_replace( '###USERNAME###', $current_user->user_login, $content );
->>>>>>> WPHome/master
 	$content = str_replace( '###ADMIN_URL###', esc_url( admin_url( 'options.php?adminhash='.$hash ) ), $content );
 	$content = str_replace( '###EMAIL###', $value, $content );
 	$content = str_replace( '###SITENAME###', get_site_option( 'site_name' ), $content );
 	$content = str_replace( '###SITEURL###', network_home_url(), $content );
 
-<<<<<<< HEAD
-	wp_mail( $value, sprintf( __( '[%s] New Admin Email Address' ), get_option( 'blogname' ) ), $content );
-=======
 	wp_mail( $value, sprintf( __( '[%s] New Admin Email Address' ), wp_specialchars_decode( get_option( 'blogname' ) ) ), $content );
->>>>>>> WPHome/master
 }
 add_action( 'update_option_new_admin_email', 'update_option_new_admin_email', 10, 2 );
 add_action( 'add_option_new_admin_email', 'update_option_new_admin_email', 10, 2 );
 
-<<<<<<< HEAD
-=======
 /**
  * Sends an email when an email address change is requested.
  *
@@ -387,7 +302,6 @@ add_action( 'add_option_new_admin_email', 'update_option_new_admin_email', 10, 2
  * @global object $errors WP_Error object.
  * @global object $wpdb   WordPress database object.
  */
->>>>>>> WPHome/master
 function send_confirmation_on_profile_email() {
 	global $errors, $wpdb;
 	$current_user = wp_get_current_user();
@@ -416,17 +330,9 @@ function send_confirmation_on_profile_email() {
 				);
 		update_option( $current_user->ID . '_new_email', $new_user_email );
 
-<<<<<<< HEAD
-		$content = apply_filters( 'new_user_email_content', __( "Dear user,
+		$email_text = __( 'Dear user,
 
 You recently requested to have the email address on your account changed.
-=======
-		/* translators: Do not translate USERNAME, ADMIN_URL, EMAIL, SITENAME, SITEURL: those are placeholders. */
-		$email_text = __( 'Howdy ###USERNAME###,
-
-You recently requested to have the email address on your account changed.
-
->>>>>>> WPHome/master
 If this is correct, please click on the following link to change it:
 ###ADMIN_URL###
 
@@ -437,21 +343,16 @@ This email has been sent to ###EMAIL###
 
 Regards,
 All at ###SITENAME###
-<<<<<<< HEAD
-###SITEURL###" ), $new_user_email );
-
-=======
 ###SITEURL###' );
 
 		/**
 		 * Filter the email text sent when a user changes emails.
 		 *
 		 * The following strings have a special meaning and will get replaced dynamically:
-		 * ###USERNAME###  The current user's username.
-		 * ###ADMIN_URL### The link to click on to confirm the email change.
-		 * ###EMAIL###     The new email.
-		 * ###SITENAME###  The name of the site.
-		 * ###SITEURL###   The URL to the site.
+		 * ###ADMIN_URL### The link to click on to confirm the email change. Required otherwise this functunalty is will break.
+		 * ###EMAIL### The new email.
+		 * ###SITENAME### The name of the site.
+		 * ###SITEURL### The URL to the site.
 		 *
 		 * @since MU
 		 *
@@ -460,32 +361,23 @@ All at ###SITENAME###
 		 */
 		$content = apply_filters( 'new_user_email_content', $email_text, $new_user_email );
 
-		$content = str_replace( '###USERNAME###', $current_user->user_login, $content );
->>>>>>> WPHome/master
 		$content = str_replace( '###ADMIN_URL###', esc_url( admin_url( 'profile.php?newuseremail='.$hash ) ), $content );
 		$content = str_replace( '###EMAIL###', $_POST['email'], $content);
 		$content = str_replace( '###SITENAME###', get_site_option( 'site_name' ), $content );
 		$content = str_replace( '###SITEURL###', network_home_url(), $content );
 
-<<<<<<< HEAD
-		wp_mail( $_POST['email'], sprintf( __( '[%s] New Email Address' ), get_option( 'blogname' ) ), $content );
-=======
 		wp_mail( $_POST['email'], sprintf( __( '[%s] New Email Address' ), wp_specialchars_decode( get_option( 'blogname' ) ) ), $content );
->>>>>>> WPHome/master
 		$_POST['email'] = $current_user->user_email;
 	}
 }
 add_action( 'personal_options_update', 'send_confirmation_on_profile_email' );
 
-<<<<<<< HEAD
-=======
 /**
  * Adds an admin notice alerting the user to check for confirmation email
  * after email address change.
  *
  * @since 3.0.0
  */
->>>>>>> WPHome/master
 function new_user_email_admin_notice() {
 	if ( strpos( $_SERVER['PHP_SELF'], 'profile.php' ) && isset( $_GET['updated'] ) && $email = get_option( get_current_user_id() . '_new_email' ) )
 		echo "<div class='update-nag'>" . sprintf( __( "Your email address has not been updated yet. Please check your inbox at %s for a confirmation email." ), $email['newemail'] ) . "</div>";
@@ -498,11 +390,7 @@ add_action( 'admin_notices', 'new_user_email_admin_notice' );
  * @since MU
  *
  * @param bool $echo Optional. If $echo is set and the quota is exceeded, a warning message is echoed. Default is true.
-<<<<<<< HEAD
- * @return int
-=======
  * @return bool True if user is over upload space quota, otherwise false.
->>>>>>> WPHome/master
  */
 function upload_is_user_over_quota( $echo = true ) {
 	if ( get_site_option( 'upload_space_check_disabled' ) )
@@ -552,12 +440,6 @@ function display_space_usage() {
  * Get the remaining upload space for this blog.
  *
  * @since MU
-<<<<<<< HEAD
- * @uses upload_is_user_over_quota()
- * @uses get_space_allowed()
- * @uses get_upload_space_available()
-=======
->>>>>>> WPHome/master
  *
  * @param int $size Current max size in bytes
  * @return int Max size in bytes
@@ -570,9 +452,6 @@ function fix_import_form_size( $size ) {
 	return min( $size, $available );
 }
 
-<<<<<<< HEAD
-// Edit blog upload space setting on Edit Blog page
-=======
 /**
  * Displays the edit blog upload space setting form on the Edit Blog screen.
  *
@@ -580,7 +459,6 @@ function fix_import_form_size( $size ) {
  *
  * @param int $id The ID of the blog to display the setting for.
  */
->>>>>>> WPHome/master
 function upload_space_setting( $id ) {
 	switch_to_blog( $id );
 	$quota = get_option( 'blog_upload_space' );
@@ -591,23 +469,13 @@ function upload_space_setting( $id ) {
 
 	?>
 	<tr>
-<<<<<<< HEAD
 		<th><?php _e( 'Site Upload Space Quota '); ?></th>
 		<td><input type="number" step="1" min="0" style="width: 100px" name="option[blog_upload_space]" value="<?php echo $quota; ?>" /> <?php _e( 'MB (Leave blank for network default)' ); ?></td>
-=======
-		<th><label for="blog-upload-space-number"><?php _e( 'Site Upload Space Quota' ); ?></label></th>
-		<td>
-			<input type="number" step="1" min="0" style="width: 100px" name="option[blog_upload_space]" id="blog-upload-space-number" aria-describedby="blog-upload-space-desc" value="<?php echo $quota; ?>" />
-			<span id="blog-upload-space-desc"><span class="screen-reader-text"><?php _e( 'Size in megabytes' ); ?></span> <?php _e( 'MB (Leave blank for network default)' ); ?></span>
-		</td>
->>>>>>> WPHome/master
 	</tr>
 	<?php
 }
 add_action( 'wpmueditblogaction', 'upload_space_setting' );
 
-<<<<<<< HEAD
-=======
 /**
  * Update the status of a user in the database.
  *
@@ -622,29 +490,18 @@ add_action( 'wpmueditblogaction', 'upload_space_setting' );
  * @param null   $deprecated Deprecated as of 3.0.2 and should not be used.
  * @return int   The initially passed $value.
  */
->>>>>>> WPHome/master
 function update_user_status( $id, $pref, $value, $deprecated = null ) {
 	global $wpdb;
 
 	if ( null !== $deprecated )
 		_deprecated_argument( __FUNCTION__, '3.1' );
 
-<<<<<<< HEAD
-	$wpdb->update( $wpdb->users, array( $pref => $value ), array( 'ID' => $id ) );
-=======
 	$wpdb->update( $wpdb->users, array( sanitize_key( $pref ) => $value ), array( 'ID' => $id ) );
->>>>>>> WPHome/master
 
 	$user = new WP_User( $id );
 	clean_user_cache( $user );
 
 	if ( $pref == 'spam' ) {
-<<<<<<< HEAD
-		if ( $value == 1 )
-			do_action( 'make_spam_user', $id );
-		else
-			do_action( 'make_ham_user', $id );
-=======
 		if ( $value == 1 ) {
 			/**
 			 * Fires after the user is marked as a SPAM user.
@@ -664,14 +521,11 @@ function update_user_status( $id, $pref, $value, $deprecated = null ) {
 			 */
 			do_action( 'make_ham_user', $id );
 		}
->>>>>>> WPHome/master
 	}
 
 	return $value;
 }
 
-<<<<<<< HEAD
-=======
 /**
  * Cleans the user cache for a specific user.
  *
@@ -680,7 +534,6 @@ function update_user_status( $id, $pref, $value, $deprecated = null ) {
  * @param int $id The user ID.
  * @return bool|int The ID of the refreshed user or false if the user does not exist.
  */
->>>>>>> WPHome/master
 function refresh_user_details( $id ) {
 	$id = (int) $id;
 
@@ -692,8 +545,6 @@ function refresh_user_details( $id ) {
 	return $id;
 }
 
-<<<<<<< HEAD
-=======
 /**
  * Returns the language for a language code.
  *
@@ -703,7 +554,6 @@ function refresh_user_details( $id ) {
  * @return string The language corresponding to $code if it exists. If it does not exist,
  *                then the first two letters of $code is returned.
  */
->>>>>>> WPHome/master
 function format_code_lang( $code = '' ) {
 	$code = strtolower( substr( $code, 0, 2 ) );
 	$lang_codes = array(
@@ -718,8 +568,6 @@ function format_code_lang( $code = '' ) {
 		'sg' => 'Sango', 'sa' => 'Sanskrit', 'sr' => 'Serbian', 'hr' => 'Croatian', 'si' => 'Sinhala; Sinhalese', 'sk' => 'Slovak', 'sl' => 'Slovenian', 'se' => 'Northern Sami', 'sm' => 'Samoan', 'sn' => 'Shona', 'sd' => 'Sindhi', 'so' => 'Somali', 'st' => 'Sotho, Southern', 'es' => 'Spanish; Castilian', 'sc' => 'Sardinian', 'ss' => 'Swati', 'su' => 'Sundanese', 'sw' => 'Swahili',
 		'sv' => 'Swedish', 'ty' => 'Tahitian', 'ta' => 'Tamil', 'tt' => 'Tatar', 'te' => 'Telugu', 'tg' => 'Tajik', 'tl' => 'Tagalog', 'th' => 'Thai', 'bo' => 'Tibetan', 'ti' => 'Tigrinya', 'to' => 'Tonga (Tonga Islands)', 'tn' => 'Tswana', 'ts' => 'Tsonga', 'tk' => 'Turkmen', 'tr' => 'Turkish', 'tw' => 'Twi', 'ug' => 'Uighur; Uyghur', 'uk' => 'Ukrainian', 'ur' => 'Urdu', 'uz' => 'Uzbek',
 		've' => 'Venda', 'vi' => 'Vietnamese', 'vo' => 'Volapük', 'cy' => 'Welsh','wa' => 'Walloon','wo' => 'Wolof', 'xh' => 'Xhosa', 'yi' => 'Yiddish', 'yo' => 'Yoruba', 'za' => 'Zhuang; Chuang', 'zu' => 'Zulu' );
-<<<<<<< HEAD
-=======
 
 	/**
 	 * Filter the language codes.
@@ -729,26 +577,22 @@ function format_code_lang( $code = '' ) {
 	 * @param array  $lang_codes Key/value pair of language codes where key is the short version.
 	 * @param string $code       A two-letter designation of the language.
 	 */
->>>>>>> WPHome/master
 	$lang_codes = apply_filters( 'lang_codes', $lang_codes, $code );
 	return strtr( $code, $lang_codes );
 }
 
-<<<<<<< HEAD
-=======
 /**
  * Synchronize category and post tag slugs when global terms are enabled.
  *
  * @since 3.0.0
  *
- * @param object $term     The term.
- * @param string $taxonomy The taxonomy for $term. Should be 'category' or 'post_tag', as these are
- *                         the only taxonomies which are processed by this function; anything else
- *                         will be returned untouched.
+ * @param $term     The term.
+ * @param $taxonomy The taxonomy for $term. Should be 'category' or 'post_tag', as these are
+ *                  the only taxonomies which are processed by this function; anything else
+ *                  will be returned untouched.
  * @return object|array Returns `$term`, after filtering the 'slug' field with {@see sanitize_title()}
  *                      if $taxonomy is 'category' or 'post_tag'.
  */
->>>>>>> WPHome/master
 function sync_category_tag_slugs( $term, $taxonomy ) {
 	if ( global_terms_enabled() && ( $taxonomy == 'category' || $taxonomy == 'post_tag' ) ) {
 		if ( is_object( $term ) ) {
@@ -761,8 +605,6 @@ function sync_category_tag_slugs( $term, $taxonomy ) {
 }
 add_filter( 'get_term', 'sync_category_tag_slugs', 10, 2 );
 
-<<<<<<< HEAD
-=======
 /**
  * Displays an access denied message when a user tries to view a site's dashboard they
  * do not have access to.
@@ -770,7 +612,6 @@ add_filter( 'get_term', 'sync_category_tag_slugs', 10, 2 );
  * @since 3.2.0
  * @access private
  */
->>>>>>> WPHome/master
 function _access_denied_splash() {
 	if ( ! is_user_logged_in() || is_network_admin() )
 		return;
@@ -783,11 +624,7 @@ function _access_denied_splash() {
 	$blog_name = get_bloginfo( 'name' );
 
 	if ( empty( $blogs ) )
-<<<<<<< HEAD
 		wp_die( sprintf( __( 'You attempted to access the "%1$s" dashboard, but you do not currently have privileges on this site. If you believe you should be able to access the "%1$s" dashboard, please contact your network administrator.' ), $blog_name ) );
-=======
-		wp_die( sprintf( __( 'You attempted to access the "%1$s" dashboard, but you do not currently have privileges on this site. If you believe you should be able to access the "%1$s" dashboard, please contact your network administrator.' ), $blog_name ), 403 );
->>>>>>> WPHome/master
 
 	$output = '<p>' . sprintf( __( 'You attempted to access the "%1$s" dashboard, but you do not currently have privileges on this site. If you believe you should be able to access the "%1$s" dashboard, please contact your network administrator.' ), $blog_name ) . '</p>';
 	$output .= '<p>' . __( 'If you reached this screen by accident and meant to visit one of your own sites, here are some shortcuts to help you find your way.' ) . '</p>';
@@ -796,23 +633,6 @@ function _access_denied_splash() {
 	$output .= '<table>';
 
 	foreach ( $blogs as $blog ) {
-<<<<<<< HEAD
-		$output .= "<tr>";
-		$output .= "<td valign='top'>";
-		$output .= "{$blog->blogname}";
-		$output .= "</td>";
-		$output .= "<td valign='top'>";
-		$output .= "<a href='" . esc_url( get_admin_url( $blog->userblog_id ) ) . "'>" . __( 'Visit Dashboard' ) . "</a> | <a href='" . esc_url( get_home_url( $blog->userblog_id ) ). "'>" . __( 'View Site' ) . "</a>" ;
-		$output .= "</td>";
-		$output .= "</tr>";
-	}
-	$output .= '</table>';
-
-	wp_die( $output );
-}
-add_action( 'admin_page_access_denied', '_access_denied_splash', 99 );
-
-=======
 		$output .= '<tr>';
 		$output .= "<td>{$blog->blogname}</td>";
 		$output .= '<td><a href="' . esc_url( get_admin_url( $blog->userblog_id ) ) . '">' . __( 'Visit Dashboard' ) . '</a> | ' .
@@ -822,7 +642,7 @@ add_action( 'admin_page_access_denied', '_access_denied_splash', 99 );
 
 	$output .= '</table>';
 
-	wp_die( $output, 403 );
+	wp_die( $output );
 }
 add_action( 'admin_page_access_denied', '_access_denied_splash', 99 );
 
@@ -834,7 +654,6 @@ add_action( 'admin_page_access_denied', '_access_denied_splash', 99 );
  * @param string $permission A permission to be checked. Currently not used.
  * @return bool True if the user has proper permissions, false if they do not.
  */
->>>>>>> WPHome/master
 function check_import_new_users( $permission ) {
 	if ( !is_super_admin() )
 		return false;
@@ -843,8 +662,6 @@ function check_import_new_users( $permission ) {
 add_filter( 'import_allow_create_users', 'check_import_new_users' );
 // See "import_allow_fetch_attachments" and "import_attachment_size_limit" filters too.
 
-<<<<<<< HEAD
-=======
 /**
  * Generates and displays a drop-down of available languages.
  *
@@ -853,7 +670,6 @@ add_filter( 'import_allow_create_users', 'check_import_new_users' );
  * @param array  $lang_files Optional. An array of the language files. Default empty array.
  * @param string $current    Optional. The current language code. Default empty.
  */
->>>>>>> WPHome/master
 function mu_dropdown_languages( $lang_files = array(), $current = '' ) {
 	$flag = false;
 	$output = array();
@@ -882,32 +698,6 @@ function mu_dropdown_languages( $lang_files = array(), $current = '' ) {
 	// Order by name
 	uksort( $output, 'strnatcasecmp' );
 
-<<<<<<< HEAD
-	$output = apply_filters( 'mu_dropdown_languages', $output, $lang_files, $current );
-	echo implode( "\n\t", $output );
-}
-
-/* Warn the admin if SECRET SALT information is missing from wp-config.php */
-function secret_salt_warning() {
-	if ( !is_super_admin() )
-		return;
-	$secret_keys = array( 'AUTH_KEY', 'SECURE_AUTH_KEY', 'LOGGED_IN_KEY', 'NONCE_KEY', 'AUTH_SALT', 'SECURE_AUTH_SALT', 'LOGGED_IN_SALT', 'NONCE_SALT' );
-	$out = '';
-	foreach( $secret_keys as $key ) {
-		if ( ! defined( $key ) )
-			$out .= "define( '$key', '" . esc_html( wp_generate_password( 64, true, true ) ) . "' );<br />";
-	}
-	if ( $out != '' ) {
-		$msg  = __( 'Warning! WordPress encrypts user cookies, but you must add the following lines to <strong>wp-config.php</strong> for it to be more secure.' );
-		$msg .= '<br/>' . __( "Before the line <code>/* That's all, stop editing! Happy blogging. */</code> please add this code:" );
-		$msg .= "<br/><br/><code>$out</code>";
-
-		echo "<div class='update-nag'>$msg</div>";
-	}
-}
-add_action( 'network_admin_notices', 'secret_salt_warning' );
-
-=======
 	/**
 	 * Filter the languages available in the dropdown.
 	 *
@@ -928,26 +718,17 @@ add_action( 'network_admin_notices', 'secret_salt_warning' );
  * @since 3.0.0
  *
  * @global int $wp_db_version The version number of the database.
- *
- * @return false False if the current user is not a super admin.
  */
->>>>>>> WPHome/master
 function site_admin_notice() {
 	global $wp_db_version;
 	if ( !is_super_admin() )
 		return false;
 	if ( get_site_option( 'wpmu_upgrade_site' ) != $wp_db_version )
-<<<<<<< HEAD
-		echo "<div class='update-nag'>" . sprintf( __( 'Thank you for Updating! Please visit the <a href="%s">Update Network</a> page to update all your sites.' ), esc_url( network_admin_url( 'upgrade.php' ) ) ) . "</div>";
-=======
 		echo "<div class='update-nag'>" . sprintf( __( 'Thank you for Updating! Please visit the <a href="%s">Upgrade Network</a> page to update all your sites.' ), esc_url( network_admin_url( 'upgrade.php' ) ) ) . "</div>";
->>>>>>> WPHome/master
 }
 add_action( 'admin_notices', 'site_admin_notice' );
 add_action( 'network_admin_notices', 'site_admin_notice' );
 
-<<<<<<< HEAD
-=======
 /**
  * Avoids a collision between a site slug and a permalink slug.
  *
@@ -960,7 +741,6 @@ add_action( 'network_admin_notices', 'site_admin_notice' );
  * @param array $postarr An array of posts. Not currently used.
  * @return array The new array of post data after checking for collisions.
  */
->>>>>>> WPHome/master
 function avoid_blog_page_permalink_collision( $data, $postarr ) {
 	if ( is_subdomain_install() )
 		return $data;
@@ -984,8 +764,6 @@ function avoid_blog_page_permalink_collision( $data, $postarr ) {
 }
 add_filter( 'wp_insert_post_data', 'avoid_blog_page_permalink_collision', 10, 2 );
 
-<<<<<<< HEAD
-=======
 /**
  * Handles the display of choosing a user's primary site.
  *
@@ -994,17 +772,12 @@ add_filter( 'wp_insert_post_data', 'avoid_blog_page_permalink_collision', 10, 2 
  *
  * @since 3.0.0
  */
->>>>>>> WPHome/master
 function choose_primary_blog() {
 	?>
 	<table class="form-table">
 	<tr>
 	<?php /* translators: My sites label */ ?>
-<<<<<<< HEAD
 		<th scope="row"><?php _e( 'Primary Site' ); ?></th>
-=======
-		<th scope="row"><label for="primary_blog"><?php _e( 'Primary Site' ); ?></label></th>
->>>>>>> WPHome/master
 		<td>
 		<?php
 		$all_blogs = get_blogs_of_user( get_current_user_id() );
@@ -1012,11 +785,7 @@ function choose_primary_blog() {
 		if ( count( $all_blogs ) > 1 ) {
 			$found = false;
 			?>
-<<<<<<< HEAD
 			<select name="primary_blog">
-=======
-			<select name="primary_blog" id="primary_blog">
->>>>>>> WPHome/master
 				<?php foreach( (array) $all_blogs as $blog ) {
 					if ( $primary_blog == $blog->userblog_id )
 						$found = true;
@@ -1025,19 +794,11 @@ function choose_primary_blog() {
 			</select>
 			<?php
 			if ( !$found ) {
-<<<<<<< HEAD
 				$blog = array_shift( $all_blogs );
 				update_user_meta( get_current_user_id(), 'primary_blog', $blog->userblog_id );
 			}
 		} elseif ( count( $all_blogs ) == 1 ) {
 			$blog = array_shift( $all_blogs );
-=======
-				$blog = reset( $all_blogs );
-				update_user_meta( get_current_user_id(), 'primary_blog', $blog->userblog_id );
-			}
-		} elseif ( count( $all_blogs ) == 1 ) {
-			$blog = reset( $all_blogs );
->>>>>>> WPHome/master
 			echo $blog->domain;
 			if ( $primary_blog != $blog->userblog_id ) // Set the primary blog again if it's out of sync with blog list.
 				update_user_meta( get_current_user_id(), 'primary_blog', $blog->userblog_id );
@@ -1050,15 +811,11 @@ function choose_primary_blog() {
 	<?php if ( in_array( get_site_option( 'registration' ), array( 'all', 'blog' ) ) ) : ?>
 		<tr>
 			<th scope="row" colspan="2" class="th-full">
-<<<<<<< HEAD
-				<a href="<?php echo apply_filters( 'wp_signup_location', network_site_url( 'wp-signup.php' ) ); ?>"><?php _e( 'Create a New Site' ); ?></a>
-=======
 				<?php
 				/** This filter is documented in wp-login.php */
 				$sign_up_url = apply_filters( 'wp_signup_location', network_site_url( 'wp-signup.php' ) );
 				?>
 				<a href="<?php echo esc_url( $sign_up_url ); ?>"><?php _e( 'Create a New Site' ); ?></a>
->>>>>>> WPHome/master
 			</th>
 		</tr>
 	<?php endif; ?>
@@ -1067,20 +824,6 @@ function choose_primary_blog() {
 }
 
 /**
-<<<<<<< HEAD
- * Grants super admin privileges.
- *
- * @since 3.0.0
- * @param int $user_id
- */
-function grant_super_admin( $user_id ) {
-	global $super_admins;
-
-	// If global super_admins override is defined, there is nothing to do here.
-	if ( isset($super_admins) )
-		return false;
-
-=======
  * Grants Super Admin privileges.
  *
  * @since 3.0.0
@@ -1102,7 +845,6 @@ function grant_super_admin( $user_id ) {
 	 *
 	 * @param int $user_id ID of the user that is about to be granted Super Admin privileges.
 	 */
->>>>>>> WPHome/master
 	do_action( 'grant_super_admin', $user_id );
 
 	// Directly fetch site_admins instead of using get_super_admins()
@@ -1112,8 +854,6 @@ function grant_super_admin( $user_id ) {
 	if ( $user && ! in_array( $user->user_login, $super_admins ) ) {
 		$super_admins[] = $user->user_login;
 		update_site_option( 'site_admins' , $super_admins );
-<<<<<<< HEAD
-=======
 
 		/**
 		 * Fires after the user is granted Super Admin privileges.
@@ -1122,7 +862,6 @@ function grant_super_admin( $user_id ) {
 		 *
 		 * @param int $user_id ID of the user that was granted Super Admin privileges.
 		 */
->>>>>>> WPHome/master
 		do_action( 'granted_super_admin', $user_id );
 		return true;
 	}
@@ -1130,20 +869,6 @@ function grant_super_admin( $user_id ) {
 }
 
 /**
-<<<<<<< HEAD
- * Revokes super admin privileges.
- *
- * @since 3.0.0
- * @param int $user_id
- */
-function revoke_super_admin( $user_id ) {
-	global $super_admins;
-
-	// If global super_admins override is defined, there is nothing to do here.
-	if ( isset($super_admins) )
-		return false;
-
-=======
  * Revokes Super Admin privileges.
  *
  * @since 3.0.0
@@ -1165,19 +890,12 @@ function revoke_super_admin( $user_id ) {
 	 *
 	 * @param int $user_id ID of the user Super Admin privileges are being revoked from.
 	 */
->>>>>>> WPHome/master
 	do_action( 'revoke_super_admin', $user_id );
 
 	// Directly fetch site_admins instead of using get_super_admins()
 	$super_admins = get_site_option( 'site_admins', array( 'admin' ) );
 
 	$user = get_userdata( $user_id );
-<<<<<<< HEAD
-	if ( $user && $user->user_email != get_site_option( 'admin_email' ) ) {
-		if ( false !== ( $key = array_search( $user->user_login, $super_admins ) ) ) {
-			unset( $super_admins[$key] );
-			update_site_option( 'site_admins', $super_admins );
-=======
 	if ( $user && 0 !== strcasecmp( $user->user_email, get_site_option( 'admin_email' ) ) ) {
 		if ( false !== ( $key = array_search( $user->user_login, $super_admins ) ) ) {
 			unset( $super_admins[$key] );
@@ -1190,7 +908,6 @@ function revoke_super_admin( $user_id ) {
 			 *
 			 * @param int $user_id ID of the user Super Admin privileges were revoked from.
 			 */
->>>>>>> WPHome/master
 			do_action( 'revoked_super_admin', $user_id );
 			return true;
 		}
@@ -1199,14 +916,6 @@ function revoke_super_admin( $user_id ) {
 }
 
 /**
-<<<<<<< HEAD
- * Whether or not we can edit this network from this page
- *
- * By default editing of network is restricted to the Network Admin for that site_id this allows for this to be overridden
- *
- * @since 3.1.0
- * @param integer $site_id The network/site id to check.
-=======
  * Whether or not we can edit this network from this page.
  *
  * By default editing of network is restricted to the Network Admin for that `$site_id`
@@ -1216,22 +925,15 @@ function revoke_super_admin( $user_id ) {
  *
  * @param int $site_id The network/site ID to check.
  * @return bool True if network can be edited, otherwise false.
->>>>>>> WPHome/master
  */
 function can_edit_network( $site_id ) {
 	global $wpdb;
 
-<<<<<<< HEAD
-	if ($site_id == $wpdb->siteid )
-=======
 	if ( $site_id == $wpdb->siteid )
->>>>>>> WPHome/master
 		$result = true;
 	else
 		$result = false;
 
-<<<<<<< HEAD
-=======
 	/**
 	 * Filter whether this network can be edited from this page.
 	 *
@@ -1240,7 +942,6 @@ function can_edit_network( $site_id ) {
 	 * @param bool $result  Whether the network can be edited from this page.
 	 * @param int  $site_id The network/site ID to check.
 	 */
->>>>>>> WPHome/master
 	return apply_filters( 'can_edit_network', $result, $site_id );
 }
 
@@ -1248,45 +949,15 @@ function can_edit_network( $site_id ) {
  * Thickbox image paths for Network Admin.
  *
  * @since 3.1.0
-<<<<<<< HEAD
-=======
  *
->>>>>>> WPHome/master
  * @access private
  */
 function _thickbox_path_admin_subfolder() {
 ?>
 <script type="text/javascript">
-<<<<<<< HEAD
 //<![CDATA[
-var tb_pathToImage = "../../wp-includes/js/thickbox/loadingAnimation.gif";
+var tb_pathToImage = "<?php echo includes_url( 'js/thickbox/loadingAnimation.gif', 'relative' ); ?>";
 //]]>
 </script>
 <?php
 }
-
-/**
- * Whether or not we have a large network.
- *
- * The default criteria for a large network is either more than 10,000 users or more than 10,000 sites.
- * Plugins can alter this criteria using the 'wp_is_large_network' filter.
- *
- * @since 3.3.0
- * @param string $using 'sites or 'users'. Default is 'sites'.
- * @return bool True if the network meets the criteria for large. False otherwise.
- */
-function wp_is_large_network( $using = 'sites' ) {
-	if ( 'users' == $using ) {
-		$count = get_user_count();
-		return apply_filters( 'wp_is_large_network', $count > 10000, 'users', $count );
-	}
-
-	$count = get_blog_count();
-	return apply_filters( 'wp_is_large_network', $count > 10000, 'sites', $count );
-}
-=======
-var tb_pathToImage = "<?php echo includes_url( 'js/thickbox/loadingAnimation.gif', 'relative' ); ?>";
-</script>
-<?php
-}
->>>>>>> WPHome/master

@@ -1,32 +1,12 @@
 <?php
 /**
-<<<<<<< HEAD
  * Customize Setting Class.
-=======
- * WordPress Customize Setting classes
->>>>>>> WPHome/master
+ *
+ * Handles saving and sanitizing of settings.
  *
  * @package WordPress
  * @subpackage Customize
  * @since 3.4.0
- */
-<<<<<<< HEAD
-class WP_Customize_Setting {
-	public $manager;
-	public $id;
-
-	public $type            = 'theme_mod';
-	public $capability      = 'edit_theme_options';
-=======
-
-/**
- * Customize Setting class.
- *
- * Handles saving and sanitizing of settings.
- *
- * @since 3.4.0
- *
- * @see WP_Customize_Manager
  */
 class WP_Customize_Setting {
 	/**
@@ -60,18 +40,10 @@ class WP_Customize_Setting {
 	 * @access public
 	 * @var string
 	 */
->>>>>>> WPHome/master
 	public $theme_supports  = '';
 	public $default         = '';
 	public $transport       = 'refresh';
 
-<<<<<<< HEAD
-	public $sanitize_callback    = '';
-	public $sanitize_js_callback = '';
-
-	protected $id_data = array();
-	private $_post_value; // Cached, sanitized $_POST value.
-=======
 	/**
 	 * Server-side sanitization callback for the setting's value.
 	 *
@@ -80,38 +52,19 @@ class WP_Customize_Setting {
 	public $sanitize_callback    = '';
 	public $sanitize_js_callback = '';
 
-	/**
-	 * Whether or not the setting is initially dirty when created.
-	 *
-	 * This is used to ensure that a setting will be sent from the pane to the
-	 * preview when loading the Customizer. Normally a setting only is synced to
-	 * the preview if it has been changed. This allows the setting to be sent
-	 * from the start.
-	 *
-	 * @since 4.2.0
-	 * @access public
-	 * @var bool
-	 */
-	public $dirty = false;
-
 	protected $id_data = array();
->>>>>>> WPHome/master
+
+	/**
+	 * Cached and sanitized $_POST value for the setting.
+	 *
+	 * @access private
+	 * @var mixed
+	 */
+	private $_post_value;
 
 	/**
 	 * Constructor.
 	 *
-<<<<<<< HEAD
-	 * @since 3.4.0
-	 *
-	 * @param WP_Customize_Manager $manager
-	 * @param string $id An specific ID of the setting. Can be a
-	 *                   theme mod or option name.
-	 * @param array $args Setting arguments.
-	 * @return WP_Customize_Setting
-	 */
-	function __construct( $manager, $id, $args = array() ) {
-		$keys = array_keys( get_class_vars( __CLASS__ ) );
-=======
 	 * Any supplied $args override class property defaults.
 	 *
 	 * @since 3.4.0
@@ -120,10 +73,10 @@ class WP_Customize_Setting {
 	 * @param string               $id      An specific ID of the setting. Can be a
 	 *                                      theme mod or option name.
 	 * @param array                $args    Setting arguments.
+	 * @return WP_Customize_Setting $setting
 	 */
 	public function __construct( $manager, $id, $args = array() ) {
 		$keys = array_keys( get_object_vars( $this ) );
->>>>>>> WPHome/master
 		foreach ( $keys as $key ) {
 			if ( isset( $args[ $key ] ) )
 				$this->$key = $args[ $key ];
@@ -146,65 +99,22 @@ class WP_Customize_Setting {
 
 		if ( $this->sanitize_js_callback )
 			add_filter( "customize_sanitize_js_{$this->id}", $this->sanitize_js_callback, 10, 2 );
-<<<<<<< HEAD
 
 		return $this;
 	}
 
-	/**
-=======
-	}
-
-	/**
-	 * The ID for the current blog when the preview() method was called.
-	 *
-	 * @since 4.2.0
-	 * @access protected
-	 * @var int
-	 */
-	protected $_previewed_blog_id;
-
-	/**
-	 * Return true if the current blog is not the same as the previewed blog.
-	 *
-	 * @since 4.2.0
-	 * @access public
-	 *
-	 * @return bool|null Returns null if preview() has not been called yet.
-	 */
-	public function is_current_blog_previewed() {
-		if ( ! isset( $this->_previewed_blog_id ) ) {
-			return null;
-		}
-		return ( get_current_blog_id() === $this->_previewed_blog_id );
-	}
-
-	/**
-	 * Original non-previewed value stored by the preview method.
-	 *
-	 * @see WP_Customize_Setting::preview()
-	 * @since 4.1.1
-	 * @var mixed
-	 */
 	protected $_original_value;
 
 	/**
->>>>>>> WPHome/master
 	 * Handle previewing the setting.
 	 *
 	 * @since 3.4.0
 	 */
 	public function preview() {
-<<<<<<< HEAD
-=======
 		if ( ! isset( $this->_original_value ) ) {
 			$this->_original_value = $this->value();
 		}
-		if ( ! isset( $this->_previewed_blog_id ) ) {
-			$this->_previewed_blog_id = get_current_blog_id();
-		}
 
->>>>>>> WPHome/master
 		switch( $this->type ) {
 			case 'theme_mod' :
 				add_filter( 'theme_mod_' . $this->id_data[ 'base' ], array( $this, '_preview_filter' ) );
@@ -218,9 +128,6 @@ class WP_Customize_Setting {
 				}
 				break;
 			default :
-<<<<<<< HEAD
-				do_action( 'customize_preview_' . $this->id );
-=======
 
 				/**
 				 * Fires when the {@see WP_Customize_Setting::preview()} method is called for settings
@@ -245,20 +152,12 @@ class WP_Customize_Setting {
 				 * @param WP_Customize_Setting $this {@see WP_Customize_Setting} instance.
 				 */
 				do_action( "customize_preview_{$this->type}", $this );
->>>>>>> WPHome/master
 		}
 	}
 
 	/**
 	 * Callback function to filter the theme mods and options.
 	 *
-<<<<<<< HEAD
-=======
-	 * If switch_to_blog() was called after the preview() method, and the current
-	 * blog is now not the same blog, then this method does a no-op and returns
-	 * the original value.
-	 *
->>>>>>> WPHome/master
 	 * @since 3.4.0
 	 * @uses WP_Customize_Setting::multidimensional_replace()
 	 *
@@ -266,25 +165,8 @@ class WP_Customize_Setting {
 	 * @return mixed New or old value.
 	 */
 	public function _preview_filter( $original ) {
-<<<<<<< HEAD
-		return $this->multidimensional_replace( $original, $this->id_data[ 'keys' ], $this->post_value() );
-	}
-
-	/**
-	 * Set the value of the parameter for a specific theme.
-	 *
-	 * @since 3.4.0
-	 *
-	 * @return bool False if cap check fails or value isn't set.
-	 */
-	public final function save() {
-=======
-		if ( ! $this->is_current_blog_previewed() ) {
-			return $original;
-		}
-
 		$undefined = new stdClass(); // symbol hack
-		$post_value = $this->post_value( $undefined );
+		$post_value = $this->manager->post_value( $this, $undefined );
 		if ( $undefined === $post_value ) {
 			$value = $this->_original_value;
 		} else {
@@ -302,16 +184,12 @@ class WP_Customize_Setting {
 	 *
 	 * @return false|null False if cap check fails or value isn't set.
 	 */
-	final public function save() {
->>>>>>> WPHome/master
+	public final function save() {
 		$value = $this->post_value();
 
 		if ( ! $this->check_capabilities() || ! isset( $value ) )
 			return false;
 
-<<<<<<< HEAD
-		do_action( 'customize_save_' . $this->id_data[ 'base' ] );
-=======
 		/**
 		 * Fires when the WP_Customize_Setting::save() method is called.
 		 *
@@ -323,38 +201,30 @@ class WP_Customize_Setting {
 		 * @param WP_Customize_Setting $this {@see WP_Customize_Setting} instance.
 		 */
 		do_action( 'customize_save_' . $this->id_data[ 'base' ], $this );
->>>>>>> WPHome/master
 
 		$this->update( $value );
 	}
 
 	/**
-<<<<<<< HEAD
-	 * Fetches, validates, and sanitizes the $_POST value.
-=======
 	 * Fetch and sanitize the $_POST value for the setting.
->>>>>>> WPHome/master
 	 *
 	 * @since 3.4.0
 	 *
 	 * @param mixed $default A default value which is used as a fallback. Default is null.
 	 * @return mixed The default value on failure, otherwise the sanitized value.
 	 */
-<<<<<<< HEAD
 	public final function post_value( $default = null ) {
+		// Check for a cached value
 		if ( isset( $this->_post_value ) )
 			return $this->_post_value;
 
+		// Call the manager for the post value
 		$result = $this->manager->post_value( $this );
 
 		if ( isset( $result ) )
 			return $this->_post_value = $result;
 		else
 			return $default;
-=======
-	final public function post_value( $default = null ) {
-		return $this->manager->post_value( $this, $default );
->>>>>>> WPHome/master
 	}
 
 	/**
@@ -366,9 +236,6 @@ class WP_Customize_Setting {
 	 * @return mixed Null if an input isn't valid, otherwise the sanitized value.
 	 */
 	public function sanitize( $value ) {
-<<<<<<< HEAD
-		$value = stripslashes_deep( $value );
-=======
 		$value = wp_unslash( $value );
 
 		/**
@@ -379,16 +246,11 @@ class WP_Customize_Setting {
 		 * @param mixed                $value Value of the setting.
 		 * @param WP_Customize_Setting $this  WP_Customize_Setting instance.
 		 */
->>>>>>> WPHome/master
 		return apply_filters( "customize_sanitize_{$this->id}", $value, $this );
 	}
 
 	/**
-<<<<<<< HEAD
-	 * Set the value of the parameter for a specific theme.
-=======
 	 * Save the value of the setting, using the related API.
->>>>>>> WPHome/master
 	 *
 	 * @since 3.4.0
 	 *
@@ -399,14 +261,6 @@ class WP_Customize_Setting {
 		switch( $this->type ) {
 			case 'theme_mod' :
 				return $this->_update_theme_mod( $value );
-<<<<<<< HEAD
-				break;
-			case 'option' :
-				return $this->_update_option( $value );
-				break;
-			default :
-				return do_action( 'customize_update_' . $this->type, $value );
-=======
 
 			case 'option' :
 				return $this->_update_option( $value );
@@ -425,7 +279,6 @@ class WP_Customize_Setting {
 				 * @param WP_Customize_Setting $this  WP_Customize_Setting instance.
 				 */
 				return do_action( 'customize_update_' . $this->type, $value, $this );
->>>>>>> WPHome/master
 		}
 	}
 
@@ -450,20 +303,12 @@ class WP_Customize_Setting {
 	}
 
 	/**
-<<<<<<< HEAD
-	 * Update the theme mod from the value of the parameter.
-=======
 	 * Update the option from the value of the setting.
->>>>>>> WPHome/master
 	 *
 	 * @since 3.4.0
 	 *
 	 * @param mixed $value The value to update.
-<<<<<<< HEAD
-	 * @return mixed The result of saving the value.
-=======
 	 * @return bool|null The result of saving the value.
->>>>>>> WPHome/master
 	 */
 	protected function _update_option( $value ) {
 		// Handle non-array option.
@@ -478,15 +323,6 @@ class WP_Customize_Setting {
 	}
 
 	/**
-<<<<<<< HEAD
-	 * Fetch the value of the parameter for a specific theme.
-	 *
-	 * @since 3.4.0
-	 *
-	 * @return mixed The requested value.
-	 */
-	public function value() {
-=======
 	 * Fetch the value of the setting.
 	 *
 	 * @since 3.4.0
@@ -495,7 +331,6 @@ class WP_Customize_Setting {
 	 */
 	public function value() {
 		// Get the callback that corresponds to the setting type.
->>>>>>> WPHome/master
 		switch( $this->type ) {
 			case 'theme_mod' :
 				$function = 'get_theme_mod';
@@ -504,8 +339,6 @@ class WP_Customize_Setting {
 				$function = 'get_option';
 				break;
 			default :
-<<<<<<< HEAD
-=======
 
 				/**
 				 * Filter a Customize setting value not handled as a theme_mod or option.
@@ -520,7 +353,6 @@ class WP_Customize_Setting {
 				 *
 				 * @param mixed $default The setting default value. Default empty.
 				 */
->>>>>>> WPHome/master
 				return apply_filters( 'customize_value_' . $this->id_data[ 'base' ], $this->default );
 		}
 
@@ -534,19 +366,13 @@ class WP_Customize_Setting {
 	}
 
 	/**
-<<<<<<< HEAD
-	 * Escape the parameter's value for use in JavaScript.
-=======
 	 * Sanitize the setting's value for use in JavaScript.
->>>>>>> WPHome/master
 	 *
 	 * @since 3.4.0
 	 *
 	 * @return mixed The requested escaped value.
 	 */
 	public function js_value() {
-<<<<<<< HEAD
-=======
 
 		/**
 		 * Filter a Customize setting value for use in JavaScript.
@@ -558,7 +384,6 @@ class WP_Customize_Setting {
 		 * @param mixed                $value The setting value.
 		 * @param WP_Customize_Setting $this  {@see WP_Customize_Setting} instance.
 		 */
->>>>>>> WPHome/master
 		$value = apply_filters( "customize_sanitize_js_{$this->id}", $this->value(), $this );
 
 		if ( is_string( $value ) )
@@ -568,21 +393,13 @@ class WP_Customize_Setting {
 	}
 
 	/**
-<<<<<<< HEAD
-	 * Check if the theme supports the setting and check user capabilities.
-=======
 	 * Validate user capabilities whether the theme supports the setting.
->>>>>>> WPHome/master
 	 *
 	 * @since 3.4.0
 	 *
 	 * @return bool False if theme doesn't support the setting or user can't change setting, otherwise true.
 	 */
-<<<<<<< HEAD
 	public final function check_capabilities() {
-=======
-	final public function check_capabilities() {
->>>>>>> WPHome/master
 		if ( $this->capability && ! call_user_func_array( 'current_user_can', (array) $this->capability ) )
 			return false;
 
@@ -622,10 +439,6 @@ class WP_Customize_Setting {
 			$node = &$node[ $key ];
 		}
 
-<<<<<<< HEAD
-		if ( $create && ! isset( $node[ $last ] ) )
-			$node[ $last ] = array();
-=======
 		if ( $create ) {
 			if ( ! is_array( $node ) ) {
 				// account for an array overriding a string or object value
@@ -635,7 +448,6 @@ class WP_Customize_Setting {
 				$node[ $last ] = array();
 			}
 		}
->>>>>>> WPHome/master
 
 		if ( ! isset( $node[ $last ] ) )
 			return;
@@ -678,11 +490,7 @@ class WP_Customize_Setting {
 	 *
 	 * @param $root
 	 * @param $keys
-<<<<<<< HEAD
-	 * @param $default A default value which is used as a fallback. Default is null.
-=======
 	 * @param mixed $default A default value which is used as a fallback. Default is null.
->>>>>>> WPHome/master
 	 * @return mixed The requested value or the default value.
 	 */
 	final protected function multidimensional_get( $root, $keys, $default = null ) {
@@ -713,15 +521,9 @@ class WP_Customize_Setting {
  *
  * Results should be properly handled using another setting or callback.
  *
-<<<<<<< HEAD
  * @package WordPress
  * @subpackage Customize
  * @since 3.4.0
-=======
- * @since 3.4.0
- *
- * @see WP_Customize_Setting
->>>>>>> WPHome/master
  */
 class WP_Customize_Filter_Setting extends WP_Customize_Setting {
 
@@ -736,15 +538,9 @@ class WP_Customize_Filter_Setting extends WP_Customize_Setting {
  *
  * Results should be properly handled using another setting or callback.
  *
-<<<<<<< HEAD
  * @package WordPress
  * @subpackage Customize
  * @since 3.4.0
-=======
- * @since 3.4.0
- *
- * @see WP_Customize_Setting
->>>>>>> WPHome/master
  */
 final class WP_Customize_Header_Image_Setting extends WP_Customize_Setting {
 	public $id = 'header_image_data';
@@ -770,27 +566,17 @@ final class WP_Customize_Header_Image_Setting extends WP_Customize_Setting {
 }
 
 /**
-<<<<<<< HEAD
+ * Class WP_Customize_Background_Image_Setting
+ *
  * @package WordPress
  * @subpackage Customize
  * @since 3.4.0
-=======
- * Customizer Background Image Setting class.
- *
- * @since 3.4.0
- *
- * @see WP_Customize_Setting
->>>>>>> WPHome/master
  */
 final class WP_Customize_Background_Image_Setting extends WP_Customize_Setting {
 	public $id = 'background_image_thumb';
 
 	/**
 	 * @since 3.4.0
-<<<<<<< HEAD
-	 * @uses remove_theme_mod()
-=======
->>>>>>> WPHome/master
 	 *
 	 * @param $value
 	 */

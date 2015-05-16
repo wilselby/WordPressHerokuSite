@@ -7,10 +7,6 @@
  *
  */
 class WP_HTTP_IXR_Client extends IXR_Client {
-<<<<<<< HEAD
-
-	function __construct($server, $path = false, $port = false, $timeout = 15) {
-=======
 	public $scheme;
 	/**
 	 * @var IXR_Error
@@ -24,7 +20,6 @@ class WP_HTTP_IXR_Client extends IXR_Client {
 	 * @param int $timeout
 	 */
 	public function __construct($server, $path = false, $port = false, $timeout = 15) {
->>>>>>> WPHome/master
 		if ( ! $path ) {
 			// Assume we have been given a URL instead
 			$bits = parse_url($server);
@@ -34,10 +29,6 @@ class WP_HTTP_IXR_Client extends IXR_Client {
 			$this->path = !empty($bits['path']) ? $bits['path'] : '/';
 
 			// Make absolutely sure we have a path
-<<<<<<< HEAD
-			if ( ! $this->path )
-				$this->path = '/';
-=======
 			if ( ! $this->path ) {
 				$this->path = '/';
 			}
@@ -45,7 +36,6 @@ class WP_HTTP_IXR_Client extends IXR_Client {
 			if ( ! empty( $bits['query'] ) ) {
 				$this->path .= '?' . $bits['query'];
 			}
->>>>>>> WPHome/master
 		} else {
 			$this->scheme = 'http';
 			$this->server = $server;
@@ -56,11 +46,7 @@ class WP_HTTP_IXR_Client extends IXR_Client {
 		$this->timeout = $timeout;
 	}
 
-<<<<<<< HEAD
-	function query() {
-=======
 	public function query() {
->>>>>>> WPHome/master
 		$args = func_get_args();
 		$method = array_shift($args);
 		$request = new IXR_Request($method, $args);

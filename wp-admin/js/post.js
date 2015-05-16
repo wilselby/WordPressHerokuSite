@@ -1,5 +1,11 @@
-<<<<<<< HEAD
-var tagBox, commentsBox, editPermalink, makeSlugeditClickable, WPSetThumbnailHTML, WPSetThumbnailID, WPRemoveThumbnail, wptitlehint;
+/* global postL10n, ajaxurl, wpAjax, setPostThumbnailL10n, postboxes, pagenow, tinymce, alert, deleteUserSetting */
+/* global theList:true, theExtraList:true, getUserSetting, setUserSetting */
+
+var tagBox, commentsBox, WPSetThumbnailHTML, WPSetThumbnailID, WPRemoveThumbnail, wptitlehint, makeSlugeditClickable, editPermalink;
+// Back-compat: prevent fatal errors
+makeSlugeditClickable = editPermalink = function(){};
+
+window.wp = window.wp || {};
 
 // return an array with any duplicate, whitespace or values removed
 function array_unique_noempty(a) {
@@ -12,7 +18,8 @@ function array_unique_noempty(a) {
 	return out;
 }
 
-(function($){
+( function($) {
+	var titleHasFocus = false;
 
 tagBox = {
 	clean : function(tags) {
@@ -82,11 +89,11 @@ tagBox = {
 	},
 
 	flushTags : function(el, a, f) {
-		a = a || false;
-		var tags = $('.the-tags', el),
+		var tagsval, newtags, text,
+			tags = $('.the-tags', el),
 			newtag = $('input.newtag', el),
-			comma = postL10n.comma,
-			newtags, text;
+			comma = postL10n.comma;
+		a = a || false;
 
 		text = a ? $(a).text() : newtag.val();
 		tagsval = tags.val();
@@ -109,7 +116,7 @@ tagBox = {
 		var tax = id.substr(id.indexOf('-')+1);
 
 		$.post(ajaxurl, {'action':'get-tagcloud', 'tax':tax}, function(r, stat) {
-			if ( 0 == r || 'success' != stat )
+			if ( 0 === r || 'success' != stat )
 				r = wpAjax.broken;
 
 			r = $('<p id="tagcloud-'+tax+'" class="the-tagcloud">'+r+'</p>');
@@ -138,7 +145,7 @@ tagBox = {
 		});
 
 		$('input.newtag', ajaxtag).blur(function() {
-			if ( this.value == '' )
+			if ( '' === this.value )
 				$(this).parent().siblings('.taghint').css('visibility', '');
 		}).focus(function(){
 			$(this).parent().siblings('.taghint').css('visibility', 'hidden');
@@ -175,19 +182,6 @@ tagBox = {
 		});
 	}
 };
-=======
-/* global postL10n, ajaxurl, wpAjax, setPostThumbnailL10n, postboxes, pagenow, tinymce, alert, deleteUserSetting */
-/* global theList:true, theExtraList:true, getUserSetting, setUserSetting */
-
-var commentsBox, WPSetThumbnailHTML, WPSetThumbnailID, WPRemoveThumbnail, wptitlehint, makeSlugeditClickable, editPermalink;
-// Back-compat: prevent fatal errors
-makeSlugeditClickable = editPermalink = function(){};
-
-window.wp = window.wp || {};
-
-( function( $ ) {
-	var titleHasFocus = false;
->>>>>>> WPHome/master
 
 commentsBox = {
 	st : 0,
@@ -199,11 +193,7 @@ commentsBox = {
 
 		this.st += num;
 		this.total = total;
-<<<<<<< HEAD
 		$('#commentsdiv .spinner').show();
-=======
-		$( '#commentsdiv .spinner' ).addClass( 'is-active' );
->>>>>>> WPHome/master
 
 		data = {
 			'action' : 'get-comments',
@@ -218,21 +208,13 @@ commentsBox = {
 			function(r) {
 				r = wpAjax.parseAjaxResponse(r);
 				$('#commentsdiv .widefat').show();
-<<<<<<< HEAD
 				$('#commentsdiv .spinner').hide();
-=======
-				$( '#commentsdiv .spinner' ).removeClass( 'is-active' );
->>>>>>> WPHome/master
 
 				if ( 'object' == typeof r && r.responses[0] ) {
 					$('#the-comment-list').append( r.responses[0].data );
 
 					theList = theExtraList = null;
-<<<<<<< HEAD
-					$("a[className*=':']").unbind();
-=======
 					$( 'a[className*=\':\']' ).unbind();
->>>>>>> WPHome/master
 
 					if ( commentsBox.st > commentsBox.total )
 						$('#show-comments').hide();
@@ -266,11 +248,7 @@ WPSetThumbnailID = function(id){
 
 WPRemoveThumbnail = function(nonce){
 	$.post(ajaxurl, {
-<<<<<<< HEAD
-		action:"set-post-thumbnail", post_id: $('#post_ID').val(), thumbnail_id: -1, _ajax_nonce: nonce, cookie: encodeURIComponent(document.cookie)
-=======
 		action: 'set-post-thumbnail', post_id: $( '#post_ID' ).val(), thumbnail_id: -1, _ajax_nonce: nonce, cookie: encodeURIComponent( document.cookie )
->>>>>>> WPHome/master
 	}, function(str){
 		if ( str == '0' ) {
 			alert( setPostThumbnailL10n.error );
@@ -281,22 +259,6 @@ WPRemoveThumbnail = function(nonce){
 	);
 };
 
-<<<<<<< HEAD
-})(jQuery);
-
-jQuery(document).ready( function($) {
-	var stamp, visibility, sticky = '', last = 0, co = $('#content');
-
-	postboxes.add_postbox_toggles(pagenow);
-
-	// multi-taxonomies
-	if ( $('#tagsdiv-post_tag').length ) {
-		tagBox.init();
-	} else {
-		$('#side-sortables, #normal-sortables, #advanced-sortables').children('div.postbox').each(function(){
-			if ( this.id.indexOf('tagsdiv-') === 0 ) {
-				tagBox.init();
-=======
 $(document).on( 'heartbeat-send.refresh-lock', function( e, data ) {
 	var lock = $('#active_post_lock').val(),
 		post_id = $('#post_ID').val(),
@@ -483,9 +445,9 @@ jQuery(document).ready( function($) {
 			$submitButtons.addClass( 'disabled' );
 
 			if ( $button.attr('id') === 'publish' ) {
-				$submitpost.find( '#major-publishing-actions .spinner' ).addClass( 'is-active' );
+				$submitpost.find('#major-publishing-actions .spinner').show();
 			} else {
-				$submitpost.find( '#minor-publishing .spinner' ).addClass( 'is-active' );
+				$submitpost.find('#minor-publishing .spinner').show();
 			}
 		});
 	});
@@ -610,12 +572,11 @@ jQuery(document).ready( function($) {
 
 	// multi-taxonomies
 	if ( $('#tagsdiv-post_tag').length ) {
-		window.tagBox && window.tagBox.init();
+		tagBox.init();
 	} else {
 		$('#side-sortables, #normal-sortables, #advanced-sortables').children('div.postbox').each(function(){
 			if ( this.id.indexOf('tagsdiv-') === 0 ) {
-				window.tagBox && window.tagBox.init();
->>>>>>> WPHome/master
+				tagBox.init();
 				return false;
 			}
 		});
@@ -623,11 +584,7 @@ jQuery(document).ready( function($) {
 
 	// categories
 	$('.categorydiv').each( function(){
-<<<<<<< HEAD
-		var this_id = $(this).attr('id'), noSyncChecks = false, syncChecks, catAddAfter, taxonomyParts, taxonomy, settingName;
-=======
 		var this_id = $(this).attr('id'), catAddBefore, catAddAfter, taxonomyParts, taxonomy, settingName;
->>>>>>> WPHome/master
 
 		taxonomyParts = this_id.split('-');
 		taxonomyParts.shift();
@@ -643,24 +600,6 @@ jQuery(document).ready( function($) {
 			$('#' + taxonomy + '-tabs').siblings('.tabs-panel').hide();
 			$(t).show();
 			if ( '#' + taxonomy + '-all' == t )
-<<<<<<< HEAD
-				deleteUserSetting(settingName);
-			else
-				setUserSetting(settingName, 'pop');
-			return false;
-		});
-
-		if ( getUserSetting(settingName) )
-			$('a[href="#' + taxonomy + '-pop"]', '#' + taxonomy + '-tabs').click();
-
-		// Ajax Cat
-		$('#new' + taxonomy).one( 'focus', function() { $(this).val( '' ).removeClass( 'form-input-tip' ) } );
-
-		$('#new' + taxonomy).keypress( function(event){
-			if( 13 === event.keyCode ) {
-				 event.preventDefault();
-				 $('#' + taxonomy + '-add-submit').click();
-=======
 				deleteUserSetting( settingName );
 			else
 				setUserSetting( settingName, 'pop' );
@@ -677,23 +616,10 @@ jQuery(document).ready( function($) {
 			if( 13 === event.keyCode ) {
 				event.preventDefault();
 				$('#' + taxonomy + '-add-submit').click();
->>>>>>> WPHome/master
 			}
 		});
 		$('#' + taxonomy + '-add-submit').click( function(){ $('#new' + taxonomy).focus(); });
 
-<<<<<<< HEAD
-		syncChecks = function() {
-			if ( noSyncChecks )
-				return;
-			noSyncChecks = true;
-			var th = jQuery(this), c = th.is(':checked'), id = th.val().toString();
-			$('#in-' + taxonomy + '-' + id + ', #in-' + taxonomy + '-category-' + id).prop( 'checked', c );
-			noSyncChecks = false;
-		};
-
-=======
->>>>>>> WPHome/master
 		catAddBefore = function( s ) {
 			if ( !$('#new'+taxonomy).val() )
 				return false;
@@ -726,11 +652,7 @@ jQuery(document).ready( function($) {
 			return false;
 		});
 
-<<<<<<< HEAD
-		$('#' + taxonomy + 'checklist li.popular-category input[type="checkbox"], #' + taxonomy + 'checklist-pop input[type="checkbox"]').live( 'click', function(){
-=======
 		$('#' + taxonomy + 'checklist, #' + taxonomy + 'checklist-pop').on( 'click', 'li.popular-category > label input[type="checkbox"]', function() {
->>>>>>> WPHome/master
 			var t = $(this), c = t.is(':checked'), id = t.val();
 			if ( id && t.parents('#taxonomy-'+taxonomy).length )
 				$('#in-' + taxonomy + '-' + id + ', #in-popular-' + taxonomy + '-' + id).prop( 'checked', c );
@@ -740,11 +662,7 @@ jQuery(document).ready( function($) {
 
 	// Custom Fields
 	if ( $('#postcustom').length ) {
-<<<<<<< HEAD
-		$('#the-list').wpList( { addAfter: function( xml, s ) {
-=======
 		$( '#the-list' ).wpList( { addAfter: function() {
->>>>>>> WPHome/master
 			$('table#list-table').show();
 		}, addBefore: function( s ) {
 			s.data += '&post_id=' + $('#post_ID').val();
@@ -758,41 +676,23 @@ jQuery(document).ready( function($) {
 		stamp = $('#timestamp').html();
 		visibility = $('#post-visibility-display').html();
 
-<<<<<<< HEAD
-		function updateVisibility() {
-			var pvSelect = $('#post-visibility-select');
-			if ( $('input:radio:checked', pvSelect).val() != 'public' ) {
-=======
 		updateVisibility = function() {
 			if ( $postVisibilitySelect.find('input:radio:checked').val() != 'public' ) {
->>>>>>> WPHome/master
 				$('#sticky').prop('checked', false);
 				$('#sticky-span').hide();
 			} else {
 				$('#sticky-span').show();
 			}
-<<<<<<< HEAD
-			if ( $('input:radio:checked', pvSelect).val() != 'password' ) {
-=======
 			if ( $postVisibilitySelect.find('input:radio:checked').val() != 'password' ) {
->>>>>>> WPHome/master
 				$('#password-span').hide();
 			} else {
 				$('#password-span').show();
 			}
-<<<<<<< HEAD
-		}
-
-		function updateText() {
-
-			if ( ! $('#timestampdiv').length )
-=======
 		};
 
 		updateText = function() {
 
 			if ( ! $timestampdiv.length )
->>>>>>> WPHome/master
 				return true;
 
 			var attemptedDate, originalDate, currentDate, publishOn, postStatus = $('#post_status'),
@@ -804,17 +704,10 @@ jQuery(document).ready( function($) {
 			currentDate = new Date( $('#cur_aa').val(), $('#cur_mm').val() -1, $('#cur_jj').val(), $('#cur_hh').val(), $('#cur_mn').val() );
 
 			if ( attemptedDate.getFullYear() != aa || (1 + attemptedDate.getMonth()) != mm || attemptedDate.getDate() != jj || attemptedDate.getMinutes() != mn ) {
-<<<<<<< HEAD
-				$('.timestamp-wrap', '#timestampdiv').addClass('form-invalid');
-				return false;
-			} else {
-				$('.timestamp-wrap', '#timestampdiv').removeClass('form-invalid');
-=======
 				$timestampdiv.find('.timestamp-wrap').addClass('form-invalid');
 				return false;
 			} else {
 				$timestampdiv.find('.timestamp-wrap').removeClass('form-invalid');
->>>>>>> WPHome/master
 			}
 
 			if ( attemptedDate > currentDate && $('#original_post_status').val() != 'future' ) {
@@ -832,19 +725,6 @@ jQuery(document).ready( function($) {
 			} else {
 				$('#timestamp').html(
 					publishOn + ' <b>' +
-<<<<<<< HEAD
-					$('option[value="' + $('#mm').val() + '"]', '#mm').text() + ' ' +
-					jj + ', ' +
-					aa + ' @ ' +
-					hh + ':' +
-					mn + '</b> '
-				);
-			}
-
-			if ( $('input:radio:checked', '#post-visibility-select').val() == 'private' ) {
-				$('#publish').val( postL10n.update );
-				if ( optPublish.length == 0 ) {
-=======
 					postL10n.dateFormat.replace( '%1$s', $('option[value="' + $('#mm').val() + '"]', '#mm').text() )
 						.replace( '%2$s', jj )
 						.replace( '%3$s', aa )
@@ -857,17 +737,12 @@ jQuery(document).ready( function($) {
 			if ( $postVisibilitySelect.find('input:radio:checked').val() == 'private' ) {
 				$('#publish').val( postL10n.update );
 				if ( 0 === optPublish.length ) {
->>>>>>> WPHome/master
 					postStatus.append('<option value="publish">' + postL10n.privatelyPublished + '</option>');
 				} else {
 					optPublish.html( postL10n.privatelyPublished );
 				}
 				$('option[value="publish"]', postStatus).prop('selected', true);
-<<<<<<< HEAD
-				$('.edit-post-status', '#misc-publishing-actions').hide();
-=======
 				$('#misc-publishing-actions .edit-post-status').hide();
->>>>>>> WPHome/master
 			} else {
 				if ( $('#original_post_status').val() == 'future' || $('#original_post_status').val() == 'draft' ) {
 					if ( optPublish.length ) {
@@ -878,11 +753,7 @@ jQuery(document).ready( function($) {
 					optPublish.html( postL10n.published );
 				}
 				if ( postStatus.is(':hidden') )
-<<<<<<< HEAD
-					$('.edit-post-status', '#misc-publishing-actions').show();
-=======
 					$('#misc-publishing-actions .edit-post-status').show();
->>>>>>> WPHome/master
 			}
 			$('#post-status-display').html($('option:selected', postStatus).text());
 			if ( $('option:selected', postStatus).val() == 'private' || $('option:selected', postStatus).val() == 'publish' ) {
@@ -896,51 +767,17 @@ jQuery(document).ready( function($) {
 				}
 			}
 			return true;
-<<<<<<< HEAD
-		}
-
-		$('.edit-visibility', '#visibility').click(function () {
-			if ($('#post-visibility-select').is(":hidden")) {
-				updateVisibility();
-				$('#post-visibility-select').slideDown('fast');
-=======
 		};
 
 		$( '#visibility .edit-visibility').click( function () {
 			if ( $postVisibilitySelect.is(':hidden') ) {
 				updateVisibility();
 				$postVisibilitySelect.slideDown('fast').find('input[type="radio"]').first().focus();
->>>>>>> WPHome/master
 				$(this).hide();
 			}
 			return false;
 		});
 
-<<<<<<< HEAD
-		$('.cancel-post-visibility', '#post-visibility-select').click(function () {
-			$('#post-visibility-select').slideUp('fast');
-			$('#visibility-radio-' + $('#hidden-post-visibility').val()).prop('checked', true);
-			$('#post_password').val($('#hidden_post_password').val());
-			$('#sticky').prop('checked', $('#hidden-post-sticky').prop('checked'));
-			$('#post-visibility-display').html(visibility);
-			$('.edit-visibility', '#visibility').show();
-			updateText();
-			return false;
-		});
-
-		$('.save-post-visibility', '#post-visibility-select').click(function () { // crazyhorse - multiple ok cancels
-			var pvSelect = $('#post-visibility-select');
-
-			pvSelect.slideUp('fast');
-			$('.edit-visibility', '#visibility').show();
-			updateText();
-
-			if ( $('input:radio:checked', pvSelect).val() != 'public' ) {
-				$('#sticky').prop('checked', false);
-			} // WEAPON LOCKED
-
-			if ( true == $('#sticky').prop('checked') ) {
-=======
 		$postVisibilitySelect.find('.cancel-post-visibility').click( function( event ) {
 			$postVisibilitySelect.slideUp('fast');
 			$('#visibility-radio-' + $('#hidden-post-visibility').val()).prop('checked', true);
@@ -962,33 +799,11 @@ jQuery(document).ready( function($) {
 			} // WEAPON LOCKED
 
 			if ( $('#sticky').prop('checked') ) {
->>>>>>> WPHome/master
 				sticky = 'Sticky';
 			} else {
 				sticky = '';
 			}
 
-<<<<<<< HEAD
-			$('#post-visibility-display').html(	postL10n[$('input:radio:checked', pvSelect).val() + sticky]	);
-			return false;
-		});
-
-		$('input:radio', '#post-visibility-select').change(function() {
-			updateVisibility();
-		});
-
-		$('#timestampdiv').siblings('a.edit-timestamp').click(function() {
-			if ($('#timestampdiv').is(":hidden")) {
-				$('#timestampdiv').slideDown('fast');
-				$('#mm').focus();
-				$(this).hide();
-			}
-			return false;
-		});
-
-		$('.cancel-timestamp', '#timestampdiv').click(function() {
-			$('#timestampdiv').slideUp('fast');
-=======
 			$('#post-visibility-display').html(	postL10n[ $postVisibilitySelect.find('input:radio:checked').val() + sticky ]	);
 			event.preventDefault();
 		});
@@ -1008,58 +823,11 @@ jQuery(document).ready( function($) {
 
 		$timestampdiv.find('.cancel-timestamp').click( function( event ) {
 			$timestampdiv.slideUp('fast').siblings('a.edit-timestamp').show().focus();
->>>>>>> WPHome/master
 			$('#mm').val($('#hidden_mm').val());
 			$('#jj').val($('#hidden_jj').val());
 			$('#aa').val($('#hidden_aa').val());
 			$('#hh').val($('#hidden_hh').val());
 			$('#mn').val($('#hidden_mn').val());
-<<<<<<< HEAD
-			$('#timestampdiv').siblings('a.edit-timestamp').show();
-			updateText();
-			return false;
-		});
-
-		$('.save-timestamp', '#timestampdiv').click(function () { // crazyhorse - multiple ok cancels
-			if ( updateText() ) {
-				$('#timestampdiv').slideUp('fast');
-				$('#timestampdiv').siblings('a.edit-timestamp').show();
-			}
-			return false;
-		});
-
-		$('#post').on( 'submit', function(e){
-			if ( ! updateText() ) {
-				e.preventDefault();
-				$('#timestampdiv').show();
-				$('#publishing-action .spinner').hide();
-				$('#publish').prop('disabled', false).removeClass('button-primary-disabled');
-				return false;
-			}
-		});
-
-		$('#post-status-select').siblings('a.edit-post-status').click(function() {
-			if ($('#post-status-select').is(":hidden")) {
-				$('#post-status-select').slideDown('fast');
-				$(this).hide();
-			}
-			return false;
-		});
-
-		$('.save-post-status', '#post-status-select').click(function() {
-			$('#post-status-select').slideUp('fast');
-			$('#post-status-select').siblings('a.edit-post-status').show();
-			updateText();
-			return false;
-		});
-
-		$('.cancel-post-status', '#post-status-select').click(function() {
-			$('#post-status-select').slideUp('fast');
-			$('#post_status').val($('#hidden_post_status').val());
-			$('#post-status-select').siblings('a.edit-post-status').show();
-			updateText();
-			return false;
-=======
 			updateText();
 			event.preventDefault();
 		});
@@ -1081,7 +849,7 @@ jQuery(document).ready( function($) {
 					wp.autosave.enableButtons();
 				}
 
-				$( '#publishing-action .spinner' ).removeClass( 'is-active' );
+				$('#publishing-action .spinner').hide();
 			}
 		});
 
@@ -1104,75 +872,10 @@ jQuery(document).ready( function($) {
 			$('#post_status').val( $('#hidden_post_status').val() );
 			updateText();
 			event.preventDefault();
->>>>>>> WPHome/master
 		});
 	} // end submitdiv
 
 	// permalink
-<<<<<<< HEAD
-	if ( $('#edit-slug-box').length ) {
-		editPermalink = function(post_id) {
-			var i, c = 0, e = $('#editable-post-name'), revert_e = e.html(), real_slug = $('#post_name'), revert_slug = real_slug.val(), b = $('#edit-slug-buttons'), revert_b = b.html(), full = $('#editable-post-name-full').html();
-
-			$('#view-post-btn').hide();
-			b.html('<a href="#" class="save button button-small">'+postL10n.ok+'</a> <a class="cancel" href="#">'+postL10n.cancel+'</a>');
-			b.children('.save').click(function() {
-				var new_slug = e.children('input').val();
-				if ( new_slug == $('#editable-post-name-full').text() ) {
-					return $('.cancel', '#edit-slug-buttons').click();
-				}
-				$.post(ajaxurl, {
-					action: 'sample-permalink',
-					post_id: post_id,
-					new_slug: new_slug,
-					new_title: $('#title').val(),
-					samplepermalinknonce: $('#samplepermalinknonce').val()
-				}, function(data) {
-					$('#edit-slug-box').html(data);
-					b.html(revert_b);
-					real_slug.val(new_slug);
-					makeSlugeditClickable();
-					$('#view-post-btn').show();
-				});
-				return false;
-			});
-
-			$('.cancel', '#edit-slug-buttons').click(function() {
-				$('#view-post-btn').show();
-				e.html(revert_e);
-				b.html(revert_b);
-				real_slug.val(revert_slug);
-				return false;
-			});
-
-			for ( i = 0; i < full.length; ++i ) {
-				if ( '%' == full.charAt(i) )
-					c++;
-			}
-
-			slug_value = ( c > full.length / 4 ) ? '' : full;
-			e.html('<input type="text" id="new-post-slug" value="'+slug_value+'" />').children('input').keypress(function(e){
-				var key = e.keyCode || 0;
-				// on enter, just save the new slug, don't save the post
-				if ( 13 == key ) {
-					b.children('.save').click();
-					return false;
-				}
-				if ( 27 == key ) {
-					b.children('.cancel').click();
-					return false;
-				}
-				real_slug.val(this.value);
-			}).focus();
-		}
-
-		makeSlugeditClickable = function() {
-			$('#editable-post-name').click(function() {
-				$('#edit-slug-buttons').children('.edit-slug').click();
-			});
-		}
-		makeSlugeditClickable();
-=======
 	function editPermalink() {
 		var i, slug_value,
 			c = 0,
@@ -1182,11 +885,7 @@ jQuery(document).ready( function($) {
 			revert_slug = real_slug.val(),
 			b = $('#edit-slug-buttons'),
 			revert_b = b.html(),
-			full = $('#editable-post-name-full');
-
-		// Deal with Twemoji in the post-name
-		full.find( 'img' ).replaceWith( function() { return this.alt; } );
-		full = full.html();
+			full = $('#editable-post-name-full').html();
 
 		$('#view-post-btn').hide();
 		b.html('<a href="#" class="save button button-small">'+postL10n.ok+'</a> <a class="cancel" href="#">'+postL10n.cancel+'</a>');
@@ -1210,7 +909,6 @@ jQuery(document).ready( function($) {
 						box.removeClass('hidden');
 					});
 				}
-
 				b.html(revert_b);
 				real_slug.val(new_slug);
 				$('#view-post-btn').show();
@@ -1256,16 +954,11 @@ jQuery(document).ready( function($) {
 				editPermalink();
 			}
 		});
->>>>>>> WPHome/master
 	}
 
 	// word count
 	if ( typeof(wpWordCount) != 'undefined' ) {
-<<<<<<< HEAD
-		$(document).triggerHandler('wpcountwords', [ co.val() ]);
-=======
 		$document.triggerHandler('wpcountwords', [ co.val() ]);
->>>>>>> WPHome/master
 
 		co.keyup( function(e) {
 			var k = e.keyCode || e.charCode;
@@ -1274,11 +967,7 @@ jQuery(document).ready( function($) {
 				return true;
 
 			if ( 13 == k || 8 == last || 46 == last )
-<<<<<<< HEAD
-				$(document).triggerHandler('wpcountwords', [ co.val() ]);
-=======
 				$document.triggerHandler('wpcountwords', [ co.val() ]);
->>>>>>> WPHome/master
 
 			last = k;
 			return true;
@@ -1290,11 +979,7 @@ jQuery(document).ready( function($) {
 
 		var title = $('#' + id), titleprompt = $('#' + id + '-prompt-text');
 
-<<<<<<< HEAD
-		if ( title.val() == '' )
-=======
 		if ( '' === title.val() )
->>>>>>> WPHome/master
 			titleprompt.removeClass('screen-reader-text');
 
 		titleprompt.click(function(){
@@ -1303,11 +988,7 @@ jQuery(document).ready( function($) {
 		});
 
 		title.blur(function(){
-<<<<<<< HEAD
-			if ( this.value == '' )
-=======
 			if ( '' === this.value )
->>>>>>> WPHome/master
 				titleprompt.removeClass('screen-reader-text');
 		}).focus(function(){
 			titleprompt.addClass('screen-reader-text');
@@ -1315,118 +996,6 @@ jQuery(document).ready( function($) {
 			titleprompt.addClass('screen-reader-text');
 			$(this).unbind(e);
 		});
-<<<<<<< HEAD
-	}
-
-	wptitlehint();
-
-	// resizable textarea#content
-	(function() {
-		var textarea = $('textarea#content'), offset = null, el;
-		// No point for touch devices
-		if ( !textarea.length || 'ontouchstart' in window )
-			return;
-
-		function dragging(e) {
-			textarea.height( Math.max(50, offset + e.pageY) + 'px' );
-			return false;
-		}
-
-		function endDrag(e) {
-			var height;
-
-			textarea.focus();
-			$(document).unbind('mousemove', dragging).unbind('mouseup', endDrag);
-
-			height = parseInt( textarea.css('height'), 10 );
-
-			// sanity check
-			if ( height && height > 50 && height < 5000 )
-				setUserSetting( 'ed_size', height );
-		}
-
-		textarea.css('resize', 'none');
-		el = $('<div id="content-resize-handle"><br></div>');
-		$('#wp-content-wrap').append(el);
-		el.on('mousedown', function(e) {
-			offset = textarea.height() - e.pageY;
-			textarea.blur();
-			$(document).mousemove(dragging).mouseup(endDrag);
-			return false;
-		});
-	})();
-
-	if ( typeof(tinymce) != 'undefined' ) {
-		tinymce.onAddEditor.add(function(mce, ed){
-			// iOS expands the iframe to full height and the user cannot adjust it.
-			if ( ed.id != 'content' || tinymce.isIOS5 )
-				return;
-
-			function getHeight() {
-				var height, node = document.getElementById('content_ifr'),
-					ifr_height = node ? parseInt( node.style.height, 10 ) : 0,
-					tb_height = $('#content_tbl tr.mceFirst').height();
-
-				if ( !ifr_height || !tb_height )
-					return false;
-
-				// total height including toolbar and statusbar
-				height = ifr_height + tb_height + 21;
-				// textarea height = total height - 33px toolbar
-				height -= 33;
-
-				return height;
-			}
-
-			// resize TinyMCE to match the textarea height when switching Text -> Visual
-			ed.onLoadContent.add( function(ed, o) {
-				var ifr_height, node = document.getElementById('content'),
-					height = node ? parseInt( node.style.height, 10 ) : 0,
-					tb_height = $('#content_tbl tr.mceFirst').height() || 33;
-
-				// height cannot be under 50 or over 5000
-				if ( !height || height < 50 || height > 5000 )
-					height = 360; // default height for the main editor
-
-				if ( getUserSetting( 'ed_size' ) > 5000  )
-					setUserSetting( 'ed_size', 360 );
-
-				// compensate for padding and toolbars
-				ifr_height = ( height - tb_height ) + 12;
-
-				// sanity check
-				if ( ifr_height > 50 && ifr_height < 5000 ) {
-					$('#content_tbl').css('height', '' );
-					$('#content_ifr').css('height', ifr_height + 'px' );
-				}
-			});
-
-			// resize the textarea to match TinyMCE's height when switching Visual -> Text
-			ed.onSaveContent.add( function(ed, o) {
-				var height = getHeight();
-
-				if ( !height || height < 50 || height > 5000 )
-					return;
-
-				$('textarea#content').css( 'height', height + 'px' );
-			});
-
-			// save on resizing TinyMCE
-			ed.onPostRender.add(function() {
-				$('#content_resize').on('mousedown.wp-mce-resize', function(e){
-					$(document).on('mouseup.wp-mce-resize', function(e){
-						var height;
-
-						$(document).off('mouseup.wp-mce-resize');
-
-						height = getHeight();
-						// sanity check
-						if ( height && height > 50 && height < 5000 )
-							setUserSetting( 'ed_size', height );
-					});
-				});
-			});
-=======
 	};
 
 	wptitlehint();
@@ -1520,7 +1089,6 @@ jQuery(document).ready( function($) {
 				editor.dom.addClass( body, format == 'post-format-0' ? 'post-format-standard' : format );
 				$( document ).trigger( 'editor-classchange' );
 			}
->>>>>>> WPHome/master
 		});
 	}
 });

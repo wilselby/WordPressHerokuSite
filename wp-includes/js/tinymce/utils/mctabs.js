@@ -1,15 +1,6 @@
 /**
  * mctabs.js
  *
-<<<<<<< HEAD
- * Copyright 2009, Moxiecode Systems AB
- * Released under LGPL License.
- *
- * License: http://tinymce.moxiecode.com/license
- * Contributing: http://tinymce.moxiecode.com/contributing
- */
-
-=======
  * Copyright, Moxiecode Systems AB
  * Released under LGPL License.
  *
@@ -19,7 +10,6 @@
 
 /*jshint globals: tinyMCEPopup */
 
->>>>>>> WPHome/master
 function MCTabs() {
 	this.settings = [];
 	this.onChange = tinyMCEPopup.editor.windowManager.createInstance('tinymce.util.Dispatcher');
@@ -134,15 +124,9 @@ tinyMCEPopup.onInit.add(function() {
 	var tinymce = tinyMCEPopup.getWin().tinymce, dom = tinyMCEPopup.dom, each = tinymce.each;
 
 	each(dom.select('div.tabs'), function(tabContainerElm) {
-<<<<<<< HEAD
-		var keyNav;
-
-		dom.setAttrib(tabContainerElm, "role", "tablist"); 
-=======
 		//var keyNav;
 
 		dom.setAttrib(tabContainerElm, "role", "tablist");
->>>>>>> WPHome/master
 
 		var items = tinyMCEPopup.dom.select('li', tabContainerElm);
 		var action = function(id) {
@@ -159,11 +143,7 @@ tinyMCEPopup.onInit.add(function() {
 
 		dom.bind(dom.getRoot(), 'keydown', function(evt) {
 			if (evt.keyCode === 9 && evt.ctrlKey && !evt.altKey) { // Tab
-<<<<<<< HEAD
-				keyNav.moveFocus(evt.shiftKey ? -1 : 1);
-=======
 				//keyNav.moveFocus(evt.shiftKey ? -1 : 1);
->>>>>>> WPHome/master
 				tinymce.dom.Event.cancel(evt);
 			}
 		});
@@ -172,21 +152,13 @@ tinyMCEPopup.onInit.add(function() {
 			dom.setAttrib(a, 'tabindex', '-1');
 		});
 
-<<<<<<< HEAD
-		keyNav = tinyMCEPopup.editor.windowManager.createInstance('tinymce.ui.KeyboardNavigation', {
-=======
 		/*keyNav = tinyMCEPopup.editor.windowManager.createInstance('tinymce.ui.KeyboardNavigation', {
->>>>>>> WPHome/master
 			root: tabContainerElm,
 			items: items,
 			onAction: action,
 			actOnFocus: true,
 			enableLeftRight: true,
 			enableUpDown: true
-<<<<<<< HEAD
-		}, tinyMCEPopup.dom);
-=======
 		}, tinyMCEPopup.dom);*/
->>>>>>> WPHome/master
 	});
 });

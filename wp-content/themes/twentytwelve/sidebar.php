@@ -1,14 +1,8 @@
 <?php
 /**
-<<<<<<< HEAD
- * The sidebar containing the main widget area.
- *
- * If no active widgets in sidebar, let's hide it completely.
-=======
  * The sidebar containing the main widget area
  *
  * If no active widgets are in the sidebar, hide it completely.
->>>>>>> WPHome/master
  *
  * @package WordPress
  * @subpackage Twenty_Twelve

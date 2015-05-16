@@ -7,17 +7,11 @@
  */
 
 if ( ! defined('WP_ADMIN') ) {
-<<<<<<< HEAD
-	// This file is being included from a file other than wp-admin/admin.php, so
-	// some setup was skipped. Make sure the admin message catalog is loaded since
-	// load_default_textdomain() will not have done so in this context.
-=======
 	/*
 	 * This file is being included from a file other than wp-admin/admin.php, so
 	 * some setup was skipped. Make sure the admin message catalog is loaded since
 	 * load_default_textdomain() will not have done so in this context.
 	 */
->>>>>>> WPHome/master
 	load_textdomain( 'default', WP_LANG_DIR . '/admin-' . get_locale() . '.mo' );
 }
 

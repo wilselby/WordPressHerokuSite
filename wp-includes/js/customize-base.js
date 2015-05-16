@@ -1,27 +1,6 @@
 window.wp = window.wp || {};
 
 (function( exports, $ ){
-<<<<<<< HEAD
-	var api, extend, ctor, inherits,
-		slice = Array.prototype.slice;
-
-	/* =====================================================================
-	 * Micro-inheritance - thank you, backbone.js.
-	 * ===================================================================== */
-
-	extend = function( protoProps, classProps ) {
-		var child = inherits( this, protoProps, classProps );
-		child.extend = this.extend;
-		return child;
-	};
-
-	// Shared empty constructor function to aid in prototype-chain creation.
-	ctor = function() {};
-
-	// Helper function to correctly set up the prototype chain, for subclasses.
-	// Similar to `goog.inherits`, but uses a hash of prototype properties and
-	// class properties to be extended.
-=======
 	var api = {}, ctor, inherits,
 		slice = Array.prototype.slice;
 
@@ -38,7 +17,6 @@ window.wp = window.wp || {};
 	 * @param  object staticProps Properties to apply directly to the class constructor.
 	 * @return child              The subclassed constructor.
 	 */
->>>>>>> WPHome/master
 	inherits = function( parent, protoProps, staticProps ) {
 		var child;
 
@@ -84,18 +62,9 @@ window.wp = window.wp || {};
 		return child;
 	};
 
-<<<<<<< HEAD
-	api = {};
-
-	/* =====================================================================
-	 * Base class.
-	 * ===================================================================== */
-
-=======
 	/**
 	 * Base class for object inheritance.
 	 */
->>>>>>> WPHome/master
 	api.Class = function( applicator, argsArray, options ) {
 		var magic, args = arguments;
 
@@ -117,8 +86,6 @@ window.wp = window.wp || {};
 		return magic;
 	};
 
-<<<<<<< HEAD
-=======
 	/**
 	 * Creates a subclass of the class.
 	 *
@@ -132,7 +99,6 @@ window.wp = window.wp || {};
 		return child;
 	};
 
->>>>>>> WPHome/master
 	api.Class.applicator = {};
 
 	api.Class.prototype.initialize = function() {};
@@ -157,20 +123,11 @@ window.wp = window.wp || {};
 		return false;
 	};
 
-<<<<<<< HEAD
-	api.Class.extend = extend;
-
-	/* =====================================================================
-	 * Events mixin.
-	 * ===================================================================== */
-
-=======
 	/**
 	 * An events manager object, offering the ability to bind to and trigger events.
 	 *
 	 * Used as a mixin.
 	 */
->>>>>>> WPHome/master
 	api.Events = {
 		trigger: function( id ) {
 			if ( this.topics && this.topics[ id ] )
@@ -178,48 +135,30 @@ window.wp = window.wp || {};
 			return this;
 		},
 
-<<<<<<< HEAD
-		bind: function( id, callback ) {
-=======
 		bind: function( id ) {
->>>>>>> WPHome/master
 			this.topics = this.topics || {};
 			this.topics[ id ] = this.topics[ id ] || $.Callbacks();
 			this.topics[ id ].add.apply( this.topics[ id ], slice.call( arguments, 1 ) );
 			return this;
 		},
 
-<<<<<<< HEAD
-		unbind: function( id, callback ) {
-=======
 		unbind: function( id ) {
->>>>>>> WPHome/master
 			if ( this.topics && this.topics[ id ] )
 				this.topics[ id ].remove.apply( this.topics[ id ], slice.call( arguments, 1 ) );
 			return this;
 		}
 	};
 
-<<<<<<< HEAD
-	/* =====================================================================
-	 * Observable values that support two-way binding.
-	 * ===================================================================== */
-
-=======
 	/**
 	 * Observable values that support two-way binding.
 	 *
 	 * @constuctor
 	 */
->>>>>>> WPHome/master
 	api.Value = api.Class.extend({
 		initialize: function( initial, options ) {
 			this._value = initial; // @todo: potentially change this to a this.set() call.
 			this.callbacks = $.Callbacks();
-<<<<<<< HEAD
-=======
 			this._dirty = false;
->>>>>>> WPHome/master
 
 			$.extend( this, options || {} );
 
@@ -245,19 +184,12 @@ window.wp = window.wp || {};
 			to = this.validate( to );
 
 			// Bail if the sanitized value is null or unchanged.
-<<<<<<< HEAD
-			if ( null === to || this._value === to )
-				return this;
-
-			this._value = to;
-=======
 			if ( null === to || _.isEqual( from, to ) ) {
 				return this;
 			}
 
 			this._value = to;
 			this._dirty = true;
->>>>>>> WPHome/master
 
 			this.callbacks.fireWith( this, [ to, from ] );
 
@@ -287,20 +219,12 @@ window.wp = window.wp || {};
 			return value;
 		},
 
-<<<<<<< HEAD
-		bind: function( callback ) {
-=======
 		bind: function() {
->>>>>>> WPHome/master
 			this.callbacks.add.apply( this.callbacks, arguments );
 			return this;
 		},
 
-<<<<<<< HEAD
-		unbind: function( callback ) {
-=======
 		unbind: function() {
->>>>>>> WPHome/master
 			this.callbacks.remove.apply( this.callbacks, arguments );
 			return this;
 		},
@@ -340,12 +264,6 @@ window.wp = window.wp || {};
 		}
 	});
 
-<<<<<<< HEAD
-	/* =====================================================================
-	 * A collection of observable values.
-	 * ===================================================================== */
-
-=======
 	/**
 	 * A collection of observable values.
 	 *
@@ -353,7 +271,6 @@ window.wp = window.wp || {};
 	 * @augments wp.customize.Class
 	 * @mixes wp.customize.Events
 	 */
->>>>>>> WPHome/master
 	api.Values = api.Class.extend({
 		defaultConstructor: api.Value,
 
@@ -475,27 +392,16 @@ window.wp = window.wp || {};
 
 	$.extend( api.Values.prototype, api.Events );
 
-<<<<<<< HEAD
-	/* =====================================================================
-	 * An observable value that syncs with an element.
-	 *
-	 * Handles inputs, selects, and textareas by default.
-	 * ===================================================================== */
-
-=======
 
 	/**
 	 * Cast a string to a jQuery collection if it isn't already.
 	 *
 	 * @param {string|jQuery collection} element
 	 */
->>>>>>> WPHome/master
 	api.ensure = function( element ) {
 		return typeof element == 'string' ? $( element ) : element;
 	};
 
-<<<<<<< HEAD
-=======
 	/**
 	 * An observable value that syncs with an element.
 	 *
@@ -505,7 +411,6 @@ window.wp = window.wp || {};
 	 * @augments wp.customize.Value
 	 * @augments wp.customize.Class
 	 */
->>>>>>> WPHome/master
 	api.Element = api.Value.extend({
 		initialize: function( element, options ) {
 			var self = this,
@@ -521,12 +426,6 @@ window.wp = window.wp || {};
 
 				if ( this.element.is('input') ) {
 					type = this.element.prop('type');
-<<<<<<< HEAD
-					if ( api.Element.synchronizer[ type ] )
-						synchronizer = api.Element.synchronizer[ type ];
-					if ( 'text' === type || 'password' === type )
-						this.events += ' keyup';
-=======
 					if ( api.Element.synchronizer[ type ] ) {
 						synchronizer = api.Element.synchronizer[ type ];
 					}
@@ -535,7 +434,6 @@ window.wp = window.wp || {};
 					} else if ( 'range' === type ) {
 						this.events += ' input propertychange';
 					}
->>>>>>> WPHome/master
 				} else if ( this.element.is('textarea') ) {
 					this.events += ' keyup';
 				}
@@ -570,11 +468,7 @@ window.wp = window.wp || {};
 
 	api.Element.synchronizer = {};
 
-<<<<<<< HEAD
-	$.each( [ 'html', 'val' ], function( i, method ) {
-=======
 	$.each( [ 'html', 'val' ], function( index, method ) {
->>>>>>> WPHome/master
 		api.Element.synchronizer[ method ] = {
 			update: function( to ) {
 				this.element[ method ]( to );
@@ -605,15 +499,6 @@ window.wp = window.wp || {};
 		}
 	};
 
-<<<<<<< HEAD
-	/* =====================================================================
-	 * Messenger for postMessage.
-	 * ===================================================================== */
-
-	$.support.postMessage = !! window.postMessage;
-
-	api.Messenger = api.Class.extend({
-=======
 	$.support.postMessage = !! window.postMessage;
 
 	/**
@@ -632,7 +517,6 @@ window.wp = window.wp || {};
 		 * @param  {mixed}  options Options hash. Optional.
 		 * @return {Value}          Class instance of the Value.
 		 */
->>>>>>> WPHome/master
 		add: function( key, initial, options ) {
 			return this[ key ] = new api.Value( initial, options );
 		},
@@ -654,41 +538,11 @@ window.wp = window.wp || {};
 
 			this.add( 'channel', params.channel );
 			this.add( 'url', params.url || '' );
-<<<<<<< HEAD
 			this.add( 'targetWindow', params.targetWindow || defaultTarget );
-=======
->>>>>>> WPHome/master
 			this.add( 'origin', this.url() ).link( this.url ).setter( function( to ) {
 				return to.replace( /([^:]+:\/\/[^\/]+).*/, '$1' );
 			});
 
-<<<<<<< HEAD
-=======
-			// first add with no value
-			this.add( 'targetWindow', null );
-			// This avoids SecurityErrors when setting a window object in x-origin iframe'd scenarios.
-			this.targetWindow.set = function( to ) {
-				var from = this._value;
-
-				to = this._setter.apply( this, arguments );
-				to = this.validate( to );
-
-				if ( null === to || from === to ) {
-					return this;
-				}
-
-				this._value = to;
-				this._dirty = true;
-
-				this.callbacks.fireWith( this, [ to, from ] );
-
-				return this;
-			};
-			// now set it
-			this.targetWindow( params.targetWindow || defaultTarget );
-
-
->>>>>>> WPHome/master
 			// Since we want jQuery to treat the receive function as unique
 			// to this instance, we give the function a new guid.
 			//
@@ -716,14 +570,11 @@ window.wp = window.wp || {};
 			if ( this.origin() && event.origin !== this.origin() )
 				return;
 
-<<<<<<< HEAD
-=======
 			// Ensure we have a string that's JSON.parse-able
 			if ( typeof event.data !== 'string' || event.data[0] !== '{' ) {
 				return;
 			}
 
->>>>>>> WPHome/master
 			message = JSON.parse( event.data );
 
 			// Check required message properties.
@@ -756,14 +607,7 @@ window.wp = window.wp || {};
 	// Add the Events mixin to api.Messenger.
 	$.extend( api.Messenger.prototype, api.Events );
 
-<<<<<<< HEAD
-	/* =====================================================================
-	 * Core customize object.
-	 * ===================================================================== */
-
-=======
 	// Core customize object.
->>>>>>> WPHome/master
 	api = $.extend( new api.Values(), api );
 	api.get = function() {
 		var result = {};
@@ -775,10 +619,6 @@ window.wp = window.wp || {};
 		return result;
 	};
 
-<<<<<<< HEAD
-	// Expose the API to the world.
-=======
 	// Expose the API publicly on window.wp.customize
->>>>>>> WPHome/master
 	exports.customize = api;
 })( wp, jQuery );

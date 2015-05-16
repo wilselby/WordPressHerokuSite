@@ -205,11 +205,7 @@ class Text_Diff {
      * @param string $line  The line to trim.
      * @param integer $key  The index of the line in the array. Not used.
      */
-<<<<<<< HEAD
-    function trimNewlines(&$line, $key)
-=======
     static function trimNewlines(&$line, $key)
->>>>>>> WPHome/master
     {
         $line = str_replace(array("\n", "\r"), '', $line);
     }
@@ -381,11 +377,7 @@ class Text_Diff_Op_copy extends Text_Diff_Op {
 
     function &reverse()
     {
-<<<<<<< HEAD
-        $reverse = &new Text_Diff_Op_copy($this->final, $this->orig);
-=======
         $reverse = new Text_Diff_Op_copy($this->final, $this->orig);
->>>>>>> WPHome/master
         return $reverse;
     }
 
@@ -407,11 +399,7 @@ class Text_Diff_Op_delete extends Text_Diff_Op {
 
     function &reverse()
     {
-<<<<<<< HEAD
-        $reverse = &new Text_Diff_Op_add($this->orig);
-=======
         $reverse = new Text_Diff_Op_add($this->orig);
->>>>>>> WPHome/master
         return $reverse;
     }
 
@@ -433,11 +421,7 @@ class Text_Diff_Op_add extends Text_Diff_Op {
 
     function &reverse()
     {
-<<<<<<< HEAD
-        $reverse = &new Text_Diff_Op_delete($this->final);
-=======
         $reverse = new Text_Diff_Op_delete($this->final);
->>>>>>> WPHome/master
         return $reverse;
     }
 
@@ -459,11 +443,7 @@ class Text_Diff_Op_change extends Text_Diff_Op {
 
     function &reverse()
     {
-<<<<<<< HEAD
-        $reverse = &new Text_Diff_Op_change($this->final, $this->orig);
-=======
         $reverse = new Text_Diff_Op_change($this->final, $this->orig);
->>>>>>> WPHome/master
         return $reverse;
     }
 

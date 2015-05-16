@@ -1,32 +1,17 @@
 /*
 Theme Name: Twenty Eleven
-<<<<<<< HEAD
-Theme URI: http://wordpress.org/extend/themes/twentyeleven
+Theme URI: http://wordpress.org/themes/twentyeleven
 Author: the WordPress team
 Author URI: http://wordpress.org/
 Description: The 2011 theme for WordPress is sophisticated, lightweight, and adaptable. Make it yours with a custom menu, header image, and background -- then go further with available theme options for light or dark color scheme, custom link colors, and three layout choices. Twenty Eleven comes equipped with a Showcase page template that transforms your front page into a showcase to show off your best content, widget support galore (sidebar, three footer areas, and a Showcase page widget area), and a custom "Ephemera" widget to display your Aside, Link, Quote, or Status posts. Included are styles for print and for the admin editor, support for featured images (as custom header images on posts and pages and as large images on featured "sticky" posts), and special styles for six different post formats.
-Version: 1.5
-License: GNU General Public License v2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Tags: dark, light, white, black, gray, one-column, two-columns, left-sidebar, right-sidebar, fixed-width, flexible-width, custom-background, custom-colors, custom-header, custom-menu, editor-style, featured-image-header, featured-images, flexible-header, full-width-template, microformats, post-formats, rtl-language-support, sticky-post, theme-options, translation-ready
-Text Domain: twentyeleven
-*/
-
-/* =Reset default browser CSS. Based on work by Eric Meyer: http://meyerweb.com/eric/tools/css/reset/index.html
-=======
-Theme URI: https://wordpress.org/themes/twentyeleven/
-Author: the WordPress team
-Author URI: https://wordpress.org/
-Description: The 2011 theme for WordPress is sophisticated, lightweight, and adaptable. Make it yours with a custom menu, header image, and background -- then go further with available theme options for light or dark color scheme, custom link colors, and three layout choices. Twenty Eleven comes equipped with a Showcase page template that transforms your front page into a showcase to show off your best content, widget support galore (sidebar, three footer areas, and a Showcase page widget area), and a custom "Ephemera" widget to display your Aside, Link, Quote, or Status posts. Included are styles for print and for the admin editor, support for featured images (as custom header images on posts and pages and as large images on featured "sticky" posts), and special styles for six different post formats.
-Version: 2.1
+Version: 2.0
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: dark, light, white, black, gray, one-column, two-columns, left-sidebar, right-sidebar, fixed-layout, responsive-layout, custom-background, custom-colors, custom-header, custom-menu, editor-style, featured-image-header, featured-images, flexible-header, full-width-template, microformats, post-formats, rtl-language-support, sticky-post, theme-options, translation-ready
 Text Domain: twentyeleven
 */
 
-/* =Reset default browser CSS. Based on work by Eric Meyer.
->>>>>>> WPHome/master
+/* =Reset default browser CSS. Based on work by Eric Meyer: http://meyerweb.com/eric/tools/css/reset/index.html
 -------------------------------------------------------------- */
 
 html, body, div, span, applet, object, iframe,
@@ -508,29 +493,12 @@ a:hover {
 }
 
 /* Assistive text */
-<<<<<<< HEAD
 .assistive-text {
 	position: absolute !important;
 	clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
 	clip: rect(1px, 1px, 1px, 1px);
 }
-#access a.assistive-text:active,
 #access a.assistive-text:focus {
-=======
-.assistive-text,
-.screen-reader-text {
-	position: absolute !important;
-	clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
-	clip: rect(1px, 1px, 1px, 1px);
-	overflow: hidden;
-	height: 1px;
-	width: 1px;
-}
-#access a.assistive-text:focus,
-.screen-reader-text:hover,
-.screen-reader-text:active,
-.screen-reader-text:focus {
->>>>>>> WPHome/master
 	background: #eee;
 	border-bottom: 1px solid #ddd;
 	color: #1982d1;
@@ -800,12 +768,9 @@ a:hover {
 .entry-summary {
 	padding: 1.625em 0 0;
 }
-<<<<<<< HEAD
-=======
 .entry-content .more-link {
 	white-space: nowrap;
 }
->>>>>>> WPHome/master
 .entry-content h1,
 .entry-content h2,
 .comment-content h1,
@@ -904,11 +869,7 @@ dl.gallery-item {
 .entry-content img,
 .comment-content img,
 .widget img {
-<<<<<<< HEAD
-	max-width: 97.5%; /* Fluid images for posts, comments, and widgets */
-=======
 	max-width: 100%; /* Fluid images for posts, comments, and widgets */
->>>>>>> WPHome/master
 }
 img[class*="align"],
 img[class*="wp-image-"],
@@ -944,11 +905,7 @@ p img,
 }
 .wp-caption img {
 	display: block;
-<<<<<<< HEAD
-	margin: 0 auto;
-=======
 	margin: -2px 0 0 -2px;
->>>>>>> WPHome/master
 	max-width: 98%;
 }
 .wp-caption .wp-caption-text,
@@ -998,10 +955,7 @@ img[class*="wp-image-"],
 #content .gallery .gallery-icon img {/* Add fancy borders to all WordPress-added images but not things like badges and icons and the like */
 	border: 1px solid #ddd;
 	padding: 6px;
-<<<<<<< HEAD
-=======
 	max-width: 97.5%;
->>>>>>> WPHome/master
 }
 .wp-caption img {
 	border-color: #eee;
@@ -1287,8 +1241,6 @@ blockquote.pull.alignright {
 	padding: 0;
 }
 
-<<<<<<< HEAD
-=======
 /* =Standard
 ----------------------------------------------- */
 
@@ -1298,7 +1250,6 @@ blockquote.pull.alignright {
 .format-standard .video-player {
 	margin-bottom: 24px;
 }
->>>>>>> WPHome/master
 
 /* =Quote
 ----------------------------------------------- */
@@ -1767,8 +1718,6 @@ section.recent-posts .other-recent-posts li:after {
 	text-transform: uppercase;
 }
 
-<<<<<<< HEAD
-=======
 /* =Media
 -------------------------------------------------------------- */
 
@@ -1781,7 +1730,6 @@ video {
 .attachment .entry-content .mejs-container {
 	margin-bottom: 24px;
 }
->>>>>>> WPHome/master
 
 /* =Navigation
 -------------------------------------------------------------- */
@@ -2359,8 +2307,6 @@ p.comment-form-comment {
 /* =Responsive Structure
 ----------------------------------------------- */
 
-<<<<<<< HEAD
-=======
 /* Does the same thing as <meta name="viewport" content="width=device-width">,
  * but in the future W3C standard way. -ms- prefix is required for IE10+ to
  * render responsive styling in Windows 8 "snapped" views; IE10+ does not honor
@@ -2373,7 +2319,6 @@ p.comment-form-comment {
 	width: device-width;
 }
 
->>>>>>> WPHome/master
 @media (max-width: 800px) {
 	/* Simplify the basic layout */
 	#main #content {
@@ -2485,10 +2430,6 @@ p.comment-form-comment {
 		margin-right: 0;
 		width: auto;
 	}
-<<<<<<< HEAD
-
-=======
->>>>>>> WPHome/master
 }
 @media (max-width: 650px) {
 	/* @media (max-width: 650px) Reduce font-sizes for better readability on smaller devices */
@@ -2504,12 +2445,6 @@ p.comment-form-comment {
 	#access ul {
 		font-size: 12px;
 	}
-<<<<<<< HEAD
-=======
-	#branding .only-search + #access div {
-		padding-right: 0;
-	}
->>>>>>> WPHome/master
 	article.intro .entry-content {
 		font-size: 12px;
 	}
@@ -2562,14 +2497,11 @@ p.comment-form-comment {
 	.singular.page .hentry {
 		padding: 1.625em 0 0;
 	}
-<<<<<<< HEAD
-=======
 	.singular .entry-header .entry-meta,
 	.singular .entry-header .entry-format,
 	.singular .entry-meta .edit-link a {
 		position: static;
 	}
->>>>>>> WPHome/master
 	/* Talking avatars take up too much room at this size */
 	.commentlist > li.comment,
 	.commentlist > li.pingback {
@@ -2604,10 +2536,6 @@ p.comment-form-comment {
 		width: 100%;
 		height: auto;
 	}
-<<<<<<< HEAD
-
-=======
->>>>>>> WPHome/master
 }
 @media (max-width: 450px) {
 	#content .gallery-columns-2 .gallery-item {
@@ -2618,10 +2546,6 @@ p.comment-form-comment {
 		width: 100%;
 		height: auto;
 	}
-<<<<<<< HEAD
-
-=======
->>>>>>> WPHome/master
 }
 @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
 	body {
@@ -2633,10 +2557,6 @@ p.comment-form-comment {
 	#branding {
 		border-top: none;
 	}
-<<<<<<< HEAD
-
-=======
->>>>>>> WPHome/master
 }
 
 
@@ -2805,10 +2725,6 @@ p.comment-form-comment {
 	.commentlist .children > li.bypostauthor > article .comment-meta {
 		color: #666;
 	}
-<<<<<<< HEAD
-
-=======
->>>>>>> WPHome/master
 }
 
 
@@ -2822,12 +2738,6 @@ p.comment-form-comment {
 	padding-right: -7.6%;
 	max-width: 1000px;
 }
-<<<<<<< HEAD
-#ie7 section.featured-post {
-	margin-left: -7.6%;
-	margin-right: -7.6%;
-	max-width: 850px;
-=======
 #ie7 .featured-posts {
 	margin: 0 -7.6%;
 }
@@ -2835,27 +2745,18 @@ p.comment-form-comment {
 	margin-left: 0;
 	margin-right: 0;
 	max-width: 100%;
->>>>>>> WPHome/master
 }
 #ie7 section.recent-posts {
 	margin-right: 7.6%;
 }
 
-<<<<<<< HEAD
-=======
 
->>>>>>> WPHome/master
 /* =IE8
 ----------------------------------------------- */
 
 #ie8 section.feature-image.large img {
-<<<<<<< HEAD
-	width: 100%;
-}
-=======
 	width: auto;
 }
 #ie8 section.featured-post .attachment-small-feature {
 	max-width: none;
 }
->>>>>>> WPHome/master

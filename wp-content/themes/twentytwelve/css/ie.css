@@ -17,11 +17,7 @@ body.custom-background-white .site {
 }
 .assistive-text,
 .site .screen-reader-text {
-<<<<<<< HEAD
 	clip: rect(1px 1px 1px 1px); /* IE7 */
-=======
-	clip: rect(1px 1px 1px 1px);
->>>>>>> WPHome/master
 }
 .full-width .site-content {
 	float: none;
@@ -57,11 +53,7 @@ img[class*="attachment-"] {
 	width: 65.104166667%;
 }
 body.template-front-page .site-content,
-<<<<<<< HEAD
-body.single-attachment .site-content,
-=======
 body.attachment .site-content,
->>>>>>> WPHome/master
 body.full-width .site-content {
 	width: 100%;
 }
@@ -112,20 +104,11 @@ body.full-width .site-content {
 	position: relative;
 }
 .main-navigation li ul {
-<<<<<<< HEAD
-	display: none;
-=======
->>>>>>> WPHome/master
 	margin: 0;
 	padding: 0;
 	position: absolute;
 	top: 100%;
 	z-index: 1;
-<<<<<<< HEAD
-}
-.ie7 .main-navigation li ul {
-	left: 0;
-=======
 	height: 1px;
 	width: 1px;
 	overflow: hidden;
@@ -136,17 +119,12 @@ body.full-width .site-content {
 	display: none;
 	left: 0;
 	overflow: visible;
->>>>>>> WPHome/master
 }
 .main-navigation li ul ul,
 .ie7 .main-navigation li ul ul {
 	top: 0;
 	left: 100%;
 }
-<<<<<<< HEAD
-.main-navigation ul li:hover > ul {
-	border-left: 0;
-=======
 .main-navigation ul li:hover > ul,
 .main-navigation ul li:focus > ul,
 .main-navigation .focus > ul {
@@ -158,7 +136,6 @@ body.full-width .site-content {
 }
 .ie7 .main-navigation ul li:hover > ul,
 .ie7 .main-navigation ul li:focus > ul {
->>>>>>> WPHome/master
 	display: block;
 }
 .main-navigation li ul li a {
@@ -181,11 +158,7 @@ body.full-width .site-content {
 	color: #636363;
 	font-weight: bold;
 }
-<<<<<<< HEAD
-.menu-toggle {
-=======
 .main-navigation .menu-toggle {
->>>>>>> WPHome/master
 	display: none;
 }
 .entry-header .entry-title {
@@ -210,9 +183,6 @@ body.full-width .site-content {
 	margin-bottom: 0;
 	width: 47.916666667%;
 }
-<<<<<<< HEAD
-.template-front-page .widget-area .widget,
-=======
 /* IE Front Page Template Widget fix */
 .template-front-page .widget-area {
 	clear: both;
@@ -223,25 +193,17 @@ body.full-width .site-content {
 }
 .template-front-page .widget-area .widget,
 .template-front-page .first.front-widgets,
->>>>>>> WPHome/master
 .template-front-page.two-sidebars .widget-area .front-widgets {
 	float: left;
 	margin-bottom: 24px;
 	width: 51.875%;
 }
-<<<<<<< HEAD
-.template-front-page .widget-area .widget:nth-child(odd) {
-	clear: right;
-}
-.template-front-page .widget-area .widget:nth-child(even),
-=======
 .template-front-page .second.front-widgets,
 .template-front-page .widget-area .widget:nth-child(odd) {
 	clear: right;
 }
 .template-front-page .first.front-widgets,
 .template-front-page .second.front-widgets,
->>>>>>> WPHome/master
 .template-front-page.two-sidebars .widget-area .front-widgets + .front-widgets {
 	float: right;
 	margin: 0 0 24px;
@@ -252,17 +214,12 @@ body.full-width .site-content {
 	float: none;
 	width: auto;
 }
-<<<<<<< HEAD
-
-/* =RTL overrides for IE7 and IE8
-=======
 /* add input font for <IE9 Password Box to make the bullets show up */
 input[type="password"] {
 	font-family: Helvetica, Arial, sans-serif;
 }
 
 /* RTL overrides for IE7 and IE8
->>>>>>> WPHome/master
 -------------------------------------------------------------- */
 .rtl .site-header h1,
 .rtl .site-header h2 {

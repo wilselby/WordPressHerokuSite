@@ -8,11 +8,7 @@
  */
 
 /** Load WordPress Administration Bootstrap */
-<<<<<<< HEAD
-require_once( './admin.php' );
-=======
 require_once( dirname( __FILE__ ) . '/admin.php' );
->>>>>>> WPHome/master
 
 if ( ! is_multisite() )
 	wp_die( __( 'Multisite support is not enabled.' ) );
@@ -36,25 +32,17 @@ get_current_screen()->add_help_tab( array(
 
 get_current_screen()->set_help_sidebar(
 	'<p><strong>' . __('For more information:') . '</strong></p>' .
-<<<<<<< HEAD
 	'<p>' . __('<a href="http://codex.wordpress.org/Network_Admin_Sites_Screen" target="_blank">Documentation on Site Management</a>') . '</p>' .
-	'<p>' . __('<a href="http://wordpress.org/support/forum/multisite/" target="_blank">Support Forums</a>') . '</p>'
-=======
-	'<p>' . __('<a href="https://codex.wordpress.org/Network_Admin_Sites_Screen" target="_blank">Documentation on Site Management</a>') . '</p>' .
 	'<p>' . __('<a href="https://wordpress.org/support/forum/multisite/" target="_blank">Support Forums</a>') . '</p>'
->>>>>>> WPHome/master
 );
 
 $_SERVER['REQUEST_URI'] = remove_query_arg( 'update', $_SERVER['REQUEST_URI'] );
 $referer = remove_query_arg( 'update', wp_get_referer() );
 
-<<<<<<< HEAD
-=======
 if ( ! empty( $_REQUEST['paged'] ) ) {
 	$referer = add_query_arg( 'paged', (int) $_REQUEST['paged'], $referer );
 }
 
->>>>>>> WPHome/master
 $id = isset( $_REQUEST['id'] ) ? intval( $_REQUEST['id'] ) : 0;
 
 if ( ! $id )
@@ -62,23 +50,12 @@ if ( ! $id )
 
 $details = get_blog_details( $id );
 if ( ! can_edit_network( $details->site_id ) )
-<<<<<<< HEAD
 	wp_die( __( 'You do not have permission to access this page.' ) );
-=======
-	wp_die( __( 'You do not have permission to access this page.' ), 403 );
->>>>>>> WPHome/master
 
 $is_main_site = is_main_site( $id );
 
 switch_to_blog( $id );
 
-<<<<<<< HEAD
-$editblog_roles = $wp_roles->roles;
-
-$default_role = get_option( 'default_role' );
-
-=======
->>>>>>> WPHome/master
 $action = $wp_list_table->current_action();
 
 if ( $action ) {
@@ -108,19 +85,10 @@ if ( $action ) {
 			if ( !empty( $_POST['newuser'] ) ) {
 				$update = 'adduser';
 				$newuser = $_POST['newuser'];
-<<<<<<< HEAD
-				$userid = $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM " . $wpdb->users . " WHERE user_login = %s", $newuser ) );
-				if ( $userid ) {
-					$blog_prefix = $wpdb->get_blog_prefix( $id );
-					$user = $wpdb->get_var( "SELECT user_id FROM " . $wpdb->usermeta . " WHERE user_id='$userid' AND meta_key='{$blog_prefix}capabilities'" );
-					if ( $user == false )
-						add_user_to_blog( $id, $userid, $_POST['new_role'] );
-=======
 				$user = get_user_by( 'login', $newuser );
 				if ( $user && $user->exists() ) {
 					if ( ! is_user_member_of_blog( $user->ID, $id ) )
 						add_user_to_blog( $id, $user->ID, $_POST['new_role'] );
->>>>>>> WPHome/master
 					else
 						$update = 'err_add_member';
 				} else {
@@ -165,11 +133,7 @@ if ( $action ) {
 
 					// If the user doesn't already belong to the blog, bail.
 					if ( !is_user_member_of_blog( $user_id ) )
-<<<<<<< HEAD
-						wp_die(__('Cheatin&#8217; uh?'));
-=======
 						wp_die( __( 'Cheatin&#8217; uh?' ), 403 );
->>>>>>> WPHome/master
 
 					$user = get_userdata( $user_id );
 					$user->set_role( $_REQUEST['new_role'] );
@@ -191,34 +155,15 @@ if ( isset( $_GET['action'] ) && 'update-site' == $_GET['action'] ) {
 	exit();
 }
 
-<<<<<<< HEAD
 add_screen_option( 'per_page', array( 'label' => _x( 'Users', 'users per page (screen options)' ) ) );
 
 $site_url_no_http = preg_replace( '#^http(s)?://#', '', get_blogaddress_by_id( $id ) );
 $title_site_url_linked = sprintf( __('Edit Site: <a href="%1$s">%2$s</a>'), get_blogaddress_by_id( $id ), $site_url_no_http );
 $title = sprintf( __('Edit Site: %s'), $site_url_no_http );
-=======
-add_screen_option( 'per_page' );
-
-$site_url_no_http = preg_replace( '#^http(s)?://#', '', get_blogaddress_by_id( $id ) );
-$title_site_url_linked = sprintf( __( 'Edit Site: %s' ), '<a href="' . get_blogaddress_by_id( $id ) . '">' . $site_url_no_http . '</a>' );
-$title = sprintf( __( 'Edit Site: %s' ), $site_url_no_http );
->>>>>>> WPHome/master
 
 $parent_file = 'sites.php';
 $submenu_file = 'sites.php';
 
-<<<<<<< HEAD
-if ( ! wp_is_large_network( 'users' ) && apply_filters( 'show_network_site_users_add_existing_form', true ) )
-	wp_enqueue_script( 'user-suggest' );
-
-require('../admin-header.php'); ?>
-
-<script type='text/javascript'>
-/* <![CDATA[ */
-var current_site_id = <?php echo $id; ?>;
-/* ]]> */
-=======
 /**
  * Filter whether to show the Add Existing User form on the Multisite Users screen.
  *
@@ -232,16 +177,13 @@ if ( ! wp_is_large_network( 'users' ) && apply_filters( 'show_network_site_users
 require( ABSPATH . 'wp-admin/admin-header.php' ); ?>
 
 <script type="text/javascript">
+/* <![CDATA[ */
 var current_site_id = <?php echo $id; ?>;
->>>>>>> WPHome/master
+/* ]]> */
 </script>
 
 
 <div class="wrap">
-<<<<<<< HEAD
-<?php screen_icon('ms-admin'); ?>
-=======
->>>>>>> WPHome/master
 <h2 id="edit-site"><?php echo $title_site_url_linked ?></h2>
 <h3 class="nav-tab-wrapper">
 <?php
@@ -261,7 +203,6 @@ foreach ( $tabs as $tab_id => $tab ) {
 if ( isset($_GET['update']) ) :
 	switch($_GET['update']) {
 	case 'adduser':
-<<<<<<< HEAD
 		echo '<div id="message" class="updated"><p>' . __( 'User added.' ) . '</p></div>';
 		break;
 	case 'err_add_member':
@@ -290,45 +231,11 @@ if ( isset($_GET['update']) ) :
 		break;
 	case 'err_new_dup':
 		echo '<div id="message" class="error"><p>' . __( 'Duplicated username or email address.' ) . '</p></div>';
-=======
-		echo '<div id="message" class="updated notice is-dismissible"><p>' . __( 'User added.' ) . '</p></div>';
-		break;
-	case 'err_add_member':
-		echo '<div id="message" class="error notice is-dismissible"><p>' . __( 'User is already a member of this site.' ) . '</p></div>';
-		break;
-	case 'err_add_notfound':
-		echo '<div id="message" class="error notice is-dismissible"><p>' . __( 'Enter the username of an existing user.' ) . '</p></div>';
-		break;
-	case 'promote':
-		echo '<div id="message" class="updated notice is-dismissible"><p>' . __( 'Changed roles.' ) . '</p></div>';
-		break;
-	case 'err_promote':
-		echo '<div id="message" class="error notice is-dismissible"><p>' . __( 'Select a user to change role.' ) . '</p></div>';
-		break;
-	case 'remove':
-		echo '<div id="message" class="updated notice is-dismissible"><p>' . __( 'User removed from this site.' ) . '</p></div>';
-		break;
-	case 'err_remove':
-		echo '<div id="message" class="error notice is-dismissible"><p>' . __( 'Select a user to remove.' ) . '</p></div>';
-		break;
-	case 'newuser':
-		echo '<div id="message" class="updated notice is-dismissible"><p>' . __( 'User created.' ) . '</p></div>';
-		break;
-	case 'err_new':
-		echo '<div id="message" class="error notice is-dismissible"><p>' . __( 'Enter the username and email.' ) . '</p></div>';
-		break;
-	case 'err_new_dup':
-		echo '<div id="message" class="error notice is-dismissible"><p>' . __( 'Duplicated username or email address.' ) . '</p></div>';
->>>>>>> WPHome/master
 		break;
 	}
 endif; ?>
 
-<<<<<<< HEAD
 <form class="search-form" action="" method="get">
-=======
-<form class="search-form" method="get">
->>>>>>> WPHome/master
 <?php $wp_list_table->search_box( __( 'Search Users' ), 'user' ); ?>
 <input type="hidden" name="id" value="<?php echo esc_attr( $id ) ?>" />
 </form>
@@ -342,11 +249,6 @@ endif; ?>
 
 </form>
 
-<<<<<<< HEAD
-<?php do_action( 'network_site_users_after_list_table', '' );?>
-
-<?php if ( current_user_can( 'promote_users' ) && apply_filters( 'show_network_site_users_add_existing_form', true ) ) : ?>
-=======
 <?php
 /**
  * Fires after the list table on the Users screen in the Multisite Network Admin.
@@ -357,35 +259,18 @@ do_action( 'network_site_users_after_list_table' );
 
 /** This filter is documented in wp-admin/network/site-users.php */
 if ( current_user_can( 'promote_users' ) && apply_filters( 'show_network_site_users_add_existing_form', true ) ) : ?>
->>>>>>> WPHome/master
 <h3 id="add-existing-user"><?php _e( 'Add Existing User' ); ?></h3>
 <form action="site-users.php?action=adduser" id="adduser" method="post">
 	<input type="hidden" name="id" value="<?php echo esc_attr( $id ) ?>" />
 	<table class="form-table">
 		<tr>
-<<<<<<< HEAD
 			<th scope="row"><?php _e( 'Username' ); ?></th>
 			<td><input type="text" class="regular-text wp-suggest-user" name="newuser" id="newuser" /></td>
 		</tr>
 		<tr>
 			<th scope="row"><?php _e( 'Role' ); ?></th>
 			<td><select name="new_role" id="new_role_0">
-			<?php
-			reset( $editblog_roles );
-			foreach ( $editblog_roles as $role => $role_assoc ) {
-				$name = translate_user_role( $role_assoc['name'] );
-				echo '<option ' . selected( $default_role, $role, false ) . ' value="' . esc_attr( $role ) . '">' . esc_html( $name ) . '</option>';
-			}
-			?>
-=======
-			<th scope="row"><label for="newuser"><?php _e( 'Username' ); ?></label></th>
-			<td><input type="text" class="regular-text wp-suggest-user" name="newuser" id="newuser" /></td>
-		</tr>
-		<tr>
-			<th scope="row"><label for="new_role_adduser"><?php _e( 'Role' ); ?></label></th>
-			<td><select name="new_role" id="new_role_adduser">
 			<?php wp_dropdown_roles( get_option( 'default_role' ) ); ?>
->>>>>>> WPHome/master
 			</select></td>
 		</tr>
 	</table>
@@ -394,9 +279,6 @@ if ( current_user_can( 'promote_users' ) && apply_filters( 'show_network_site_us
 </form>
 <?php endif; ?>
 
-<<<<<<< HEAD
-<?php if ( current_user_can( 'create_users' ) && apply_filters( 'show_network_site_users_add_new_form', true ) ) : ?>
-=======
 <?php
 /**
  * Filter whether to show the Add New User form on the Multisite Users screen.
@@ -406,13 +288,11 @@ if ( current_user_can( 'promote_users' ) && apply_filters( 'show_network_site_us
  * @param bool $bool Whether to show the Add New User form. Default true.
  */
 if ( current_user_can( 'create_users' ) && apply_filters( 'show_network_site_users_add_new_form', true ) ) : ?>
->>>>>>> WPHome/master
 <h3 id="add-new-user"><?php _e( 'Add New User' ); ?></h3>
 <form action="<?php echo network_admin_url('site-users.php?action=newuser'); ?>" id="newuser" method="post">
 	<input type="hidden" name="id" value="<?php echo esc_attr( $id ) ?>" />
 	<table class="form-table">
 		<tr>
-<<<<<<< HEAD
 			<th scope="row"><?php _e( 'Username' ) ?></th>
 			<td><input type="text" class="regular-text" name="user[username]" /></td>
 		</tr>
@@ -423,26 +303,7 @@ if ( current_user_can( 'create_users' ) && apply_filters( 'show_network_site_use
 		<tr>
 			<th scope="row"><?php _e( 'Role' ); ?></th>
 			<td><select name="new_role" id="new_role_0">
-			<?php
-			reset( $editblog_roles );
-			foreach ( $editblog_roles as $role => $role_assoc ) {
-				$name = translate_user_role( $role_assoc['name'] );
-				echo '<option ' . selected( $default_role, $role, false ) . ' value="' . esc_attr( $role ) . '">' . esc_html( $name ) . '</option>';
-			}
-			?>
-=======
-			<th scope="row"><label for="user_username"><?php _e( 'Username' ) ?></label></th>
-			<td><input type="text" class="regular-text" name="user[username]" id="user_username" /></td>
-		</tr>
-		<tr>
-			<th scope="row"><label for="user_email"><?php _e( 'Email' ) ?></label></th>
-			<td><input type="text" class="regular-text" name="user[email]" id="user_email" /></td>
-		</tr>
-		<tr>
-			<th scope="row"><label for="new_role_newuser"><?php _e( 'Role' ); ?></label></th>
-			<td><select name="new_role" id="new_role_newuser">
 			<?php wp_dropdown_roles( get_option( 'default_role' ) ); ?>
->>>>>>> WPHome/master
 			</select></td>
 		</tr>
 		<tr class="form-field">
@@ -455,8 +316,4 @@ if ( current_user_can( 'create_users' ) && apply_filters( 'show_network_site_use
 <?php endif; ?>
 </div>
 <?php
-<<<<<<< HEAD
-require('../admin-footer.php');
-=======
 require( ABSPATH . 'wp-admin/admin-footer.php' );
->>>>>>> WPHome/master

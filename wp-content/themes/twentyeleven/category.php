@@ -1,10 +1,6 @@
 <?php
 /**
-<<<<<<< HEAD
- * The template for displaying Category Archive pages.
-=======
  * Template for displaying Category Archive pages
->>>>>>> WPHome/master
  *
  * @package WordPress
  * @subpackage Twenty_Eleven
@@ -25,10 +21,6 @@ get_header(); ?>
 
 					<?php
 						$category_description = category_description();
-<<<<<<< HEAD
-						if ( ! empty( $category_description ) )
-							echo apply_filters( 'category_archive_meta', '<div class="category-archive-meta">' . $category_description . '</div>' );
-=======
 						if ( ! empty( $category_description ) ) {
 							/**
 							 * Filter the default Twenty Eleven category description.
@@ -39,7 +31,6 @@ get_header(); ?>
 							 */
 							echo apply_filters( 'category_archive_meta', '<div class="category-archive-meta">' . $category_description . '</div>' );
 						}
->>>>>>> WPHome/master
 					?>
 				</header>
 
@@ -49,12 +40,8 @@ get_header(); ?>
 				<?php while ( have_posts() ) : the_post(); ?>
 
 					<?php
-<<<<<<< HEAD
-						/* Include the Post-Format-specific template for the content.
-=======
 						/*
 						 * Include the Post-Format-specific template for the content.
->>>>>>> WPHome/master
 						 * If you want to overload this in a child theme then include a file
 						 * called content-___.php (where ___ is the Post Format name) and that will be used instead.
 						 */

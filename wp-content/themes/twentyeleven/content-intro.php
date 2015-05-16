@@ -1,10 +1,6 @@
 <?php
 /**
-<<<<<<< HEAD
- * The template for displaying page content in the showcase.php page template
-=======
  * Template for displaying page content in the showcase.php page template
->>>>>>> WPHome/master
  *
  * @package WordPress
  * @subpackage Twenty_Eleven

@@ -7,17 +7,6 @@
  */
 
 /**
-<<<<<<< HEAD
- * {@internal Missing Short Description}}
- *
- * @since 2.0.0
- *
- * @return unknown
- */
-function got_mod_rewrite() {
-	$got_rewrite = apache_mod_loaded('mod_rewrite', true);
-	return apply_filters('got_rewrite', $got_rewrite);
-=======
  * Returns whether the server is running Apache with the mod_rewrite module loaded.
  *
  * @since 2.0.0
@@ -62,7 +51,6 @@ function got_url_rewrite() {
 	 * @param bool $got_url_rewrite Whether URL rewriting is available.
 	 */
 	return apply_filters( 'got_url_rewrite', $got_url_rewrite );
->>>>>>> WPHome/master
 }
 
 /**
@@ -70,13 +58,8 @@ function got_url_rewrite() {
  *
  * @since 1.5.0
  *
-<<<<<<< HEAD
- * @param unknown_type $filename
- * @param unknown_type $marker
-=======
  * @param string $filename
  * @param string $marker
->>>>>>> WPHome/master
  * @return array An array of strings from a file (.htaccess ) from between BEGIN and END markers.
  */
 function extract_from_markers( $filename, $marker ) {
@@ -111,15 +94,9 @@ function extract_from_markers( $filename, $marker ) {
  *
  * @since 1.5.0
  *
-<<<<<<< HEAD
- * @param unknown_type $filename
- * @param unknown_type $marker
- * @param unknown_type $insertion
-=======
  * @param string $filename
  * @param string $marker
  * @param array  $insertion
->>>>>>> WPHome/master
  * @return bool True on write success, false on failure.
  */
 function insert_with_markers( $filename, $marker, $insertion ) {
@@ -186,15 +163,10 @@ function save_mod_rewrite_rules() {
 	$home_path = get_home_path();
 	$htaccess_file = $home_path.'.htaccess';
 
-<<<<<<< HEAD
-	// If the file doesn't already exist check for write access to the directory and whether we have some rules.
-	// else check for write access to the file.
-=======
 	/*
 	 * If the file doesn't already exist check for write access to the directory
 	 * and whether we have some rules. Else check for write access to the file.
 	 */
->>>>>>> WPHome/master
 	if ((!file_exists($htaccess_file) && is_writable($home_path) && $wp_rewrite->using_mod_rewrite_permalinks()) || is_writable($htaccess_file)) {
 		if ( got_mod_rewrite() ) {
 			$rules = explode( "\n", $wp_rewrite->mod_rewrite_rules() );
@@ -239,11 +211,7 @@ function iis7_save_url_rewrite_rules(){
  *
  * @since 1.5.0
  *
-<<<<<<< HEAD
- * @param unknown_type $file
-=======
  * @param string $file
->>>>>>> WPHome/master
  */
 function update_recently_edited( $file ) {
 	$oldfiles = (array ) get_option( 'recently_edited' );
@@ -283,28 +251,16 @@ add_action( 'update_option_page_on_front', 'update_home_siteurl', 10, 2 );
 /**
  * Shorten an URL, to be used as link text
  *
-<<<<<<< HEAD
- * @since 1.2.1
-=======
  * @since 1.2.0
->>>>>>> WPHome/master
  *
  * @param string $url
  * @return string
  */
 function url_shorten( $url ) {
-<<<<<<< HEAD
-	$short_url = str_replace( 'http://', '', stripslashes( $url ));
-	$short_url = str_replace( 'www.', '', $short_url );
-	$short_url = untrailingslashit( $short_url );
-	if ( strlen( $short_url ) > 35 )
-		$short_url = substr( $short_url, 0, 32 ) . '...';
-=======
 	$short_url = str_replace( array( 'http://', 'www.' ), '', $url );
 	$short_url = untrailingslashit( $short_url );
 	if ( strlen( $short_url ) > 35 )
 		$short_url = substr( $short_url, 0, 32 ) . '&hellip;';
->>>>>>> WPHome/master
 	return $short_url;
 }
 
@@ -320,19 +276,6 @@ function url_shorten( $url ) {
  * @param array $vars An array of globals to reset.
  */
 function wp_reset_vars( $vars ) {
-<<<<<<< HEAD
-	for ( $i=0; $i<count( $vars ); $i += 1 ) {
-		$var = $vars[$i];
-		global $$var;
-
-		if ( empty( $_POST[$var] ) ) {
-			if ( empty( $_GET[$var] ) )
-				$$var = '';
-			else
-				$$var = $_GET[$var];
-		} else {
-			$$var = $_POST[$var];
-=======
 	foreach ( $vars as $var ) {
 		if ( empty( $_POST[ $var ] ) ) {
 			if ( empty( $_GET[ $var ] ) ) {
@@ -342,7 +285,6 @@ function wp_reset_vars( $vars ) {
 			}
 		} else {
 			$GLOBALS[ $var ] = $_POST[ $var ];
->>>>>>> WPHome/master
 		}
 	}
 }
@@ -352,19 +294,11 @@ function wp_reset_vars( $vars ) {
  *
  * @since 2.1.0
  *
-<<<<<<< HEAD
- * @param unknown_type $message
- */
-function show_message($message) {
-	if ( is_wp_error($message) ){
-		if ( $message->get_error_data() )
-=======
  * @param string|WP_Error $message
  */
 function show_message($message) {
 	if ( is_wp_error($message) ){
 		if ( $message->get_error_data() && is_string( $message->get_error_data() ) )
->>>>>>> WPHome/master
 			$message = $message->get_error_message() . ': ' . $message->get_error_data();
 		else
 			$message = $message->get_error_message();
@@ -382,13 +316,6 @@ function wp_doc_link_parse( $content ) {
 		return array();
 
 	$tokens = token_get_all( $content );
-<<<<<<< HEAD
-	$functions = array();
-	$ignore_functions = array();
-	for ( $t = 0, $count = count( $tokens ); $t < $count; $t++ ) {
-		if ( !is_array( $tokens[$t] ) ) continue;
-		if ( T_STRING == $tokens[$t][0] && ( '(' == $tokens[ $t + 1 ] || '(' == $tokens[ $t + 2 ] ) ) {
-=======
 	$count = count( $tokens );
 	$functions = array();
 	$ignore_functions = array();
@@ -398,7 +325,6 @@ function wp_doc_link_parse( $content ) {
 		}
 
 		if ( T_STRING == $tokens[ $t ][0] && ( '(' == $tokens[ $t + 1 ] || '(' == $tokens[ $t + 2 ] ) ) {
->>>>>>> WPHome/master
 			// If it's a function or class defined locally, there's not going to be any docs available
 			if ( ( isset( $tokens[ $t - 2 ][1] ) && in_array( $tokens[ $t - 2 ][1], array( 'function', 'class' ) ) ) || ( isset( $tokens[ $t - 2 ][0] ) && T_OBJECT_OPERATOR == $tokens[ $t - 1 ][0] ) ) {
 				$ignore_functions[] = $tokens[$t][1];
@@ -410,9 +336,6 @@ function wp_doc_link_parse( $content ) {
 
 	$functions = array_unique( $functions );
 	sort( $functions );
-<<<<<<< HEAD
-	$ignore_functions = apply_filters( 'documentation_ignore_functions', $ignore_functions );
-=======
 
 	/**
 	 * Filter the list of functions and classes to be ignored from the documentation lookup.
@@ -423,7 +346,6 @@ function wp_doc_link_parse( $content ) {
 	 */
 	$ignore_functions = apply_filters( 'documentation_ignore_functions', $ignore_functions );
 
->>>>>>> WPHome/master
 	$ignore_functions = array_unique( $ignore_functions );
 
 	$out = array();
@@ -439,13 +361,8 @@ function wp_doc_link_parse( $content ) {
 /**
  * Saves option for number of rows when listing posts, pages, comments, etc.
  *
-<<<<<<< HEAD
- * @since 2.8
-**/
-=======
  * @since 2.8.0
  */
->>>>>>> WPHome/master
 function set_screen_options() {
 
 	if ( isset($_POST['wp_screen_options']) && is_array($_POST['wp_screen_options']) ) {
@@ -488,9 +405,6 @@ function set_screen_options() {
 					return;
 				break;
 			default:
-<<<<<<< HEAD
-				$value = apply_filters('set-screen-option', false, $option, $value);
-=======
 
 				/**
 				 * Filter a screen option value before it is set.
@@ -510,7 +424,6 @@ function set_screen_options() {
 				 */
 				$value = apply_filters( 'set-screen-option', false, $option, $value );
 
->>>>>>> WPHome/master
 				if ( false === $value )
 					return;
 				break;
@@ -523,11 +436,7 @@ function set_screen_options() {
 }
 
 /**
-<<<<<<< HEAD
- * Check if rewrite rule for WordPress already exists in the IIS 7 configuration file
-=======
  * Check if rewrite rule for WordPress already exists in the IIS 7+ configuration file
->>>>>>> WPHome/master
  *
  * @since 2.8.0
  *
@@ -585,11 +494,7 @@ function iis7_delete_rewrite_rule($filename) {
 }
 
 /**
-<<<<<<< HEAD
- * Add WordPress rewrite rule to the IIS 7 configuration file.
-=======
  * Add WordPress rewrite rule to the IIS 7+ configuration file.
->>>>>>> WPHome/master
  *
  * @since 2.8.0
  *
@@ -689,32 +594,6 @@ function saveDomDocument($doc, $filename) {
  *
  * @since 3.0.0
  */
-<<<<<<< HEAD
-function admin_color_scheme_picker() {
-	global $_wp_admin_css_colors, $user_id; ?>
-<fieldset><legend class="screen-reader-text"><span><?php _e('Admin Color Scheme')?></span></legend>
-<?php
-$current_color = get_user_option('admin_color', $user_id);
-if ( empty($current_color) )
-	$current_color = 'fresh';
-foreach ( $_wp_admin_css_colors as $color => $color_info ): ?>
-<div class="color-option"><input name="admin_color" id="admin_color_<?php echo esc_attr( $color ); ?>" type="radio" value="<?php echo esc_attr( $color ); ?>" class="tog" <?php checked($color, $current_color); ?> />
-	<table class="color-palette">
-	<tr>
-	<?php foreach ( $color_info->colors as $html_color ): ?>
-	<td style="background-color: <?php echo esc_attr( $html_color ); ?>" title="<?php echo esc_attr( $color ); ?>">&nbsp;</td>
-	<?php endforeach; ?>
-	</tr>
-	</table>
-
-	<label for="admin_color_<?php echo esc_attr( $color ); ?>"><?php echo esc_html( $color_info->name ); ?></label>
-</div>
-	<?php endforeach; ?>
-</fieldset>
-<?php
-}
-
-=======
 function admin_color_scheme_picker( $user_id ) {
 	global $_wp_admin_css_colors;
 
@@ -783,14 +662,13 @@ function wp_color_scheme_settings() {
 		$icon_colors = $_wp_admin_css_colors['fresh']->icon_colors;
 	} else {
 		// Fall back to the default set of icon colors if the default scheme is missing.
-		$icon_colors = array( 'base' => '#999', 'focus' => '#00a0d2', 'current' => '#fff' );
+		$icon_colors = array( 'base' => '#999', 'focus' => '#2ea2cc', 'current' => '#fff' );
 	}
 
 	echo '<script type="text/javascript">var _wpColorScheme = ' . wp_json_encode( array( 'icons' => $icon_colors ) ) . ";</script>\n";
 }
 add_action( 'admin_head', 'wp_color_scheme_settings' );
 
->>>>>>> WPHome/master
 function _ipad_meta() {
 	if ( wp_is_mobile() ) {
 		?>
@@ -799,8 +677,6 @@ function _ipad_meta() {
 	}
 }
 add_action('admin_head', '_ipad_meta');
-<<<<<<< HEAD
-=======
 
 /**
  * Check lock status for posts displayed on the Posts screen
@@ -965,50 +841,5 @@ function post_form_autocomplete_off() {
 		echo ' autocomplete="off"';
 	}
 }
+
 add_action( 'post_edit_form_tag', 'post_form_autocomplete_off' );
-
-/**
- * Remove single-use URL parameters and create canonical link based on new URL.
- *
- * Remove specific query string parameters from a URL, create the canonical link,
- * put it in the admin header, and change the current URL to match.
- *
- * @since 4.2.0
- */
-function wp_admin_canonical_url() {
-	$removable_query_args = array(
-		'message', 'settings-updated', 'saved',
-		'update', 'updated', 'activated',
-		'activate', 'deactivate', 'locked',
-		'deleted', 'trashed', 'untrashed',
-		'enabled', 'disabled', 'skipped',
-		'spammed', 'unspammed',
-	);
-
-	/**
-	 * Filter the list of URL parameters to remove.
-	 *
-	 * @since 4.2.0
-	 *
-	 * @param array $removable_query_args An array of parameters to remove from the URL.
-	 */
-	$removable_query_args = apply_filters( 'removable_query_args', $removable_query_args );
-
-	if ( empty( $removable_query_args ) ) {
-		return;
-	}
-
-	// Ensure we're using an absolute URL.
-	$current_url  = set_url_scheme( 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] );
-	$filtered_url = remove_query_arg( $removable_query_args, $current_url );
-	?>
-	<link id="wp-admin-canonical" rel="canonical" href="<?php echo esc_url( $filtered_url ); ?>" />
-	<script>
-		if ( window.history.replaceState ) {
-			window.history.replaceState( null, null, document.getElementById( 'wp-admin-canonical' ).href + window.location.hash );
-		}
-	</script>
-<?php
-}
-add_action( 'admin_head', 'wp_admin_canonical_url' );
->>>>>>> WPHome/master

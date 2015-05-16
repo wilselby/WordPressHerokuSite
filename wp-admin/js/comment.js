@@ -1,31 +1,19 @@
-<<<<<<< HEAD
-=======
 /* global postboxes:true, commentL10n:true */
->>>>>>> WPHome/master
 jQuery(document).ready( function($) {
 
 	postboxes.add_postbox_toggles('comment');
 
 	var stamp = $('#timestamp').html();
 	$('.edit-timestamp').click(function () {
-<<<<<<< HEAD
-		if ($('#timestampdiv').is(":hidden")) {
-			$('#timestampdiv').slideDown("normal");
-=======
 		if ($('#timestampdiv').is(':hidden')) {
 			$('#timestampdiv').slideDown('normal');
->>>>>>> WPHome/master
 			$('.edit-timestamp').hide();
 		}
 		return false;
 	});
 
 	$('.cancel-timestamp').click(function() {
-<<<<<<< HEAD
-		$('#timestampdiv').slideUp("normal");
-=======
 		$('#timestampdiv').slideUp('normal');
->>>>>>> WPHome/master
 		$('#mm').val($('#hidden_mm').val());
 		$('#jj').val($('#hidden_jj').val());
 		$('#aa').val($('#hidden_aa').val());
@@ -47,11 +35,7 @@ jQuery(document).ready( function($) {
 			$('.timestamp-wrap', '#timestampdiv').removeClass('form-invalid');
 		}
 
-<<<<<<< HEAD
-		$('#timestampdiv').slideUp("normal");
-=======
 		$('#timestampdiv').slideUp('normal');
->>>>>>> WPHome/master
 		$('.edit-timestamp').show();
 		$('#timestamp').html(
 			commentL10n.submittedOn + ' <b>' +

@@ -10,15 +10,9 @@
  */
 
 /** Load WordPress Administration Bootstrap */
-<<<<<<< HEAD
-require_once ('admin.php');
-
-wp_reset_vars(array('action', 'cat_id', 'linkurl', 'name', 'image', 'description', 'visible', 'target', 'category', 'link_id', 'submit', 'order_by', 'links_show_cat_id', 'rating', 'rel', 'notes', 'linkcheck[]'));
-=======
 require_once( dirname( __FILE__ ) . '/admin.php' );
 
 wp_reset_vars( array( 'action', 'cat_id', 'link_id' ) );
->>>>>>> WPHome/master
 
 if ( ! current_user_can('manage_links') )
 	wp_link_manager_disabled_message();
@@ -36,11 +30,7 @@ switch ($action) {
 	case 'deletebookmarks' :
 		check_admin_referer('bulk-bookmarks');
 
-<<<<<<< HEAD
-		//for each link id (in $linkcheck[]) change category to selected value
-=======
 		// For each link id (in $linkcheck[]) change category to selected value.
->>>>>>> WPHome/master
 		if (count($linkcheck) == 0) {
 			wp_redirect($this_file);
 			exit;
@@ -56,32 +46,16 @@ switch ($action) {
 
 		wp_redirect("$this_file?deleted=$deleted");
 		exit;
-<<<<<<< HEAD
-		break;
-=======
->>>>>>> WPHome/master
 
 	case 'move' :
 		check_admin_referer('bulk-bookmarks');
 
-<<<<<<< HEAD
-		//for each link id (in $linkcheck[]) change category to selected value
-=======
 		// For each link id (in $linkcheck[]) change category to selected value.
->>>>>>> WPHome/master
 		if (count($linkcheck) == 0) {
 			wp_redirect($this_file);
 			exit;
 		}
 		$all_links = join(',', $linkcheck);
-<<<<<<< HEAD
-		// should now have an array of links we can change
-		//$q = $wpdb->query("update $wpdb->links SET link_category='$category' WHERE link_id IN ($all_links)");
-
-		wp_redirect($this_file);
-		exit;
-		break;
-=======
 		/*
 		 * Should now have an array of links we can change:
 		 *     $q = $wpdb->query("update $wpdb->links SET link_category='$category' WHERE link_id IN ($all_links)");
@@ -89,7 +63,6 @@ switch ($action) {
 
 		wp_redirect($this_file);
 		exit;
->>>>>>> WPHome/master
 
 	case 'add' :
 		check_admin_referer('add-bookmark');
@@ -100,10 +73,6 @@ switch ($action) {
 
 		wp_redirect( $redir );
 		exit;
-<<<<<<< HEAD
-		break;
-=======
->>>>>>> WPHome/master
 
 	case 'save' :
 		$link_id = (int) $_POST['link_id'];
@@ -113,10 +82,6 @@ switch ($action) {
 
 		wp_redirect($this_file);
 		exit;
-<<<<<<< HEAD
-		break;
-=======
->>>>>>> WPHome/master
 
 	case 'delete' :
 		$link_id = (int) $_GET['link_id'];
@@ -126,10 +91,6 @@ switch ($action) {
 
 		wp_redirect($this_file);
 		exit;
-<<<<<<< HEAD
-		break;
-=======
->>>>>>> WPHome/master
 
 	case 'edit' :
 		wp_enqueue_script('link');
@@ -147,13 +108,8 @@ switch ($action) {
 		if (!$link = get_link_to_edit($link_id))
 			wp_die(__('Link not found.'));
 
-<<<<<<< HEAD
-		include ('edit-link-form.php');
-		include ('admin-footer.php');
-=======
 		include( ABSPATH . 'wp-admin/edit-link-form.php' );
 		include( ABSPATH . 'wp-admin/admin-footer.php' );
->>>>>>> WPHome/master
 		break;
 
 	default :

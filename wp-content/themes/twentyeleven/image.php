@@ -1,10 +1,6 @@
 <?php
 /**
-<<<<<<< HEAD
- * The template for displaying image attachments.
-=======
  * Template for displaying image attachments
->>>>>>> WPHome/master
  *
  * @package WordPress
  * @subpackage Twenty_Eleven
@@ -52,11 +48,7 @@ get_header(); ?>
 							<div class="entry-attachment">
 								<div class="attachment">
 <?php
-<<<<<<< HEAD
-	/**
-=======
 	/*
->>>>>>> WPHome/master
 	 * Grab the IDs of all the image attachments in a gallery so we can get the URL of the next adjacent image in a gallery,
 	 * or the first image (if we're looking at the last image in a gallery), or, in a gallery of one, just the link to that image file
 	 */
@@ -65,34 +57,22 @@ get_header(); ?>
 		if ( $attachment->ID == $post->ID )
 			break;
 	}
-<<<<<<< HEAD
-	$k++;
-	// If there is more than 1 attachment in a gallery
-	if ( count( $attachments ) > 1 ) {
-=======
 
 	// If there is more than 1 attachment in a gallery
 	if ( count( $attachments ) > 1 ) {
 		$k++;
->>>>>>> WPHome/master
 		if ( isset( $attachments[ $k ] ) )
 			// get the URL of the next image attachment
 			$next_attachment_url = get_attachment_link( $attachments[ $k ]->ID );
 		else
 			// or get the URL of the first image attachment
-<<<<<<< HEAD
 			$next_attachment_url = get_attachment_link( $attachments[ 0 ]->ID );
-=======
-			$next_attachment_url = get_attachment_link( $attachments[0]->ID );
->>>>>>> WPHome/master
 	} else {
 		// or, if there's only 1 image, get the URL of the image
 		$next_attachment_url = wp_get_attachment_url();
 	}
 ?>
 									<a href="<?php echo esc_url( $next_attachment_url ); ?>" title="<?php the_title_attribute(); ?>" rel="attachment"><?php
-<<<<<<< HEAD
-=======
 									/**
 									 * Filter the Twenty Eleven default attachment size.
 									 *
@@ -100,7 +80,6 @@ get_header(); ?>
 									 *
 									 * @param int The height and width attachment size dimensions in pixels. Default 848.
 									 */
->>>>>>> WPHome/master
 									$attachment_size = apply_filters( 'twentyeleven_attachment_size', 848 );
 									echo wp_get_attachment_image( $post->ID, array( $attachment_size, 1024 ) ); // filterable image width with 1024px limit for image height.
 									?></a>

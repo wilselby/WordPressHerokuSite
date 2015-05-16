@@ -7,11 +7,7 @@
  * @since 3.0.0
  */
 
-<<<<<<< HEAD
-require_once( './admin.php' );
-=======
 require_once( dirname( __FILE__ ) . '/admin.php' );
->>>>>>> WPHome/master
 
 if ( !is_multisite() )
 	wp_die( __( 'Multisite support is not enabled.' ) );
@@ -43,42 +39,23 @@ get_current_screen()->add_help_tab( array(
 	'id'      => 'overview',
 	'title'   => __('Overview'),
 	'content' =>
-<<<<<<< HEAD
-		'<p>' . __('This screen shows an individual user all of their sites in this network, and also allows that user to set a primary site. He or she can use the links under each site to visit either the frontend or the dashboard for that site.') . '</p>' .
-=======
 		'<p>' . __('This screen shows an individual user all of their sites in this network, and also allows that user to set a primary site. They can use the links under each site to visit either the frontend or the dashboard for that site.') . '</p>' .
->>>>>>> WPHome/master
 		'<p>' . __('Up until WordPress version 3.0, what is now called a Multisite Network had to be installed separately as WordPress MU (multi-user).') . '</p>'
 ) );
 
 get_current_screen()->set_help_sidebar(
 	'<p><strong>' . __('For more information:') . '</strong></p>' .
-<<<<<<< HEAD
 	'<p>' . __('<a href="http://codex.wordpress.org/Dashboard_My_Sites_Screen" target="_blank">Documentation on My Sites</a>') . '</p>' .
-	'<p>' . __('<a href="http://wordpress.org/support/" target="_blank">Support Forums</a>') . '</p>'
-);
-
-require_once( './admin-header.php' );
-
-if ( $updated ) { ?>
-	<div id="message" class="updated"><p><strong><?php _e( 'Settings saved.' ); ?></strong></p></div>
-<?php } ?>
-
-<div class="wrap">
-<?php screen_icon(); ?>
-=======
-	'<p>' . __('<a href="https://codex.wordpress.org/Dashboard_My_Sites_Screen" target="_blank">Documentation on My Sites</a>') . '</p>' .
 	'<p>' . __('<a href="https://wordpress.org/support/" target="_blank">Support Forums</a>') . '</p>'
 );
 
 require_once( ABSPATH . 'wp-admin/admin-header.php' );
 
 if ( $updated ) { ?>
-	<div id="message" class="updated notice is-dismissible"><p><strong><?php _e( 'Settings saved.' ); ?></strong></p></div>
+	<div id="message" class="updated"><p><strong><?php _e( 'Settings saved.' ); ?></strong></p></div>
 <?php } ?>
 
 <div class="wrap">
->>>>>>> WPHome/master
 <h2><?php echo esc_html( $title ); ?></h2>
 <?php
 if ( empty( $blogs ) ) :
@@ -87,20 +64,7 @@ if ( empty( $blogs ) ) :
 	echo '</p>';
 else :
 ?>
-<<<<<<< HEAD
 <form id="myblogs" action="" method="post">
-	<?php
-	choose_primary_blog();
-	do_action( 'myblogs_allblogs_options' );
-	?>
-	<br clear="all" />
-	<table class="widefat fixed">
-	<?php
-	$settings_html = apply_filters( 'myblogs_options', '', 'global' );
-	if ( $settings_html != '' ) {
-		echo '<tr><td valign="top"><h3>' . __( 'Global Settings' ) . '</h3></td><td>';
-=======
-<form id="myblogs" method="post">
 	<?php
 	choose_primary_blog();
 	/**
@@ -111,7 +75,7 @@ else :
 	do_action( 'myblogs_allblogs_options' );
 	?>
 	<br clear="all" />
-	<table class="widefat fixed striped">
+	<table class="widefat fixed">
 	<?php
 	/**
 	 * Enable the Global Settings section on the My Sites screen.
@@ -128,7 +92,6 @@ else :
 	$settings_html = apply_filters( 'myblogs_options', '', 'global' );
 	if ( $settings_html != '' ) {
 		echo '<tr><td><h3>' . __( 'Global Settings' ) . '</h3></td><td>';
->>>>>>> WPHome/master
 		echo $settings_html;
 		echo '</td></tr>';
 	}
@@ -146,20 +109,10 @@ else :
 		$split = $split + $cols;
 	}
 
-<<<<<<< HEAD
 	$c = '';
 	foreach ( $rows as $row ) {
 		$c = $c == 'alternate' ? '' : 'alternate';
 		echo "<tr class='$c'>";
-		$i = 0;
-		foreach ( $row as $user_blog ) {
-			$s = $i == 3 ? '' : 'border-right: 1px solid #ccc;';
-			echo "<td valign='top' style='$s'>";
-			echo "<h3>{$user_blog->blogname}</h3>";
-			echo "<p>" . apply_filters( 'myblogs_blog_actions', "<a href='" . esc_url( get_home_url( $user_blog->userblog_id ) ). "'>" . __( 'Visit' ) . "</a> | <a href='" . esc_url( get_admin_url( $user_blog->userblog_id ) ) . "'>" . __( 'Dashboard' ) . "</a>", $user_blog ) . "</p>";
-=======
-	foreach ( $rows as $row ) {
-		echo "<tr>";
 		$i = 0;
 		foreach ( $row as $user_blog ) {
 			$s = $i == 3 ? '' : 'border-right: 1px solid #ccc;';
@@ -175,7 +128,6 @@ else :
 			 */
 			echo "<p>" . apply_filters( 'myblogs_blog_actions', "<a href='" . esc_url( get_home_url( $user_blog->userblog_id ) ). "'>" . __( 'Visit' ) . "</a> | <a href='" . esc_url( get_admin_url( $user_blog->userblog_id ) ) . "'>" . __( 'Dashboard' ) . "</a>", $user_blog ) . "</p>";
 			/** This filter is documented in wp-admin/my-sites.php */
->>>>>>> WPHome/master
 			echo apply_filters( 'myblogs_options', '', $user_blog );
 			echo "</td>";
 			$i++;
@@ -190,8 +142,4 @@ else :
 <?php endif; ?>
 	</div>
 <?php
-<<<<<<< HEAD
-include( './admin-footer.php' );
-=======
 include( ABSPATH . 'wp-admin/admin-footer.php' );
->>>>>>> WPHome/master

@@ -1,12 +1,8 @@
 <?php
 /**
  * Template Name: Sidebar Template
-<<<<<<< HEAD
- * Description: A Page Template that adds a sidebar to pages
-=======
  *
  * Description: A Page Template that adds a sidebar to pages.
->>>>>>> WPHome/master
  *
  * @package WordPress
  * @subpackage Twenty_Eleven

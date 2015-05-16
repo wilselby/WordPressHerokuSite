@@ -7,20 +7,14 @@
 
 header('Content-Type: ' . feed_content_type('atom') . '; charset=' . get_option('blog_charset'), true);
 echo '<?xml version="1.0" encoding="' . get_option('blog_charset') . '" ?' . '>';
-<<<<<<< HEAD
-=======
 
 /** This action is documented in wp-includes/feed-rss2.php */
 do_action( 'rss_tag_pre', 'atom-comments' );
->>>>>>> WPHome/master
 ?>
 <feed
 	xmlns="http://www.w3.org/2005/Atom"
 	xml:lang="<?php bloginfo_rss( 'language' ); ?>"
 	xmlns:thr="http://purl.org/syndication/thread/1.0"
-<<<<<<< HEAD
-	<?php do_action('atom_ns'); do_action('atom_comments_ns'); ?>
-=======
 	<?php
 		/** This action is documented in wp-includes/feed-atom.php */
 		do_action( 'atom_ns' );
@@ -32,7 +26,6 @@ do_action( 'rss_tag_pre', 'atom-comments' );
 		 */
 		do_action( 'atom_comments_ns' );
 	?>
->>>>>>> WPHome/master
 >
 	<title type="text"><?php
 		if ( is_singular() )
@@ -59,9 +52,6 @@ do_action( 'rss_tag_pre', 'atom-comments' );
 	<link rel="self" type="application/atom+xml" href="<?php bloginfo_rss('comments_atom_url'); ?>" />
 	<id><?php bloginfo_rss('comments_atom_url'); ?></id>
 <?php } ?>
-<<<<<<< HEAD
-<?php do_action('comments_atom_head'); ?>
-=======
 <?php
 	/**
 	 * Fires at the end of the Atom comment feed header.
@@ -70,7 +60,6 @@ do_action( 'rss_tag_pre', 'atom-comments' );
 	 */
 	do_action( 'comments_atom_head' );
 ?>
->>>>>>> WPHome/master
 <?php
 if ( have_comments() ) : while ( have_comments() ) : the_comment();
 	$comment_post = $GLOBALS['post'] = get_post( $comment->comment_post_ID );
@@ -79,12 +68,8 @@ if ( have_comments() ) : while ( have_comments() ) : the_comment();
 		<title><?php
 			if ( !is_singular() ) {
 				$title = get_the_title($comment_post->ID);
-<<<<<<< HEAD
-				$title = apply_filters('the_title_rss', $title);
-=======
 				/** This filter is documented in wp-includes/feed.php */
 				$title = apply_filters( 'the_title_rss', $title );
->>>>>>> WPHome/master
 				printf(ent2ncr(__('Comment on %1$s by %2$s')), $title, get_comment_author_rss());
 			} else {
 				printf(ent2ncr(__('By: %s')), get_comment_author_rss());
@@ -111,13 +96,6 @@ if ( have_comments() ) : while ( have_comments() ) : the_comment();
 		<thr:in-reply-to ref="<?php the_guid(); ?>" href="<?php the_permalink_rss() ?>" type="<?php bloginfo_rss('html_type'); ?>" />
 <?php else : // This comment is in reply to another comment
 	$parent_comment = get_comment($comment->comment_parent);
-<<<<<<< HEAD
-	// The rel attribute below and the id tag above should be GUIDs, but WP doesn't create them for comments (unlike posts). Either way, its more important that they both use the same system
-?>
-		<thr:in-reply-to ref="<?php comment_guid($parent_comment) ?>" href="<?php echo get_comment_link($parent_comment) ?>" type="<?php bloginfo_rss('html_type'); ?>" />
-<?php endif;
-	do_action('comment_atom_entry', $comment->comment_ID, $comment_post->ID);
-=======
 	// The rel attribute below and the id tag above should be GUIDs, but WP doesn't create them for comments (unlike posts). Either way, it's more important that they both use the same system
 ?>
 		<thr:in-reply-to ref="<?php comment_guid($parent_comment) ?>" href="<?php echo get_comment_link($parent_comment) ?>" type="<?php bloginfo_rss('html_type'); ?>" />
@@ -131,7 +109,6 @@ if ( have_comments() ) : while ( have_comments() ) : the_comment();
 	 * @param int $comment_post_id ID of the post the current comment is connected to.
 	 */
 	do_action( 'comment_atom_entry', $comment->comment_ID, $comment_post->ID );
->>>>>>> WPHome/master
 ?>
 	</entry>
 <?php endwhile; endif; ?>

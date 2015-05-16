@@ -15,19 +15,12 @@
  * @uses WP_Image_Editor Extends class
  */
 class WP_Image_Editor_GD extends WP_Image_Editor {
-<<<<<<< HEAD
-
-	protected $image = false; // GD Resource
-
-	function __destruct() {
-=======
 	/**
 	 * @var resource
 	 */
 	protected $image; // GD Resource
 
 	public function __destruct() {
->>>>>>> WPHome/master
 		if ( $this->image ) {
 			// we don't need the original in memory anymore
 			imagedestroy( $this->image );
@@ -86,11 +79,7 @@ class WP_Image_Editor_GD extends WP_Image_Editor {
 	 * @since 3.5.0
 	 * @access protected
 	 *
-<<<<<<< HEAD
-	 * @return boolean|\WP_Error
-=======
 	 * @return boolean|WP_Error True if loaded successfully; WP_Error on failure.
->>>>>>> WPHome/master
 	 */
 	public function load() {
 		if ( $this->image )
@@ -99,10 +88,6 @@ class WP_Image_Editor_GD extends WP_Image_Editor {
 		if ( ! is_file( $this->file ) && ! preg_match( '|^https?://|', $this->file ) )
 			return new WP_Error( 'error_loading_image', __('File doesn&#8217;t exist?'), $this->file );
 
-<<<<<<< HEAD
-		// Set artificially high because GD uses uncompressed images in memory
-		@ini_set( 'memory_limit', apply_filters( 'image_memory_limit', WP_MAX_MEMORY_LIMIT ) );
-=======
 		/**
 		 * Filter the memory limit allocated for image manipulation.
 		 *
@@ -114,7 +99,6 @@ class WP_Image_Editor_GD extends WP_Image_Editor {
 		// Set artificially high because GD uses uncompressed images in memory
 		@ini_set( 'memory_limit', apply_filters( 'image_memory_limit', WP_MAX_MEMORY_LIMIT ) );
 
->>>>>>> WPHome/master
 		$this->image = @imagecreatefromstring( file_get_contents( $this->file ) );
 
 		if ( ! is_resource( $this->image ) )
@@ -124,12 +108,6 @@ class WP_Image_Editor_GD extends WP_Image_Editor {
 		if ( ! $size )
 			return new WP_Error( 'invalid_image', __('Could not read image size.'), $this->file );
 
-<<<<<<< HEAD
-		$this->update_size( $size[0], $size[1] );
-		$this->mime_type = $size['mime'];
-
-		return true;
-=======
 		if ( function_exists( 'imagealphablending' ) && function_exists( 'imagesavealpha' ) ) {
 			imagealphablending( $this->image, false );
 			imagesavealpha( $this->image, true );
@@ -139,7 +117,6 @@ class WP_Image_Editor_GD extends WP_Image_Editor {
 		$this->mime_type = $size['mime'];
 
 		return $this->set_quality();
->>>>>>> WPHome/master
 	}
 
 	/**
@@ -165,14 +142,6 @@ class WP_Image_Editor_GD extends WP_Image_Editor {
 	 * Resizes current image.
 	 * Wraps _resize, since _resize returns a GD Resource.
 	 *
-<<<<<<< HEAD
-	 * @since 3.5.0
-	 * @access public
-	 *
-	 * @param int $max_w
-	 * @param int $max_h
-	 * @param boolean $crop
-=======
 	 * At minimum, either a height or width must be provided.
 	 * If one of the two is set to null, the resize will
 	 * maintain aspect ratio according to the provided dimension.
@@ -183,7 +152,6 @@ class WP_Image_Editor_GD extends WP_Image_Editor {
 	 * @param  int|null $max_w Image width.
 	 * @param  int|null $max_h Image height.
 	 * @param  boolean  $crop
->>>>>>> WPHome/master
 	 * @return boolean|WP_Error
 	 */
 	public function resize( $max_w, $max_h, $crop = false ) {
@@ -222,20 +190,11 @@ class WP_Image_Editor_GD extends WP_Image_Editor {
 	}
 
 	/**
-<<<<<<< HEAD
-	 * Processes current image and saves to disk
-	 * multiple sizes from single source.
-=======
 	 * Resize multiple images from a single source.
->>>>>>> WPHome/master
 	 *
 	 * @since 3.5.0
 	 * @access public
 	 *
-<<<<<<< HEAD
-	 * @param array $sizes { {'width'=>int, 'height'=>int, 'crop'=>bool}, ... }
-	 * @return array
-=======
 	 * @param array $sizes {
 	 *     An array of image size arrays. Default sizes are 'small', 'medium', 'large'.
 	 *
@@ -250,18 +209,12 @@ class WP_Image_Editor_GD extends WP_Image_Editor {
 	 *     }
 	 * }
 	 * @return array An array of resized images' metadata by size.
->>>>>>> WPHome/master
 	 */
 	public function multi_resize( $sizes ) {
 		$metadata = array();
 		$orig_size = $this->size;
 
 		foreach ( $sizes as $size => $size_data ) {
-<<<<<<< HEAD
-			$image = $this->_resize( $size_data['width'], $size_data['height'], $size_data['crop'] );
-
-			if( ! is_wp_error( $image ) ) {
-=======
 			if ( ! isset( $size_data['width'] ) && ! isset( $size_data['height'] ) ) {
 				continue;
 			}
@@ -278,10 +231,8 @@ class WP_Image_Editor_GD extends WP_Image_Editor {
 			}
 
 			$image = $this->_resize( $size_data['width'], $size_data['height'], $size_data['crop'] );
-			$duplicate = ( ( $orig_size['width'] == $size_data['width'] ) && ( $orig_size['height'] == $size_data['height'] ) );
 
-			if ( ! is_wp_error( $image ) && ! $duplicate ) {
->>>>>>> WPHome/master
+			if( ! is_wp_error( $image ) ) {
 				$resized = $this->_save( $image );
 
 				imagedestroy( $image );
@@ -304,10 +255,6 @@ class WP_Image_Editor_GD extends WP_Image_Editor {
 	 * @since 3.5.0
 	 * @access public
 	 *
-<<<<<<< HEAD
-	 * @param string|int $src The source file or Attachment ID.
-=======
->>>>>>> WPHome/master
 	 * @param int $src_x The start x position to crop from.
 	 * @param int $src_y The start y position to crop from.
 	 * @param int $src_w The width to crop.
@@ -359,18 +306,9 @@ class WP_Image_Editor_GD extends WP_Image_Editor {
 	 */
 	public function rotate( $angle ) {
 		if ( function_exists('imagerotate') ) {
-<<<<<<< HEAD
 			$rotated = imagerotate( $this->image, $angle, 0 );
 
 			if ( is_resource( $rotated ) ) {
-=======
-			$transparency = imagecolorallocatealpha( $this->image, 255, 255, 255, 127 );
-			$rotated = imagerotate( $this->image, $angle, $transparency );
-
-			if ( is_resource( $rotated ) ) {
-				imagealphablending( $rotated, true );
-				imagesavealpha( $rotated, true );
->>>>>>> WPHome/master
 				imagedestroy( $this->image );
 				$this->image = $rotated;
 				$this->update_size();
@@ -386,13 +324,8 @@ class WP_Image_Editor_GD extends WP_Image_Editor {
 	 * @since 3.5.0
 	 * @access public
 	 *
-<<<<<<< HEAD
-	 * @param boolean $horz Horizontal Flip
-	 * @param boolean $vert Vertical Flip
-=======
 	 * @param boolean $horz Flip along Horizontal Axis
 	 * @param boolean $vert Flip along Vertical Axis
->>>>>>> WPHome/master
 	 * @returns boolean|WP_Error
 	 */
 	public function flip( $horz, $vert ) {
@@ -421,13 +354,8 @@ class WP_Image_Editor_GD extends WP_Image_Editor {
 	 * @since 3.5.0
 	 * @access public
 	 *
-<<<<<<< HEAD
-	 * @param string $destfilename
-	 * @param string $mime_type
-=======
 	 * @param string|null $filename
 	 * @param string|null $mime_type
->>>>>>> WPHome/master
 	 * @return array|WP_Error {'path'=>string, 'file'=>string, 'width'=>int, 'height'=>int, 'mime-type'=>string}
 	 */
 	public function save( $filename = null, $mime_type = null ) {
@@ -441,15 +369,12 @@ class WP_Image_Editor_GD extends WP_Image_Editor {
 		return $saved;
 	}
 
-<<<<<<< HEAD
-=======
 	/**
 	 * @param resource $image
 	 * @param string|null $filename
 	 * @param string|null $mime_type
 	 * @return WP_Error|array
 	 */
->>>>>>> WPHome/master
 	protected function _save( $image, $filename = null, $mime_type = null ) {
 		list( $filename, $extension, $mime_type ) = $this->get_output_format( $filename, $mime_type );
 
@@ -469,11 +394,7 @@ class WP_Image_Editor_GD extends WP_Image_Editor {
 				return new WP_Error( 'image_save_error', __('Image Editor Save Failed') );
 		}
 		elseif ( 'image/jpeg' == $mime_type ) {
-<<<<<<< HEAD
-			if ( ! $this->make_image( $filename, 'imagejpeg', array( $image, $filename, apply_filters( 'jpeg_quality', $this->quality, 'image_resize' ) ) ) )
-=======
 			if ( ! $this->make_image( $filename, 'imagejpeg', array( $image, $filename, $this->get_quality() ) ) )
->>>>>>> WPHome/master
 				return new WP_Error( 'image_save_error', __('Image Editor Save Failed') );
 		}
 		else {
@@ -485,14 +406,6 @@ class WP_Image_Editor_GD extends WP_Image_Editor {
 		$perms = $stat['mode'] & 0000666; //same permissions as parent folder, strip off the executable bits
 		@ chmod( $filename, $perms );
 
-<<<<<<< HEAD
-		return array(
-			'path' => $filename,
-			'file' => wp_basename( apply_filters( 'image_make_intermediate_size', $filename ) ),
-			'width' => $this->size['width'],
-			'height' => $this->size['height'],
-			'mime-type'=> $mime_type,
-=======
 		/**
 		 * Filter the name of the saved image file.
 		 *
@@ -506,7 +419,6 @@ class WP_Image_Editor_GD extends WP_Image_Editor {
 			'width'     => $this->size['width'],
 			'height'    => $this->size['height'],
 			'mime-type' => $mime_type,
->>>>>>> WPHome/master
 		);
 	}
 
@@ -530,11 +442,6 @@ class WP_Image_Editor_GD extends WP_Image_Editor {
 				return imagegif( $this->image );
 			default:
 				header( 'Content-Type: image/jpeg' );
-<<<<<<< HEAD
-				return imagejpeg( $this->image, null, $this->quality );
-		}
-	}
-=======
 				return imagejpeg( $this->image, null, $this->get_quality() );
 		}
 	}
@@ -556,5 +463,4 @@ class WP_Image_Editor_GD extends WP_Image_Editor {
 
 		return parent::make_image( $filename, $function, $arguments );
 	}
->>>>>>> WPHome/master
 }

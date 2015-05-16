@@ -6,8 +6,4 @@ Released under LGPL
 
 Modified February 2008
 for WordPress
-<<<<<<< HEAD
-http://wordpress.org
-=======
 https://wordpress.org
->>>>>>> WPHome/master

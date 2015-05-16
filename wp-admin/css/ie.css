@@ -9,8 +9,6 @@
 	width: 98%;
 }
 
-<<<<<<< HEAD
-=======
 #wpbody-content #dashboard-widgets .postbox-container {
 	width: 49.5%;
 }
@@ -36,7 +34,6 @@
 	zoom: 100%;
 }
 
->>>>>>> WPHome/master
 .wp-editor-wrap .wp-editor-container textarea.wp-editor-area {
 	width: 97%;
 }
@@ -53,11 +50,7 @@
 	width: 35%;
 }
 
-<<<<<<< HEAD
-#wp-fullscreen-title {
-=======
 .wp-fullscreen-title {
->>>>>>> WPHome/master
 	width: 97%;
 }
 
@@ -66,21 +59,10 @@
 }
 
 #wp-fullscreen-tagline {
-<<<<<<< HEAD
 	color: #888;
 	font-size: 14px;
 }
 
-#adminmenushadow {
-	display: none;
-}
-
-=======
-	color: #82878c;
-	font-size: 14px;
-}
-
->>>>>>> WPHome/master
 #adminmenuback {
 	left: 0;
 	background-image: none;
@@ -115,19 +97,14 @@
 	line-height: 1px;
 }
 
-<<<<<<< HEAD
-=======
 #adminmenu .wp-submenu {
 	left: 110px;
 }
 
->>>>>>> WPHome/master
 #adminmenu .wp-submenu ul {
 	margin: 0;
 }
 
-<<<<<<< HEAD
-=======
 .folded #wpcontent,
 .folded #wpfooter {
 	margin-left: 170px;
@@ -140,13 +117,10 @@
 	width: 150px;
 }
 
->>>>>>> WPHome/master
 .folded #adminmenu .wp-submenu {
 	border-top-color: transparent;
 }
 
-<<<<<<< HEAD
-=======
 .folded #adminmenu .wp-menu-name {
 	display: block;
 }
@@ -166,7 +140,6 @@
 	background-color: transparent;
 }
 
->>>>>>> WPHome/master
 #adminmenu .wp-submenu .wp-submenu-head {
 	border-top-color: #ddd;
 }
@@ -205,8 +178,6 @@ ul#adminmenu {
 	padding: 0;
 }
 
-<<<<<<< HEAD
-=======
 #adminmenu li.wp-has-current-submenu .wp-submenu {
 	left: -40px;
 }
@@ -219,7 +190,6 @@ ul#adminmenu {
 	padding-left: 8px;
 }
 
->>>>>>> WPHome/master
 #collapse-menu {
 	line-height: 23px;
 }
@@ -228,8 +198,6 @@ ul#adminmenu {
 	padding-top: 7px;
 }
 
-<<<<<<< HEAD
-=======
 
 .theme-browser .theme {
 	width: 30%;
@@ -260,7 +228,6 @@ ul#adminmenu {
 	border-top: 1px solid #ddd;
 }
 
->>>>>>> WPHome/master
 table.fixed th,
 table.fixed td {
 	border-top: 1px solid #ddd;
@@ -272,13 +239,6 @@ table.fixed td {
 	overflow: visible;
 }
 
-<<<<<<< HEAD
-#dashboard-widgets #dashboard_quick_press form p.submit #publish {
-	float: none;
-}
-
-=======
->>>>>>> WPHome/master
 #dashboard-widgets h3 a {
 	height: 14px;
 	line-height: 14px;
@@ -300,11 +260,7 @@ table.fixed td {
 	border: 1px solid #dfdfdf;
 }
 
-<<<<<<< HEAD
-#wpbody-content .postbox h3 {
-=======
 #wpbody-content .postbox .hndle {
->>>>>>> WPHome/master
 	margin-bottom: -1px;
 }
 
@@ -509,13 +465,6 @@ div#dashboard-widgets {
 	display: block;
 }
 
-<<<<<<< HEAD
-.tagchecklist span a {
-	margin: 4px 0 0 -9px;
-}
-
-=======
->>>>>>> WPHome/master
 .tablenav .button-secondary,
 .nav .button-secondary {
 	padding-top: 2px;
@@ -537,15 +486,12 @@ div#dashboard-widgets {
 	display: inline;
 }
 
-<<<<<<< HEAD
-=======
 a.post-state-format {
 	text-indent: 0;
 	line-height: 0;
 	font-size: 0;
 }
 
->>>>>>> WPHome/master
 table.ie-fixed {
 	table-layout: fixed;
 }
@@ -634,23 +580,6 @@ table.ie-fixed {
 	min-width: 400px;
 }
 
-<<<<<<< HEAD
-.about-wrap img.element-screenshot {
-	padding: 2px;
-}
-
-.about-wrap .feature-section img,
-.about-wrap .feature-section .image-mask {
-	border-width: 1px;
-	border-style: solid;
-}
-
-.about-wrap .feature-section.three-col img {
-	margin-left: 0;
-}
-
-=======
->>>>>>> WPHome/master
 .available-theme {
 	display: inline;
 }
@@ -664,17 +593,6 @@ table.ie-fixed {
 	margin-right: 7px;
 }
 
-<<<<<<< HEAD
-.about-wrap .three-col-images img {
-	margin: 0 0.6% 10px;
-}
-
-.about-wrap .three-col-images .last-feature,
-.about-wrap .three-col-images .first-feature {
-	float: none;
-}
-
-=======
 .about-wrap .three-col.about-updates .col-2 {
 	width: 15%;
 }
@@ -752,7 +670,7 @@ input[type="password"],
 }
 
 .mce-btn i.mce-i-wp_adv {
-	background-color: #a0a5aa;
+	background-color: #aaa;
 }
 
 .mce-btn i.mce-i-help,
@@ -761,7 +679,6 @@ input[type="password"],
 }
 
 
->>>>>>> WPHome/master
 /* IE6 leftovers */
 * html .row-actions {
 	visibility: visible;

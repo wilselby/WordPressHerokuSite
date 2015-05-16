@@ -2,11 +2,7 @@
 /**
  * Object Cache API
  *
-<<<<<<< HEAD
  * @link http://codex.wordpress.org/Function_Reference/WP_Cache
-=======
- * @link https://codex.wordpress.org/Function_Reference/WP_Cache
->>>>>>> WPHome/master
  *
  * @package WordPress
  * @subpackage Cache
@@ -23,21 +19,12 @@
  * @param mixed $data The data to add to the cache store
  * @param string $group The group to add the cache to
  * @param int $expire When the cache data should be expired
-<<<<<<< HEAD
- * @return unknown
- */
-function wp_cache_add($key, $data, $group = '', $expire = 0) {
-	global $wp_object_cache;
-
-	return $wp_object_cache->add($key, $data, $group, $expire);
-=======
  * @return bool False if cache key and group already exist, true on success
  */
 function wp_cache_add( $key, $data, $group = '', $expire = 0 ) {
 	global $wp_object_cache;
 
 	return $wp_object_cache->add( $key, $data, $group, (int) $expire );
->>>>>>> WPHome/master
 }
 
 /**
@@ -98,11 +85,7 @@ function wp_cache_delete($key, $group = '') {
  * @uses $wp_object_cache Object Cache Class
  * @see WP_Object_Cache::flush()
  *
-<<<<<<< HEAD
- * @return bool Always returns true
-=======
  * @return bool False on failure, true on success
->>>>>>> WPHome/master
  */
 function wp_cache_flush() {
 	global $wp_object_cache;
@@ -120,11 +103,7 @@ function wp_cache_flush() {
  * @param int|string $key What the contents in the cache are called
  * @param string $group Where the cache contents are grouped
  * @param bool $force Whether to force an update of the local cache from the persistent cache (default is false)
-<<<<<<< HEAD
  * @param &bool $found Whether key was found in the cache. Disambiguates a return of false, a storable value.
-=======
- * @param bool &$found Whether key was found in the cache. Disambiguates a return of false, a storable value.
->>>>>>> WPHome/master
  * @return bool|mixed False on failure to retrieve contents or the cache
  *		contents on success
  */
@@ -173,32 +152,19 @@ function wp_cache_init() {
  * @param mixed $data The contents to store in the cache
  * @param string $group Where to group the cache contents
  * @param int $expire When to expire the cache contents
-<<<<<<< HEAD
- * @return bool False if cache key and group already exist, true on success
- */
-function wp_cache_replace($key, $data, $group = '', $expire = 0) {
-	global $wp_object_cache;
-
-	return $wp_object_cache->replace($key, $data, $group, $expire);
-=======
  * @return bool False if not exists, true if contents were replaced
  */
 function wp_cache_replace( $key, $data, $group = '', $expire = 0 ) {
 	global $wp_object_cache;
 
 	return $wp_object_cache->replace( $key, $data, $group, (int) $expire );
->>>>>>> WPHome/master
 }
 
 /**
  * Saves the data to the cache.
  *
-<<<<<<< HEAD
- * @since 2.0
-=======
  * @since 2.0.0
  *
->>>>>>> WPHome/master
  * @uses $wp_object_cache Object Cache Class
  * @see WP_Object_Cache::set()
  *
@@ -206,21 +172,12 @@ function wp_cache_replace( $key, $data, $group = '', $expire = 0 ) {
  * @param mixed $data The contents to store in the cache
  * @param string $group Where to group the cache contents
  * @param int $expire When to expire the cache contents
-<<<<<<< HEAD
- * @return bool False if cache key and group already exist, true on success
- */
-function wp_cache_set($key, $data, $group = '', $expire = 0) {
-	global $wp_object_cache;
-
-	return $wp_object_cache->set($key, $data, $group, $expire);
-=======
  * @return bool False on failure, true on success
  */
 function wp_cache_set( $key, $data, $group = '', $expire = 0 ) {
 	global $wp_object_cache;
 
 	return $wp_object_cache->set( $key, $data, $group, (int) $expire );
->>>>>>> WPHome/master
 }
 
 /**
@@ -260,10 +217,7 @@ function wp_cache_add_global_groups( $groups ) {
  */
 function wp_cache_add_non_persistent_groups( $groups ) {
 	// Default cache doesn't persist so nothing to do here.
-<<<<<<< HEAD
 	return;
-=======
->>>>>>> WPHome/master
 }
 
 /**
@@ -303,11 +257,7 @@ function wp_cache_reset() {
  *
  * @package WordPress
  * @subpackage Cache
-<<<<<<< HEAD
- * @since 2.0
-=======
  * @since 2.0.0
->>>>>>> WPHome/master
  */
 class WP_Object_Cache {
 
@@ -318,11 +268,7 @@ class WP_Object_Cache {
 	 * @access private
 	 * @since 2.0.0
 	 */
-<<<<<<< HEAD
-	var $cache = array ();
-=======
 	private $cache = array();
->>>>>>> WPHome/master
 
 	/**
 	 * The amount of times the cache data was already stored in the cache.
@@ -331,11 +277,7 @@ class WP_Object_Cache {
 	 * @access private
 	 * @var int
 	 */
-<<<<<<< HEAD
-	var $cache_hits = 0;
-=======
 	private $cache_hits = 0;
->>>>>>> WPHome/master
 
 	/**
 	 * Amount of times the cache did not have the request in cache
@@ -344,11 +286,7 @@ class WP_Object_Cache {
 	 * @access public
 	 * @since 2.0.0
 	 */
-<<<<<<< HEAD
-	var $cache_misses = 0;
-=======
 	public $cache_misses = 0;
->>>>>>> WPHome/master
 
 	/**
 	 * List of global groups
@@ -357,11 +295,7 @@ class WP_Object_Cache {
 	 * @access protected
 	 * @since 3.0.0
 	 */
-<<<<<<< HEAD
-	var $global_groups = array();
-=======
 	protected $global_groups = array();
->>>>>>> WPHome/master
 
 	/**
 	 * The blog prefix to prepend to keys in non-global groups.
@@ -370,19 +304,7 @@ class WP_Object_Cache {
 	 * @access private
 	 * @since 3.5.0
 	 */
-<<<<<<< HEAD
-	var $blog_prefix;
-=======
 	private $blog_prefix;
-
-	/**
-	 * Holds the value of `is_multisite()`
-	 *
-	 * @var bool
-	 * @access private
-	 * @since 3.5.0
-	 */
-	private $multisite;
 
 	/**
 	 * Make private properties readable for backwards compatibility.
@@ -435,7 +357,6 @@ class WP_Object_Cache {
 	public function __unset( $name ) {
 		unset( $this->$name );
 	}
->>>>>>> WPHome/master
 
 	/**
 	 * Adds data to the cache if it doesn't already exist.
@@ -452,11 +373,7 @@ class WP_Object_Cache {
 	 * @param int $expire When to expire the cache contents
 	 * @return bool False if cache key and group already exist, true on success
 	 */
-<<<<<<< HEAD
-	function add( $key, $data, $group = 'default', $expire = '' ) {
-=======
 	public function add( $key, $data, $group = 'default', $expire = 0 ) {
->>>>>>> WPHome/master
 		if ( wp_suspend_cache_addition() )
 			return false;
 
@@ -470,11 +387,7 @@ class WP_Object_Cache {
 		if ( $this->_exists( $id, $group ) )
 			return false;
 
-<<<<<<< HEAD
-		return $this->set($key, $data, $group, $expire);
-=======
 		return $this->set( $key, $data, $group, (int) $expire );
->>>>>>> WPHome/master
 	}
 
 	/**
@@ -484,11 +397,7 @@ class WP_Object_Cache {
 	 *
 	 * @param array $groups List of groups that are global.
 	 */
-<<<<<<< HEAD
-	function add_global_groups( $groups ) {
-=======
 	public function add_global_groups( $groups ) {
->>>>>>> WPHome/master
 		$groups = (array) $groups;
 
 		$groups = array_fill_keys( $groups, true );
@@ -505,11 +414,7 @@ class WP_Object_Cache {
 	 * @param string $group The group the key is in.
 	 * @return false|int False on failure, the item's new value on success.
 	 */
-<<<<<<< HEAD
-	function decr( $key, $offset = 1, $group = 'default' ) {
-=======
 	public function decr( $key, $offset = 1, $group = 'default' ) {
->>>>>>> WPHome/master
 		if ( empty( $group ) )
 			$group = 'default';
 
@@ -535,42 +440,24 @@ class WP_Object_Cache {
 	/**
 	 * Remove the contents of the cache key in the group
 	 *
-<<<<<<< HEAD
-	 * If the cache key does not exist in the group and $force parameter is set
-	 * to false, then nothing will happen. The $force parameter is set to false
-	 * by default.
-=======
 	 * If the cache key does not exist in the group, then nothing will happen.
->>>>>>> WPHome/master
 	 *
 	 * @since 2.0.0
 	 *
 	 * @param int|string $key What the contents in the cache are called
 	 * @param string $group Where the cache contents are grouped
-<<<<<<< HEAD
-	 * @param bool $force Optional. Whether to force the unsetting of the cache
-	 *		key in the group
-	 * @return bool False if the contents weren't deleted and true on success
-	 */
-	function delete($key, $group = 'default', $force = false) {
-=======
 	 * @param bool $deprecated Deprecated.
 	 *
 	 * @return bool False if the contents weren't deleted and true on success
 	 */
 	public function delete( $key, $group = 'default', $deprecated = false ) {
->>>>>>> WPHome/master
 		if ( empty( $group ) )
 			$group = 'default';
 
 		if ( $this->multisite && ! isset( $this->global_groups[ $group ] ) )
 			$key = $this->blog_prefix . $key;
 
-<<<<<<< HEAD
-		if ( ! $force && ! $this->_exists( $key, $group ) )
-=======
 		if ( ! $this->_exists( $key, $group ) )
->>>>>>> WPHome/master
 			return false;
 
 		unset( $this->cache[$group][$key] );
@@ -584,11 +471,7 @@ class WP_Object_Cache {
 	 *
 	 * @return bool Always returns true
 	 */
-<<<<<<< HEAD
-	function flush() {
-=======
 	public function flush() {
->>>>>>> WPHome/master
 		$this->cache = array ();
 
 		return true;
@@ -611,11 +494,7 @@ class WP_Object_Cache {
 	 * @return bool|mixed False on failure to retrieve contents or the cache
 	 *		contents on success
 	 */
-<<<<<<< HEAD
-	function get( $key, $group = 'default', $force = false, &$found = null ) {
-=======
 	public function get( $key, $group = 'default', $force = false, &$found = null ) {
->>>>>>> WPHome/master
 		if ( empty( $group ) )
 			$group = 'default';
 
@@ -646,11 +525,7 @@ class WP_Object_Cache {
 	 * @param string $group The group the key is in.
 	 * @return false|int False on failure, the item's new value on success.
 	 */
-<<<<<<< HEAD
-	function incr( $key, $offset = 1, $group = 'default' ) {
-=======
 	public function incr( $key, $offset = 1, $group = 'default' ) {
->>>>>>> WPHome/master
 		if ( empty( $group ) )
 			$group = 'default';
 
@@ -685,11 +560,7 @@ class WP_Object_Cache {
 	 * @param int $expire When to expire the cache contents
 	 * @return bool False if not exists, true if contents were replaced
 	 */
-<<<<<<< HEAD
-	function replace( $key, $data, $group = 'default', $expire = '' ) {
-=======
 	public function replace( $key, $data, $group = 'default', $expire = 0 ) {
->>>>>>> WPHome/master
 		if ( empty( $group ) )
 			$group = 'default';
 
@@ -700,11 +571,7 @@ class WP_Object_Cache {
 		if ( ! $this->_exists( $id, $group ) )
 			return false;
 
-<<<<<<< HEAD
-		return $this->set( $key, $data, $group, $expire );
-=======
 		return $this->set( $key, $data, $group, (int) $expire );
->>>>>>> WPHome/master
 	}
 
 	/**
@@ -713,11 +580,7 @@ class WP_Object_Cache {
 	 * @since 3.0.0
 	 * @deprecated 3.5.0
 	 */
-<<<<<<< HEAD
-	function reset() {
-=======
 	public function reset() {
->>>>>>> WPHome/master
 		_deprecated_function( __FUNCTION__, '3.5', 'switch_to_blog()' );
 
 		// Clear out non-global caches since the blog ID has changed.
@@ -747,11 +610,7 @@ class WP_Object_Cache {
 	 * @param int $expire Not Used
 	 * @return bool Always returns true
 	 */
-<<<<<<< HEAD
-	function set($key, $data, $group = 'default', $expire = '') {
-=======
 	public function set( $key, $data, $group = 'default', $expire = 0 ) {
->>>>>>> WPHome/master
 		if ( empty( $group ) )
 			$group = 'default';
 
@@ -773,11 +632,7 @@ class WP_Object_Cache {
 	 *
 	 * @since 2.0.0
 	 */
-<<<<<<< HEAD
-	function stats() {
-=======
 	public function stats() {
->>>>>>> WPHome/master
 		echo "<p>";
 		echo "<strong>Cache Hits:</strong> {$this->cache_hits}<br />";
 		echo "<strong>Cache Misses:</strong> {$this->cache_misses}<br />";
@@ -798,11 +653,7 @@ class WP_Object_Cache {
 	 *
 	 * @param int $blog_id Blog ID
 	 */
-<<<<<<< HEAD
-	function switch_to_blog( $blog_id ) {
-=======
 	public function switch_to_blog( $blog_id ) {
->>>>>>> WPHome/master
 		$blog_id = (int) $blog_id;
 		$this->blog_prefix = $this->multisite ? $blog_id . ':' : '';
 	}
@@ -813,12 +664,9 @@ class WP_Object_Cache {
 	 * @since 3.4.0
 	 *
 	 * @access protected
-<<<<<<< HEAD
-=======
 	 * @param string $key
 	 * @param string $group
 	 * @return bool
->>>>>>> WPHome/master
 	 */
 	protected function _exists( $key, $group ) {
 		return isset( $this->cache[ $group ] ) && ( isset( $this->cache[ $group ][ $key ] ) || array_key_exists( $key, $this->cache[ $group ] ) );
@@ -828,14 +676,9 @@ class WP_Object_Cache {
 	 * Sets up object properties; PHP 5 style constructor
 	 *
 	 * @since 2.0.8
-<<<<<<< HEAD
 	 * @return null|WP_Object_Cache If cache is disabled, returns null.
 	 */
-	function __construct() {
-=======
-	 */
 	public function __construct() {
->>>>>>> WPHome/master
 		global $blog_id;
 
 		$this->multisite = is_multisite();
@@ -858,11 +701,7 @@ class WP_Object_Cache {
 	 *
 	 * @return bool True value. Won't be used by PHP
 	 */
-<<<<<<< HEAD
-	function __destruct() {
-=======
 	public function __destruct() {
->>>>>>> WPHome/master
 		return true;
 	}
 }

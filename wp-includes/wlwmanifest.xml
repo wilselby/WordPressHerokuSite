@@ -7,11 +7,7 @@
 	<supportsKeywords>Yes</supportsKeywords>
 	<supportsGetTags>Yes</supportsGetTags>
   </options>
-<<<<<<< HEAD
-  
-=======
 
->>>>>>> WPHome/master
   <weblog>
     <serviceName>WordPress</serviceName>
     <imageUrl>images/wlw/wp-icon.png</imageUrl>
@@ -19,15 +15,6 @@
     <homepageLinkText>View site</homepageLinkText>
     <adminLinkText>Dashboard</adminLinkText>
     <adminUrl>
-<<<<<<< HEAD
-      <![CDATA[ 
-			{blog-postapi-url}/../wp-admin/ 
-		]]>
-    </adminUrl>
-    <postEditingUrl>
-      <![CDATA[ 
-			{blog-postapi-url}/../wp-admin/post.php?action=edit&post={post-id} 
-=======
       <![CDATA[
 			{blog-postapi-url}/../wp-admin/
 		]]>
@@ -35,7 +22,6 @@
     <postEditingUrl>
       <![CDATA[
 			{blog-postapi-url}/../wp-admin/post.php?action=edit&post={post-id}
->>>>>>> WPHome/master
 		]]>
     </postEditingUrl>
   </weblog>
@@ -46,11 +32,7 @@
       <text>Manage Comments</text>
       <imageUrl>images/wlw/wp-comments.png</imageUrl>
       <clickUrl>
-<<<<<<< HEAD
-        <![CDATA[ 
-=======
         <![CDATA[
->>>>>>> WPHome/master
 				{blog-postapi-url}/../wp-admin/edit-comments.php
 			]]>
       </clickUrl>

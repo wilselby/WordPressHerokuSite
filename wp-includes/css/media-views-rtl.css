@@ -1,11 +1,4 @@
 /**
-<<<<<<< HEAD
- * Modal
- */
-.media-modal-close {
-	right: auto;
-	left: 7px;
-=======
  * Base Styles
  */
 .media-modal * {
@@ -26,7 +19,6 @@
 .media-frame {
 	font-family: "Open Sans", sans-serif;
 	font-size: 12px;
-	-webkit-overflow-scrolling: touch;
 }
 
 .media-frame input,
@@ -50,11 +42,11 @@
 }
 
 .media-frame a.button {
-	color: #32373c;
+	color: #333;
 }
 
 .media-frame a.button:hover {
-	color: #23282d;
+	color: #222;
 }
 
 .media-frame a.button-primary,
@@ -113,17 +105,17 @@
 }
 
 /*!
- * jQuery UI Draggable/Sortable 1.11.4
+ * jQuery UI Draggable/Sortable 1.11.2
  * http://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright 2014 jQuery Foundation and other contributors
  * Released under the MIT license.
  * http://jquery.org/license
  */
 .ui-draggable-handle,
 .ui-sortable-handle {
 	-ms-touch-action: none;
-	touch-action: none;
+	touch-action:     none;
 }
 
 /**
@@ -195,7 +187,7 @@
 }
 
 .media-modal-close:hover .media-modal-icon:before {
-	color: #00a0d2;
+	color: #2ea2cc;
 }
 
 .media-modal-close:active {
@@ -219,16 +211,11 @@
 .media-modal-icon {
 	background-image: url(../images/uploader-icons.png);
 	background-repeat: no-repeat;
->>>>>>> WPHome/master
 }
 
 /**
  * Toolbar
  */
-<<<<<<< HEAD
-.media-toolbar-primary {
-	float: left;
-=======
 .media-toolbar {
 	position: absolute;
 	top: 0;
@@ -244,80 +231,32 @@
 .media-toolbar-primary {
 	float: left;
 	height: 100%;
->>>>>>> WPHome/master
+	max-width: 33%;
 }
 
 .media-toolbar-secondary {
 	float: right;
-<<<<<<< HEAD
-=======
 	height: 100%;
->>>>>>> WPHome/master
+	max-width: 66%;
 }
 
 .media-toolbar-primary > .media-button,
 .media-toolbar-primary > .media-button-group {
-<<<<<<< HEAD
-	margin-left: 0;
-	margin-right: 10px;
-	float: right;
-=======
 	margin-right: 10px;
 	float: right;
 	margin-top: 15px;
->>>>>>> WPHome/master
 }
 
 .media-toolbar-secondary > .media-button,
 .media-toolbar-secondary > .media-button-group {
-<<<<<<< HEAD
-	margin-right: 0;
-	margin-left: 10px;
-	float: right;
-=======
 	margin-left: 10px;
 	margin-top: 15px;
->>>>>>> WPHome/master
 }
 
 /**
  * Sidebar
  */
 .media-sidebar {
-<<<<<<< HEAD
-	right: auto;
-	left: 0;
-	border-left: 0;
-	border-right: 1px solid #dfdfdf;
-}
-
-.media-sidebar .setting {
-	float: right;
-}
-
-.media-sidebar .setting span {
-	margin-right: 0;
-	margin-left: 4%;
-}
-
-.media-sidebar .setting span,
-.compat-item label span {
-	float: right;
-	text-align: left;
-}
-
-.media-sidebar .setting input,
-.media-sidebar .setting textarea {
-	float: left;
-}
-
-.compat-item {
-	float: right;
-}
-
-.compat-item .label {
-	margin-right: 0;
-=======
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -498,18 +437,11 @@
 
 .compat-item .label {
 	min-width: 30%;
->>>>>>> WPHome/master
 	margin-left: 4%;
 	float: right;
 	text-align: left;
 }
 
-<<<<<<< HEAD
-.compat-item .field {
-	float: left;
-	padding-right: 0;
-	padding-left: 1px;
-=======
 .compat-item .label span {
 	display: block;
 	width: 100%;
@@ -517,8 +449,7 @@
 
 .compat-item .field {
 	float: left;
-	width: 65%;
-	margin: 1px;
+	width: 66%;
 }
 
 .compat-item .field input[type="text"],
@@ -527,13 +458,9 @@
 .compat-item .field input[type="number"],
 .compat-item .field input[type="search"],
 .compat-item .field input[type="tel"],
-.compat-item .field input[type="url"],
-.compat-item .field textarea {
+.compat-item .field input[type="url"] {
 	width: 100%;
 	margin: 0;
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	box-sizing: border-box;
 }
 
 .sidebar-for-errors .attachment-details,
@@ -541,28 +468,12 @@
 .sidebar-for-errors .media-sidebar .media-progress-bar,
 .sidebar-for-errors .upload-details {
 	display: none !important;
->>>>>>> WPHome/master
 }
 
 /**
  * Menu
  */
 .media-menu {
-<<<<<<< HEAD
-	border-right: 0;
-	border-left: 1px solid #d9d9d9;
-	box-shadow: inset 6px 0 6px -6px rgba( 0, 0, 0, 0.2 )
-}
-
-/**
- * Router
- */
-.media-router > a {
-	float: right;
-	border-right: 0;
-	border-left: 1px solid #dfdfdf;
-}
-=======
 	position: absolute;
 	top: 0;
 	right: 0;
@@ -587,7 +498,7 @@
 	margin: 0;
 	line-height: 18px;
 	font-size: 14px;
-	color: #0073aa;
+	color: #0074a2;
 	text-decoration: none;
 }
 
@@ -602,7 +513,7 @@
 
 .media-menu .active,
 .media-menu .active:hover {
-	color: #23282d;
+	color: #222;
 	font-weight: bold;
 }
 
@@ -643,34 +554,17 @@
 	text-decoration: none;
 }
 
->>>>>>> WPHome/master
 .media-router > a:last-child {
 	border-left: 0;
 }
 
-<<<<<<< HEAD
-/**
- * Frame
- */
-.media-frame-menu {
-	left: auto;
-	right: 0;
-}
-
-.media-frame-title,
-.media-frame-router,
-.media-frame-content,
-.media-frame-toolbar {
-	left: 0;
-	right: 200px;
-=======
 .media-router > a:active {
 	outline: none;
 }
 
 .media-router .active,
 .media-router .active:hover {
-	color: #32373c;
+	color: #333;
 }
 
 .media-router .active,
@@ -746,7 +640,6 @@
 	bottom: 0;
 	height: 60px;
 	z-index: 100;
->>>>>>> WPHome/master
 }
 
 .media-frame.hide-menu .media-frame-title,
@@ -757,12 +650,6 @@
 }
 
 .media-frame.hide-menu .media-frame-menu {
-<<<<<<< HEAD
-	left: auto;
-	right: -200px;
-}
-
-=======
 	right: -200px;
 }
 
@@ -841,35 +728,18 @@
 	border: 0;
 }
 
->>>>>>> WPHome/master
 /**
  * Attachment Browser Filters
  */
 .media-frame select.attachment-filters {
-<<<<<<< HEAD
-	margin-right: 0;
-	margin-left: 10px;
-=======
 	margin-top: 11px;
 	margin-left: 2%;
-	max-width: 42%;
-	max-width: -webkit-calc(48% - 12px);
-	max-width: calc(48% - 12px);
-}
-
-.media-frame select.attachment-filters:last-of-type {
-	margin-left: 0;
->>>>>>> WPHome/master
+	max-width: 47%;
 }
 
 /**
  * Search
  */
-<<<<<<< HEAD
-.media-toolbar-secondary .search {
-	margin-right: 0;
-	margin-left: 16px;
-=======
 .media-frame .search {
 	margin-top: 11px;
 	padding: 4px;
@@ -881,128 +751,20 @@
 
 .media-toolbar-primary .search {
 	max-width: 100%;
->>>>>>> WPHome/master
 }
 
 /**
  * Attachments
  */
-<<<<<<< HEAD
 .attachments {
-	padding-right: 0;
-	padding-left: 16px;
-=======
-.wp-core-ui .attachments {
 	margin: 0;
 	-webkit-overflow-scrolling: touch;
->>>>>>> WPHome/master
 }
 
 /**
  * Attachment
  */
-<<<<<<< HEAD
 .attachment {
-	float: right;
-}
-
-.attachment .thumbnail {
-	left: auto;
-	right: 0;
-}
-
-.attachment .close {
-	right: auto;
-	left: 5px;
-}
-
-.attachment .check {
-	right: auto;
-	left: -7px;
-}
-
-/**
- * Attachments Browser
- */
-.attachments-browser .media-toolbar {
-	right: 0;
-	left: 300px;
-}
-
-.attachments-browser .attachments,
-.attachments-browser .uploader-inline {
-	right: 0;
-	left: 300px;
-}
-
-
-/**
- * Progress Bar
- */
-.attachment-preview .media-progress-bar {
-	left: auto;
-	right: 15%;
-}
-
-.media-sidebar .media-uploader-status .upload-dismiss-errors {
-	right: auto;
-	left: 0;
-}
-
-.upload-errors .upload-error-label {
-	margin-right: 0;
-	margin-left: 8px;
-	float: right;
-	margin-top: -3px;
-}
-
-/**
- * Selection
- */
-.media-selection {
-	right: 0;
-	left: 350px;
-	padding: 0 16px 0 0;
-}
-
-.media-selection .selection-info {
-	margin-right: 0;
-	margin-left: 10px;
-}
-
-.media-selection .selection-info a {
-	float: right;
-	border-right: 0;
-	border-left: 1px solid #dfdfdf;
-	margin: 1px -8px 1px 8px;
-}
-
-.media-selection .selection-info a:last-child {
-	border-right: 1px;
-	border-left: 0;
-	margin-left: 0;
-	margin-right: -8px;
-}
-
-.media-selection:after {
-	right: auto;
-	left: 0;
-	background-image: -webkit-gradient(linear, left top, right top, from( rgba( 255, 255, 255, 1 ) ), to( rgba( 255, 255, 255, 0 ) ));
-	background-image: -webkit-linear-gradient(left, rgba( 255, 255, 255, 1 ) ,  rgba( 255, 255, 255, 0 ) );
-	background-image:    -moz-linear-gradient(left, rgba( 255, 255, 255, 1 ) ,  rgba( 255, 255, 255, 0 ) );
-	background-image:      -o-linear-gradient(left, rgba( 255, 255, 255, 1 ) ,  rgba( 255, 255, 255, 0 ) );
-	background-image:   linear-gradient(to right, rgba( 255, 255, 255, 1 ) ,  rgba( 255, 255, 255, 0 ) );
-}
-
-/**
- * Attachment Details
- */
-.attachment-info .thumbnail {
-	float: right;
-	margin-right: 0;
-	margin-left: 10px;
-=======
-.wp-core-ui .attachment {
 	position: relative;
 	float: right;
 	padding: 8px;
@@ -1021,9 +783,9 @@
 	box-sizing: border-box;
 }
 
-.wp-core-ui .attachment:focus,
-.wp-core-ui .selected.attachment:focus,
-.wp-core-ui .attachment.details:focus {
+.attachment:focus,
+.selected.attachment:focus,
+.attachment.details:focus {
 	-webkit-box-shadow:
 		inset 0 0 2px 3px #fff,
 		inset 0 0 0 7px #5b9dd9;
@@ -1033,7 +795,7 @@
 	outline: none;
 }
 
-.wp-core-ui .selected.attachment {
+.selected.attachment {
 	-webkit-box-shadow:
 		inset 0 0 0 5px #fff,
 		inset 0 0 0 7px #ccc;
@@ -1042,7 +804,7 @@
 		inset 0 0 0 7px #ccc;
 }
 
-.wp-core-ui .attachment.details {
+.attachment.details {
 	-webkit-box-shadow:
 		inset 0 0 0 3px #fff,
 		inset 0 0 0 7px #1e8cbe;
@@ -1051,7 +813,7 @@
 		inset 0 0 0 7px #1e8cbe;
 }
 
-.wp-core-ui .attachment-preview {
+.attachment-preview {
 	position: relative;
 	-webkit-box-shadow:
 		inset 0 0 15px rgba( 0, 0, 0, 0.1 ),
@@ -1063,18 +825,18 @@
 	cursor: pointer;
 }
 
-.wp-core-ui .attachment-preview:before {
+.attachment-preview:before {
 	content: '';
 	display: block;
 	padding-top: 100%;
 }
 
-.wp-core-ui .attachment .icon {
+.attachment .icon {
 	margin: 0 auto;
 	overflow: hidden;
 }
 
-.wp-core-ui .attachment .thumbnail {
+.attachment .thumbnail {
 	overflow: hidden;
 	position: absolute;
 	top: 0;
@@ -1086,15 +848,15 @@
 	transition: opacity .1s;
 }
 
-.wp-core-ui .attachment .portrait img {
+.attachment .portrait img {
 	max-width: 100%;
 }
 
-.wp-core-ui .attachment .landscape img {
+.attachment .landscape img {
 	max-height: 100%;
 }
 
-.wp-core-ui .attachment .thumbnail:after {
+.attachment .thumbnail:after {
 	content: '';
 	display: block;
 	position: absolute;
@@ -1107,40 +869,42 @@
 	overflow: hidden;
 }
 
-.wp-core-ui .attachment .thumbnail img {
+/* @noflip */
+.attachment .thumbnail img {
 	top: 0;
-	right: 0;
+	left: 0;
 }
 
-.wp-core-ui .attachment .thumbnail .centered {
+/* @noflip */
+.attachment .thumbnail .centered {
 	position: absolute;
 	top: 0;
-	right: 0;
+	left: 0;
 	width: 100%;
 	height: 100%;
-	-webkit-transform: translate( -50%, 50% );
-	-ms-transform: translate(-50%,50%); /* Fails with spaces?? Weird! */
-	transform: translate( -50%, 50% );
+	-webkit-transform: translate( 50%, 50% );
+	-ms-transform: translate(50%,50%); /* Fails with spaces?? Weird! */
+	transform: translate( 50%, 50% );
 }
 
-.wp-core-ui .attachment .thumbnail .centered img {
-	-webkit-transform: translate( 50%, -50% );
-	-ms-transform: translate(50%,-50%);
-	transform: translate( 50%, -50% );
+.attachment .thumbnail .centered img {
+	-webkit-transform: translate( -50%, -50% );
+	-ms-transform: translate(-50%,-50%);
+	transform: translate( -50%, -50% );
 }
 
-.wp-core-ui .attachments-browser .attachment .thumbnail .centered img.icon {
-	-webkit-transform: translate( 50%, -70% );
-	-ms-transform: translate(50%,-70%);
-	transform: translate( 50%, -70% );
+.attachment .thumbnail .centered img.icon {
+	-webkit-transform: translate( -50%, -70% );
+	-ms-transform: translate(-50%,-70%);
+	transform: translate( -50%, -70% );
 }
 
-.ie8 .wp-core-ui .attachment img.icon {
+.ie8 .attachment img.icon {
 	top: 20%;
 	position: relative;
 }
 
-.wp-core-ui .attachment .filename {
+.attachment .filename {
 	position: absolute;
 	right: 0;
 	left: 0;
@@ -1155,15 +919,15 @@
 	box-shadow: inset 0 0 0 1px rgba( 0, 0, 0, 0.15 );
 }
 
-.wp-core-ui .attachment .filename div {
+.attachment .filename div {
 	padding: 5px 10px;
 }
 
-.wp-core-ui .attachment .thumbnail img {
+.attachment .thumbnail img {
 	position: absolute;
 }
 
-.wp-core-ui .attachment .close {
+.attachment .close {
 	display: block;
 	position: absolute;
 	top: 5px;
@@ -1189,15 +953,15 @@
 	transition-property: none;
 }
 
-.wp-core-ui .attachment a.close:hover,
-.wp-core-ui .attachment a.close:focus {
+.attachment a.close:hover,
+.attachment a.close:focus {
 	-webkit-box-shadow: 0 0 0 1px rgba( 0, 0, 0, 0.6 );
 	box-shadow: 0 0 0 1px rgba( 0, 0, 0, 0.6 );
 	background-position: -36px 4px;
 
 }
 
-.wp-core-ui .attachment .check {
+.attachment .check {
 	display: none;
 	height: 24px;
 	width: 24px;
@@ -1211,24 +975,24 @@
 	box-shadow: 0 0 0 1px #fff, 0 0 0 2px rgba( 0, 0, 0, 0.15 );
 }
 
-.wp-core-ui .attachment .check div {
+.attachment .check div {
 	background-position: -1px 0;
 	height: 15px;
 	width: 15px;
 	margin: 5px;
 }
 
-.wp-core-ui .attachment .check:hover div {
+.attachment .check:hover div {
 	background-position: -40px 0;
 }
 
-.wp-core-ui .attachment.selected .check {
+.attachment.selected .check {
 	display: block;
 }
 
-.wp-core-ui .attachment.details .check,
-.wp-core-ui .attachment.selected .check:focus,
-.wp-core-ui .media-frame.mode-grid .attachment.selected .check {
+.attachment.details .check,
+.attachment.selected .check:focus,
+.media-frame.mode-grid .attachment.selected .check {
 	background-color: #1e8cbe;
 	-webkit-box-shadow:
 		0 0 0 1px #fff,
@@ -1238,18 +1002,18 @@
 		0 0 0 2px #1e8cbe;
 }
 
-.wp-core-ui .attachment.details .check div,
-.wp-core-ui .media-frame.mode-grid .attachment.selected .check div {
+.attachment.details .check div,
+.media-frame.mode-grid .attachment.selected .check div {
 	background-position: -21px 0;
 }
 
-.wp-core-ui .attachment.details .check:hover div,
-.wp-core-ui .attachment.selected .check:focus div,
-.wp-core-ui .media-frame.mode-grid .attachment.selected .check:hover div {
+.attachment.details .check:hover div,
+.attachment.selected .check:focus div,
+.media-frame.mode-grid .attachment.selected .check:hover div {
 	background-position: -60px 0;
 }
 
-.wp-core-ui .media-frame .attachment .describe {
+.media-frame .attachment .describe {
 	position: relative;
 	display: block;
 	width: 100%;
@@ -1303,14 +1067,6 @@
 
 .attachments-browser .uploader-inline.hidden {
 	display: none;
-}
-
-.attachments-browser .media-toolbar-primary {
-	max-width: 33%;
-}
-
-.attachments-browser .media-toolbar-secondary {
-	max-width: 66%;
 }
 
 .uploader-inline .close {
@@ -1402,6 +1158,10 @@
 	max-width: 400px;
 }
 
+.media-sidebar .media-uploader-status {
+	border-bottom: 1px solid #dfdfdf;
+}
+
 .uploader-inline .media-uploader-status h3 {
 	display: none;
 }
@@ -1445,21 +1205,31 @@
 }
 
 .upload-errors .upload-error {
-	padding: 12px;
-	margin-bottom: 12px; 
-	background: #fff; 
- 	border-right: 4px solid #dd3d36; 
- 	-webkit-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1); 
- 	box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1); 
+	margin: 8px auto 0 auto;
+	padding: 8px;
+	border: 1px #c00 solid;
+	background: #ffebe8;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
 }
 
-.upload-errors .upload-error-filename {
+.upload-errors .upload-error-label {
+	padding: 2px 4px;
+	margin-left: 8px;
 	font-weight: bold;
+	color: #fff;
+	background: #e00;
+	background-image: -webkit-gradient(linear, right top, right bottom, from(#e00), to(#a00));
+	background-image: -webkit-linear-gradient(top, #e00, #a00);
+	background-image: linear-gradient(to bottom, #e00, #a00);
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
 }
 
 .upload-errors .upload-error-message {
 	display: block;
 	padding-top: 8px;
+	color: #b44;
 	word-wrap: break-word;
 }
 
@@ -1667,6 +1437,8 @@
 	width: 40px;
 	padding: 0;
 	margin: 4px;
+	-webkit-box-shadow: none;
+	box-shadow: none;
 }
 
 .media-selection .attachment .thumbnail {
@@ -1686,23 +1458,7 @@
 	background: none;
 }
 
-.wp-core-ui .media-selection .attachment:focus,
-.wp-core-ui .media-selection .selected.attachment:focus,
-.wp-core-ui .media-selection .attachment.details:focus {
-	-webkit-box-shadow:
-		0 0 0 1px #fff,
-		0 0 2px 3px #5b9dd9;
-	box-shadow:
-		0 0 0 1px #fff,
-		0 0 2px 3px #5b9dd9;
-}
-
-.wp-core-ui .media-selection .selected.attachment {
-	-webkit-box-shadow: none;
-	box-shadow: none;
-}
-
-.wp-core-ui .media-selection .attachment.details {
+.media-selection .attachment.selection.details .thumbnail {
 	-webkit-box-shadow:
 		0 0 0 1px #fff,
 		0 0 0 3px #1e8cbe;
@@ -1735,19 +1491,12 @@
 	background: url(../images/spinner.gif) no-repeat;
 	-webkit-background-size: 20px 20px;
 	background-size: 20px 20px;
-	float: left;
-	display: inline-block;
-	visibility: hidden;
+	display: none;
 	opacity: 0.7;
 	filter: alpha(opacity=70);
 	width: 20px;
 	height: 20px;
 	margin: 0;
-	vertical-align: middle;
-}
-
-.media-frame .spinner.is-active {
-	visibility: visible;
 }
 
 .media-toolbar .spinner {
@@ -1769,7 +1518,7 @@
 }
 
 .attachment-details .settings-save-status .spinner {
-	margin-right: 5px;
+	margin: 0 5px 0;
 }
 
 .attachment-details .settings-save-status .saved {
@@ -1777,10 +1526,7 @@
 	display: none;
 }
 
-.attachment-details.save-waiting .settings-save-status .spinner {
-	visibility: visible;
-}
-
+.attachment-details.save-waiting .settings-save-status .spinner,
 .attachment-details.save-complete .settings-save-status .saved {
 	display: block;
 }
@@ -1840,35 +1586,10 @@
 	max-width: 120px;
 	max-height: 120px;
 	margin: 0 auto;
->>>>>>> WPHome/master
 }
 
 .attachment-info .details {
 	float: right;
-<<<<<<< HEAD
-}
-
-/**
- * Attachment Display Settings
- */
-.attachment-display-settings {
-	float: right;
-}
-
-/**
- * Embed from URL
- */
-.embed-url span {
-	display: block;
-	padding: 4px 2px 6px 0;
-}
-
-.media-embed .thumbnail {
-	float: right;
-}
-
-.media-embed .setting {
-=======
 	font-size: 12px;
 	max-width: 100%;
 }
@@ -2037,8 +1758,8 @@
 	padding: 12px 14px;
 	width: 100%;
 	min-width: 200px;
-	-webkit-box-shadow: inset -2px 2px 4px -2px rgba( 0, 0, 0, 0.1 );
-	box-shadow: inset -2px 2px 4px -2px rgba( 0, 0, 0, 0.1 );
+	-webkit-box-shadow: inset 2px 2px 4px -2px rgba( 0, 0, 0, 0.1 );
+	box-shadow: inset 2px 2px 4px -2px rgba( 0, 0, 0, 0.1 );
 }
 
 .media-frame .embed-url .spinner {
@@ -2048,7 +1769,7 @@
 }
 
 .media-frame .embed-loading .embed-url .spinner {
-	visibility: visible;
+	display: block;
 }
 
 .embed-link-settings,
@@ -2062,18 +1783,11 @@
 	overflow: auto;
 }
 
-.embed-preview img,
-.embed-preview iframe,
-.embed-preview embed {
+.embed-preview img, .embed-preview iframe, .embed-preview embed {
 	max-width: 100%;
 }
 
-.embed-preview a {
-	display: inline-block;
-}
-
 .embed-preview img {
-	display: block;
 	height: auto;
 }
 
@@ -2401,22 +2115,10 @@
 }
 
 .ie7 .media-sidebar .setting .link-to-custom {
->>>>>>> WPHome/master
 	float: right;
 }
 
 /**
-<<<<<<< HEAD
- * Responsive layout
- */
-@media only screen and (max-width: 900px) {
-	.media-frame-title,
-	.media-frame-router,
-	.media-frame-content,
-	.media-frame-toolbar {
-		left: 0;
-		right: 140px;
-=======
  * Localization
  */
 .rtl .media-modal,
@@ -2652,7 +2354,7 @@
 	}
 
 	.media-modal .attachments-browser .media-toolbar .spinner {
-		margin: 14px 2px 0;
+		margin: 14px 8px 0;
 	}
 
 	/* Text inputs need to be 16px, or they force zooming on iOS */
@@ -2696,17 +2398,11 @@
 
 	.media-sidebar.visible {
 		bottom: 0;
->>>>>>> WPHome/master
 	}
 
 	.attachments-browser .attachments,
 	.attachments-browser .uploader-inline,
 	.attachments-browser .media-toolbar {
-<<<<<<< HEAD
-		right: 0;
-		left: 180px;
-	}
-=======
 		left: 0;
 	}
 
@@ -2795,6 +2491,7 @@
  * HiDPI Displays
  */
 @media print,
+  (-o-min-device-pixel-ratio: 5/4),
   (-webkit-min-device-pixel-ratio: 1.25),
   (min-resolution: 120dpi) {
 
@@ -2855,5 +2552,4 @@
 
 .media-frame-content[data-columns="12"] .attachment {
 	width: 8.33%;
->>>>>>> WPHome/master
 }

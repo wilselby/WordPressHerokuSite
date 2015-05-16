@@ -20,11 +20,7 @@
  * @param int $dst_h The destination height.
  * @param int $src_abs Optional. If the source crop points are absolute.
  * @param string $dst_file Optional. The destination file to write to.
-<<<<<<< HEAD
- * @return string|WP_Error|false New filepath on success, WP_Error or false on failure.
-=======
  * @return string|WP_Error New filepath on success, WP_Error on failure.
->>>>>>> WPHome/master
  */
 function wp_crop_image( $src, $src_x, $src_y, $src_w, $src_h, $dst_w, $dst_h, $src_abs = false, $dst_file = false ) {
 	$src_file = $src;
@@ -51,26 +47,18 @@ function wp_crop_image( $src, $src_x, $src_y, $src_w, $src_h, $dst_w, $dst_h, $s
 	if ( ! $dst_file )
 		$dst_file = str_replace( basename( $src_file ), 'cropped-' . basename( $src_file ), $src_file );
 
-<<<<<<< HEAD
-	// The directory containing the original file may no longer exist when
-	// using a replication plugin.
-=======
 	/*
 	 * The directory containing the original file may no longer exist when
 	 * using a replication plugin.
 	 */
->>>>>>> WPHome/master
 	wp_mkdir_p( dirname( $dst_file ) );
 
 	$dst_file = dirname( $dst_file ) . '/' . wp_unique_filename( dirname( $dst_file ), basename( $dst_file ) );
 
 	$result = $editor->save( $dst_file );
-<<<<<<< HEAD
-=======
 	if ( is_wp_error( $result ) )
 		return $result;
 
->>>>>>> WPHome/master
 	return $dst_file;
 }
 
@@ -87,23 +75,12 @@ function wp_generate_attachment_metadata( $attachment_id, $file ) {
 	$attachment = get_post( $attachment_id );
 
 	$metadata = array();
-<<<<<<< HEAD
-=======
 	$support = false;
->>>>>>> WPHome/master
 	if ( preg_match('!^image/!', get_post_mime_type( $attachment )) && file_is_displayable_image($file) ) {
 		$imagesize = getimagesize( $file );
 		$metadata['width'] = $imagesize[0];
 		$metadata['height'] = $imagesize[1];
 
-<<<<<<< HEAD
-		// Make the file path relative to the upload dir
-		$metadata['file'] = _wp_relative_upload_path($file);
-
-		// make thumbnails and other intermediate sizes
-		global $_wp_additional_image_sizes;
-
-=======
 		// Make the file path relative to the upload dir.
 		$metadata['file'] = _wp_relative_upload_path($file);
 
@@ -111,7 +88,6 @@ function wp_generate_attachment_metadata( $attachment_id, $file ) {
 		global $_wp_additional_image_sizes;
 
 		$sizes = array();
->>>>>>> WPHome/master
 		foreach ( get_intermediate_image_sizes() as $s ) {
 			$sizes[$s] = array( 'width' => '', 'height' => '', 'crop' => false );
 			if ( isset( $_wp_additional_image_sizes[$s]['width'] ) )
@@ -123,17 +99,11 @@ function wp_generate_attachment_metadata( $attachment_id, $file ) {
 			else
 				$sizes[$s]['height'] = get_option( "{$s}_size_h" ); // For default sizes set in options
 			if ( isset( $_wp_additional_image_sizes[$s]['crop'] ) )
-<<<<<<< HEAD
-				$sizes[$s]['crop'] = intval( $_wp_additional_image_sizes[$s]['crop'] ); // For theme-added sizes
-=======
 				$sizes[$s]['crop'] = $_wp_additional_image_sizes[$s]['crop']; // For theme-added sizes
->>>>>>> WPHome/master
 			else
 				$sizes[$s]['crop'] = get_option( "{$s}_crop" ); // For default sizes set in options
 		}
 
-<<<<<<< HEAD
-=======
 		/**
 		 * Filter the image sizes automatically generated when uploading an image.
 		 *
@@ -141,7 +111,6 @@ function wp_generate_attachment_metadata( $attachment_id, $file ) {
 		 *
 		 * @param array $sizes An associative array of image sizes.
 		 */
->>>>>>> WPHome/master
 		$sizes = apply_filters( 'intermediate_image_sizes_advanced', $sizes );
 
 		if ( $sizes ) {
@@ -153,23 +122,15 @@ function wp_generate_attachment_metadata( $attachment_id, $file ) {
 			$metadata['sizes'] = array();
 		}
 
-<<<<<<< HEAD
-		// fetch additional metadata from exif/iptc
-=======
 		// Fetch additional metadata from EXIF/IPTC.
->>>>>>> WPHome/master
 		$image_meta = wp_read_image_metadata( $file );
 		if ( $image_meta )
 			$metadata['image_meta'] = $image_meta;
 
-<<<<<<< HEAD
-	}
-
-=======
-	} elseif ( wp_attachment_is( 'video', $attachment ) ) {
+	} elseif ( preg_match( '#^video/#', get_post_mime_type( $attachment ) ) ) {
 		$metadata = wp_read_video_metadata( $file );
 		$support = current_theme_supports( 'post-thumbnails', 'attachment:video' ) || post_type_supports( 'attachment:video', 'thumbnail' );
-	} elseif ( wp_attachment_is( 'audio', $attachment ) ) {
+	} elseif ( preg_match( '#^audio/#', get_post_mime_type( $attachment ) ) ) {
 		$metadata = wp_read_audio_metadata( $file );
 		$support = current_theme_supports( 'post-thumbnails', 'attachment:audio' ) || post_type_supports( 'attachment:audio', 'thumbnail' );
 	}
@@ -240,7 +201,6 @@ function wp_generate_attachment_metadata( $attachment_id, $file ) {
 	 * @param array $metadata      An array of attachment meta data.
 	 * @param int   $attachment_id Current attachment ID.
 	 */
->>>>>>> WPHome/master
 	return apply_filters( 'wp_generate_attachment_metadata', $metadata, $attachment_id );
 }
 
@@ -296,19 +256,12 @@ function wp_read_image_metadata( $file ) {
 
 	list( , , $sourceImageType ) = getimagesize( $file );
 
-<<<<<<< HEAD
-	// exif contains a bunch of data we'll probably never need formatted in ways
-	// that are difficult to use. We'll normalize it and just extract the fields
-	// that are likely to be useful. Fractions and numbers are converted to
-	// floats, dates to unix timestamps, and everything else to strings.
-=======
 	/*
 	 * EXIF contains a bunch of data we'll probably never need formatted in ways
 	 * that are difficult to use. We'll normalize it and just extract the fields
 	 * that are likely to be useful. Fractions and numbers are converted to
 	 * floats, dates to unix timestamps, and everything else to strings.
 	 */
->>>>>>> WPHome/master
 	$meta = array(
 		'aperture' => 0,
 		'credit' => '',
@@ -320,12 +273,6 @@ function wp_read_image_metadata( $file ) {
 		'iso' => 0,
 		'shutter_speed' => 0,
 		'title' => '',
-<<<<<<< HEAD
-	);
-
-	// read iptc first, since it might contain data not available in exif such
-	// as caption, description etc
-=======
 		'orientation' => 0,
 	);
 
@@ -333,33 +280,12 @@ function wp_read_image_metadata( $file ) {
 	 * Read IPTC first, since it might contain data not available in exif such
 	 * as caption, description etc.
 	 */
->>>>>>> WPHome/master
 	if ( is_callable( 'iptcparse' ) ) {
 		getimagesize( $file, $info );
 
 		if ( ! empty( $info['APP13'] ) ) {
 			$iptc = iptcparse( $info['APP13'] );
 
-<<<<<<< HEAD
-			// headline, "A brief synopsis of the caption."
-			if ( ! empty( $iptc['2#105'][0] ) )
-				$meta['title'] = trim( $iptc['2#105'][0] );
-			// title, "Many use the Title field to store the filename of the image, though the field may be used in many ways."
-			elseif ( ! empty( $iptc['2#005'][0] ) )
-				$meta['title'] = trim( $iptc['2#005'][0] );
-
-			if ( ! empty( $iptc['2#120'][0] ) ) { // description / legacy caption
-				$caption = trim( $iptc['2#120'][0] );
-				if ( empty( $meta['title'] ) ) {
-					// Assume the title is stored in 2:120 if it's short.
-					if ( strlen( $caption ) < 80 )
-						$meta['title'] = $caption;
-					else
-						$meta['caption'] = $caption;
-				} elseif ( $caption != $meta['title'] ) {
-					$meta['caption'] = $caption;
-				}
-=======
 			// Headline, "A brief synopsis of the caption."
 			if ( ! empty( $iptc['2#105'][0] ) ) {
 				$meta['title'] = trim( $iptc['2#105'][0] );
@@ -373,18 +299,20 @@ function wp_read_image_metadata( $file ) {
 
 			if ( ! empty( $iptc['2#120'][0] ) ) { // description / legacy caption
 				$caption = trim( $iptc['2#120'][0] );
+				if ( empty( $meta['title'] ) ) {
+					mbstring_binary_safe_encoding();
+					$caption_length = strlen( $caption );
+					reset_mbstring_encoding();
 
-				mbstring_binary_safe_encoding();
-				$caption_length = strlen( $caption );
-				reset_mbstring_encoding();
-
-				if ( empty( $meta['title'] ) && $caption_length < 80 ) {
 					// Assume the title is stored in 2:120 if it's short.
-					$meta['title'] = $caption;
+					if ( $caption_length < 80 ) {
+						$meta['title'] = $caption;
+					} else {
+						$meta['caption'] = $caption;
+					}
+				} elseif ( $caption != $meta['title'] ) {
+					$meta['caption'] = $caption;
 				}
-
-				$meta['caption'] = $caption;
->>>>>>> WPHome/master
 			}
 
 			if ( ! empty( $iptc['2#110'][0] ) ) // credit
@@ -392,11 +320,7 @@ function wp_read_image_metadata( $file ) {
 			elseif ( ! empty( $iptc['2#080'][0] ) ) // creator / legacy byline
 				$meta['credit'] = trim( $iptc['2#080'][0] );
 
-<<<<<<< HEAD
 			if ( ! empty( $iptc['2#055'][0] ) and ! empty( $iptc['2#060'][0] ) ) // created date and time
-=======
-			if ( ! empty( $iptc['2#055'][0] ) && ! empty( $iptc['2#060'][0] ) ) // created date and time
->>>>>>> WPHome/master
 				$meta['created_timestamp'] = strtotime( $iptc['2#055'][0] . ' ' . $iptc['2#060'][0] );
 
 			if ( ! empty( $iptc['2#116'][0] ) ) // copyright
@@ -404,56 +328,6 @@ function wp_read_image_metadata( $file ) {
 		 }
 	}
 
-<<<<<<< HEAD
-	// fetch additional info from exif if available
-	if ( is_callable( 'exif_read_data' ) && in_array( $sourceImageType, apply_filters( 'wp_read_image_metadata_types', array( IMAGETYPE_JPEG, IMAGETYPE_TIFF_II, IMAGETYPE_TIFF_MM ) ) ) ) {
-		$exif = @exif_read_data( $file );
-
-		if ( !empty( $exif['Title'] ) )
-			$meta['title'] = trim( $exif['Title'] );
-
-		if ( ! empty( $exif['ImageDescription'] ) ) {
-			if ( empty( $meta['title'] ) && strlen( $exif['ImageDescription'] ) < 80 ) {
-				// Assume the title is stored in ImageDescription
-				$meta['title'] = trim( $exif['ImageDescription'] );
-				if ( ! empty( $exif['COMPUTED']['UserComment'] ) && trim( $exif['COMPUTED']['UserComment'] ) != $meta['title'] )
-					$meta['caption'] = trim( $exif['COMPUTED']['UserComment'] );
-			} elseif ( trim( $exif['ImageDescription'] ) != $meta['title'] ) {
-				$meta['caption'] = trim( $exif['ImageDescription'] );
-			}
-		} elseif ( ! empty( $exif['Comments'] ) && trim( $exif['Comments'] ) != $meta['title'] ) {
-			$meta['caption'] = trim( $exif['Comments'] );
-		}
-
-		if ( ! empty( $exif['Artist'] ) )
-			$meta['credit'] = trim( $exif['Artist'] );
-		elseif ( ! empty($exif['Author'] ) )
-			$meta['credit'] = trim( $exif['Author'] );
-
-		if ( ! empty( $exif['Copyright'] ) )
-			$meta['copyright'] = trim( $exif['Copyright'] );
-		if ( ! empty($exif['FNumber'] ) )
-			$meta['aperture'] = round( wp_exif_frac2dec( $exif['FNumber'] ), 2 );
-		if ( ! empty($exif['Model'] ) )
-			$meta['camera'] = trim( $exif['Model'] );
-		if ( ! empty($exif['DateTimeDigitized'] ) )
-			$meta['created_timestamp'] = wp_exif_date2ts($exif['DateTimeDigitized'] );
-		if ( ! empty($exif['FocalLength'] ) )
-			$meta['focal_length'] = (string) wp_exif_frac2dec( $exif['FocalLength'] );
-		if ( ! empty($exif['ISOSpeedRatings'] ) ) {
-			$meta['iso'] = is_array( $exif['ISOSpeedRatings'] ) ? reset( $exif['ISOSpeedRatings'] ) : $exif['ISOSpeedRatings'];
-			$meta['iso'] = trim( $meta['iso'] );
-		}
-		if ( ! empty($exif['ExposureTime'] ) )
-			$meta['shutter_speed'] = (string) wp_exif_frac2dec( $exif['ExposureTime'] );
-	}
-
-	foreach ( array( 'title', 'caption', 'credit', 'copyright', 'camera', 'iso' ) as $key ) {
-		if ( $meta[ $key ] && ! seems_utf8( $meta[ $key ] ) )
-			$meta[ $key ] = utf8_encode( $meta[ $key ] );
-	}
-
-=======
 	/**
 	 * Filter the image types to check for exif data.
 	 *
@@ -464,6 +338,10 @@ function wp_read_image_metadata( $file ) {
 	if ( is_callable( 'exif_read_data' ) && in_array( $sourceImageType, apply_filters( 'wp_read_image_metadata_types', array( IMAGETYPE_JPEG, IMAGETYPE_TIFF_II, IMAGETYPE_TIFF_MM ) ) ) ) {
 		$exif = @exif_read_data( $file );
 
+		if ( empty( $meta['title'] ) && ! empty( $exif['Title'] ) ) {
+			$meta['title'] = trim( $exif['Title'] );
+		}
+
 		if ( ! empty( $exif['ImageDescription'] ) ) {
 			mbstring_binary_safe_encoding();
 			$description_length = strlen( $exif['ImageDescription'] );
@@ -472,16 +350,13 @@ function wp_read_image_metadata( $file ) {
 			if ( empty( $meta['title'] ) && $description_length < 80 ) {
 				// Assume the title is stored in ImageDescription
 				$meta['title'] = trim( $exif['ImageDescription'] );
-			}
-
-			if ( empty( $meta['caption'] ) && ! empty( $exif['COMPUTED']['UserComment'] ) ) {
-				$meta['caption'] = trim( $exif['COMPUTED']['UserComment'] );
-			}
-
-			if ( empty( $meta['caption'] ) ) {
+				if ( empty( $meta['caption'] ) && ! empty( $exif['COMPUTED']['UserComment'] ) && trim( $exif['COMPUTED']['UserComment'] ) != $meta['title'] ) {
+					$meta['caption'] = trim( $exif['COMPUTED']['UserComment'] );
+				}
+			} elseif ( empty( $meta['caption'] ) && trim( $exif['ImageDescription'] ) != $meta['title'] ) {
 				$meta['caption'] = trim( $exif['ImageDescription'] );
 			}
-		} elseif ( empty( $meta['caption'] ) && ! empty( $exif['Comments'] ) ) {
+		} elseif ( empty( $meta['caption'] ) && ! empty( $exif['Comments'] ) && trim( $exif['Comments'] ) != $meta['title'] ) {
 			$meta['caption'] = trim( $exif['Comments'] );
 		}
 
@@ -541,7 +416,6 @@ function wp_read_image_metadata( $file ) {
 	 * @param string $file            Path to image file.
 	 * @param int    $sourceImageType Type of image.
 	 */
->>>>>>> WPHome/master
 	return apply_filters( 'wp_read_image_metadata', $meta, $file, $sourceImageType );
 
 }
@@ -563,26 +437,11 @@ function file_is_valid_image($path) {
  * Validate that file is suitable for displaying within a web page.
  *
  * @since 2.5.0
-<<<<<<< HEAD
- * @uses apply_filters() Calls 'file_is_displayable_image' on $result and $path.
-=======
->>>>>>> WPHome/master
  *
  * @param string $path File path to test.
  * @return bool True if suitable, false if not suitable.
  */
 function file_is_displayable_image($path) {
-<<<<<<< HEAD
-	$info = @getimagesize($path);
-	if ( empty($info) )
-		$result = false;
-	elseif ( !in_array($info[2], array(IMAGETYPE_GIF, IMAGETYPE_JPEG, IMAGETYPE_PNG)) )	// only gif, jpeg and png images can reliably be displayed
-		$result = false;
-	else
-		$result = true;
-
-	return apply_filters('file_is_displayable_image', $result, $path);
-=======
 	$displayable_image_types = array( IMAGETYPE_GIF, IMAGETYPE_JPEG, IMAGETYPE_PNG, IMAGETYPE_BMP );
 
 	$info = @getimagesize( $path );
@@ -603,7 +462,6 @@ function file_is_displayable_image($path) {
 	 * @param string $path   Path to the image.
 	 */
 	return apply_filters( 'file_is_displayable_image', $result, $path );
->>>>>>> WPHome/master
 }
 
 /**
@@ -636,9 +494,6 @@ function load_image_to_edit( $attachment_id, $mime_type, $size = 'full' ) {
 			break;
 	}
 	if ( is_resource($image) ) {
-<<<<<<< HEAD
-		$image = apply_filters('load_image_to_edit', $image, $attachment_id, $size);
-=======
 		/**
 		 * Filter the current image being loaded for editing.
 		 *
@@ -649,7 +504,6 @@ function load_image_to_edit( $attachment_id, $mime_type, $size = 'full' ) {
 		 * @param string   $size          Image size.
 		 */
 		$image = apply_filters( 'load_image_to_edit', $image, $attachment_id, $size );
->>>>>>> WPHome/master
 		if ( function_exists('imagealphablending') && function_exists('imagesavealpha') ) {
 			imagealphablending($image, false);
 			imagesavealpha($image, true);
@@ -676,14 +530,6 @@ function _load_image_to_edit_path( $attachment_id, $size = 'full' ) {
 
 	if ( $filepath && file_exists( $filepath ) ) {
 		if ( 'full' != $size && ( $data = image_get_intermediate_size( $attachment_id, $size ) ) ) {
-<<<<<<< HEAD
-			$filepath = apply_filters( 'load_image_to_edit_filesystempath', path_join( dirname( $filepath ), $data['file'] ), $attachment_id, $size );
-		}
-	} elseif ( function_exists( 'fopen' ) && function_exists( 'ini_get' ) && true == ini_get( 'allow_url_fopen' ) ) {
-		$filepath = apply_filters( 'load_image_to_edit_attachmenturl', wp_get_attachment_url( $attachment_id ), $attachment_id, $size );
-	}
-
-=======
 			/**
 			 * Filter the path to the current image.
 			 *
@@ -721,7 +567,6 @@ function _load_image_to_edit_path( $attachment_id, $size = 'full' ) {
 	 * @param string      $attachment_id Attachment ID.
 	 * @param string      $size          Size of the image.
 	 */
->>>>>>> WPHome/master
 	return apply_filters( 'load_image_to_edit_path', $filepath, $attachment_id, $size );
 }
 
@@ -743,15 +588,10 @@ function _copy_image_file( $attachment_id ) {
 		$dst_file = str_replace( basename( $dst_file ), 'copy-' . basename( $dst_file ), $dst_file );
 		$dst_file = dirname( $dst_file ) . '/' . wp_unique_filename( dirname( $dst_file ), basename( $dst_file ) );
 
-<<<<<<< HEAD
-		// The directory containing the original file may no longer exist when
-		// using a replication plugin.
-=======
 		/*
 		 * The directory containing the original file may no longer
 		 * exist when using a replication plugin.
 		 */
->>>>>>> WPHome/master
 		wp_mkdir_p( dirname( $dst_file ) );
 
 		if ( ! @copy( $src_file, $dst_file ) )

@@ -9,9 +9,6 @@
  */
 class WP_Links_List_Table extends WP_List_Table {
 
-<<<<<<< HEAD
-	function __construct( $args = array() ) {
-=======
 	/**
 	 * Constructor.
 	 *
@@ -23,23 +20,12 @@ class WP_Links_List_Table extends WP_List_Table {
 	 * @param array $args An associative array of arguments.
 	 */
 	public function __construct( $args = array() ) {
->>>>>>> WPHome/master
 		parent::__construct( array(
 			'plural' => 'bookmarks',
 			'screen' => isset( $args['screen'] ) ? $args['screen'] : null,
 		) );
 	}
 
-<<<<<<< HEAD
-	function ajax_user_can() {
-		return current_user_can( 'manage_links' );
-	}
-
-	function prepare_items() {
-		global $cat_id, $s, $orderby, $order;
-
-		wp_reset_vars( array( 'action', 'cat_id', 'linkurl', 'name', 'image', 'description', 'visible', 'target', 'category', 'link_id', 'submit', 'orderby', 'order', 'links_show_cat_id', 'rating', 'rel', 'notes', 'linkcheck[]', 's' ) );
-=======
 	public function ajax_user_can() {
 		return current_user_can( 'manage_links' );
 	}
@@ -48,7 +34,6 @@ class WP_Links_List_Table extends WP_List_Table {
 		global $cat_id, $s, $orderby, $order;
 
 		wp_reset_vars( array( 'action', 'cat_id', 'link_id', 'orderby', 'order', 's' ) );
->>>>>>> WPHome/master
 
 		$args = array( 'hide_invisible' => 0, 'hide_empty' => 0 );
 
@@ -64,30 +49,18 @@ class WP_Links_List_Table extends WP_List_Table {
 		$this->items = get_bookmarks( $args );
 	}
 
-<<<<<<< HEAD
-	function no_items() {
-		_e( 'No links found.' );
-	}
-
-	function get_bulk_actions() {
-=======
 	public function no_items() {
 		_e( 'No links found.' );
 	}
 
 	protected function get_bulk_actions() {
->>>>>>> WPHome/master
 		$actions = array();
 		$actions['delete'] = __( 'Delete' );
 
 		return $actions;
 	}
 
-<<<<<<< HEAD
-	function extra_tablenav( $which ) {
-=======
 	protected function extra_tablenav( $which ) {
->>>>>>> WPHome/master
 		global $cat_id;
 
 		if ( 'top' != $which )
@@ -99,35 +72,22 @@ class WP_Links_List_Table extends WP_List_Table {
 				'selected' => $cat_id,
 				'name' => 'cat_id',
 				'taxonomy' => 'link_category',
-<<<<<<< HEAD
-				'show_option_all' => __( 'View all categories' ),
-=======
 				'show_option_all' => __( 'All categories' ),
->>>>>>> WPHome/master
 				'hide_empty' => true,
 				'hierarchical' => 1,
 				'show_count' => 0,
 				'orderby' => 'name',
 			);
-<<<<<<< HEAD
-			wp_dropdown_categories( $dropdown_options );
-			submit_button( __( 'Filter' ), 'button', false, false, array( 'id' => 'post-query-submit' ) );
-=======
 
 			echo '<label class="screen-reader-text" for="cat_id">' . __( 'Filter by category' ) . '</label>';
 			wp_dropdown_categories( $dropdown_options );
 			submit_button( __( 'Filter' ), 'button', 'filter_action', false, array( 'id' => 'post-query-submit' ) );
->>>>>>> WPHome/master
 ?>
 		</div>
 <?php
 	}
 
-<<<<<<< HEAD
-	function get_columns() {
-=======
 	public function get_columns() {
->>>>>>> WPHome/master
 		return array(
 			'cb'         => '<input type="checkbox" />',
 			'name'       => _x( 'Name', 'link name' ),
@@ -139,11 +99,7 @@ class WP_Links_List_Table extends WP_List_Table {
 		);
 	}
 
-<<<<<<< HEAD
-	function get_sortable_columns() {
-=======
 	protected function get_sortable_columns() {
->>>>>>> WPHome/master
 		return array(
 			'name'    => 'name',
 			'url'     => 'url',
@@ -152,17 +108,11 @@ class WP_Links_List_Table extends WP_List_Table {
 		);
 	}
 
-<<<<<<< HEAD
-	function display_rows() {
+	public function display_rows() {
 		global $cat_id;
 
 		$alt = 0;
 
-=======
-	public function display_rows() {
-		global $cat_id;
-
->>>>>>> WPHome/master
 		foreach ( $this->items as $link ) {
 			$link = sanitize_bookmark( $link );
 			$link->link_name = esc_attr( $link->link_name );
@@ -172,18 +122,11 @@ class WP_Links_List_Table extends WP_List_Table {
 
 			$visible = ( $link->link_visible == 'Y' ) ? __( 'Yes' ) : __( 'No' );
 			$rating  = $link->link_rating;
-<<<<<<< HEAD
 			$style = ( $alt++ % 2 ) ? '' : ' class="alternate"';
 
 			$edit_link = get_edit_bookmark_link( $link );
 ?>
-		<tr id="link-<?php echo $link->link_id; ?>" valign="middle" <?php echo $style; ?>>
-=======
-
-			$edit_link = get_edit_bookmark_link( $link );
-?>
-		<tr id="link-<?php echo $link->link_id; ?>">
->>>>>>> WPHome/master
+		<tr id="link-<?php echo $link->link_id; ?>" <?php echo $style; ?>>
 <?php
 
 			list( $columns, $hidden ) = $this->get_column_info();
@@ -245,9 +188,6 @@ class WP_Links_List_Table extends WP_List_Table {
 						break;
 					default:
 						?>
-<<<<<<< HEAD
-						<td <?php echo $attributes ?>><?php do_action( 'manage_link_custom_column', $column_name, $link->link_id ); ?></td>
-=======
 						<td <?php echo $attributes ?>><?php
 							/**
 							 * Fires for each registered custom link column.
@@ -259,7 +199,6 @@ class WP_Links_List_Table extends WP_List_Table {
 							 */
 							do_action( 'manage_link_custom_column', $column_name, $link->link_id );
 						?></td>
->>>>>>> WPHome/master
 						<?php
 						break;
 				}

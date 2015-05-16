@@ -1,11 +1,7 @@
 <?php
 
 if ( !class_exists('SimplePie') )
-<<<<<<< HEAD
-	require_once (ABSPATH . WPINC . '/class-simplepie.php');
-=======
 	require_once( ABSPATH . WPINC . '/class-simplepie.php' );
->>>>>>> WPHome/master
 
 class WP_Feed_Cache extends SimplePie_Cache {
 	/**
@@ -14,31 +10,12 @@ class WP_Feed_Cache extends SimplePie_Cache {
 	 * @static
 	 * @access public
 	 */
-<<<<<<< HEAD
-	function create($location, $filename, $extension) {
-=======
 	public function create($location, $filename, $extension) {
->>>>>>> WPHome/master
 		return new WP_Feed_Cache_Transient($location, $filename, $extension);
 	}
 }
 
 class WP_Feed_Cache_Transient {
-<<<<<<< HEAD
-	var $name;
-	var $mod_name;
-	var $lifetime = 43200; //Default lifetime in cache of 12 hours
-
-	function __construct($location, $filename, $extension) {
-		$this->name = 'feed_' . $filename;
-		$this->mod_name = 'feed_mod_' . $filename;
-		$this->lifetime = apply_filters('wp_feed_cache_transient_lifetime', $this->lifetime, $filename);
-	}
-
-	function save($data) {
-		if ( is_a($data, 'SimplePie') )
-			$data = $data->data;
-=======
 	public $name;
 	public $mod_name;
 	public $lifetime = 43200; //Default lifetime in cache of 12 hours
@@ -60,31 +37,14 @@ class WP_Feed_Cache_Transient {
 	}
 
 	public function save($data) {
-		if ( $data instanceof SimplePie ) {
+		if ( is_a($data, 'SimplePie') )
 			$data = $data->data;
-		}
->>>>>>> WPHome/master
 
 		set_transient($this->name, $data, $this->lifetime);
 		set_transient($this->mod_name, time(), $this->lifetime);
 		return true;
 	}
 
-<<<<<<< HEAD
-	function load() {
-		return get_transient($this->name);
-	}
-
-	function mtime() {
-		return get_transient($this->mod_name);
-	}
-
-	function touch() {
-		return set_transient($this->mod_name, time(), $this->lifetime);
-	}
-
-	function unlink() {
-=======
 	public function load() {
 		return get_transient($this->name);
 	}
@@ -98,7 +58,6 @@ class WP_Feed_Cache_Transient {
 	}
 
 	public function unlink() {
->>>>>>> WPHome/master
 		delete_transient($this->name);
 		delete_transient($this->mod_name);
 		return true;
@@ -107,11 +66,7 @@ class WP_Feed_Cache_Transient {
 
 class WP_SimplePie_File extends SimplePie_File {
 
-<<<<<<< HEAD
-	function __construct($url, $timeout = 10, $redirects = 5, $headers = null, $useragent = null, $force_fsockopen = false) {
-=======
 	public function __construct($url, $timeout = 10, $redirects = 5, $headers = null, $useragent = null, $force_fsockopen = false) {
->>>>>>> WPHome/master
 		$this->url = $url;
 		$this->timeout = $timeout;
 		$this->redirects = $redirects;
@@ -121,14 +76,10 @@ class WP_SimplePie_File extends SimplePie_File {
 		$this->method = SIMPLEPIE_FILE_SOURCE_REMOTE;
 
 		if ( preg_match('/^http(s)?:\/\//i', $url) ) {
-<<<<<<< HEAD
-			$args = array( 'timeout' => $this->timeout, 'redirection' => $this->redirects);
-=======
 			$args = array(
 				'timeout' => $this->timeout,
 				'redirection' => $this->redirects,
 			);
->>>>>>> WPHome/master
 
 			if ( !empty($this->headers) )
 				$args['headers'] = $this->headers;
@@ -136,11 +87,7 @@ class WP_SimplePie_File extends SimplePie_File {
 			if ( SIMPLEPIE_USERAGENT != $this->useragent ) //Use default WP user agent unless custom has been specified
 				$args['user-agent'] = $this->useragent;
 
-<<<<<<< HEAD
-			$res = wp_remote_request($url, $args);
-=======
 			$res = wp_safe_remote_request($url, $args);
->>>>>>> WPHome/master
 
 			if ( is_wp_error($res) ) {
 				$this->error = 'WP HTTP Error: ' . $res->get_error_message();
@@ -151,15 +98,8 @@ class WP_SimplePie_File extends SimplePie_File {
 				$this->status_code = wp_remote_retrieve_response_code( $res );
 			}
 		} else {
-<<<<<<< HEAD
-			if ( ! file_exists($url) || ( ! $this->body = file_get_contents($url) ) ) {
-				$this->error = 'file_get_contents could not read the file';
-				$this->success = false;
-			}
-=======
 			$this->error = '';
 			$this->success = false;
->>>>>>> WPHome/master
 		}
 	}
 }

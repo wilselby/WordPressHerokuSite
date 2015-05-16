@@ -11,14 +11,9 @@ class WP_Ajax_Response {
 	 *
 	 * @since 2.1.0
 	 * @var array
-<<<<<<< HEAD
 	 * @access private
 	 */
-	var $responses = array();
-=======
-	 */
-	public $responses = array();
->>>>>>> WPHome/master
+	private $responses = array();
 
 	/**
 	 * Constructor - Passes args to {@link WP_Ajax_Response::add()}.
@@ -27,16 +22,63 @@ class WP_Ajax_Response {
 	 * @see WP_Ajax_Response::add()
 	 *
 	 * @param string|array $args Optional. Will be passed to add() method.
-<<<<<<< HEAD
 	 * @return WP_Ajax_Response
 	 */
-	function __construct( $args = '' ) {
-=======
-	 */
 	public function __construct( $args = '' ) {
->>>>>>> WPHome/master
 		if ( !empty($args) )
 			$this->add($args);
+	}
+
+	/**
+	 * Make private properties readable for backwards compatibility.
+	 *
+	 * @since 4.0.0
+	 * @access public
+	 *
+	 * @param string $name Property to get.
+	 * @return mixed Property.
+	 */
+	public function __get( $name ) {
+		return $this->$name;
+	}
+
+	/**
+	 * Make private properties settable for backwards compatibility.
+	 *
+	 * @since 4.0.0
+	 * @access public
+	 *
+	 * @param string $name  Property to set.
+	 * @param mixed  $value Property value.
+	 * @return mixed Newly-set property.
+	 */
+	public function __set( $name, $value ) {
+		return $this->$name = $value;
+	}
+
+	/**
+	 * Make private properties checkable for backwards compatibility.
+	 *
+	 * @since 4.0.0
+	 * @access public
+	 *
+	 * @param string $name Property to check if set.
+	 * @return bool Whether the property is set.
+	 */
+	public function __isset( $name ) {
+		return isset( $this->$name );
+	}
+
+	/**
+	 * Make private properties un-settable for backwards compatibility.
+	 *
+	 * @since 4.0.0
+	 * @access public
+	 *
+	 * @param string $name Property to unset.
+	 */
+	public function __unset( $name ) {
+		unset( $this->$name );
 	}
 
 	/**
@@ -62,11 +104,7 @@ class WP_Ajax_Response {
 	 * @param string|array $args Override defaults.
 	 * @return string XML response.
 	 */
-<<<<<<< HEAD
-	function add( $args = '' ) {
-=======
 	public function add( $args = '' ) {
->>>>>>> WPHome/master
 		$defaults = array(
 			'what' => 'object', 'action' => false,
 			'id' => '0', 'old_id' => false,
@@ -75,12 +113,6 @@ class WP_Ajax_Response {
 		);
 
 		$r = wp_parse_args( $args, $defaults );
-<<<<<<< HEAD
-		extract( $r, EXTR_SKIP );
-		$position = preg_replace( '/[^a-z0-9:_-]/i', '', $position );
-
-		if ( is_wp_error($id) ) {
-=======
 
 		$position = preg_replace( '/[^a-z0-9:_-]/i', '', $r['position'] );
 		$id = $r['id'];
@@ -90,23 +122,11 @@ class WP_Ajax_Response {
 		$data = $r['data'];
 
 		if ( is_wp_error( $id ) ) {
->>>>>>> WPHome/master
 			$data = $id;
 			$id = 0;
 		}
 
 		$response = '';
-<<<<<<< HEAD
-		if ( is_wp_error($data) ) {
-			foreach ( (array) $data->get_error_codes() as $code ) {
-				$response .= "<wp_error code='$code'><![CDATA[" . $data->get_error_message($code) . "]]></wp_error>";
-				if ( !$error_data = $data->get_error_data($code) )
-					continue;
-				$class = '';
-				if ( is_object($error_data) ) {
-					$class = ' class="' . get_class($error_data) . '"';
-					$error_data = get_object_vars($error_data);
-=======
 		if ( is_wp_error( $data ) ) {
 			foreach ( (array) $data->get_error_codes() as $code ) {
 				$response .= "<wp_error code='$code'><![CDATA[" . $data->get_error_message( $code ) . "]]></wp_error>";
@@ -117,25 +137,16 @@ class WP_Ajax_Response {
 				if ( is_object( $error_data ) ) {
 					$class = ' class="' . get_class( $error_data ) . '"';
 					$error_data = get_object_vars( $error_data );
->>>>>>> WPHome/master
 				}
 
 				$response .= "<wp_error_data code='$code'$class>";
 
-<<<<<<< HEAD
-				if ( is_scalar($error_data) ) {
-					$response .= "<![CDATA[$error_data]]>";
-				} elseif ( is_array($error_data) ) {
-					foreach ( $error_data as $k => $v )
-						$response .= "<$k><![CDATA[$v]]></$k>";
-=======
 				if ( is_scalar( $error_data ) ) {
 					$response .= "<![CDATA[$error_data]]>";
 				} elseif ( is_array( $error_data ) ) {
 					foreach ( $error_data as $k => $v ) {
 						$response .= "<$k><![CDATA[$v]]></$k>";
 					}
->>>>>>> WPHome/master
 				}
 
 				$response .= "</wp_error_data>";
@@ -145,17 +156,6 @@ class WP_Ajax_Response {
 		}
 
 		$s = '';
-<<<<<<< HEAD
-		if ( is_array($supplemental) ) {
-			foreach ( $supplemental as $k => $v )
-				$s .= "<$k><![CDATA[$v]]></$k>";
-			$s = "<supplemental>$s</supplemental>";
-		}
-
-		if ( false === $action )
-			$action = $_POST['action'];
-
-=======
 		if ( is_array( $r['supplemental'] ) ) {
 			foreach ( $r['supplemental'] as $k => $v ) {
 				$s .= "<$k><![CDATA[$v]]></$k>";
@@ -166,7 +166,6 @@ class WP_Ajax_Response {
 		if ( false === $action ) {
 			$action = $_POST['action'];
 		}
->>>>>>> WPHome/master
 		$x = '';
 		$x .= "<response action='{$action}_$id'>"; // The action attribute in the xml output is formatted like a nonce action
 		$x .=	"<$what id='$id' " . ( false === $old_id ? '' : "old_id='$old_id' " ) . "position='$position'>";
@@ -186,11 +185,7 @@ class WP_Ajax_Response {
 	 *
 	 * @since 2.1.0
 	 */
-<<<<<<< HEAD
-	function send() {
-=======
 	public function send() {
->>>>>>> WPHome/master
 		header( 'Content-Type: text/xml; charset=' . get_option( 'blog_charset' ) );
 		echo "<?xml version='1.0' encoding='" . get_option( 'blog_charset' ) . "' standalone='yes'?><wp_ajax>";
 		foreach ( (array) $this->responses as $response )

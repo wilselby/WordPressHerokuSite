@@ -15,20 +15,13 @@
  */
 function get_importers() {
 	global $wp_importers;
-<<<<<<< HEAD
-	if ( is_array($wp_importers) )
-		uasort($wp_importers, create_function('$a, $b', 'return strcmp($a[0], $b[0]);'));
-=======
 	if ( is_array( $wp_importers ) ) {
 		uasort( $wp_importers, '_usort_by_first_member' );
 	}
->>>>>>> WPHome/master
 	return $wp_importers;
 }
 
 /**
-<<<<<<< HEAD
-=======
  * Sorts a multidimensional array by first member of each top level member
  *
  * Used by uasort() as a callback, should not be used directly.
@@ -45,7 +38,6 @@ function _usort_by_first_member( $a, $b ) {
 }
 
 /**
->>>>>>> WPHome/master
  * Register importer for WordPress.
  *
  * @since 2.0.0
@@ -84,21 +76,13 @@ function wp_import_cleanup( $id ) {
  * @return array Uploaded file's details on success, error message on failure
  */
 function wp_import_handle_upload() {
-<<<<<<< HEAD
 	if ( !isset($_FILES['import']) ) {
 		$file['error'] = __( 'File is empty. Please upload something more substantial. This error could also be caused by uploads being disabled in your php.ini or by post_max_size being defined as smaller than upload_max_filesize in php.ini.' );
 		return $file;
-=======
-	if ( ! isset( $_FILES['import'] ) ) {
-		return array(
-			'error' => __( 'File is empty. Please upload something more substantial. This error could also be caused by uploads being disabled in your php.ini or by post_max_size being defined as smaller than upload_max_filesize in php.ini.' )
-		);
->>>>>>> WPHome/master
 	}
 
 	$overrides = array( 'test_form' => false, 'test_type' => false );
 	$_FILES['import']['name'] .= '.txt';
-<<<<<<< HEAD
 	$file = wp_handle_upload( $_FILES['import'], $overrides );
 
 	if ( isset( $file['error'] ) )
@@ -114,34 +98,12 @@ function wp_import_handle_upload() {
 		'post_content' => $url,
 		'post_mime_type' => $type,
 		'guid' => $url,
-=======
-	$upload = wp_handle_upload( $_FILES['import'], $overrides );
-
-	if ( isset( $upload['error'] ) ) {
-		return $upload;
-	}
-
-	// Construct the object array
-	$object = array(
-		'post_title' => basename( $upload['file'] ),
-		'post_content' => $upload['url'],
-		'post_mime_type' => $upload['type'],
-		'guid' => $upload['url'],
->>>>>>> WPHome/master
 		'context' => 'import',
 		'post_status' => 'private'
 	);
 
 	// Save the data
-<<<<<<< HEAD
 	$id = wp_insert_attachment( $object, $file );
-
-	// schedule a cleanup for one day from now in case of failed import or missing wp_import_cleanup() call
-	wp_schedule_single_event( time() + DAY_IN_SECONDS, 'importer_scheduled_cleanup', array( $id ) );
-
-	return array( 'file' => $file, 'id' => $id );
-=======
-	$id = wp_insert_attachment( $object, $upload['file'] );
 
 	/*
 	 * Schedule a cleanup for one day from now in case of failed
@@ -149,8 +111,7 @@ function wp_import_handle_upload() {
 	 */
 	wp_schedule_single_event( time() + DAY_IN_SECONDS, 'importer_scheduled_cleanup', array( $id ) );
 
-	return array( 'file' => $upload['file'], 'id' => $id );
->>>>>>> WPHome/master
+	return array( 'file' => $file, 'id' => $id );
 }
 
 /**
@@ -161,26 +122,16 @@ function wp_import_handle_upload() {
  * @return array Importers with metadata for each.
  */
 function wp_get_popular_importers() {
-<<<<<<< HEAD
-	include ABSPATH . WPINC . '/version.php'; // include an unmodified $wp_version
-=======
 	include( ABSPATH . WPINC . '/version.php' ); // include an unmodified $wp_version
->>>>>>> WPHome/master
 
 	$locale = get_locale();
 	$popular_importers = get_site_transient( 'popular_importers_' . $locale );
 
 	if ( ! $popular_importers ) {
-<<<<<<< HEAD
-		$url = add_query_arg( 'locale', get_locale(), 'http://api.wordpress.org/core/importers/1.0/' );
-		$options = array( 'user-agent' => 'WordPress/' . $wp_version . '; ' . home_url() );
-		$popular_importers = maybe_unserialize( wp_remote_retrieve_body( wp_remote_get( $url, $options ) ) );
-=======
 		$url = add_query_arg( 'locale', get_locale(), 'http://api.wordpress.org/core/importers/1.1/' );
 		$options = array( 'user-agent' => 'WordPress/' . $wp_version . '; ' . home_url() );
 		$response = wp_remote_get( $url, $options );
 		$popular_importers = json_decode( wp_remote_retrieve_body( $response ), true );
->>>>>>> WPHome/master
 
 		if ( is_array( $popular_importers ) )
 			set_site_transient( 'popular_importers_' . $locale, $popular_importers, 2 * DAY_IN_SECONDS );

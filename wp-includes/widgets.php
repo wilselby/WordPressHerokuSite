@@ -6,13 +6,8 @@
  * This functionality was found in a plugin before WordPress 2.2 release which
  * included it in the core from that point on.
  *
-<<<<<<< HEAD
  * @link http://codex.wordpress.org/Plugins/WordPress_Widgets WordPress Widgets
  * @link http://codex.wordpress.org/Plugins/WordPress_Widgets_Api Widgets API
-=======
- * @link https://codex.wordpress.org/Plugins/WordPress_Widgets WordPress Widgets
- * @link https://codex.wordpress.org/Plugins/WordPress_Widgets_Api Widgets API
->>>>>>> WPHome/master
  *
  * @package WordPress
  * @subpackage Widgets
@@ -24,53 +19,6 @@
  *
  * @package WordPress
  * @subpackage Widgets
-<<<<<<< HEAD
- * @since 2.8
- */
-class WP_Widget {
-
-	var $id_base;			// Root id for all widgets of this type.
-	var $name;				// Name for this widget type.
-	var $widget_options;	// Option array passed to wp_register_sidebar_widget()
-	var $control_options;	// Option array passed to wp_register_widget_control()
-
-	var $number = false;	// Unique ID number of the current instance.
-	var $id = false;		// Unique ID string of the current instance (id_base-number)
-	var $updated = false;	// Set true when we update the data after a POST submit - makes sure we don't do it twice.
-
-	// Member functions that you must over-ride.
-
-	/** Echo the widget content.
-	 *
-	 * Subclasses should over-ride this function to generate their widget code.
-	 *
-	 * @param array $args Display arguments including before_title, after_title, before_widget, and after_widget.
-	 * @param array $instance The settings for the particular instance of the widget
-	 */
-	function widget($args, $instance) {
-		die('function WP_Widget::widget() must be over-ridden in a sub-class.');
-	}
-
-	/** Update a particular instance.
-	 *
-	 * This function should check that $new_instance is set correctly.
-	 * The newly calculated value of $instance should be returned.
-	 * If "false" is returned, the instance won't be saved/updated.
-	 *
-	 * @param array $new_instance New settings for this instance as input by the user via form()
-	 * @param array $old_instance Old settings for this instance
-	 * @return array Settings to save or bool false to cancel saving
-	 */
-	function update($new_instance, $old_instance) {
-		return $new_instance;
-	}
-
-	/** Echo the settings update form
-	 *
-	 * @param array $instance Current settings
-	 */
-	function form($instance) {
-=======
  * @since 2.8.0
  */
 class WP_Widget {
@@ -188,7 +136,6 @@ class WP_Widget {
 	 * @return string Default return is 'noform'.
 	 */
 	public function form($instance) {
->>>>>>> WPHome/master
 		echo '<p class="no-options-widget">' . __('There are no options for this widget.') . '</p>';
 		return 'noform';
 	}
@@ -196,28 +143,6 @@ class WP_Widget {
 	// Functions you'll need to call.
 
 	/**
-<<<<<<< HEAD
-	 * PHP4 constructor
-	 */
-	function WP_Widget( $id_base = false, $name, $widget_options = array(), $control_options = array() ) {
-		WP_Widget::__construct( $id_base, $name, $widget_options, $control_options );
-	}
-
-	/**
-	 * PHP5 constructor
-	 *
-	 * @param string $id_base Optional Base ID for the widget, lower case,
-	 * if left empty a portion of the widget's class name will be used. Has to be unique.
-	 * @param string $name Name for the widget displayed on the configuration page.
-	 * @param array $widget_options Optional Passed to wp_register_sidebar_widget()
-	 *	 - description: shown on the configuration page
-	 *	 - classname
-	 * @param array $control_options Optional Passed to wp_register_widget_control()
-	 *	 - width: required if more than 250px
-	 *	 - height: currently not used but may be needed in the future
-	 */
-	function __construct( $id_base = false, $name, $widget_options = array(), $control_options = array() ) {
-=======
 	 * PHP5 constructor.
 	 *
 	 * @since 2.8.0
@@ -232,7 +157,6 @@ class WP_Widget {
 	 *                                for information on accepted arguments. Default empty array.
 	 */
 	public function __construct( $id_base, $name, $widget_options = array(), $control_options = array() ) {
->>>>>>> WPHome/master
 		$this->id_base = empty($id_base) ? preg_replace( '/(wp_)?widget_/', '', strtolower(get_class($this)) ) : strtolower($id_base);
 		$this->name = $name;
 		$this->option_name = 'widget_' . $this->id_base;
@@ -241,10 +165,8 @@ class WP_Widget {
 	}
 
 	/**
-<<<<<<< HEAD
-=======
 	 * PHP4 constructor
-	 *
+	 * 
 	 * @param string $id_base
 	 * @param string $name
 	 * @param array  $widget_options
@@ -255,7 +177,6 @@ class WP_Widget {
 	}
 
 	/**
->>>>>>> WPHome/master
 	 * Constructs name attributes for use in form() fields
 	 *
 	 * This function should be used in form() methods to create name attributes for fields to be saved by update()
@@ -263,31 +184,11 @@ class WP_Widget {
 	 * @param string $field_name Field name
 	 * @return string Name attribute for $field_name
 	 */
-<<<<<<< HEAD
-	function get_field_name($field_name) {
-=======
 	public function get_field_name($field_name) {
->>>>>>> WPHome/master
 		return 'widget-' . $this->id_base . '[' . $this->number . '][' . $field_name . ']';
 	}
 
 	/**
-<<<<<<< HEAD
-	 * Constructs id attributes for use in form() fields
-	 *
-	 * This function should be used in form() methods to create id attributes for fields to be saved by update()
-	 *
-	 * @param string $field_name Field name
-	 * @return string ID attribute for $field_name
-	 */
-	function get_field_id($field_name) {
-		return 'widget-' . $this->id_base . '-' . $this->number . '-' . $field_name;
-	}
-
-	// Private Functions. Don't worry about these.
-
-	function _register() {
-=======
 	 * Constructs id attributes for use in {@see WP_Widget::form()} fields.
 	 *
 	 * This function should be used in form() methods to create id attributes
@@ -310,7 +211,6 @@ class WP_Widget {
 	 * @access private
 	 */
 	public function _register() {
->>>>>>> WPHome/master
 		$settings = $this->get_settings();
 		$empty = true;
 
@@ -332,9 +232,6 @@ class WP_Widget {
 		}
 	}
 
-<<<<<<< HEAD
-	function _set($number) {
-=======
 	/**
 	 * Set the internal order number for the widget instance.
 	 *
@@ -345,29 +242,10 @@ class WP_Widget {
 	 *                    instances of the same class.
 	 */
 	public function _set($number) {
->>>>>>> WPHome/master
 		$this->number = $number;
 		$this->id = $this->id_base . '-' . $number;
 	}
 
-<<<<<<< HEAD
-	function _get_display_callback() {
-		return array($this, 'display_callback');
-	}
-
-	function _get_update_callback() {
-		return array($this, 'update_callback');
-	}
-
-	function _get_form_callback() {
-		return array($this, 'form_callback');
-	}
-
-	/** Generate the actual widget content.
-	 *	Just finds the instance and calls widget().
-	 *	Do NOT over-ride this function. */
-	function display_callback( $args, $widget_args = 1 ) {
-=======
 	public function _get_display_callback() {
 		return array($this, 'display_callback');
 	}
@@ -416,7 +294,6 @@ class WP_Widget {
 	 * }
 	 */
 	public function display_callback( $args, $widget_args = 1 ) {
->>>>>>> WPHome/master
 		if ( is_numeric($widget_args) )
 			$widget_args = array( 'number' => $widget_args );
 
@@ -426,24 +303,6 @@ class WP_Widget {
 
 		if ( array_key_exists( $this->number, $instance ) ) {
 			$instance = $instance[$this->number];
-<<<<<<< HEAD
-			// filters the widget's settings, return false to stop displaying the widget
-			$instance = apply_filters('widget_display_callback', $instance, $this, $args);
-			if ( false !== $instance )
-				$this->widget($args, $instance);
-		}
-	}
-
-	/** Deal with changed settings.
-	 *	Do NOT over-ride this function. */
-	function update_callback( $widget_args = 1 ) {
-		global $wp_registered_widgets;
-
-		if ( is_numeric($widget_args) )
-			$widget_args = array( 'number' => $widget_args );
-
-		$widget_args = wp_parse_args( $widget_args, array( 'number' => -1 ) );
-=======
 
 			/**
 			 * Filter the settings for a particular widget instance.
@@ -486,18 +345,12 @@ class WP_Widget {
 	public function update_callback( $deprecated = 1 ) {
 		global $wp_registered_widgets;
 
->>>>>>> WPHome/master
 		$all_instances = $this->get_settings();
 
 		// We need to update the data
 		if ( $this->updated )
 			return;
 
-<<<<<<< HEAD
-		$sidebars_widgets = wp_get_sidebars_widgets();
-
-=======
->>>>>>> WPHome/master
 		if ( isset($_POST['delete_widget']) && $_POST['delete_widget'] ) {
 			// Delete the settings for this instance of the widget
 			if ( isset($_POST['the-widget-id']) )
@@ -527,14 +380,6 @@ class WP_Widget {
 
 				$old_instance = isset($all_instances[$number]) ? $all_instances[$number] : array();
 
-<<<<<<< HEAD
-				$instance = $this->update($new_instance, $old_instance);
-
-				// filters the widget's settings before saving, return false to cancel saving (keep the old settings if updating)
-				$instance = apply_filters('widget_update_callback', $instance, $new_instance, $old_instance, $this);
-				if ( false !== $instance )
-					$all_instances[$number] = $instance;
-=======
 				$was_cache_addition_suspended = wp_suspend_cache_addition();
 				if ( $this->is_preview() && ! $was_cache_addition_suspended ) {
 					wp_suspend_cache_addition( true );
@@ -563,7 +408,6 @@ class WP_Widget {
 				if ( false !== $instance ) {
 					$all_instances[$number] = $instance;
 				}
->>>>>>> WPHome/master
 
 				break; // run only once
 			}
@@ -573,11 +417,6 @@ class WP_Widget {
 		$this->updated = true;
 	}
 
-<<<<<<< HEAD
-	/** Generate the control form.
-	 *	Do NOT over-ride this function. */
-	function form_callback( $widget_args = 1 ) {
-=======
 	/**
 	 * Generate the widget control form (Do NOT override).
 	 *
@@ -587,7 +426,6 @@ class WP_Widget {
 	 * @param int|array $widget_args Widget instance number or array of widget arguments.
 	 */
 	public function form_callback( $widget_args = 1 ) {
->>>>>>> WPHome/master
 		if ( is_numeric($widget_args) )
 			$widget_args = array( 'number' => $widget_args );
 
@@ -603,10 +441,6 @@ class WP_Widget {
 			$instance = $all_instances[ $widget_args['number'] ];
 		}
 
-<<<<<<< HEAD
-		// filters the widget admin form before displaying, return false to stop displaying it
-		$instance = apply_filters('widget_form_callback', $instance, $this);
-=======
 		/**
 		 * Filter the widget instance's settings before displaying the control form.
 		 *
@@ -618,16 +452,10 @@ class WP_Widget {
 		 * @param WP_Widget $this     The current widget instance.
 		 */
 		$instance = apply_filters( 'widget_form_callback', $instance, $this );
->>>>>>> WPHome/master
 
 		$return = null;
 		if ( false !== $instance ) {
 			$return = $this->form($instance);
-<<<<<<< HEAD
-			// add extra fields in the widget form - be sure to set $return to null if you add any
-			// if the widget has no form the text echoed from the default form method can be hidden using css
-			do_action_ref_array( 'in_widget_form', array(&$this, &$return, $instance) );
-=======
 
 			/**
 			 * Fires at the end of the widget control form.
@@ -646,15 +474,10 @@ class WP_Widget {
 			 * @param array     $instance An array of the widget's settings.
 			 */
 			do_action_ref_array( 'in_widget_form', array( &$this, &$return, $instance ) );
->>>>>>> WPHome/master
 		}
 		return $return;
 	}
 
-<<<<<<< HEAD
-	/** Helper function: Registers a single instance. */
-	function _register_one($number = -1) {
-=======
 	/**
 	 * Register an instance of the widget class.
 	 *
@@ -665,15 +488,11 @@ class WP_Widget {
 	 *                        compared to other instances of the same class. Default -1.
 	 */
 	public function _register_one( $number = -1 ) {
->>>>>>> WPHome/master
 		wp_register_sidebar_widget(	$this->id, $this->name,	$this->_get_display_callback(), $this->widget_options, array( 'number' => $number ) );
 		_register_widget_update_callback( $this->id_base, $this->_get_update_callback(), $this->control_options, array( 'number' => -1 ) );
 		_register_widget_form_callback(	$this->id, $this->name,	$this->_get_form_callback(), $this->control_options, array( 'number' => $number ) );
 	}
 
-<<<<<<< HEAD
-	function save_settings($settings) {
-=======
 	/**
 	 * Save the settings for all instances of the widget class.
 	 *
@@ -683,14 +502,10 @@ class WP_Widget {
 	 * @param array $settings Multi-dimensional array of widget instance settings.
 	 */
 	public function save_settings( $settings ) {
->>>>>>> WPHome/master
 		$settings['_multiwidget'] = 1;
 		update_option( $this->option_name, $settings );
 	}
 
-<<<<<<< HEAD
-	function get_settings() {
-=======
 	/**
 	 * Get the settings for all instances of the widget class.
 	 *
@@ -701,7 +516,6 @@ class WP_Widget {
 	 */
 	public function get_settings() {
 
->>>>>>> WPHome/master
 		$settings = get_option($this->option_name);
 
 		if ( false === $settings && isset($this->alt_option_name) )
@@ -725,22 +539,6 @@ class WP_Widget {
  *
  * @package WordPress
  * @subpackage Widgets
-<<<<<<< HEAD
- * @since 2.8
- */
-class WP_Widget_Factory {
-	var $widgets = array();
-
-	function WP_Widget_Factory() {
-		add_action( 'widgets_init', array( $this, '_register_widgets' ), 100 );
-	}
-
-	function register($widget_class) {
-		$this->widgets[$widget_class] = new $widget_class();
-	}
-
-	function unregister($widget_class) {
-=======
  * @since 2.8.0
  */
 class WP_Widget_Factory {
@@ -771,14 +569,10 @@ class WP_Widget_Factory {
 	 * @param string $widget_class The name of a {@see WP_Widget} subclass.
 	 */
 	public function unregister( $widget_class ) {
->>>>>>> WPHome/master
 		if ( isset($this->widgets[$widget_class]) )
 			unset($this->widgets[$widget_class]);
 	}
 
-<<<<<<< HEAD
-	function _register_widgets() {
-=======
 	/**
 	 * Utility method for adding widgets to the registered widgets global.
 	 *
@@ -786,7 +580,6 @@ class WP_Widget_Factory {
 	 * @access public
 	 */
 	public function _register_widgets() {
->>>>>>> WPHome/master
 		global $wp_registered_widgets;
 		$keys = array_keys($this->widgets);
 		$registered = array_keys($wp_registered_widgets);
@@ -842,13 +635,8 @@ $_wp_sidebars_widgets = array();
 /**
  * Private
  */
-<<<<<<< HEAD
- $GLOBALS['_wp_deprecated_widgets_callbacks'] = array(
- 	'wp_widget_pages',
-=======
 $GLOBALS['_wp_deprecated_widgets_callbacks'] = array(
 	'wp_widget_pages',
->>>>>>> WPHome/master
 	'wp_widget_pages_control',
 	'wp_widget_calendar',
 	'wp_widget_calendar_control',
@@ -870,11 +658,7 @@ $GLOBALS['_wp_deprecated_widgets_callbacks'] = array(
 	'wp_widget_rss_control',
 	'wp_widget_recent_comments',
 	'wp_widget_recent_comments_control'
-<<<<<<< HEAD
- );
-=======
 );
->>>>>>> WPHome/master
 
 /* Template tags & API functions */
 
@@ -922,31 +706,11 @@ function unregister_widget($widget_class) {
  *
  * If you wanted to quickly create multiple sidebars for a theme or internally.
  * This function will allow you to do so. If you don't pass the 'name' and/or
-<<<<<<< HEAD
- * 'id' in $args, then they will be built for you.
- *
- * The default for the name is "Sidebar #", with '#' being replaced with the
- * number the sidebar is currently when greater than one. If first sidebar, the
- * name will be just "Sidebar". The default for id is "sidebar-" followed by the
- * number the sidebar creation is currently at. If the id is provided, and multiple
- * sidebars are being defined, the id will have "-2" appended, and so on.
-=======
  * 'id' in `$args`, then they will be built for you.
->>>>>>> WPHome/master
  *
  * @since 2.2.0
  *
  * @see register_sidebar() The second parameter is documented by register_sidebar() and is the same here.
-<<<<<<< HEAD
- * @uses parse_str() Converts a string to an array to be used in the rest of the function.
- * @uses register_sidebar() Sends single sidebar information [name, id] to this
- *	function to handle building the sidebar.
- *
- * @param int $number Number of sidebars to create.
- * @param string|array $args Builds Sidebar based off of 'name' and 'id' values.
- */
-function register_sidebars($number = 1, $args = array()) {
-=======
  *
  * @param int          $number Optional. Number of sidebars to create. Default 1.
  * @param array|string $args {
@@ -962,7 +726,6 @@ function register_sidebars($number = 1, $args = array()) {
  * }
  */
 function register_sidebars( $number = 1, $args = array() ) {
->>>>>>> WPHome/master
 	global $wp_registered_sidebars;
 	$number = (int) $number;
 
@@ -997,36 +760,6 @@ function register_sidebars( $number = 1, $args = array() ) {
 /**
  * Builds the definition for a single sidebar and returns the ID.
  *
-<<<<<<< HEAD
- * The $args parameter takes either a string or an array with 'name' and 'id'
- * contained in either usage. It will be noted that the values will be applied
- * to all sidebars, so if creating more than one, it will be advised to allow
- * for WordPress to create the defaults for you.
- *
- * Example for string would be <code>'name=whatever;id=whatever1'</code> and for
- * the array it would be <code>array(
- *    'name' => 'whatever',
- *    'id' => 'whatever1')</code>.
- *
- * name - The name of the sidebar, which presumably the title which will be
- *     displayed.
- * id - The unique identifier by which the sidebar will be called by.
- * before_widget - The content that will prepended to the widgets when they are
- *     displayed.
- * after_widget - The content that will be appended to the widgets when they are
- *     displayed.
- * before_title - The content that will be prepended to the title when displayed.
- * after_title - the content that will be appended to the title when displayed.
- *
- * <em>Content</em> is assumed to be HTML and should be formatted as such, but
- * doesn't have to be.
- *
- * @since 2.2.0
- * @uses $wp_registered_sidebars Stores the new sidebar in this array by sidebar ID.
- *
- * @param string|array $args Builds Sidebar based off of 'name' and 'id' values
- * @return string The sidebar id that was added.
-=======
  * Accepts either a string or an array and then parses that against a set
  * of default arguments for the new sidebar. WordPress will automatically
  * generate a sidebar ID and name based on the current number of registered
@@ -1064,18 +797,12 @@ function register_sidebars( $number = 1, $args = array() ) {
  *                                 Default is a closing h2 element.
  * }
  * @return string Sidebar ID added to $wp_registered_sidebars global.
->>>>>>> WPHome/master
  */
 function register_sidebar($args = array()) {
 	global $wp_registered_sidebars;
 
 	$i = count($wp_registered_sidebars) + 1;
 
-<<<<<<< HEAD
-=======
-	$id_is_empty = empty( $args['id'] );
-
->>>>>>> WPHome/master
 	$defaults = array(
 		'name' => sprintf(__('Sidebar %d'), $i ),
 		'id' => "sidebar-$i",
@@ -1089,20 +816,10 @@ function register_sidebar($args = array()) {
 
 	$sidebar = wp_parse_args( $args, $defaults );
 
-<<<<<<< HEAD
-=======
-	if ( $id_is_empty ) {
-		/* translators: 1: the id argument, 2: sidebar name, 3: recommended id value */
-		_doing_it_wrong( __FUNCTION__, sprintf( __( 'No %1$s was set in the arguments array for the "%2$s" sidebar. Defaulting to "%3$s". Manually set the %1$s to "%3$s" to silence this notice and keep existing sidebar content.' ), '<code>id</code>', $sidebar['name'], $sidebar['id'] ), '4.2.0' );
-	}
-
->>>>>>> WPHome/master
 	$wp_registered_sidebars[$sidebar['id']] = $sidebar;
 
 	add_theme_support('widgets');
 
-<<<<<<< HEAD
-=======
 	/**
 	 * Fires once a sidebar has been registered.
 	 *
@@ -1110,7 +827,6 @@ function register_sidebar($args = array()) {
 	 *
 	 * @param array $sidebar Parsed arguments for the registered sidebar.
 	 */
->>>>>>> WPHome/master
 	do_action( 'register_sidebar', $sidebar );
 
 	return $sidebar['id'];
@@ -1133,36 +849,15 @@ function unregister_sidebar( $name ) {
 }
 
 /**
-<<<<<<< HEAD
- * Register widget for use in sidebars.
- *
- * The default widget option is 'classname' that can be override.
- *
- * The function can also be used to unregister widgets when $output_callback
-=======
  * Register an instance of a widget.
  *
  * The default widget option is 'classname' that can be overridden.
  *
  * The function can also be used to un-register widgets when `$output_callback`
->>>>>>> WPHome/master
  * parameter is an empty string.
  *
  * @since 2.2.0
  *
-<<<<<<< HEAD
- * @uses $wp_registered_widgets Uses stored registered widgets.
- * @uses $wp_register_widget_defaults Retrieves widget defaults.
- *
- * @param int|string $id Widget ID.
- * @param string $name Widget display title.
- * @param callback $output_callback Run when widget is called.
- * @param array|string $options Optional. Widget Options.
- * @param mixed $params,... Widget parameters to add to widget.
- * @return null Will return if $output_callback is empty after removing widget.
- */
-function wp_register_sidebar_widget($id, $name, $output_callback, $options = array()) {
-=======
  * @global array $wp_registered_widgets       Uses stored registered widgets.
  * @global array $wp_register_widget_defaults Retrieves widget defaults.
  *
@@ -1180,7 +875,6 @@ function wp_register_sidebar_widget($id, $name, $output_callback, $options = arr
  * @return null Will return if `$output_callback` is empty after removing widget.
  */
 function wp_register_sidebar_widget( $id, $name, $output_callback, $options = array() ) {
->>>>>>> WPHome/master
 	global $wp_registered_widgets, $wp_registered_widget_controls, $wp_registered_widget_updates, $_wp_deprecated_widgets_callbacks;
 
 	$id = strtolower($id);
@@ -1212,8 +906,6 @@ function wp_register_sidebar_widget( $id, $name, $output_callback, $options = ar
 	$widget = array_merge($widget, $options);
 
 	if ( is_callable($output_callback) && ( !isset($wp_registered_widgets[$id]) || did_action( 'widgets_init' ) ) ) {
-<<<<<<< HEAD
-=======
 
 		/**
 		 * Fires once for each registered widget.
@@ -1222,7 +914,6 @@ function wp_register_sidebar_widget( $id, $name, $output_callback, $options = ar
 		 *
 		 * @param array $widget An array of default widget arguments.
 		 */
->>>>>>> WPHome/master
 		do_action( 'wp_register_sidebar_widget', $widget );
 		$wp_registered_widgets[$id] = $widget;
 	}
@@ -1258,11 +949,7 @@ function wp_widget_description( $id ) {
  *
  * @since 2.9.0
  *
-<<<<<<< HEAD
- * @param int|string $id sidebar ID.
-=======
  * @param string $id sidebar ID.
->>>>>>> WPHome/master
  * @return string Sidebar description, if available. Null on failure to retrieve description.
  */
 function wp_sidebar_description( $id ) {
@@ -1283,8 +970,6 @@ function wp_sidebar_description( $id ) {
  * @param int|string $id Widget ID.
  */
 function wp_unregister_sidebar_widget($id) {
-<<<<<<< HEAD
-=======
 
 	/**
 	 * Fires just before a widget is removed from a sidebar.
@@ -1293,7 +978,6 @@ function wp_unregister_sidebar_widget($id) {
 	 *
 	 * @param int $id The widget ID.
 	 */
->>>>>>> WPHome/master
 	do_action( 'wp_unregister_sidebar_widget', $id );
 
 	wp_register_sidebar_widget($id, '', '');
@@ -1308,19 +992,6 @@ function wp_unregister_sidebar_widget($id) {
  * control form, but try hard to use the default width. The 'id_base' is for
  * multi-widgets (widgets which allow multiple instances such as the text
  * widget), an id_base must be provided. The widget id will end up looking like
-<<<<<<< HEAD
- * {$id_base}-{$unique_number}.
- *
- * @since 2.2.0
- *
- * @param int|string $id Sidebar ID.
- * @param string $name Sidebar display name.
- * @param callback $control_callback Run when sidebar is displayed.
- * @param array|string $options Optional. Widget options. See above long description.
- * @param mixed $params,... Optional. Additional parameters to add to widget.
- */
-function wp_register_widget_control($id, $name, $control_callback, $options = array()) {
-=======
  * `{$id_base}-{$unique_number}`.
  *
  * @since 2.2.0
@@ -1334,7 +1005,6 @@ function wp_register_widget_control($id, $name, $control_callback, $options = ar
  * @param array|string $options          Optional. Widget options. See description above. Default empty array.
  */
 function wp_register_widget_control( $id, $name, $control_callback, $options = array() ) {
->>>>>>> WPHome/master
 	global $wp_registered_widget_controls, $wp_registered_widget_updates, $wp_registered_widgets, $_wp_deprecated_widgets_callbacks;
 
 	$id = strtolower($id);
@@ -1381,8 +1051,6 @@ function wp_register_widget_control( $id, $name, $control_callback, $options = a
 	$wp_registered_widget_updates[$id_base] = $widget;
 }
 
-<<<<<<< HEAD
-=======
 /**
  *
  * @global array $wp_registered_widget_updates
@@ -1390,7 +1058,6 @@ function wp_register_widget_control( $id, $name, $control_callback, $options = a
  * @param callable $update_callback
  * @param array    $options
  */
->>>>>>> WPHome/master
 function _register_widget_update_callback($id_base, $update_callback, $options = array()) {
 	global $wp_registered_widget_updates;
 
@@ -1409,8 +1076,6 @@ function _register_widget_update_callback($id_base, $update_callback, $options =
 	$wp_registered_widget_updates[$id_base] = $widget;
 }
 
-<<<<<<< HEAD
-=======
 /**
  *
  * @global array $wp_registered_widget_controls
@@ -1420,7 +1085,6 @@ function _register_widget_update_callback($id_base, $update_callback, $options =
  * @param array      $options
  * @return null
  */
->>>>>>> WPHome/master
 function _register_widget_form_callback($id, $name, $form_callback, $options = array()) {
 	global $wp_registered_widget_controls;
 
@@ -1454,10 +1118,6 @@ function _register_widget_form_callback($id, $name, $form_callback, $options = a
  * Remove control callback for widget.
  *
  * @since 2.2.0
-<<<<<<< HEAD
- * @uses wp_register_widget_control() Unregisters by using empty callback.
-=======
->>>>>>> WPHome/master
  *
  * @param int|string $id Widget ID.
  */
@@ -1468,22 +1128,6 @@ function wp_unregister_widget_control($id) {
 /**
  * Display dynamic sidebar.
  *
-<<<<<<< HEAD
- * By default it displays the default sidebar or 'sidebar-1'. The 'sidebar-1' is
- * not named by the theme, the actual name is '1', but 'sidebar-' is added to
- * the registered sidebars for the name. If you named your sidebar 'after-post',
- * then the parameter $index will still be 'after-post', but the lookup will be
- * for 'sidebar-after-post'.
- *
- * It is confusing for the $index parameter, but just know that it should just
- * work. When you register the sidebar in the theme, you will use the same name
- * for this function or "Pay no heed to the man behind the curtain." Just accept
- * it as an oddity of WordPress sidebar register and display.
- *
- * @since 2.2.0
- *
- * @param int|string $index Optional, default is 1. Name or ID of dynamic sidebar.
-=======
  * By default this displays the default sidebar or 'sidebar-1'. If your theme specifies the 'id' or
  * 'name' parameter for its registered sidebars you can pass an id or name as the $index parameter.
  * Otherwise, you can pass in a numerical index to display the sidebar at that index.
@@ -1491,7 +1135,6 @@ function wp_unregister_widget_control($id) {
  * @since 2.2.0
  *
  * @param int|string $index Optional, default is 1. Index, name or ID of dynamic sidebar.
->>>>>>> WPHome/master
  * @return bool True, if widget sidebar was found and called. False if not found or not called.
  */
 function dynamic_sidebar($index = 1) {
@@ -1510,14 +1153,6 @@ function dynamic_sidebar($index = 1) {
 	}
 
 	$sidebars_widgets = wp_get_sidebars_widgets();
-<<<<<<< HEAD
-	if ( empty( $sidebars_widgets ) )
-		return false;
-
-	if ( empty($wp_registered_sidebars[$index]) || !array_key_exists($index, $sidebars_widgets) || !is_array($sidebars_widgets[$index]) || empty($sidebars_widgets[$index]) )
-		return false;
-
-=======
 	if ( empty( $wp_registered_sidebars[ $index ] ) || empty( $sidebars_widgets[ $index ] ) || ! is_array( $sidebars_widgets[ $index ] ) ) {
 		/** This action is documented in wp-includes/widgets.php */
 		do_action( 'dynamic_sidebar_before', $index, false );
@@ -1540,7 +1175,6 @@ function dynamic_sidebar($index = 1) {
 	 *                                Default true.
 	 */
 	do_action( 'dynamic_sidebar_before', $index, true );
->>>>>>> WPHome/master
 	$sidebar = $wp_registered_sidebars[$index];
 
 	$did_one = false;
@@ -1564,8 +1198,6 @@ function dynamic_sidebar($index = 1) {
 		$classname_ = ltrim($classname_, '_');
 		$params[0]['before_widget'] = sprintf($params[0]['before_widget'], $id, $classname_);
 
-<<<<<<< HEAD
-=======
 		/**
 		 * Filter the parameters passed to a widget's display callback.
 		 *
@@ -1598,14 +1230,10 @@ function dynamic_sidebar($index = 1) {
 		 *     }
 		 * }
 		 */
->>>>>>> WPHome/master
 		$params = apply_filters( 'dynamic_sidebar_params', $params );
 
 		$callback = $wp_registered_widgets[$id]['callback'];
 
-<<<<<<< HEAD
-		do_action( 'dynamic_sidebar', $wp_registered_widgets[$id] );
-=======
 		/**
 		 * Fires before a widget's display callback is called.
 		 *
@@ -1632,7 +1260,6 @@ function dynamic_sidebar($index = 1) {
 		 * }
 		 */
 		do_action( 'dynamic_sidebar', $wp_registered_widgets[ $id ] );
->>>>>>> WPHome/master
 
 		if ( is_callable($callback) ) {
 			call_user_func_array($callback, $params);
@@ -1640,8 +1267,6 @@ function dynamic_sidebar($index = 1) {
 		}
 	}
 
-<<<<<<< HEAD
-=======
 	/**
 	 * Fires after widgets are rendered in a dynamic sidebar.
 	 *
@@ -1671,7 +1296,6 @@ function dynamic_sidebar($index = 1) {
 
 	$did_one = apply_filters( 'dynamic_sidebar_has_widgets', $did_one, $index );
 
->>>>>>> WPHome/master
 	return $did_one;
 }
 
@@ -1703,14 +1327,9 @@ function is_active_widget($callback = false, $widget_id = false, $id_base = fals
 
 	if ( is_array($sidebars_widgets) ) {
 		foreach ( $sidebars_widgets as $sidebar => $widgets ) {
-<<<<<<< HEAD
-			if ( $skip_inactive && 'wp_inactive_widgets' == $sidebar )
-				continue;
-=======
 			if ( $skip_inactive && ( 'wp_inactive_widgets' === $sidebar || 'orphaned_widgets' === substr( $sidebar, 0, 16 ) ) ) {
 				continue;
 			}
->>>>>>> WPHome/master
 
 			if ( is_array($widgets) ) {
 				foreach ( $widgets as $widget ) {
@@ -1748,26 +1367,14 @@ function is_dynamic_sidebar() {
 /**
  * Whether a sidebar is in use.
  *
-<<<<<<< HEAD
- * @since 2.8
- *
- * @param mixed $index Sidebar name, id or number to check.
-=======
  * @since 2.8.0
  *
  * @param string|int $index Sidebar name, id or number to check.
->>>>>>> WPHome/master
  * @return bool true if the sidebar is in use, false otherwise.
  */
 function is_active_sidebar( $index ) {
 	$index = ( is_int($index) ) ? "sidebar-$index" : sanitize_title($index);
 	$sidebars_widgets = wp_get_sidebars_widgets();
-<<<<<<< HEAD
-	if ( !empty($sidebars_widgets[$index]) )
-		return true;
-
-	return false;
-=======
 	$is_active_sidebar = ! empty( $sidebars_widgets[$index] );
 
 	/**
@@ -1780,17 +1387,12 @@ function is_active_sidebar( $index ) {
 	 * @param int|string $index             Index, name, or ID of the dynamic sidebar.
 	 */
 	return apply_filters( 'is_active_sidebar', $is_active_sidebar, $index );
->>>>>>> WPHome/master
 }
 
 /* Internal Functions */
 
 /**
-<<<<<<< HEAD
- * Retrieve full list of sidebars and their widgets.
-=======
  * Retrieve full list of sidebars and their widget instance IDs.
->>>>>>> WPHome/master
  *
  * Will upgrade sidebar widget list, if needed. Will also save updated list, if
  * needed.
@@ -1798,16 +1400,6 @@ function is_active_sidebar( $index ) {
  * @since 2.2.0
  * @access private
  *
-<<<<<<< HEAD
- * @param bool $deprecated Not used (deprecated).
- * @return array Upgraded list of widgets to version 3 array format when called from the admin.
- */
-function wp_get_sidebars_widgets($deprecated = true) {
-	if ( $deprecated !== true )
-		_deprecated_argument( __FUNCTION__, '2.8.1' );
-
-	global $wp_registered_widgets, $_wp_sidebars_widgets, $sidebars_widgets;
-=======
  * @param bool $deprecated Not used (argument deprecated).
  * @return array Upgraded list of widgets to version 3 array format when called from the admin.
  */
@@ -1816,7 +1408,6 @@ function wp_get_sidebars_widgets( $deprecated = true ) {
 		_deprecated_argument( __FUNCTION__, '2.8.1' );
 
 	global $_wp_sidebars_widgets, $sidebars_widgets;
->>>>>>> WPHome/master
 
 	// If loading from front page, consult $_wp_sidebars_widgets rather than options
 	// to see if wp_convert_widget_settings() has made manipulations in memory.
@@ -1832,9 +1423,6 @@ function wp_get_sidebars_widgets( $deprecated = true ) {
 	if ( is_array( $sidebars_widgets ) && isset($sidebars_widgets['array_version']) )
 		unset($sidebars_widgets['array_version']);
 
-<<<<<<< HEAD
-	$sidebars_widgets = apply_filters('sidebars_widgets', $sidebars_widgets);
-=======
 	/**
 	 * Filter the list of sidebars and their widgets.
 	 *
@@ -1843,7 +1431,6 @@ function wp_get_sidebars_widgets( $deprecated = true ) {
 	 * @param array $sidebars_widgets An associative array of sidebars and their widgets.
 	 */
 	$sidebars_widgets = apply_filters( 'sidebars_widgets', $sidebars_widgets );
->>>>>>> WPHome/master
 	return $sidebars_widgets;
 }
 
@@ -1885,12 +1472,9 @@ function wp_get_widget_defaults() {
  *
  * @since 2.8.0
  *
-<<<<<<< HEAD
-=======
  * @param string $base_name
  * @param string $option_name
  * @param array  $settings
->>>>>>> WPHome/master
  * @return array
  */
 function wp_convert_widget_settings($base_name, $option_name, $settings) {
@@ -1945,23 +1529,6 @@ function wp_convert_widget_settings($base_name, $option_name, $settings) {
 }
 
 /**
-<<<<<<< HEAD
- * Output an arbitrary widget as a template tag
- *
- * @since 2.8
- *
- * @param string $widget the widget's PHP class name (see default-widgets.php)
- * @param array $instance the widget's instance settings
- * @param array $args the widget's sidebar args
- * @return void
- **/
-function the_widget($widget, $instance = array(), $args = array()) {
-	global $wp_widget_factory;
-
-	$widget_obj = $wp_widget_factory->widgets[$widget];
-	if ( !is_a($widget_obj, 'WP_Widget') )
-		return;
-=======
  * Output an arbitrary widget as a template tag.
  *
  * @since 2.8.0
@@ -1985,10 +1552,8 @@ function the_widget( $widget, $instance = array(), $args = array() ) {
 	global $wp_widget_factory;
 
 	$widget_obj = $wp_widget_factory->widgets[$widget];
-	if ( ! ( $widget_obj instanceof WP_Widget ) ) {
+	if ( !is_a($widget_obj, 'WP_Widget') )
 		return;
-	}
->>>>>>> WPHome/master
 
 	$before_widget = sprintf('<div class="widget %s">', $widget_obj->widget_options['classname'] );
 	$default_args = array( 'before_widget' => $before_widget, 'after_widget' => "</div>", 'before_title' => '<h2 class="widgettitle">', 'after_title' => '</h2>' );
@@ -1996,8 +1561,6 @@ function the_widget( $widget, $instance = array(), $args = array() ) {
 	$args = wp_parse_args($args, $default_args);
 	$instance = wp_parse_args($instance);
 
-<<<<<<< HEAD
-=======
 	/**
 	 * Fires before rendering the requested widget.
 	 *
@@ -2007,7 +1570,6 @@ function the_widget( $widget, $instance = array(), $args = array() ) {
 	 * @param array  $instance The current widget instance's settings.
 	 * @param array  $args     An array of the widget's sidebar arguments.
 	 */
->>>>>>> WPHome/master
 	do_action( 'the_widget', $widget, $instance, $args );
 
 	$widget_obj->_set(-1);
@@ -2036,11 +1598,6 @@ function _wp_sidebars_changed() {
 	retrieve_widgets(true);
 }
 
-<<<<<<< HEAD
-// look for "lost" widgets, this has to run at least on each theme change
-function retrieve_widgets($theme_changed = false) {
-	global $wp_registered_widget_updates, $wp_registered_sidebars, $sidebars_widgets, $wp_registered_widgets;
-=======
 /**
  * Look for "lost" widgets, this has to run at least on each theme change.
  *
@@ -2052,7 +1609,6 @@ function retrieve_widgets($theme_changed = false) {
  */
 function retrieve_widgets( $theme_changed = false ) {
 	global $wp_registered_sidebars, $sidebars_widgets, $wp_registered_widgets;
->>>>>>> WPHome/master
 
 	$registered_sidebar_keys = array_keys( $wp_registered_sidebars );
 	$orphaned = 0;
@@ -2061,13 +1617,6 @@ function retrieve_widgets( $theme_changed = false ) {
 	if ( is_array( $old_sidebars_widgets ) ) {
 		// time() that sidebars were stored is in $old_sidebars_widgets['time']
 		$_sidebars_widgets = $old_sidebars_widgets['data'];
-<<<<<<< HEAD
-		remove_theme_mod( 'sidebars_widgets' );
-
-		foreach ( $_sidebars_widgets as $sidebar => $widgets ) {
-			if ( 'wp_inactive_widgets' == $sidebar || 'orphaned_widgets' == substr( $sidebar, 0, 16 ) )
-				continue;
-=======
 
 		if ( 'customize' !== $theme_changed ) {
 			remove_theme_mod( 'sidebars_widgets' );
@@ -2077,7 +1626,6 @@ function retrieve_widgets( $theme_changed = false ) {
 			if ( 'wp_inactive_widgets' === $sidebar || 'orphaned_widgets' === substr( $sidebar, 0, 16 ) ) {
 				continue;
 			}
->>>>>>> WPHome/master
 
 			if ( !in_array( $sidebar, $registered_sidebar_keys ) ) {
 				$_sidebars_widgets['orphaned_widgets_' . ++$orphaned] = $widgets;
@@ -2156,13 +1704,9 @@ function retrieve_widgets( $theme_changed = false ) {
 	}
 
 	$sidebars_widgets['wp_inactive_widgets'] = array_merge($lost_widgets, (array) $sidebars_widgets['wp_inactive_widgets']);
-<<<<<<< HEAD
-	wp_set_sidebars_widgets($sidebars_widgets);
-=======
 	if ( 'customize' !== $theme_changed ) {
 		wp_set_sidebars_widgets( $sidebars_widgets );
 	}
->>>>>>> WPHome/master
 
 	return $sidebars_widgets;
 }

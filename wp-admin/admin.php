@@ -11,14 +11,9 @@
  *
  * @since 2.3.2
  */
-<<<<<<< HEAD
-if ( ! defined('WP_ADMIN') )
-	define('WP_ADMIN', true);
-=======
 if ( ! defined( 'WP_ADMIN' ) ) {
 	define( 'WP_ADMIN', true );
 }
->>>>>>> WPHome/master
 
 if ( ! defined('WP_NETWORK_ADMIN') )
 	define('WP_NETWORK_ADMIN', false);
@@ -42,29 +37,6 @@ if ( get_option('db_upgraded') ) {
 	update_option( 'db_upgraded',  false );
 
 	/**
-<<<<<<< HEAD
-	 * Runs on the next page load after successful upgrade
-	 *
-	 * @since 2.8
-	 */
-	do_action('after_db_upgrade');
-} elseif ( get_option('db_version') != $wp_db_version && empty($_POST) ) {
-	if ( !is_multisite() ) {
-		wp_redirect(admin_url('upgrade.php?_wp_http_referer=' . urlencode(stripslashes($_SERVER['REQUEST_URI']))));
-		exit;
-	} elseif ( apply_filters( 'do_mu_upgrade', true ) ) {
-		/**
-		 * On really small MU installs run the upgrader every time,
-		 * else run it less often to reduce load.
-		 *
-		 * @since 2.8.4b
-		 */
-		$c = get_blog_count();
-		// If 50 or fewer sites, run every time. Else, run "about ten percent" of the time. Shh, don't check that math.
-		if ( $c <= 50 || ( $c > 50 && mt_rand( 0, (int)( $c / 50 ) ) == 1 ) ) {
-			require_once( ABSPATH . WPINC . '/http.php' );
-			$response = wp_remote_get( admin_url( 'upgrade.php?step=1' ), array( 'timeout' => 120, 'httpversion' => '1.1' ) );
-=======
 	 * Fires on the next page load after a successful DB upgrade.
 	 *
 	 * @since 2.8.0
@@ -91,16 +63,11 @@ if ( get_option('db_upgraded') ) {
 	 */
 	} elseif ( apply_filters( 'do_mu_upgrade', true ) ) {
 		$c = get_blog_count();
-
-		/*
-		 * If there are 50 or fewer sites, run every time. Otherwise, throttle to reduce load:
-		 * attempt to do no more than threshold value, with some +/- allowed.
-		 */
+		// If 50 or fewer sites, run every time. Else, run "about ten percent" of the time. Shh, don't check that math.
 		if ( $c <= 50 || ( $c > 50 && mt_rand( 0, (int)( $c / 50 ) ) == 1 ) ) {
 			require_once( ABSPATH . WPINC . '/http.php' );
 			$response = wp_remote_get( admin_url( 'upgrade.php?step=1' ), array( 'timeout' => 120, 'httpversion' => '1.1' ) );
 			/** This action is documented in wp-admin/network/upgrade.php */
->>>>>>> WPHome/master
 			do_action( 'after_mu_upgrade', $response );
 			unset($response);
 		}
@@ -121,32 +88,12 @@ set_screen_options();
 $date_format = get_option('date_format');
 $time_format = get_option('time_format');
 
-<<<<<<< HEAD
-wp_reset_vars(array('profile', 'redirect', 'redirect_url', 'a', 'text', 'trackback', 'pingback'));
-
 wp_enqueue_script( 'common' );
-
-$editing = false;
-
-if ( isset($_GET['page']) ) {
-	$plugin_page = stripslashes($_GET['page']);
-=======
-wp_enqueue_script( 'common' );
-
-// $pagenow is set in vars.php
-// $wp_importers is sometimes set in wp-admin/includes/import.php
-//
-// The remaining variables are imported as globals elsewhere,
-//     declared as globals here
-global $pagenow, $wp_importers, $hook_suffix, $plugin_page, $typenow, $taxnow;
-
-$page_hook = null;
 
 $editing = false;
 
 if ( isset($_GET['page']) ) {
 	$plugin_page = wp_unslash( $_GET['page'] );
->>>>>>> WPHome/master
 	$plugin_page = plugin_basename($plugin_page);
 }
 
@@ -167,12 +114,6 @@ elseif ( WP_USER_ADMIN )
 else
 	require(ABSPATH . 'wp-admin/menu.php');
 
-<<<<<<< HEAD
-if ( current_user_can( 'manage_options' ) )
-	@ini_set( 'memory_limit', apply_filters( 'admin_memory_limit', WP_MAX_MEMORY_LIMIT ) );
-
-do_action('admin_init');
-=======
 if ( current_user_can( 'manage_options' ) ) {
 	/**
 	 * Filter the maximum memory limit available for administration screens.
@@ -202,7 +143,6 @@ if ( current_user_can( 'manage_options' ) ) {
  * @since 2.5.0
  */
 do_action( 'admin_init' );
->>>>>>> WPHome/master
 
 if ( isset($plugin_page) ) {
 	if ( !empty($typenow) )
@@ -211,12 +151,8 @@ if ( isset($plugin_page) ) {
 		$the_parent = $pagenow;
 	if ( ! $page_hook = get_plugin_page_hook($plugin_page, $the_parent) ) {
 		$page_hook = get_plugin_page_hook($plugin_page, $plugin_page);
-<<<<<<< HEAD
-		// backwards compatibility for plugins using add_management_page
-=======
 
 		// Backwards compatibility for plugins using add_management_page().
->>>>>>> WPHome/master
 		if ( empty( $page_hook ) && 'edit.php' == $pagenow && '' != get_plugin_page_hook($plugin_page, 'tools.php') ) {
 			// There could be plugin specific params on the URL, so we need the whole query string
 			if ( !empty($_SERVER[ 'QUERY_STRING' ]) )
@@ -231,35 +167,18 @@ if ( isset($plugin_page) ) {
 }
 
 $hook_suffix = '';
-<<<<<<< HEAD
 if ( isset($page_hook) )
 	$hook_suffix = $page_hook;
 else if ( isset($plugin_page) )
 	$hook_suffix = $plugin_page;
 else if ( isset($pagenow) )
 	$hook_suffix = $pagenow;
-=======
-if ( isset( $page_hook ) ) {
-	$hook_suffix = $page_hook;
-} elseif ( isset( $plugin_page ) ) {
-	$hook_suffix = $plugin_page;
-} elseif ( isset( $pagenow ) ) {
-	$hook_suffix = $pagenow;
-}
->>>>>>> WPHome/master
 
 set_current_screen();
 
 // Handle plugin admin pages.
 if ( isset($plugin_page) ) {
 	if ( $page_hook ) {
-<<<<<<< HEAD
-		do_action('load-' . $page_hook);
-		if (! isset($_GET['noheader']))
-			require_once(ABSPATH . 'wp-admin/admin-header.php');
-
-		do_action($page_hook);
-=======
 		/**
 		 * Fires before a particular screen is loaded.
 		 *
@@ -287,11 +206,10 @@ if ( isset($plugin_page) ) {
 		/**
 		 * Used to call the registered callback for a plugin screen.
 		 *
-		 * @ignore
+		 * @internal
 		 * @since 1.5.0
 		 */
 		do_action( $page_hook );
->>>>>>> WPHome/master
 	} else {
 		if ( validate_file($plugin_page) )
 			wp_die(__('Invalid plugin page'));
@@ -299,9 +217,6 @@ if ( isset($plugin_page) ) {
 		if ( !( file_exists(WP_PLUGIN_DIR . "/$plugin_page") && is_file(WP_PLUGIN_DIR . "/$plugin_page") ) && !( file_exists(WPMU_PLUGIN_DIR . "/$plugin_page") && is_file(WPMU_PLUGIN_DIR . "/$plugin_page") ) )
 			wp_die(sprintf(__('Cannot load %s.'), htmlentities($plugin_page)));
 
-<<<<<<< HEAD
-		do_action('load-' . $plugin_page);
-=======
 		/**
 		 * Fires before a particular screen is loaded.
 		 *
@@ -315,7 +230,6 @@ if ( isset($plugin_page) ) {
 		 * @since 1.5.0
 		 */
 		do_action( 'load-' . $plugin_page );
->>>>>>> WPHome/master
 
 		if ( !isset($_GET['noheader']))
 			require_once(ABSPATH . 'wp-admin/admin-header.php');
@@ -329,11 +243,7 @@ if ( isset($plugin_page) ) {
 	include(ABSPATH . 'wp-admin/admin-footer.php');
 
 	exit();
-<<<<<<< HEAD
 } else if (isset($_GET['import'])) {
-=======
-} elseif ( isset( $_GET['import'] ) ) {
->>>>>>> WPHome/master
 
 	$importer = $_GET['import'];
 
@@ -350,8 +260,6 @@ if ( isset($plugin_page) ) {
 		exit;
 	}
 
-<<<<<<< HEAD
-=======
 	/**
 	 * Fires before an importer screen is loaded.
 	 *
@@ -359,7 +267,6 @@ if ( isset($plugin_page) ) {
 	 *
 	 * @since 3.5.0
 	 */
->>>>>>> WPHome/master
 	do_action( 'load-importer-' . $importer );
 
 	$parent_file = 'tools.php';
@@ -373,10 +280,6 @@ if ( isset($plugin_page) ) {
 
 	define('WP_IMPORTING', true);
 
-<<<<<<< HEAD
-	if ( apply_filters( 'force_filtered_html_on_import', false ) )
-		kses_init_filters();  // Always filter imported data with kses on multisite.
-=======
 	/**
 	 * Whether to filter imported data through kses on import.
 	 *
@@ -390,7 +293,6 @@ if ( isset($plugin_page) ) {
 	if ( apply_filters( 'force_filtered_html_on_import', false ) ) {
 		kses_init_filters();  // Always filter imported data with kses on multisite.
 	}
->>>>>>> WPHome/master
 
 	call_user_func($wp_importers[$importer][2]);
 
@@ -401,11 +303,6 @@ if ( isset($plugin_page) ) {
 
 	exit();
 } else {
-<<<<<<< HEAD
-	do_action("load-$pagenow");
-	// Backwards compatibility with old load-page-new.php, load-page.php,
-	// and load-categories.php actions.
-=======
 	/**
 	 * Fires before a particular screen is loaded.
 	 *
@@ -424,7 +321,6 @@ if ( isset($plugin_page) ) {
 	 * The following hooks are fired to ensure backward compatibility.
 	 * In all other cases, 'load-' . $pagenow should be used instead.
 	 */
->>>>>>> WPHome/master
 	if ( $typenow == 'page' ) {
 		if ( $pagenow == 'post-new.php' )
 			do_action( 'load-page-new.php' );
@@ -438,10 +334,6 @@ if ( isset($plugin_page) ) {
 	}
 }
 
-<<<<<<< HEAD
-if ( !empty($_REQUEST['action']) )
-	do_action('admin_action_' . $_REQUEST['action']);
-=======
 if ( ! empty( $_REQUEST['action'] ) ) {
 	/**
 	 * Fires when an 'action' request variable is sent.
@@ -453,4 +345,3 @@ if ( ! empty( $_REQUEST['action'] ) ) {
 	 */
 	do_action( 'admin_action_' . $_REQUEST['action'] );
 }
->>>>>>> WPHome/master

@@ -7,16 +7,6 @@
  */
 
 /**
-<<<<<<< HEAD
- * {@internal Missing Short Description}}
- *
- * @since 2.0.0
- * @uses $wpdb
- *
- * @param string $comment_author Author of the comment
- * @param string $comment_date Date of the comment
- * @return mixed Comment ID on success.
-=======
  * Determine if a comment exists based on author and date.
  *
  * @since 2.0.0
@@ -26,7 +16,6 @@
  * @param string $comment_author Author of the comment
  * @param string $comment_date Date of the comment
  * @return mixed Comment post ID on success.
->>>>>>> WPHome/master
  */
 function comment_exists($comment_author, $comment_date) {
 	global $wpdb;
@@ -48,14 +37,6 @@ function edit_comment() {
 	if ( ! current_user_can( 'edit_comment', (int) $_POST['comment_ID'] ) )
 		wp_die ( __( 'You are not allowed to edit comments on this post.' ) );
 
-<<<<<<< HEAD
-	$_POST['comment_author'] = $_POST['newcomment_author'];
-	$_POST['comment_author_email'] = $_POST['newcomment_author_email'];
-	$_POST['comment_author_url'] = $_POST['newcomment_author_url'];
-	$_POST['comment_approved'] = $_POST['comment_status'];
-	$_POST['comment_content'] = $_POST['content'];
-	$_POST['comment_ID'] = (int) $_POST['comment_ID'];
-=======
 	if ( isset( $_POST['newcomment_author'] ) )
 		$_POST['comment_author'] = $_POST['newcomment_author'];
 	if ( isset( $_POST['newcomment_author_email'] ) )
@@ -68,7 +49,6 @@ function edit_comment() {
 		$_POST['comment_content'] = $_POST['content'];
 	if ( isset( $_POST['comment_ID'] ) )
 		$_POST['comment_ID'] = (int) $_POST['comment_ID'];
->>>>>>> WPHome/master
 
 	foreach ( array ('aa', 'mm', 'jj', 'hh', 'mn') as $timeunit ) {
 		if ( !empty( $_POST['hidden_' . $timeunit] ) && $_POST['hidden_' . $timeunit] != $_POST[$timeunit] ) {
@@ -95,19 +75,11 @@ function edit_comment() {
 }
 
 /**
-<<<<<<< HEAD
- * {@internal Missing Short Description}}
- *
- * @since 2.0.0
- *
- * @param int $id ID of comment to retrieve
-=======
  * Returns a comment object based on comment ID.
  *
  * @since 2.0.0
  *
  * @param int $id ID of comment to retrieve.
->>>>>>> WPHome/master
  * @return bool|object Comment if found. False on failure.
  */
 function get_comment_to_edit( $id ) {
@@ -118,9 +90,6 @@ function get_comment_to_edit( $id ) {
 	$comment->comment_post_ID = (int) $comment->comment_post_ID;
 
 	$comment->comment_content = format_to_edit( $comment->comment_content );
-<<<<<<< HEAD
-	$comment->comment_content = apply_filters( 'comment_edit_pre', $comment->comment_content);
-=======
 	/**
 	 * Filter the comment content before editing.
 	 *
@@ -129,7 +98,6 @@ function get_comment_to_edit( $id ) {
 	 * @param string $comment->comment_content Comment content.
 	 */
 	$comment->comment_content = apply_filters( 'comment_edit_pre', $comment->comment_content );
->>>>>>> WPHome/master
 
 	$comment->comment_author = format_to_edit( $comment->comment_author );
 	$comment->comment_author_email = format_to_edit( $comment->comment_author_email );
@@ -143,12 +111,8 @@ function get_comment_to_edit( $id ) {
  * Get the number of pending comments on a post or posts
  *
  * @since 2.3.0
-<<<<<<< HEAD
- * @uses $wpdb
-=======
  *
  * @global wpdb $wpdb WordPress database abstraction object.
->>>>>>> WPHome/master
  *
  * @param int|array $post_id Either a single Post ID or an array of Post IDs
  * @return int|array Either a single Posts pending comments as an int or an array of ints keyed on the Post IDs
@@ -199,11 +163,7 @@ function get_pending_comments_num( $post_id ) {
  */
 function floated_admin_avatar( $name ) {
 	global $comment;
-<<<<<<< HEAD
-	$avatar = get_avatar( $comment, 32 );
-=======
 	$avatar = get_avatar( $comment, 32, 'mystery' );
->>>>>>> WPHome/master
 	return "$avatar $name";
 }
 

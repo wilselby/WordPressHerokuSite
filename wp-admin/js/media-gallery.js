@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-=======
 /* global ajaxurl */
->>>>>>> WPHome/master
 jQuery(function($){
 	$( 'body' ).bind( 'click.wp-gallery', function(e){
 		var target = $( e.target ), id, img_size;

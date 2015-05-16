@@ -84,17 +84,10 @@ function print_column_headers($screen, $id = true) {
  * @since 3.1.0
  */
 class _WP_List_Table_Compat extends WP_List_Table {
-<<<<<<< HEAD
-	var $_screen;
-	var $_columns;
-
-	function _WP_List_Table_Compat( $screen, $columns = array() ) {
-=======
 	public $_screen;
 	public $_columns;
 
 	public function __construct( $screen, $columns = array() ) {
->>>>>>> WPHome/master
 		if ( is_string( $screen ) )
 			$screen = convert_to_screen( $screen );
 
@@ -102,19 +95,11 @@ class _WP_List_Table_Compat extends WP_List_Table {
 
 		if ( !empty( $columns ) ) {
 			$this->_columns = $columns;
-<<<<<<< HEAD
-			add_filter( 'manage_' . $screen->id . '_columns', array( &$this, 'get_columns' ), 0 );
-		}
-	}
-
-	function get_column_info() {
-=======
 			add_filter( 'manage_' . $screen->id . '_columns', array( $this, 'get_columns' ), 0 );
 		}
 	}
 
 	protected function get_column_info() {
->>>>>>> WPHome/master
 		$columns = get_column_headers( $this->_screen );
 		$hidden = get_hidden_columns( $this->_screen );
 		$sortable = array();
@@ -122,11 +107,7 @@ class _WP_List_Table_Compat extends WP_List_Table {
 		return array( $columns, $hidden, $sortable );
 	}
 
-<<<<<<< HEAD
-	function get_columns() {
-=======
 	public function get_columns() {
->>>>>>> WPHome/master
 		return $this->_columns;
 	}
 }

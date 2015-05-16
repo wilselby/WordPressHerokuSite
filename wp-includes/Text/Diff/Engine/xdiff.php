@@ -45,17 +45,6 @@ class Text_Diff_Engine_xdiff {
             }
             switch ($line[0]) {
             case ' ':
-<<<<<<< HEAD
-                $edits[] = &new Text_Diff_Op_copy(array(substr($line, 1)));
-                break;
-
-            case '+':
-                $edits[] = &new Text_Diff_Op_add(array(substr($line, 1)));
-                break;
-
-            case '-':
-                $edits[] = &new Text_Diff_Op_delete(array(substr($line, 1)));
-=======
                 $edits[] = new Text_Diff_Op_copy(array(substr($line, 1)));
                 break;
 
@@ -65,7 +54,6 @@ class Text_Diff_Engine_xdiff {
 
             case '-':
                 $edits[] = new Text_Diff_Op_delete(array(substr($line, 1)));
->>>>>>> WPHome/master
                 break;
             }
         }

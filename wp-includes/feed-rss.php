@@ -5,11 +5,7 @@
  * @package WordPress
  */
 
-<<<<<<< HEAD
 header('Content-Type: ' . feed_content_type('rss-http') . '; charset=' . get_option('blog_charset'), true);
-=======
-header('Content-Type: ' . feed_content_type('rss') . '; charset=' . get_option('blog_charset'), true);
->>>>>>> WPHome/master
 $more = 1;
 
 echo '<?xml version="1.0" encoding="'.get_option('blog_charset').'"?'.'>'; ?>
@@ -21,9 +17,6 @@ echo '<?xml version="1.0" encoding="'.get_option('blog_charset').'"?'.'>'; ?>
 	<lastBuildDate><?php echo mysql2date('D, d M Y H:i:s +0000', get_lastpostmodified('GMT'), false); ?></lastBuildDate>
 	<docs>http://backend.userland.com/rss092</docs>
 	<language><?php bloginfo_rss( 'language' ); ?></language>
-<<<<<<< HEAD
-	<?php do_action('rss_head'); ?>
-=======
 
 	<?php
 	/**
@@ -33,16 +26,12 @@ echo '<?xml version="1.0" encoding="'.get_option('blog_charset').'"?'.'>'; ?>
 	 */
 	do_action( 'rss_head' );
 	?>
->>>>>>> WPHome/master
 
 <?php while (have_posts()) : the_post(); ?>
 	<item>
 		<title><?php the_title_rss() ?></title>
 		<description><![CDATA[<?php the_excerpt_rss() ?>]]></description>
 		<link><?php the_permalink_rss() ?></link>
-<<<<<<< HEAD
-		<?php do_action('rss_item'); ?>
-=======
 		<?php
 		/**
 		 * Fires at the end of each RSS feed item.
@@ -51,7 +40,6 @@ echo '<?xml version="1.0" encoding="'.get_option('blog_charset').'"?'.'>'; ?>
 		 */
 		do_action( 'rss_item' );
 		?>
->>>>>>> WPHome/master
 	</item>
 <?php endwhile; ?>
 </channel>

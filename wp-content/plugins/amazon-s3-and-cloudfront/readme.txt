@@ -3,7 +3,7 @@ Contributors: bradt
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=5VPMGLLK94XJC
 Tags: uploads, amazon, s3, mirror, admin, media, cdn, cloudfront
 Requires at least: 3.5
-Tested up to: 4.2
+Tested up to: 4.1
 Stable tag: 0.8.2
 License: GPLv3
 

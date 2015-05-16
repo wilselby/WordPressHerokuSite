@@ -1,12 +1,6 @@
 /**
  * Base Styles
  */
-<<<<<<< HEAD
-.media-modal,
-.media-frame {
-	font-family: sans-serif;
-	font-size: 12px;
-=======
 .media-modal * {
 	-webkit-box-sizing: content-box;
 	-moz-box-sizing: content-box;
@@ -25,17 +19,11 @@
 .media-frame {
 	font-family: "Open Sans", sans-serif;
 	font-size: 12px;
-	-webkit-overflow-scrolling: touch;
->>>>>>> WPHome/master
 }
 
 .media-frame input,
 .media-frame textarea {
 	padding: 6px 8px;
-<<<<<<< HEAD
-	line-height: 16px;
-=======
->>>>>>> WPHome/master
 }
 
 .media-frame select,
@@ -54,19 +42,11 @@
 }
 
 .media-frame a.button {
-<<<<<<< HEAD
 	color: #333;
 }
 
 .media-frame a.button:hover {
 	color: #222;
-=======
-	color: #32373c;
-}
-
-.media-frame a.button:hover {
-	color: #23282d;
->>>>>>> WPHome/master
 }
 
 .media-frame a.button-primary,
@@ -82,26 +62,13 @@
 .media-frame input[type="url"],
 .media-frame textarea,
 .media-frame select {
-<<<<<<< HEAD
-	font-family: sans-serif;
-	font-size: 12px;
-	-moz-box-sizing: border-box;
-	-webkit-box-sizing: border-box;
-	-ms-box-sizing: border-box; /* ie8 only */
-	box-sizing: border-box;
-	-webkit-border-radius: 3px;
-	border-radius: 3px;
-=======
 	font-family: "Open Sans", sans-serif;
 	font-size: 12px;
->>>>>>> WPHome/master
 	border-width: 1px;
 	border-style: solid;
 	border-color: #dfdfdf;
 }
 
-<<<<<<< HEAD
-=======
 .media-frame input[type="text"]:focus,
 .media-frame input[type="password"]:focus,
 .media-frame input[type="number"]:focus,
@@ -113,7 +80,6 @@
 	border-color: #5b9dd9;
 }
 
->>>>>>> WPHome/master
 .media-frame select {
 	height: 24px;
 	padding: 2px;
@@ -134,29 +100,22 @@
    color: #a9a9a9;
 }
 
-<<<<<<< HEAD
-/* Enable draggable on IE10 touch events until it's rolled into jQuery UI core */
-.ui-sortable,
-.ui-draggable {
-	-ms-touch-action: none;
-=======
 .media-frame .hidden {
 	display: none;
 }
 
 /*!
- * jQuery UI Draggable/Sortable 1.11.4
+ * jQuery UI Draggable/Sortable 1.11.2
  * http://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright 2014 jQuery Foundation and other contributors
  * Released under the MIT license.
  * http://jquery.org/license
  */
 .ui-draggable-handle,
 .ui-sortable-handle {
 	-ms-touch-action: none;
-	touch-action: none;
->>>>>>> WPHome/master
+	touch-action:     none;
 }
 
 /**
@@ -171,13 +130,10 @@
 	z-index: 160000;
 }
 
-<<<<<<< HEAD
-=======
 .wp-customizer .media-modal {
 	z-index: 560000;
 }
 
->>>>>>> WPHome/master
 .media-modal-backdrop {
 	position: fixed;
 	top: 0;
@@ -190,22 +146,6 @@
 	z-index: 159900;
 }
 
-<<<<<<< HEAD
-.media-modal-close {
-	position: absolute;
-	top: 7px;
-	right: 7px;
-	width: 30px;
-	height: 30px;
-	z-index: 1000;
-}
-.media-modal-close span {
-	display: block;
-	margin: 8px auto 0;
-	width: 15px;
-	height: 15px;
-	background-position: -100px 0;
-=======
 .wp-customizer .media-modal-backdrop {
 	z-index: 559900;
 }
@@ -247,8 +187,7 @@
 }
 
 .media-modal-close:hover .media-modal-icon:before {
-	color: #00a0d2;
->>>>>>> WPHome/master
+	color: #2ea2cc;
 }
 
 .media-modal-close:active {
@@ -263,14 +202,10 @@
 	bottom: 0;
 	overflow: auto;
 	min-height: 300px;
-<<<<<<< HEAD
-	background: #fff;
-=======
 	-webkit-box-shadow: 0 5px 15px rgba(0,0,0,0.7);
 	box-shadow: 0 5px 15px rgba(0,0,0,0.7);
 	background: #fcfcfc;
 	-webkit-font-smoothing: subpixel-antialiased;
->>>>>>> WPHome/master
 }
 
 .media-modal-icon {
@@ -296,11 +231,13 @@
 .media-toolbar-primary {
 	float: right;
 	height: 100%;
+	max-width: 33%;
 }
 
 .media-toolbar-secondary {
 	float: left;
 	height: 100%;
+	max-width: 66%;
 }
 
 .media-toolbar-primary > .media-button,
@@ -313,10 +250,6 @@
 .media-toolbar-secondary > .media-button,
 .media-toolbar-secondary > .media-button-group {
 	margin-right: 10px;
-<<<<<<< HEAD
-	float: left;
-=======
->>>>>>> WPHome/master
 	margin-top: 15px;
 }
 
@@ -331,13 +264,8 @@
 	width: 267px;
 	padding: 0 16px 24px;
 	z-index: 75;
-<<<<<<< HEAD
-	background: #f5f5f5;
-	border-left: 1px solid #dfdfdf;
-=======
 	background: #f3f3f3;
 	border-left: 1px solid #ddd;
->>>>>>> WPHome/master
 	overflow: auto;
 	-webkit-overflow-scrolling: touch;
 }
@@ -347,10 +275,6 @@
 }
 
 .media-sidebar .sidebar-title {
-<<<<<<< HEAD
-	font-weight: 200;
-=======
->>>>>>> WPHome/master
 	font-size: 20px;
 	margin: 0;
 	padding: 12px 10px 10px;
@@ -367,61 +291,24 @@
 	width: 100%;
 }
 
-<<<<<<< HEAD
-.media-sidebar h3 {
-=======
 .media-sidebar h3,
 .image-details h3 {
->>>>>>> WPHome/master
 	position: relative;
 	font-weight: bold;
 	text-transform: uppercase;
 	font-size: 12px;
-<<<<<<< HEAD
-	color: #777;
-	text-shadow: 0 1px 0 #fff;
-	margin: 24px 0 8px;
-}
-
-.media-sidebar .setting {
-=======
 	color: #666;
 	margin: 24px 0 8px;
 }
 
 .media-sidebar .setting,
 .attachment-details .setting {
->>>>>>> WPHome/master
 	display: block;
 	float: left;
 	width: 100%;
 	margin: 1px 0;
 }
 
-<<<<<<< HEAD
-.media-sidebar .setting label {
-	display: block;
-}
-
-.media-sidebar .setting .link-to-custom {
-	margin: 3px 0;
-}
-
-.media-sidebar .setting span {
-	min-width: 30%;
-	margin-right: 4%;
-	font-size: 12px;
-}
-
-.media-sidebar .setting select {
-	max-width: 65%;
-}
-
-.media-sidebar .setting input[type="checkbox"] {
-	width: auto;
-	float: none;
-	margin-top: 8px;
-=======
 .media-sidebar .setting label,
 .attachment-details .setting label {
 	display: block;
@@ -460,30 +347,16 @@
 .attachment-details .field input[type="radio"] {
 	float: none;
 	margin: 8px 3px 0;
->>>>>>> WPHome/master
 	padding: 0;
 }
 
 .media-sidebar .setting span,
-<<<<<<< HEAD
-=======
 .attachment-details .setting span,
->>>>>>> WPHome/master
 .compat-item label span {
 	float: left;
 	min-height: 22px;
 	padding-top: 8px;
 	line-height: 16px;
-<<<<<<< HEAD
-	text-align: right;
-	font-weight: normal;
-	color: #999;
-	text-shadow: 0 1px 0 #fff;
-}
-
-.media-sidebar .setting input,
-.media-sidebar .setting textarea {
-=======
 	font-weight: normal;
 	color: #666;
 }
@@ -514,14 +387,10 @@
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 	margin: 1px;
->>>>>>> WPHome/master
 	width: 65%;
 	float: right;
 }
 
-<<<<<<< HEAD
-.media-sidebar .setting textarea,
-=======
 .media-sidebar .setting .value,
 .attachment-details .setting .value {
 	margin: 0 1px;
@@ -530,18 +399,13 @@
 
 .media-sidebar .setting textarea,
 .attachment-details .setting textarea,
->>>>>>> WPHome/master
 .compat-item .field textarea {
 	height: 62px;
 	resize: vertical;
 }
 
-<<<<<<< HEAD
-.media-sidebar select {
-=======
 .media-sidebar select,
 .attachment-details select {
->>>>>>> WPHome/master
 	margin-top: 3px;
 }
 
@@ -585,18 +449,7 @@
 
 .compat-item .field {
 	float: right;
-	width: 65%;
-<<<<<<< HEAD
-	padding-right: 1px;
-}
-
-.compat-item .field input {
-	width: 100%;
-	margin: 0;
-}
-
-=======
-	margin: 1px;
+	width: 66%;
 }
 
 .compat-item .field input[type="text"],
@@ -605,13 +458,9 @@
 .compat-item .field input[type="number"],
 .compat-item .field input[type="search"],
 .compat-item .field input[type="tel"],
-.compat-item .field input[type="url"],
-.compat-item .field textarea {
+.compat-item .field input[type="url"] {
 	width: 100%;
 	margin: 0;
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	box-sizing: border-box;
 }
 
 .sidebar-for-errors .attachment-details,
@@ -620,7 +469,6 @@
 .sidebar-for-errors .upload-details {
 	display: none !important;
 }
->>>>>>> WPHome/master
 
 /**
  * Menu
@@ -632,17 +480,11 @@
 	right: 0;
 	bottom: 0;
 	margin: 0;
-<<<<<<< HEAD
-	padding: 16px 0;
-	border-right: 1px solid #d9d9d9;
-	box-shadow: inset -6px 0 6px -6px rgba( 0, 0, 0, 0.2 );
-=======
 	padding: 10px 0;
 	background: #f3f3f3;
 	border-right-width: 1px;
 	border-right-style: solid;
 	border-right-color: #ccc;
->>>>>>> WPHome/master
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
@@ -652,20 +494,11 @@
 .media-menu > a {
 	display: block;
 	position: relative;
-<<<<<<< HEAD
-	padding: 4px 20px;
-	margin: 0;
-	line-height: 18px;
-	font-size: 14px;
-	color: #21759B;
-	text-shadow: 0 1px 0 #fff;
-=======
 	padding: 8px 20px;
 	margin: 0;
 	line-height: 18px;
 	font-size: 14px;
-	color: #0073aa;
->>>>>>> WPHome/master
+	color: #0074a2;
 	text-decoration: none;
 }
 
@@ -680,11 +513,7 @@
 
 .media-menu .active,
 .media-menu .active:hover {
-<<<<<<< HEAD
-	color: #333;
-=======
-	color: #23282d;
->>>>>>> WPHome/master
+	color: #222;
 	font-weight: bold;
 }
 
@@ -692,12 +521,7 @@
 	height: 0;
 	margin: 12px 20px;
 	padding: 0;
-<<<<<<< HEAD
-	border-top: 1px solid #dfdfdf;
-	border-bottom: 1px solid #fff;
-=======
 	border-top: 1px solid #ddd;
->>>>>>> WPHome/master
 }
 
 /**
@@ -714,12 +538,6 @@
 	user-select: none;
 }
 
-<<<<<<< HEAD
-.media-router > a {
-	position: relative;
-	float: left;
-	padding: 2px 10px;
-=======
 .media-router a {
 	-webkit-transition: none;
 	transition: none;
@@ -729,16 +547,10 @@
 	position: relative;
 	float: left;
 	padding: 8px 10px 9px;
->>>>>>> WPHome/master
 	margin: 0;
 	height: 18px;
 	line-height: 18px;
 	font-size: 14px;
-<<<<<<< HEAD
-	border-right: 1px solid #dfdfdf;
-	text-shadow: 0 1px 0 #fff;
-=======
->>>>>>> WPHome/master
 	text-decoration: none;
 }
 
@@ -746,38 +558,13 @@
 	border-right: 0;
 }
 
-<<<<<<< HEAD
-.media-router > a:active,
-.media-router > a:focus {
-=======
 .media-router > a:active {
->>>>>>> WPHome/master
 	outline: none;
 }
 
 .media-router .active,
 .media-router .active:hover {
-<<<<<<< HEAD
 	color: #333;
-}
-
-.media-router .active:after {
-	content: '';
-	display: block;
-	margin: -100px auto 0;
-	width: 7px;
-	height: 7px;
-	background: #fff;
-	box-shadow: 1px 1px 1px rgba( 0, 0, 0, 0.2 );
-	z-index: 300;
-
-	-webkit-transform: rotate( 45deg ) translate( 75px, 75px );
-	-moz-transform:    rotate( 45deg ) translate( 75px, 75px );
-	-ms-transform:     rotate( 45deg ) translate( 75px, 75px );
-	-o-transform:      rotate( 45deg ) translate( 75px, 75px );
-	transform:         rotate( 45deg ) translate( 75px, 75px );
-=======
-	color: #32373c;
 }
 
 .media-router .active,
@@ -790,7 +577,6 @@
 
 .media-router .active:after {
 	display: none;
->>>>>>> WPHome/master
 }
 
 /**
@@ -810,11 +596,7 @@
 	top: 0;
 	left: 0;
 	bottom: 0;
-<<<<<<< HEAD
-	width: 199px;
-=======
 	width: 200px;
->>>>>>> WPHome/master
 	z-index: 150;
 }
 
@@ -823,40 +605,22 @@
 	top: 0;
 	left: 200px;
 	right: 0;
-<<<<<<< HEAD
-	height: 45px;
-=======
 	height: 50px;
->>>>>>> WPHome/master
 	z-index: 200;
 }
 
 .media-frame-router {
 	position: absolute;
-<<<<<<< HEAD
-	top: 45px;
-	left: 200px;
-	right: 0;
-	height: 30px;
-	z-index: 200;
-	border-bottom: 1px solid #dfdfdf;
-	box-shadow: 0 4px 4px -4px rgba( 0, 0, 0, 0.1 );
-=======
 	top: 50px;
 	left: 200px;
 	right: 0;
 	height: 36px;
 	z-index: 200;
->>>>>>> WPHome/master
 }
 
 .media-frame-content {
 	position: absolute;
-<<<<<<< HEAD
-	top: 75px;
-=======
 	top: 84px;
->>>>>>> WPHome/master
 	left: 200px;
 	right: 0;
 	bottom: 61px;
@@ -864,12 +628,9 @@
 	width: auto;
 	margin: 0;
 	overflow: auto;
-<<<<<<< HEAD
-=======
 	background: #fff;
 	border-top: 1px solid #ddd;
 	border-bottom: 1px solid #ddd;
->>>>>>> WPHome/master
 }
 
 .media-frame-toolbar {
@@ -879,12 +640,6 @@
 	bottom: 0;
 	height: 60px;
 	z-index: 100;
-<<<<<<< HEAD
-	border: 0 solid #dfdfdf;
-	border-width: 1px 0 0 0;
-	box-shadow: 0 -4px 4px -4px rgba( 0, 0, 0, 0.1 );
-=======
->>>>>>> WPHome/master
 }
 
 .media-frame.hide-menu .media-frame-title,
@@ -907,11 +662,7 @@
 }
 
 .media-frame.hide-router .media-frame-content {
-<<<<<<< HEAD
-	top: 45px;
-=======
 	top: 50px;
->>>>>>> WPHome/master
 }
 
 .media-frame.hide-router .media-frame-router {
@@ -920,31 +671,17 @@
 
 .media-frame.hide-router .media-frame-title {
 	border-bottom: 1px solid #dfdfdf;
-<<<<<<< HEAD
-	box-shadow: 0 4px 4px -4px rgba( 0, 0, 0, 0.1 );
-}
-
-.media-frame .media-toolbar .add-to-gallery {
-=======
 	-webkit-box-shadow: 0 4px 4px -4px rgba( 0, 0, 0, 0.1 );
 	box-shadow: 0 4px 4px -4px rgba( 0, 0, 0, 0.1 );
 }
 
 .media-frame-title .dashicons {
->>>>>>> WPHome/master
 	display: none;
 }
 
 .media-frame-title h1 {
 	padding: 0 16px;
 	font-size: 22px;
-<<<<<<< HEAD
-	font-weight: 200;
-	line-height: 45px;
-	margin: 0;
-}
-
-=======
 	line-height: 50px;
 	margin: 0;
 }
@@ -977,7 +714,6 @@
 	z-index: 600000;
 }
 
->>>>>>> WPHome/master
 /**
  * Iframes
  */
@@ -997,18 +733,8 @@
  */
 .media-frame select.attachment-filters {
 	margin-top: 11px;
-<<<<<<< HEAD
-	margin-right: 10px;
-=======
 	margin-right: 2%;
-	max-width: 42%;
-	max-width: -webkit-calc(48% - 12px);
-	max-width: calc(48% - 12px);
-}
-
-.media-frame select.attachment-filters:last-of-type {
-	margin-right: 0;
->>>>>>> WPHome/master
+	max-width: 47%;
 }
 
 /**
@@ -1017,17 +743,6 @@
 .media-frame .search {
 	margin-top: 11px;
 	padding: 4px;
-<<<<<<< HEAD
-	line-height: 18px;
-	font-size: 13px;
-	color: #464646;
-	font-family: sans-serif;
-	-webkit-appearance: none;
-}
-
-.media-toolbar-secondary .search {
-	margin-right: 16px;
-=======
 	font-size: 13px;
 	color: #464646;
 	font-family: "Open Sans", sans-serif;
@@ -1036,62 +751,20 @@
 
 .media-toolbar-primary .search {
 	max-width: 100%;
->>>>>>> WPHome/master
 }
 
 /**
  * Attachments
  */
-<<<<<<< HEAD
 .attachments {
 	margin: 0;
-	padding-right: 16px;
-=======
-.wp-core-ui .attachments {
-	margin: 0;
->>>>>>> WPHome/master
 	-webkit-overflow-scrolling: touch;
 }
 
 /**
  * Attachment
  */
-<<<<<<< HEAD
 .attachment {
-	position: relative;
-	float: left;
-
-	padding: 0;
-	margin: 0 10px 20px;
-	color: #464646;
-	list-style: none;
-	text-align: center;
-
-	-webkit-user-select: none;
-	-moz-user-select:    none;
-	-ms-user-select:     none;
-	-o-user-select:      none;
-	user-select:         none;
-}
-
-.selected.attachment {
-	box-shadow:
-		0 0 0 1px #fff,
-		0 0 0 3px #ccc;
-}
-
-.details.attachment {
-	box-shadow:
-		0 0 0 1px #fff,
-		0 0 0 5px #1e8cbe;
-}
-
-.attachment-preview {
-	position: relative;
-	width: 199px;
-	height: 199px;
-=======
-.wp-core-ui .attachment {
 	position: relative;
 	float: left;
 	padding: 8px;
@@ -1110,9 +783,9 @@
 	box-sizing: border-box;
 }
 
-.wp-core-ui .attachment:focus,
-.wp-core-ui .selected.attachment:focus,
-.wp-core-ui .attachment.details:focus {
+.attachment:focus,
+.selected.attachment:focus,
+.attachment.details:focus {
 	-webkit-box-shadow:
 		inset 0 0 2px 3px #fff,
 		inset 0 0 0 7px #5b9dd9;
@@ -1122,7 +795,7 @@
 	outline: none;
 }
 
-.wp-core-ui .selected.attachment {
+.selected.attachment {
 	-webkit-box-shadow:
 		inset 0 0 0 5px #fff,
 		inset 0 0 0 7px #ccc;
@@ -1131,7 +804,7 @@
 		inset 0 0 0 7px #ccc;
 }
 
-.wp-core-ui .attachment.details {
+.attachment.details {
 	-webkit-box-shadow:
 		inset 0 0 0 3px #fff,
 		inset 0 0 0 7px #1e8cbe;
@@ -1140,12 +813,11 @@
 		inset 0 0 0 7px #1e8cbe;
 }
 
-.wp-core-ui .attachment-preview {
+.attachment-preview {
 	position: relative;
 	-webkit-box-shadow:
 		inset 0 0 15px rgba( 0, 0, 0, 0.1 ),
 		inset 0 0 0 1px rgba( 0, 0, 0, 0.05 );
->>>>>>> WPHome/master
 	box-shadow:
 		inset 0 0 15px rgba( 0, 0, 0, 0.1 ),
 		inset 0 0 0 1px rgba( 0, 0, 0, 0.05 );
@@ -1153,38 +825,18 @@
 	cursor: pointer;
 }
 
-<<<<<<< HEAD
-.attachment .icon {
-	margin: 0 auto;
-	overflow: hidden;
-	padding-top: 20%;
-}
-
-.attachment .thumbnail {
-	display: block;
-	position: absolute;
-	top: 0;
-	left: 0;
-	margin: 0 auto;
-	overflow: hidden;
-	max-width: 100%;
-	max-height: 100%;
-}
-
-.attachment-preview .thumbnail:after {
-=======
-.wp-core-ui .attachment-preview:before {
+.attachment-preview:before {
 	content: '';
 	display: block;
 	padding-top: 100%;
 }
 
-.wp-core-ui .attachment .icon {
+.attachment .icon {
 	margin: 0 auto;
 	overflow: hidden;
 }
 
-.wp-core-ui .attachment .thumbnail {
+.attachment .thumbnail {
 	overflow: hidden;
 	position: absolute;
 	top: 0;
@@ -1196,16 +848,15 @@
 	transition: opacity .1s;
 }
 
-.wp-core-ui .attachment .portrait img {
+.attachment .portrait img {
 	max-width: 100%;
 }
 
-.wp-core-ui .attachment .landscape img {
+.attachment .landscape img {
 	max-height: 100%;
 }
 
-.wp-core-ui .attachment .thumbnail:after {
->>>>>>> WPHome/master
+.attachment .thumbnail:after {
 	content: '';
 	display: block;
 	position: absolute;
@@ -1213,89 +864,58 @@
 	left: 0;
 	right: 0;
 	bottom: 0;
-<<<<<<< HEAD
-=======
 	-webkit-box-shadow: inset 0 0 0 1px rgba( 0, 0, 0, 0.1 );
->>>>>>> WPHome/master
 	box-shadow: inset 0 0 0 1px rgba( 0, 0, 0, 0.1 );
 	overflow: hidden;
 }
 
-<<<<<<< HEAD
+/* @noflip */
 .attachment .thumbnail img {
-=======
-.wp-core-ui .attachment .thumbnail img {
->>>>>>> WPHome/master
 	top: 0;
 	left: 0;
 }
 
-<<<<<<< HEAD
+/* @noflip */
 .attachment .thumbnail .centered {
-=======
-.wp-core-ui .attachment .thumbnail .centered {
->>>>>>> WPHome/master
 	position: absolute;
 	top: 0;
 	left: 0;
 	width: 100%;
 	height: 100%;
 	-webkit-transform: translate( 50%, 50% );
-<<<<<<< HEAD
-	-moz-transform:    translate( 50%, 50% );
-	-ms-transform:     translate( 50%, 50% );
-	-o-transform:      translate( 50%, 50% );
-	transform:         translate( 50%, 50% );
-}
-
-.attachment .thumbnail .centered img {
-	-webkit-transform: translate( -50%, -50% );
-	-moz-transform:    translate( -50%, -50% );
-	-ms-transform:     translate( -50%, -50% );
-	-o-transform:      translate( -50%, -50% );
-	transform:         translate( -50%, -50% );
-}
-
-.attachment .filename {
-=======
 	-ms-transform: translate(50%,50%); /* Fails with spaces?? Weird! */
 	transform: translate( 50%, 50% );
 }
 
-.wp-core-ui .attachment .thumbnail .centered img {
+.attachment .thumbnail .centered img {
 	-webkit-transform: translate( -50%, -50% );
 	-ms-transform: translate(-50%,-50%);
 	transform: translate( -50%, -50% );
 }
 
-.wp-core-ui .attachments-browser .attachment .thumbnail .centered img.icon {
+.attachment .thumbnail .centered img.icon {
 	-webkit-transform: translate( -50%, -70% );
 	-ms-transform: translate(-50%,-70%);
 	transform: translate( -50%, -70% );
 }
 
-.ie8 .wp-core-ui .attachment img.icon {
+.ie8 .attachment img.icon {
 	top: 20%;
 	position: relative;
 }
 
-.wp-core-ui .attachment .filename {
->>>>>>> WPHome/master
+.attachment .filename {
 	position: absolute;
 	left: 0;
 	right: 0;
 	bottom: 0;
 	overflow: hidden;
 	max-height: 100%;
-<<<<<<< HEAD
-
-=======
->>>>>>> WPHome/master
 	word-wrap: break-word;
 	text-align: center;
 	font-weight: bold;
 	background: rgba( 255, 255, 255, 0.8 );
-<<<<<<< HEAD
+	-webkit-box-shadow: inset 0 0 0 1px rgba( 0, 0, 0, 0.15 );
 	box-shadow: inset 0 0 0 1px rgba( 0, 0, 0, 0.15 );
 }
 
@@ -1303,33 +923,12 @@
 	padding: 5px 10px;
 }
 
-.attachment-preview .thumbnail {
-	width: 199px;
-	height: 199px;
-}
-
 .attachment .thumbnail img {
 	position: absolute;
 }
 
 .attachment .close {
-	display: none;
-=======
-	-webkit-box-shadow: inset 0 0 0 1px rgba( 0, 0, 0, 0.15 );
-	box-shadow: inset 0 0 0 1px rgba( 0, 0, 0, 0.15 );
-}
-
-.wp-core-ui .attachment .filename div {
-	padding: 5px 10px;
-}
-
-.wp-core-ui .attachment .thumbnail img {
-	position: absolute;
-}
-
-.wp-core-ui .attachment .close {
 	display: block;
->>>>>>> WPHome/master
 	position: absolute;
 	top: 5px;
 	right: 5px;
@@ -1344,21 +943,6 @@
 	background-color: #fff;
 	background-position: -96px 4px;
 	border-width: 0;
-<<<<<<< HEAD
-	border-radius: 3px;
-	box-shadow: 0 0 0 1px rgba( 0, 0, 0, 0.3 );
-}
-
-.attachment .close:hover {
-	box-shadow: 0 0 0 1px rgba( 0, 0, 0, 0.6 );
-}
-
-.attachment:hover .close {
-	display: block;
-}
-
-.attachment .check {
-=======
 	-webkit-border-radius: 3px;
 	border-radius: 3px;
 	-webkit-box-shadow: 0 0 0 1px rgba( 0, 0, 0, 0.3 );
@@ -1369,39 +953,19 @@
 	transition-property: none;
 }
 
-.wp-core-ui .attachment a.close:hover,
-.wp-core-ui .attachment a.close:focus {
+.attachment a.close:hover,
+.attachment a.close:focus {
 	-webkit-box-shadow: 0 0 0 1px rgba( 0, 0, 0, 0.6 );
 	box-shadow: 0 0 0 1px rgba( 0, 0, 0, 0.6 );
 	background-position: -36px 4px;
 
 }
 
-.wp-core-ui .attachment .check {
->>>>>>> WPHome/master
+.attachment .check {
 	display: none;
 	height: 24px;
 	width: 24px;
 	position: absolute;
-<<<<<<< HEAD
-	top: -7px;
-	right: -7px;
-	outline: none;
-
-	border: 1px solid #fff;
-	border-radius: 3px;
-	box-shadow: 0 0 0 1px rgba( 0, 0, 0, 0.4 );
-
-	background: #f1f1f1;
-	background-image: -webkit-gradient(linear, left top, left bottom, from(#f1f1f1), to(#e1e1e1));
-	background-image: -webkit-linear-gradient(top, #f1f1f1, #e1e1e1);
-	background-image:    -moz-linear-gradient(top, #f1f1f1, #e1e1e1);
-	background-image:      -o-linear-gradient(top, #f1f1f1, #e1e1e1);
-	background-image:   linear-gradient(to bottom, #f1f1f1, #e1e1e1);
-}
-
-.attachment .check div {
-=======
 	z-index: 10;
 	top: 0;
 	right: 0;
@@ -1411,15 +975,13 @@
 	box-shadow: 0 0 0 1px #fff, 0 0 0 2px rgba( 0, 0, 0, 0.15 );
 }
 
-.wp-core-ui .attachment .check div {
->>>>>>> WPHome/master
+.attachment .check div {
 	background-position: -1px 0;
 	height: 15px;
 	width: 15px;
 	margin: 5px;
 }
 
-<<<<<<< HEAD
 .attachment .check:hover div {
 	background-position: -40px 0;
 }
@@ -1428,44 +990,9 @@
 	display: block;
 }
 
-.attachment.details .check {
-	box-shadow: 0 0 0 1px #1e8cbe;
-
-	background: #1e8cbe;
-	background-image: -webkit-gradient(linear, left top, left bottom, from(#1e8cbe), to(#0074a2));
-	background-image: -webkit-linear-gradient(top, #1e8cbe, #0074a2);
-	background-image:    -moz-linear-gradient(top, #1e8cbe, #0074a2);
-	background-image:      -o-linear-gradient(top, #1e8cbe, #0074a2);
-	background-image:   linear-gradient(to bottom, #1e8cbe, #0074a2);
-}
-
-.attachment.details .check div {
-	background-position: -21px 0;
-}
-
-.attachment.details .check:hover div {
-	background-position: -60px 0;
-}
-
-.media-frame .attachment .describe {
-	position: relative;
-	display: block;
-	width: 100%;
-	margin: -1px 0 0;
-	padding: 8px;
-	font-size: 12px;
-=======
-.wp-core-ui .attachment .check:hover div {
-	background-position: -40px 0;
-}
-
-.wp-core-ui .attachment.selected .check {
-	display: block;
-}
-
-.wp-core-ui .attachment.details .check,
-.wp-core-ui .attachment.selected .check:focus,
-.wp-core-ui .media-frame.mode-grid .attachment.selected .check {
+.attachment.details .check,
+.attachment.selected .check:focus,
+.media-frame.mode-grid .attachment.selected .check {
 	background-color: #1e8cbe;
 	-webkit-box-shadow:
 		0 0 0 1px #fff,
@@ -1475,18 +1002,18 @@
 		0 0 0 2px #1e8cbe;
 }
 
-.wp-core-ui .attachment.details .check div,
-.wp-core-ui .media-frame.mode-grid .attachment.selected .check div {
+.attachment.details .check div,
+.media-frame.mode-grid .attachment.selected .check div {
 	background-position: -21px 0;
 }
 
-.wp-core-ui .attachment.details .check:hover div,
-.wp-core-ui .attachment.selected .check:focus div,
-.wp-core-ui .media-frame.mode-grid .attachment.selected .check:hover div {
+.attachment.details .check:hover div,
+.attachment.selected .check:focus div,
+.media-frame.mode-grid .attachment.selected .check:hover div {
 	background-position: -60px 0;
 }
 
-.wp-core-ui .media-frame .attachment .describe {
+.media-frame .attachment .describe {
 	position: relative;
 	display: block;
 	width: 100%;
@@ -1494,7 +1021,6 @@
 	padding: 8px;
 	font-size: 12px;
 	-webkit-border-radius: 0;
->>>>>>> WPHome/master
 	border-radius: 0;
 }
 
@@ -1513,26 +1039,19 @@
 	height: 50px;
 }
 
-<<<<<<< HEAD
-=======
 .attachments-browser.hide-sidebar .media-toolbar {
 	right: 0;
 }
 
->>>>>>> WPHome/master
 .attachments-browser .media-toolbar-primary > .media-button,
 .attachments-browser .media-toolbar-primary > .media-button-group,
 .attachments-browser .media-toolbar-secondary > .media-button,
 .attachments-browser .media-toolbar-secondary > .media-button-group {
-<<<<<<< HEAD
-	margin-top: 10px;
-=======
 	margin: 11px 0;
 }
 
 .attachments-browser .attachments {
 	padding: 2px 8px 8px;
->>>>>>> WPHome/master
 }
 
 .attachments-browser .attachments,
@@ -1543,21 +1062,11 @@
 	right: 300px;
 	bottom: 0;
 	overflow: auto;
-<<<<<<< HEAD
-=======
 	outline: none;
 }
 
 .attachments-browser .uploader-inline.hidden {
 	display: none;
-}
-
-.attachments-browser .media-toolbar-primary {
-	max-width: 33%;
-}
-
-.attachments-browser .media-toolbar-secondary {
-	max-width: 66%;
 }
 
 .uploader-inline .close {
@@ -1585,7 +1094,6 @@
 .attachments-browser.hide-sidebar .uploader-inline {
 	right: 0;
 	margin-right: 0;
->>>>>>> WPHome/master
 }
 
 .attachments-browser .instructions {
@@ -1593,16 +1101,12 @@
 	margin-top: 16px;
 	line-height: 18px;
 	font-size: 13px;
-<<<<<<< HEAD
-	color: #999;
-=======
 	color: #666;
 	margin-right: 0.5em;
 }
 
 .attachments-browser .no-media {
 	padding: 2em 0 0 2em;
->>>>>>> WPHome/master
 }
 
 /**
@@ -1613,10 +1117,7 @@
 	height: 10px;
 	width: 70%;
 	margin: 10px auto;
-<<<<<<< HEAD
-=======
 	-webkit-border-radius: 10px;
->>>>>>> WPHome/master
 	border-radius: 10px;
 	background: #dfdfdf;
 	background: rgba( 0, 0, 0, 0.1 );
@@ -1626,22 +1127,11 @@
 	height: 10px;
 	min-width: 20px;
 	width: 0;
-<<<<<<< HEAD
-	background: #aaa;
-	background: rgba( 0, 0, 0, 0.2 );
-	border-radius: 10px;
-	-webkit-transition: width 300ms;
-	-moz-transition:    width 300ms;
-	-ms-transition:     width 300ms;
-	-o-transition:      width 300ms;
-	transition:         width 300ms;
-=======
 	background: #1e8cbe;
 	-webkit-border-radius: 10px;
 	border-radius: 10px;
 	-webkit-transition: width 300ms;
 	transition: width 300ms;
->>>>>>> WPHome/master
 }
 
 .media-uploader-status .media-progress-bar {
@@ -1668,14 +1158,10 @@
 	max-width: 400px;
 }
 
-<<<<<<< HEAD
 .media-sidebar .media-uploader-status {
 	border-bottom: 1px solid #dfdfdf;
-	box-shadow: 0 1px 0 #fff;
 }
 
-=======
->>>>>>> WPHome/master
 .uploader-inline .media-uploader-status h3 {
 	display: none;
 }
@@ -1684,10 +1170,6 @@
 	display: none;
 	font-size: 12px;
 	color: #666;
-<<<<<<< HEAD
-	text-shadow: 0 1px 0 #fff;
-=======
->>>>>>> WPHome/master
 }
 
 .uploading.media-uploader-status .upload-details {
@@ -1723,11 +1205,11 @@
 }
 
 .upload-errors .upload-error {
-<<<<<<< HEAD
 	margin: 8px auto 0 auto;
 	padding: 8px;
 	border: 1px #c00 solid;
 	background: #ffebe8;
+	-webkit-border-radius: 3px;
 	border-radius: 3px;
 }
 
@@ -1739,31 +1221,15 @@
 	background: #e00;
 	background-image: -webkit-gradient(linear, left top, left bottom, from(#e00), to(#a00));
 	background-image: -webkit-linear-gradient(top, #e00, #a00);
-	background-image:    -moz-linear-gradient(top, #e00, #a00);
-	background-image:      -o-linear-gradient(top, #e00, #a00);
-	background-image:   linear-gradient(to bottom, #e00, #a00);
+	background-image: linear-gradient(to bottom, #e00, #a00);
+	-webkit-border-radius: 3px;
 	border-radius: 3px;
-=======
-	padding: 12px;
-	margin-bottom: 12px; 
-	background: #fff; 
- 	border-left: 4px solid #dd3d36; 
- 	-webkit-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1); 
- 	box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1); 
-}
-
-.upload-errors .upload-error-filename {
-	font-weight: bold;
->>>>>>> WPHome/master
 }
 
 .upload-errors .upload-error-message {
 	display: block;
 	padding-top: 8px;
-<<<<<<< HEAD
 	color: #b44;
-=======
->>>>>>> WPHome/master
 	word-wrap: break-word;
 }
 
@@ -1774,25 +1240,12 @@
 	right: 0;
 	bottom: 0;
 	background: rgba( 0, 86, 132, 0.9 );
-<<<<<<< HEAD
-
-=======
->>>>>>> WPHome/master
 	z-index: 250000;
 	display: none;
 	text-align: center;
 	opacity: 0;
-<<<<<<< HEAD
-
-	-webkit-transition: opacity 250ms;
-	-moz-transition:    opacity 250ms;
-	-ms-transition:     opacity 250ms;
-	-o-transition:      opacity 250ms;
-	transition:         opacity 250ms;
-=======
 	-webkit-transition: opacity 250ms;
 	transition: opacity 250ms;
->>>>>>> WPHome/master
 }
 
 .uploader-window-content {
@@ -1805,28 +1258,15 @@
 }
 
 .uploader-window h3 {
-<<<<<<< HEAD
-=======
 	margin: -0.5em 0 0;
->>>>>>> WPHome/master
 	position: absolute;
 	top: 50%;
 	left: 0;
 	right: 0;
 	-webkit-transform: translateY( -50% );
-<<<<<<< HEAD
-	-moz-transform:    translateY( -50% );
-	-ms-transform:     translateY( -50% );
-	-o-transform:      translateY( -50% );
-	transform:         translateY( -50% );
-
-	font-size: 20px;
-	font-weight: 200;
-=======
 	-ms-transform: translateY(-50%);
 	transform: translateY( -50% );
 	font-size: 40px;
->>>>>>> WPHome/master
 	color: #fff;
 	padding: 0;
 }
@@ -1848,13 +1288,8 @@
 }
 
 .media-frame .uploader-inline {
-<<<<<<< HEAD
-	margin: 20px;
-	padding: 20px;
-=======
 	margin-bottom: 20px;
 	padding: 0;
->>>>>>> WPHome/master
 	text-align: center;
 }
 
@@ -1866,11 +1301,7 @@
 }
 
 .uploader-inline-content .upload-ui {
-<<<<<<< HEAD
-	margin: 4em 0;
-=======
 	margin: 2em 0;
->>>>>>> WPHome/master
 }
 
 .uploader-inline-content .post-upload-ui {
@@ -1884,13 +1315,8 @@
 .uploader-inline h3 {
 	font-size: 20px;
 	line-height: 28px;
-<<<<<<< HEAD
-	font-weight: 200;
-	margin-bottom: 1.6em;
-=======
 	font-weight: 400;
 	margin: 0;
->>>>>>> WPHome/master
 }
 
 .uploader-inline .has-upload-message .upload-instructions {
@@ -1909,10 +1335,7 @@
 
 .uploader-inline p {
 	font-size: 12px;
-<<<<<<< HEAD
-=======
 	margin: 0.5em 0;
->>>>>>> WPHome/master
 }
 
 .uploader-inline .media-progress-bar {
@@ -2004,22 +1427,18 @@
 .media-selection .attachments {
 	display: inline-block;
 	height: 48px;
-<<<<<<< HEAD
-	margin-top: 5px;
-=======
 	margin: 6px;
 	padding: 0;
->>>>>>> WPHome/master
 	overflow: hidden;
 	vertical-align: top;
 }
 
-<<<<<<< HEAD
-=======
 .media-selection .attachment {
 	width: 40px;
 	padding: 0;
 	margin: 4px;
+	-webkit-box-shadow: none;
+	box-shadow: none;
 }
 
 .media-selection .attachment .thumbnail {
@@ -2029,51 +1448,20 @@
 	left: 0;
 }
 
->>>>>>> WPHome/master
 .media-selection .attachment .icon {
 	width: 50%;
 }
 
-<<<<<<< HEAD
-.attachment.selection.selected {
-	box-shadow: none;
-}
-
-.attachment.selection.details {
-	box-shadow:
-		0 0 0 1px #fff,
-		0 0 0 4px #1e8cbe;
-}
-
-.media-selection .attachment.selection.details {
-=======
 .media-selection .attachment-preview {
 	-webkit-box-shadow: none;
 	box-shadow: none;
 	background: none;
 }
 
-.wp-core-ui .media-selection .attachment:focus,
-.wp-core-ui .media-selection .selected.attachment:focus,
-.wp-core-ui .media-selection .attachment.details:focus {
-	-webkit-box-shadow:
-		0 0 0 1px #fff,
-		0 0 2px 3px #5b9dd9;
-	box-shadow:
-		0 0 0 1px #fff,
-		0 0 2px 3px #5b9dd9;
-}
-
-.wp-core-ui .media-selection .selected.attachment {
-	-webkit-box-shadow: none;
-	box-shadow: none;
-}
-
-.wp-core-ui .media-selection .attachment.details {
+.media-selection .attachment.selection.details .thumbnail {
 	-webkit-box-shadow:
 		0 0 0 1px #fff,
 		0 0 0 3px #1e8cbe;
->>>>>>> WPHome/master
 	box-shadow:
 		0 0 0 1px #fff,
 		0 0 0 3px #1e8cbe;
@@ -2087,17 +1475,9 @@
 	right: 0;
 	bottom: 0;
 	width: 25px;
-<<<<<<< HEAD
-	background-image: -webkit-gradient(linear, right top, left top, from( rgba( 255, 255, 255, 1 ) ), to( rgba( 255, 255, 255, 0 ) ));
-	background-image: -webkit-linear-gradient(right, rgba( 255, 255, 255, 1 ) ,  rgba( 255, 255, 255, 0 ) );
-	background-image:    -moz-linear-gradient(right, rgba( 255, 255, 255, 1 ) ,  rgba( 255, 255, 255, 0 ) );
-	background-image:      -o-linear-gradient(right, rgba( 255, 255, 255, 1 ) ,  rgba( 255, 255, 255, 0 ) );
-	background-image:   linear-gradient(to left, rgba( 255, 255, 255, 1 ) ,  rgba( 255, 255, 255, 0 ) );
-=======
 	background-image: -webkit-gradient(linear, right top, left top, from(rgba( 255, 255, 255, 1 )), to(rgba( 255, 255, 255, 0 )));
 	background-image: -webkit-linear-gradient(right, rgba( 255, 255, 255, 1 ), rgba( 255, 255, 255, 0 ));
 	background-image: linear-gradient(to left, rgba( 255, 255, 255, 1 ) ,  rgba( 255, 255, 255, 0 ) );
->>>>>>> WPHome/master
 }
 
 .media-selection .attachment .filename {
@@ -2107,39 +1487,16 @@
 /**
  * Spinner
  */
-<<<<<<< HEAD
-
-.media-frame .spinner {
-	background: url(../images/wpspin.gif) no-repeat;
-	background-size: 16px 16px;
-	display: none;
-	opacity: 0.7;
-	filter: alpha(opacity=70);
-	width: 16px;
-	height: 16px;
-	margin: 0;
-}
-
-.media-sidebar .settings-save-status {
-	background: #f5f5f5;
-=======
 .media-frame .spinner {
 	background: url(../images/spinner.gif) no-repeat;
 	-webkit-background-size: 20px 20px;
 	background-size: 20px 20px;
-	float: right;
-	display: inline-block;
-	visibility: hidden;
+	display: none;
 	opacity: 0.7;
 	filter: alpha(opacity=70);
 	width: 20px;
 	height: 20px;
 	margin: 0;
-	vertical-align: middle;
-}
-
-.media-frame .spinner.is-active {
-	visibility: visible;
 }
 
 .media-toolbar .spinner {
@@ -2155,49 +1512,23 @@
 }
 
 .attachment-details .settings-save-status {
->>>>>>> WPHome/master
 	float: right;
 	text-transform: none;
 	z-index: 10;
 }
 
-<<<<<<< HEAD
-.media-sidebar .settings-save-status .spinner {
+.attachment-details .settings-save-status .spinner {
 	margin: 0 5px 0;
 }
 
-.media-sidebar .settings-save-status .saved {
-=======
-.attachment-details .settings-save-status .spinner {
-	margin-left: 5px;
-}
-
 .attachment-details .settings-save-status .saved {
->>>>>>> WPHome/master
 	float: right;
 	display: none;
 }
 
-<<<<<<< HEAD
-.media-sidebar .save-waiting .settings-save-status .spinner,
-.media-sidebar .save-complete .settings-save-status .saved {
-	display: block;
-}
-
-/**
- * Attachment Details
- */
-.attachment-details {
-	position: relative;
-	overflow: auto;
-=======
-.attachment-details.save-waiting .settings-save-status .spinner {
-	visibility: visible;
-}
-
+.attachment-details.save-waiting .settings-save-status .spinner,
 .attachment-details.save-complete .settings-save-status .saved {
 	display: block;
->>>>>>> WPHome/master
 }
 
 .attachment-info {
@@ -2205,14 +1536,8 @@
 	min-height: 60px;
 	margin-bottom: 16px;
 	line-height: 18px;
-<<<<<<< HEAD
-	color: #999;
-	border-bottom: 1px solid #e5e5e5;
-	box-shadow: 0 1px 0 #fff;
-=======
 	color: #666;
 	border-bottom: 1px solid #ddd;
->>>>>>> WPHome/master
 	padding-bottom: 11px;
 }
 
@@ -2235,10 +1560,7 @@
 .uploading .attachment-info .thumbnail {
 	width: 120px;
 	height: 80px;
-<<<<<<< HEAD
-=======
 	-webkit-box-shadow: inset 0 0 15px rgba( 0, 0, 0, 0.1 );
->>>>>>> WPHome/master
 	box-shadow: inset 0 0 15px rgba( 0, 0, 0, 0.1 );
 }
 
@@ -2246,11 +1568,7 @@
 	margin-top: 35px;
 }
 
-<<<<<<< HEAD
-.attachment-info .thumbnail:after {
-=======
 .attachment-info .thumbnail-image:after {
->>>>>>> WPHome/master
 	content: '';
 	display: block;
 	position: absolute;
@@ -2258,10 +1576,7 @@
 	left: 0;
 	right: 0;
 	bottom: 0;
-<<<<<<< HEAD
-=======
 	-webkit-box-shadow: inset 0 0 0 1px rgba( 0, 0, 0, 0.15 );
->>>>>>> WPHome/master
 	box-shadow: inset 0 0 0 1px rgba( 0, 0, 0, 0.15 );
 	overflow: hidden;
 }
@@ -2281,13 +1596,9 @@
 
 .attachment-info .edit-attachment,
 .attachment-info .refresh-attachment,
-<<<<<<< HEAD
-.attachment-info .delete-attachment {
-=======
 .attachment-info .delete-attachment,
 .attachment-info .trash-attachment,
 .attachment-info .untrash-attachment {
->>>>>>> WPHome/master
 	display: block;
 	text-decoration: none;
 	white-space: nowrap;
@@ -2303,13 +1614,6 @@
 	display: block;
 }
 
-<<<<<<< HEAD
-.attachment-info .delete-attachment {
-	color: #bc0b0b;
-}
-
-.attachment-info .delete-attachment:hover {
-=======
 .media-modal .delete-attachment,
 .media-modal .trash-attachment,
 .media-modal .untrash-attachment {
@@ -2319,7 +1623,6 @@
 .media-modal .delete-attachment:hover,
 .media-modal .trash-attachment:hover,
 .media-modal .untrash-attachment:hover {
->>>>>>> WPHome/master
 	color: red;
 }
 
@@ -2336,14 +1639,6 @@
 	margin: 1.4em 0 0.4em;
 }
 
-<<<<<<< HEAD
-.gallery-settings {
-	overflow: hidden;
-}
-
-/**
- * Embed from URL
-=======
 .collection-settings {
 	overflow: hidden;
 }
@@ -2447,27 +1742,15 @@
 
 /**
  * Embed from URL and Image Details
->>>>>>> WPHome/master
  */
 .embed-url {
 	display: block;
 	position: relative;
-<<<<<<< HEAD
-	padding: 0 16px 7px;
-	margin: 0;
-	z-index: 250;
-	background: #fff;
-	border-bottom: 1px solid #dfdfdf;
-	box-shadow: 0 4px 4px -4px rgba( 0, 0, 0, 0.1 );
-	font-size: 18px;
-	font-weight: 200;
-=======
 	padding: 16px;
 	margin: 0;
 	z-index: 250;
 	background: #fff;
 	font-size: 18px;
->>>>>>> WPHome/master
 }
 
 .media-frame .embed-url input {
@@ -2475,42 +1758,24 @@
 	padding: 12px 14px;
 	width: 100%;
 	min-width: 200px;
-<<<<<<< HEAD
-=======
 	-webkit-box-shadow: inset 2px 2px 4px -2px rgba( 0, 0, 0, 0.1 );
->>>>>>> WPHome/master
 	box-shadow: inset 2px 2px 4px -2px rgba( 0, 0, 0, 0.1 );
 }
 
 .media-frame .embed-url .spinner {
 	position: absolute;
-<<<<<<< HEAD
-	top: 16px;
-=======
 	top: 32px;
->>>>>>> WPHome/master
 	right: 26px;
 }
 
 .media-frame .embed-loading .embed-url .spinner {
-<<<<<<< HEAD
 	display: block;
-}
-
-.embed-link-settings,
-.embed-image-settings {
-	position: absolute;
-	background: #f5f5f5;
-	top: 57px;
-=======
-	visibility: visible;
 }
 
 .embed-link-settings,
 .embed-media-settings {
 	position: absolute;
 	top: 70px;
->>>>>>> WPHome/master
 	left: 0;
 	right: 0;
 	bottom: 0;
@@ -2518,20 +1783,11 @@
 	overflow: auto;
 }
 
-<<<<<<< HEAD
-=======
-.embed-preview img,
-.embed-preview iframe,
-.embed-preview embed {
+.embed-preview img, .embed-preview iframe, .embed-preview embed {
 	max-width: 100%;
 }
 
-.embed-preview a {
-	display: inline-block;
-}
-
 .embed-preview img {
-	display: block;
 	height: auto;
 }
 
@@ -2645,7 +1901,6 @@
 	clear: both;
 }
 
->>>>>>> WPHome/master
 .media-embed .thumbnail {
 	max-width: 100%;
 	max-height: 200px;
@@ -2666,28 +1921,19 @@
 	left: 0;
 	right: 0;
 	bottom: 0;
-<<<<<<< HEAD
-=======
 	-webkit-box-shadow: inset 0 0 0 1px rgba( 0, 0, 0, 0.1 );
->>>>>>> WPHome/master
 	box-shadow: inset 0 0 0 1px rgba( 0, 0, 0, 0.1 );
 	overflow: hidden;
 }
 
 .media-embed .setting {
 	width: 100%;
-<<<<<<< HEAD
-	margin-top: 10px;
-=======
 	margin: 10px 0;
->>>>>>> WPHome/master
 	float: left;
 	display: block;
 	clear: both;
 }
 
-<<<<<<< HEAD
-=======
 .image-details .embed-media-settings .setting {
 	float: none;
 	width: auto;
@@ -2731,16 +1977,11 @@
 	display: none;
 }
 
->>>>>>> WPHome/master
 .media-embed .setting span {
 	display: block;
 	width: 200px;
 	font-size: 13px;
 	line-height: 24px;
-<<<<<<< HEAD
-	color: #999;
-	text-shadow: 0 1px 0 #fff;
-=======
 	color: #666;
 }
 
@@ -2750,21 +1991,12 @@
 	text-align: right;
 	margin: 8px 1% 0 1%;
 	line-height: 1.1;
->>>>>>> WPHome/master
 }
 
 .media-embed .setting .button-group {
 	margin: 2px 0;
 }
 
-<<<<<<< HEAD
-.media-embed .setting input,
-.media-embed .setting textarea {
-	display: block;
-	width: 100%;
-	max-width: 400px;
-	margin: 1px 0;
-=======
 .media-embed-sidebar {
 	position: absolute;
 	top: 0;
@@ -2835,7 +2067,6 @@
 #wp-fullscreen-body .uploader-editor .uploader-editor-title,
 .wp-editor-wrap .uploader-editor.droppable .uploader-editor-title {
 	display: block;
->>>>>>> WPHome/master
 }
 
 /**
@@ -2872,9 +2103,6 @@
 	max-width: 55%;
 }
 
-<<<<<<< HEAD
-.ie7 .media-sidebar .setting input,
-=======
 .ie7 .media-sidebar .setting input[type="text"],
 .ie7 .media-sidebar .setting input[type="password"],
 .ie7 .media-sidebar .setting input[type="email"],
@@ -2882,7 +2110,6 @@
 .ie7 .media-sidebar .setting input[type="search"],
 .ie7 .media-sidebar .setting input[type="tel"],
 .ie7 .media-sidebar .setting input[type="url"],
->>>>>>> WPHome/master
 .ie7 .media-sidebar .setting textarea {
 	width: 55%;
 }
@@ -2891,13 +2118,6 @@
 	float: left;
 }
 
-<<<<<<< HEAD
-@media only screen and (max-width: 960px) {
-	.media-frame-content .media-toolbar-primary .search,
-	.media-frame-content .media-toolbar-secondary .attachment-filters {
-		max-width: 120px;
-	}
-=======
 /**
  * Localization
  */
@@ -2928,33 +2148,12 @@
 :lang(he-il) .rtl .media-frame textarea,
 :lang(he-il) .rtl .media-frame select {
 	font-family: Arial, sans-serif;
->>>>>>> WPHome/master
 }
 
 /**
  * Responsive layout
  */
 @media only screen and (max-width: 900px) {
-<<<<<<< HEAD
-	.media-frame-menu {
-		width: 139px;
-	}
-
-	.media-menu > a {
-		padding: 4px 10px;
-	}
-
-	.media-frame-title,
-	.media-frame-router,
-	.media-frame-content,
-	.media-frame-toolbar {
-		left: 140px;
-	}
-
-	.media-sidebar {
-		width: 159px;
-		padding: 0 10px 24px;
-=======
 
 	/* Drop-down menu */
 	.media-frame:not(.hide-menu) .media-frame-title,
@@ -3019,62 +2218,38 @@
 
 	.media-sidebar {
 		width: 230px;
->>>>>>> WPHome/master
 	}
 
 	.attachments-browser .attachments,
 	.attachments-browser .uploader-inline,
 	.attachments-browser .media-toolbar {
-<<<<<<< HEAD
-		right: 180px;
-=======
 		right: 262px;
 	}
 
 	.media-sidebar .setting,
 	.attachment-details .setting {
 		margin: 6px 0px;
->>>>>>> WPHome/master
 	}
 
 	.media-sidebar .setting input,
 	.media-sidebar .setting textarea,
 	.media-sidebar .setting span,
-<<<<<<< HEAD
-=======
 	.attachment-details .setting input,
 	.attachment-details .setting textarea,
 	.attachment-details .setting span,
->>>>>>> WPHome/master
 	.compat-item label span {
 		float: none;
 	}
 
 	.media-sidebar .setting span,
-<<<<<<< HEAD
-	.compat-item label span {
-		text-align: inherit;
-		display: block;
-=======
 	.attachment-details .setting span,
 	.compat-item label span {
 		text-align: inherit;
->>>>>>> WPHome/master
 		min-height: 16px;
 		margin: 0;
 		padding: 8px 2px 0;
 	}
 
-<<<<<<< HEAD
-	.media-sidebar .setting input,
-	.media-sidebar .setting textarea,
-	.media-sidebar .setting select {
-		width: 98%;
-		max-width: none;
-	}
-
-	.media-sidebar .setting select.columns {
-=======
 	.media-sidebar .setting .value,
 	.attachment-details .setting .value {
 		float: none;
@@ -3107,7 +2282,6 @@
 
 	.media-sidebar .setting select.columns,
 	.attachment-details .setting select.columns {
->>>>>>> WPHome/master
 		width: auto;
 	}
 
@@ -3117,10 +2291,6 @@
 		padding: 3px 6px;
 	}
 
-<<<<<<< HEAD
-	.media-frame-content .attachment .icon {
-		top: 40%;
-=======
 	.image-details .column-image {
 		width: 30%;
 		left: 70%;
@@ -3159,7 +2329,6 @@
 
 	.collection-settings .setting input[type="checkbox"] {
 		margin-top: 0;
->>>>>>> WPHome/master
 	}
 
 	.media-selection {
@@ -3174,14 +2343,6 @@
 		display: none;
 	}
 
-<<<<<<< HEAD
-	.media-menu .separator {
-		margin: 12px 10px;
-	}
-}
-
-@media only screen and (max-width: 800px) {
-=======
 	.media-modal .attachments-browser .media-toolbar .search {
 		max-width: 100%;
 		height: auto;
@@ -3193,7 +2354,7 @@
 	}
 
 	.media-modal .attachments-browser .media-toolbar .spinner {
-		margin: 14px 2px 0;
+		margin: 14px 8px 0;
 	}
 
 	/* Text inputs need to be 16px, or they force zooming on iOS */
@@ -3263,31 +2424,11 @@
 	}
 
 	/* Media tabs on the top */
->>>>>>> WPHome/master
 	.media-frame-content .media-toolbar .instructions {
 		display: none;
 	}
 }
 
-<<<<<<< HEAD
-@media only screen and (max-width: 680px) {
-	.media-frame-content .media-toolbar .search,
-	.media-frame-content .media-toolbar .attachment-filters {
-		max-width: 85px;
-	}
-}
-
-/* Use the same min-width as in the admin */
-@media only screen and (max-width: 600px) {
-	.media-modal {
-		width: 540px;
-		position: absolute;
-	}
-
-	.media-modal-backdrop {
-		width: 600px;
-		position: absolute;
-=======
 /* Landscape specific header override */
 @media screen and (max-height: 400px) {
 	.media-menu {
@@ -3343,7 +2484,6 @@
 
 	.media-frame.hide-router .media-frame-content {
 		top: 40px;
->>>>>>> WPHome/master
 	}
 }
 
@@ -3351,20 +2491,7 @@
  * HiDPI Displays
  */
 @media print,
-<<<<<<< HEAD
   (-o-min-device-pixel-ratio: 5/4),
-  (-webkit-min-device-pixel-ratio: 1.25),
-  (min-resolution: 120dpi) {
-  	.media-modal-icon {
-  		background-image: url(../images/uploader-icons-2x.png);
-  		background-size: 134px 15px;
-  	}
-
-  	.media-frame .spinner {
-  		background-image: url(../images/wpspin-2x.gif);
-  	}
-}
-=======
   (-webkit-min-device-pixel-ratio: 1.25),
   (min-resolution: 120dpi) {
 
@@ -3426,4 +2553,3 @@
 .media-frame-content[data-columns="12"] .attachment {
 	width: 8.33%;
 }
->>>>>>> WPHome/master

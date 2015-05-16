@@ -1,18 +1,10 @@
 <?php
 /**
-<<<<<<< HEAD
- * The template for displaying Author Archive pages.
- *
- * Used to display archive-type pages for posts by an author.
- *
- * Learn more: http://codex.wordpress.org/Template_Hierarchy
-=======
  * The template for displaying Author Archive pages
  *
  * Used to display archive-type pages for posts by an author.
  *
- * @link https://codex.wordpress.org/Template_Hierarchy
->>>>>>> WPHome/master
+ * @link http://codex.wordpress.org/Template_Hierarchy
  *
  * @package WordPress
  * @subpackage Twenty_Twelve
@@ -37,11 +29,7 @@ get_header(); ?>
 			?>
 
 			<header class="archive-header">
-<<<<<<< HEAD
 				<h1 class="archive-title"><?php printf( __( 'Author Archives: %s', 'twentytwelve' ), '<span class="vcard"><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( "ID" ) ) ) . '" title="' . esc_attr( get_the_author() ) . '" rel="me">' . get_the_author() . '</a></span>' ); ?></h1>
-=======
-				<h1 class="archive-title"><?php printf( __( 'Author Archives: %s', 'twentytwelve' ), '<span class="vcard"><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '" title="' . esc_attr( get_the_author() ) . '" rel="me">' . get_the_author() . '</a></span>' ); ?></h1>
->>>>>>> WPHome/master
 			</header><!-- .archive-header -->
 
 			<?php
@@ -59,9 +47,6 @@ get_header(); ?>
 			if ( get_the_author_meta( 'description' ) ) : ?>
 			<div class="author-info">
 				<div class="author-avatar">
-<<<<<<< HEAD
-					<?php echo get_avatar( get_the_author_meta( 'user_email' ), apply_filters( 'twentytwelve_author_bio_avatar_size', 60 ) ); ?>
-=======
 					<?php
 					/**
 					 * Filter the author bio avatar size.
@@ -73,7 +58,6 @@ get_header(); ?>
 					$author_bio_avatar_size = apply_filters( 'twentytwelve_author_bio_avatar_size', 68 );
 					echo get_avatar( get_the_author_meta( 'user_email' ), $author_bio_avatar_size );
 					?>
->>>>>>> WPHome/master
 				</div><!-- .author-avatar -->
 				<div class="author-description">
 					<h2><?php printf( __( 'About %s', 'twentytwelve' ), get_the_author() ); ?></h2>
@@ -97,8 +81,4 @@ get_header(); ?>
 	</section><!-- #primary -->
 
 <?php get_sidebar(); ?>
-<<<<<<< HEAD
 <?php get_footer(); ?>
-=======
-<?php get_footer(); ?>
->>>>>>> WPHome/master

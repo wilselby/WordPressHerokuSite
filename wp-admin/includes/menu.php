@@ -1,8 +1,4 @@
 <?php
-<<<<<<< HEAD
-
-=======
->>>>>>> WPHome/master
 /**
  * Build Administration Menu.
  *
@@ -10,14 +6,6 @@
  * @subpackage Administration
  */
 
-<<<<<<< HEAD
-if ( is_network_admin() )
-	do_action('_network_admin_menu');
-elseif ( is_user_admin() )
-	do_action('_user_admin_menu');
-else
-	do_action('_admin_menu');
-=======
 if ( is_network_admin() ) {
 
 	/**
@@ -52,7 +40,6 @@ if ( is_network_admin() ) {
 	 */
 	do_action( '_admin_menu' );
 }
->>>>>>> WPHome/master
 
 // Create list of page plugin hook names.
 foreach ($menu as $menu_page) {
@@ -84,28 +71,6 @@ unset($menu_page, $compat);
 $_wp_submenu_nopriv = array();
 $_wp_menu_nopriv = array();
 // Loop over submenus and remove pages for which the user does not have privs.
-<<<<<<< HEAD
-foreach ( array( 'submenu' ) as $sub_loop ) {
-	foreach ($$sub_loop as $parent => $sub) {
-		foreach ($sub as $index => $data) {
-			if ( ! current_user_can($data[1]) ) {
-				unset(${$sub_loop}[$parent][$index]);
-				$_wp_submenu_nopriv[$parent][$data[2]] = true;
-			}
-		}
-		unset($index, $data);
-
-		if ( empty(${$sub_loop}[$parent]) )
-			unset(${$sub_loop}[$parent]);
-	}
-	unset($sub, $parent);
-}
-unset($sub_loop);
-
-// Loop over the top-level menu.
-// Menus for which the original parent is not accessible due to lack of privs will have the next
-// submenu in line be assigned as the new menu parent.
-=======
 foreach ($submenu as $parent => $sub) {
 	foreach ($sub as $index => $data) {
 		if ( ! current_user_can($data[1]) ) {
@@ -125,26 +90,17 @@ unset($sub, $parent);
  * Menus for which the original parent is not accessible due to lack of privileges
  * will have the next submenu in line be assigned as the new menu parent.
  */
->>>>>>> WPHome/master
 foreach ( $menu as $id => $data ) {
 	if ( empty($submenu[$data[2]]) )
 		continue;
 	$subs = $submenu[$data[2]];
-<<<<<<< HEAD
 	$first_sub = array_shift($subs);
-	$old_parent = $data[2];
-	$new_parent = $first_sub[2];
-	// If the first submenu is not the same as the assigned parent,
-	// make the first submenu the new parent.
-=======
-	$first_sub = reset( $subs );
 	$old_parent = $data[2];
 	$new_parent = $first_sub[2];
 	/*
 	 * If the first submenu is not the same as the assigned parent,
 	 * make the first submenu the new parent.
 	 */
->>>>>>> WPHome/master
 	if ( $new_parent != $old_parent ) {
 		$_wp_real_parent_file[$old_parent] = $new_parent;
 		$menu[$id][2] = $new_parent;
@@ -161,17 +117,6 @@ foreach ( $menu as $id => $data ) {
 }
 unset($id, $data, $subs, $first_sub, $old_parent, $new_parent);
 
-<<<<<<< HEAD
-if ( is_network_admin() )
-	do_action('network_admin_menu', '');
-elseif ( is_user_admin() )
-	do_action('user_admin_menu', '');
-else
-	do_action('admin_menu', '');
-
-// Remove menus that have no accessible submenus and require privs that the user does not have.
-// Run re-parent loop again.
-=======
 if ( is_network_admin() ) {
 
 	/**
@@ -208,26 +153,17 @@ if ( is_network_admin() ) {
  * Remove menus that have no accessible submenus and require privileges
  * that the user does not have. Run re-parent loop again.
  */
->>>>>>> WPHome/master
 foreach ( $menu as $id => $data ) {
 	if ( ! current_user_can($data[1]) )
 		$_wp_menu_nopriv[$data[2]] = true;
 
-<<<<<<< HEAD
-	// If there is only one submenu and it is has same destination as the parent,
-	// remove the submenu.
-	if ( ! empty( $submenu[$data[2]] ) && 1 == count ( $submenu[$data[2]] ) ) {
-		$subs = $submenu[$data[2]];
-		$first_sub = array_shift($subs);
-=======
 	/*
 	 * If there is only one submenu and it is has same destination as the parent,
 	 * remove the submenu.
 	 */
 	if ( ! empty( $submenu[$data[2]] ) && 1 == count ( $submenu[$data[2]] ) ) {
 		$subs = $submenu[$data[2]];
-		$first_sub = reset( $subs );
->>>>>>> WPHome/master
+		$first_sub = array_shift($subs);
 		if ( $data[2] == $first_sub[2] )
 			unset( $submenu[$data[2]] );
 	}
@@ -277,11 +213,7 @@ function add_menu_classes($menu) {
 			continue;
 		}
 
-<<<<<<< HEAD
-		if ( 0 === strpos($top[2], 'separator') ) { // if separator
-=======
 		if ( 0 === strpos($top[2], 'separator') && false !== $lastorder ) { // if separator
->>>>>>> WPHome/master
 			$first = true;
 			$c = $menu[$lastorder][4];
 			$menu[$lastorder][4] = add_cssclass('menu-top-last', $c);
@@ -302,8 +234,6 @@ function add_menu_classes($menu) {
 		$lastorder = $order;
 	}
 
-<<<<<<< HEAD
-=======
 	/**
 	 * Filter administration menus array with classes added for top-level items.
 	 *
@@ -311,15 +241,11 @@ function add_menu_classes($menu) {
 	 *
 	 * @param array $menu Associative array of administration menu items.
 	 */
->>>>>>> WPHome/master
 	return apply_filters( 'add_menu_classes', $menu );
 }
 
 uksort($menu, "strnatcasecmp"); // make it all pretty
 
-<<<<<<< HEAD
-if ( apply_filters('custom_menu_order', false) ) {
-=======
 /**
  * Filter whether to enable custom ordering of the administration menu.
  *
@@ -330,16 +256,12 @@ if ( apply_filters('custom_menu_order', false) ) {
  * @param bool $custom Whether custom ordering is enabled. Default false.
  */
 if ( apply_filters( 'custom_menu_order', false ) ) {
->>>>>>> WPHome/master
 	$menu_order = array();
 	foreach ( $menu as $menu_item ) {
 		$menu_order[] = $menu_item[2];
 	}
 	unset($menu_item);
 	$default_menu_order = $menu_order;
-<<<<<<< HEAD
-	$menu_order = apply_filters('menu_order', $menu_order);
-=======
 
 	/**
 	 * Filter the order of administration menu items.
@@ -354,7 +276,6 @@ if ( apply_filters( 'custom_menu_order', false ) ) {
 	 * @param array $menu_order An ordered array of menu items.
 	 */
 	$menu_order = apply_filters( 'menu_order', $menu_order );
->>>>>>> WPHome/master
 	$menu_order = array_flip($menu_order);
 	$default_menu_order = array_flip($default_menu_order);
 
@@ -387,10 +308,6 @@ if ( !empty( $menu ) && 'wp-menu-separator' == $menu[ $last_menu_key ][ 4 ] )
 unset( $last_menu_key );
 
 if ( !user_can_access_admin_page() ) {
-<<<<<<< HEAD
-	do_action('admin_page_access_denied');
-	wp_die( __('You do not have sufficient permissions to access this page.') );
-=======
 
 	/**
 	 * Fires when access to an admin page is denied.
@@ -399,8 +316,7 @@ if ( !user_can_access_admin_page() ) {
 	 */
 	do_action( 'admin_page_access_denied' );
 
-	wp_die( __( 'You do not have sufficient permissions to access this page.' ), 403 );
->>>>>>> WPHome/master
+	wp_die( __('You do not have sufficient permissions to access this page.') );
 }
 
 $menu = add_menu_classes($menu);

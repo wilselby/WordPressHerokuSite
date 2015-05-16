@@ -8,11 +8,7 @@
  */
 
 /** Load WordPress Administration Bootstrap */
-<<<<<<< HEAD
-require_once( './admin.php' );
-=======
 require_once( dirname( __FILE__ ) . '/admin.php' );
->>>>>>> WPHome/master
 
 if ( ! is_multisite() )
 	wp_die( __( 'Multisite support is not enabled.' ) );
@@ -22,11 +18,6 @@ if ( empty( $_GET['action'] ) ) {
 	exit;
 }
 
-<<<<<<< HEAD
-do_action( 'wpmuadminedit' , '' );
-
-// Let plugins use us as a post handler easily
-=======
 /**
  * Fires just before the action handler in several Network Admin screens.
  *
@@ -45,7 +36,6 @@ do_action( 'wpmuadminedit' );
  *
  * @since 3.1.0
  */
->>>>>>> WPHome/master
 do_action( 'network_admin_edit_' . $_GET['action'] );
 
 wp_redirect( network_admin_url() );

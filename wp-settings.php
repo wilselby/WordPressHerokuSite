@@ -20,12 +20,6 @@ define( 'WPINC', 'wp-includes' );
 // Include files required for initialization.
 require( ABSPATH . WPINC . '/load.php' );
 require( ABSPATH . WPINC . '/default-constants.php' );
-<<<<<<< HEAD
-require( ABSPATH . WPINC . '/version.php' );
-
-// Set initial default constants including WP_MEMORY_LIMIT, WP_MAX_MEMORY_LIMIT, WP_DEBUG, WP_CONTENT_DIR and WP_CACHE.
-wp_initial_constants( );
-=======
 
 /*
  * These can't be directly globalized in version.php. When updating,
@@ -37,7 +31,6 @@ require( ABSPATH . WPINC . '/version.php' );
 
 // Set initial default constants including WP_MEMORY_LIMIT, WP_MAX_MEMORY_LIMIT, WP_DEBUG, WP_CONTENT_DIR and WP_CACHE.
 wp_initial_constants();
->>>>>>> WPHome/master
 
 // Check for the required PHP version and for the MySQL extension or a database drop-in.
 wp_check_php_mysql_versions();
@@ -121,29 +114,20 @@ require( ABSPATH . WPINC . '/class-wp-ajax-response.php' );
 require( ABSPATH . WPINC . '/formatting.php' );
 require( ABSPATH . WPINC . '/capabilities.php' );
 require( ABSPATH . WPINC . '/query.php' );
-<<<<<<< HEAD
-=======
 require( ABSPATH . WPINC . '/date.php' );
->>>>>>> WPHome/master
 require( ABSPATH . WPINC . '/theme.php' );
 require( ABSPATH . WPINC . '/class-wp-theme.php' );
 require( ABSPATH . WPINC . '/template.php' );
 require( ABSPATH . WPINC . '/user.php' );
-<<<<<<< HEAD
-=======
 require( ABSPATH . WPINC . '/session.php' );
->>>>>>> WPHome/master
 require( ABSPATH . WPINC . '/meta.php' );
 require( ABSPATH . WPINC . '/general-template.php' );
 require( ABSPATH . WPINC . '/link-template.php' );
 require( ABSPATH . WPINC . '/author-template.php' );
 require( ABSPATH . WPINC . '/post.php' );
 require( ABSPATH . WPINC . '/post-template.php' );
-<<<<<<< HEAD
-=======
 require( ABSPATH . WPINC . '/revision.php' );
 require( ABSPATH . WPINC . '/post-formats.php' );
->>>>>>> WPHome/master
 require( ABSPATH . WPINC . '/post-thumbnail-template.php' );
 require( ABSPATH . WPINC . '/category.php' );
 require( ABSPATH . WPINC . '/category-template.php' );
@@ -179,13 +163,9 @@ if ( is_multisite() ) {
 
 // Define constants that rely on the API to obtain the default value.
 // Define must-use plugin directory constants, which may be overridden in the sunrise.php drop-in.
-<<<<<<< HEAD
-wp_plugin_directory_constants( );
-=======
 wp_plugin_directory_constants();
 
 $GLOBALS['wp_plugin_paths'] = array();
->>>>>>> WPHome/master
 
 // Load must-use plugins.
 foreach ( wp_get_mu_plugins() as $mu_plugin ) {
@@ -196,41 +176,27 @@ unset( $mu_plugin );
 // Load network activated plugins.
 if ( is_multisite() ) {
 	foreach( wp_get_active_network_plugins() as $network_plugin ) {
-<<<<<<< HEAD
-=======
 		wp_register_plugin_realpath( $network_plugin );
->>>>>>> WPHome/master
 		include_once( $network_plugin );
 	}
 	unset( $network_plugin );
 }
 
-<<<<<<< HEAD
-=======
 /**
  * Fires once all must-use and network-activated plugins have loaded.
  *
  * @since 2.8.0
  */
->>>>>>> WPHome/master
 do_action( 'muplugins_loaded' );
 
 if ( is_multisite() )
 	ms_cookie_constants(  );
 
-<<<<<<< HEAD
 // Define constants after multisite is loaded. Cookie-related constants may be overridden in ms_network_cookies().
-wp_cookie_constants( );
-
-// Define and enforce our SSL constants
-wp_ssl_constants( );
-=======
-// Define constants after multisite is loaded.
 wp_cookie_constants();
 
 // Define and enforce our SSL constants
 wp_ssl_constants();
->>>>>>> WPHome/master
 
 // Create common globals.
 require( ABSPATH . WPINC . '/vars.php' );
@@ -244,15 +210,10 @@ create_initial_post_types();
 register_theme_directory( get_theme_root() );
 
 // Load active plugins.
-<<<<<<< HEAD
-foreach ( wp_get_active_and_valid_plugins() as $plugin )
-	include_once( $plugin );
-=======
 foreach ( wp_get_active_and_valid_plugins() as $plugin ) {
 	wp_register_plugin_realpath( $plugin );
 	include_once( $plugin );
 }
->>>>>>> WPHome/master
 unset( $plugin );
 
 // Load pluggable functions.
@@ -266,12 +227,6 @@ wp_set_internal_encoding();
 if ( WP_CACHE && function_exists( 'wp_cache_postload' ) )
 	wp_cache_postload();
 
-<<<<<<< HEAD
-do_action( 'plugins_loaded' );
-
-// Define constants which affect functionality if not already defined.
-wp_functionality_constants( );
-=======
 /**
  * Fires once activated plugins have loaded.
  *
@@ -283,19 +238,15 @@ do_action( 'plugins_loaded' );
 
 // Define constants which affect functionality if not already defined.
 wp_functionality_constants();
->>>>>>> WPHome/master
 
 // Add magic quotes and set up $_REQUEST ( $_GET + $_POST )
 wp_magic_quotes();
 
-<<<<<<< HEAD
-=======
 /**
  * Fires when comment cookies are sanitized.
  *
  * @since 2.0.11
  */
->>>>>>> WPHome/master
 do_action( 'sanitize_comment_cookies' );
 
 /**
@@ -303,11 +254,7 @@ do_action( 'sanitize_comment_cookies' );
  * @global object $wp_the_query
  * @since 2.0.0
  */
-<<<<<<< HEAD
-$wp_the_query = new WP_Query();
-=======
 $GLOBALS['wp_the_query'] = new WP_Query();
->>>>>>> WPHome/master
 
 /**
  * Holds the reference to @see $wp_the_query
@@ -315,11 +262,7 @@ $GLOBALS['wp_the_query'] = new WP_Query();
  * @global object $wp_query
  * @since 1.5.0
  */
-<<<<<<< HEAD
-$wp_query = $wp_the_query;
-=======
 $GLOBALS['wp_query'] = $GLOBALS['wp_the_query'];
->>>>>>> WPHome/master
 
 /**
  * Holds the WordPress Rewrite object for creating pretty URLs
@@ -333,11 +276,7 @@ $GLOBALS['wp_rewrite'] = new WP_Rewrite();
  * @global object $wp
  * @since 2.0.0
  */
-<<<<<<< HEAD
-$wp = new WP();
-=======
 $GLOBALS['wp'] = new WP();
->>>>>>> WPHome/master
 
 /**
  * WordPress Widget Factory Object
@@ -353,14 +292,11 @@ $GLOBALS['wp_widget_factory'] = new WP_Widget_Factory();
  */
 $GLOBALS['wp_roles'] = new WP_Roles();
 
-<<<<<<< HEAD
-=======
 /**
  * Fires before the theme is loaded.
  *
  * @since 2.6.0
  */
->>>>>>> WPHome/master
 do_action( 'setup_theme' );
 
 // Define the template related constants.
@@ -393,14 +329,6 @@ if ( ! defined( 'WP_INSTALLING' ) || 'wp-activate.php' === $pagenow ) {
 		include( TEMPLATEPATH . '/functions.php' );
 }
 
-<<<<<<< HEAD
-do_action( 'after_setup_theme' );
-
-// Set up current user.
-$wp->init();
-
-/**
-=======
 /**
  * Fires after the theme is loaded.
  *
@@ -414,17 +342,13 @@ $GLOBALS['wp']->init();
 /**
  * Fires after WordPress has finished loading but before any headers are sent.
  *
->>>>>>> WPHome/master
  * Most of WP is loaded at this stage, and the user is authenticated. WP continues
  * to load on the init hook that follows (e.g. widgets), and many plugins instantiate
  * themselves on it for all sorts of reasons (e.g. they need a user, a taxonomy, etc.).
  *
  * If you wish to plug an action once WP is loaded, use the wp_loaded hook below.
-<<<<<<< HEAD
-=======
  *
  * @since 1.5.0
->>>>>>> WPHome/master
  */
 do_action( 'init' );
 
@@ -443,16 +367,8 @@ if ( is_multisite() ) {
  * AJAX requests should use wp-admin/admin-ajax.php. admin-ajax.php can handle requests for
  * users not logged in.
  *
-<<<<<<< HEAD
  * @link http://codex.wordpress.org/AJAX_in_Plugins
  *
  * @since 3.0.0
  */
-do_action('wp_loaded');
-=======
- * @link https://codex.wordpress.org/AJAX_in_Plugins
- *
- * @since 3.0.0
- */
 do_action( 'wp_loaded' );
->>>>>>> WPHome/master

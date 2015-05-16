@@ -1,50 +1,12 @@
 <?php
 /**
-<<<<<<< HEAD
  * Customize Section Class.
-=======
- * WordPress Customize Section classes
->>>>>>> WPHome/master
+ *
+ * A UI container for controls, managed by the WP_Customize_Manager.
  *
  * @package WordPress
  * @subpackage Customize
  * @since 3.4.0
- */
-<<<<<<< HEAD
-class WP_Customize_Section {
-	public $manager;
-	public $id;
-	public $priority       = 10;
-	public $capability     = 'edit_theme_options';
-	public $theme_supports = '';
-	public $title          = '';
-	public $description    = '';
-	public $controls;
-
-	/**
-	 * Constructor.
-	 *
-	 * @since 3.4.0
-	 *
-	 * @param WP_Customize_Manager $manager
-	 * @param string $id An specific ID of the section.
-	 * @param array $args Section arguments.
-	 */
-	function __construct( $manager, $id, $args = array() ) {
-		$keys = array_keys( get_class_vars( __CLASS__ ) );
-		foreach ( $keys as $key ) {
-			if ( isset( $args[ $key ] ) )
-				$this->$key = $args[ $key ];
-=======
-
-/**
- * Customize Section class.
- *
- * A UI container for controls, managed by the WP_Customize_Manager class.
- *
- * @since 3.4.0
- *
- * @see WP_Customize_Manager
  */
 class WP_Customize_Section {
 
@@ -190,21 +152,10 @@ class WP_Customize_Section {
 			if ( isset( $args[ $key ] ) ) {
 				$this->$key = $args[ $key ];
 			}
->>>>>>> WPHome/master
 		}
 
 		$this->manager = $manager;
 		$this->id = $id;
-<<<<<<< HEAD
-
-		$this->controls = array(); // Users cannot customize the $controls array.
-
-		return $this;
-	}
-
-	/**
-	 * Check if the theme supports the section and check user capabilities.
-=======
 		if ( empty( $this->active_callback ) ) {
 			$this->active_callback = array( $this, 'active_callback' );
 		}
@@ -212,6 +163,8 @@ class WP_Customize_Section {
 		$this->instance_number = self::$instance_count;
 
 		$this->controls = array(); // Users cannot customize the $controls array.
+
+		return $this;
 	}
 
 	/**
@@ -222,7 +175,7 @@ class WP_Customize_Section {
 	 *
 	 * @return bool Whether the section is active to the current preview.
 	 */
-	final public function active() {
+	public final function active() {
 		$section = $this;
 		$active = call_user_func( $this->active_callback, $this );
 
@@ -272,21 +225,12 @@ class WP_Customize_Section {
 	/**
 	 * Checks required user capabilities and whether the theme has the
 	 * feature support required by the section.
->>>>>>> WPHome/master
 	 *
 	 * @since 3.4.0
 	 *
 	 * @return bool False if theme doesn't support the section or user doesn't have the capability.
 	 */
-<<<<<<< HEAD
 	public final function check_capabilities() {
-		if ( $this->capability && ! call_user_func_array( 'current_user_can', (array) $this->capability ) )
-			return false;
-
-		if ( $this->theme_supports && ! call_user_func_array( 'current_theme_supports', (array) $this->theme_supports ) )
-			return false;
-=======
-	final public function check_capabilities() {
 		if ( $this->capability && ! call_user_func_array( 'current_user_can', (array) $this->capability ) ) {
 			return false;
 		}
@@ -294,21 +238,18 @@ class WP_Customize_Section {
 		if ( $this->theme_supports && ! call_user_func_array( 'current_theme_supports', (array) $this->theme_supports ) ) {
 			return false;
 		}
->>>>>>> WPHome/master
 
 		return true;
 	}
 
 	/**
-<<<<<<< HEAD
-=======
 	 * Get the section's content template for insertion into the Customizer pane.
 	 *
 	 * @since 4.1.0
 	 *
 	 * @return string Contents of the section.
 	 */
-	final public function get_content() {
+	public final function get_content() {
 		ob_start();
 		$this->maybe_render();
 		$template = trim( ob_get_contents() );
@@ -317,20 +258,11 @@ class WP_Customize_Section {
 	}
 
 	/**
->>>>>>> WPHome/master
 	 * Check capabilities and render the section.
 	 *
 	 * @since 3.4.0
 	 */
-<<<<<<< HEAD
 	public final function maybe_render() {
-		if ( ! $this->check_capabilities() )
-			return;
-
-		do_action( 'customize_render_section', $this );
-		do_action( 'customize_render_section_' . $this->id );
-=======
-	final public function maybe_render() {
 		if ( ! $this->check_capabilities() ) {
 			return;
 		}
@@ -352,31 +284,16 @@ class WP_Customize_Section {
 		 * @since 3.4.0
 		 */
 		do_action( "customize_render_section_{$this->id}" );
->>>>>>> WPHome/master
 
 		$this->render();
 	}
 
 	/**
-<<<<<<< HEAD
-	 * Render the section.
-=======
 	 * Render the section, and the controls that have been added to it.
->>>>>>> WPHome/master
 	 *
 	 * @since 3.4.0
 	 */
 	protected function render() {
-<<<<<<< HEAD
-		?>
-		<li id="customize-section-<?php echo esc_attr( $this->id ); ?>" class="control-section customize-section">
-			<h3 class="customize-section-title" tabindex="0" title="<?php echo esc_attr( $this->description ); ?>"><?php echo esc_html( $this->title ); ?></h3>
-			<ul class="customize-section-content">
-				<?php
-				foreach ( $this->controls as $control )
-					$control->maybe_render();
-				?>
-=======
 		$classes = 'accordion-section control-section control-section-' . $this->type;
 		?>
 		<li id="accordion-section-<?php echo esc_attr( $this->id ); ?>" class="<?php echo esc_attr( $classes ); ?>">
@@ -390,97 +307,17 @@ class WP_Customize_Section {
 						<p class="description customize-section-description"><?php echo $this->description; ?></p>
 					</li>
 				<?php endif; ?>
->>>>>>> WPHome/master
 			</ul>
 		</li>
 		<?php
 	}
 }
-<<<<<<< HEAD
-=======
-
-/**
- * Customize Themes Section class.
- *
- * A UI container for theme controls, which behaves like a backwards Panel.
- *
- * @since 4.2.0
- *
- * @see WP_Customize_Section
- */
-class WP_Customize_Themes_Section extends WP_Customize_Section {
-
-	/**
-	 * Customize section type.
-	 *
-	 * @since 4.2.0
-	 * @access public
-	 * @var string
-	 */
-	public $type = 'themes';
-
-	/**
-	 * Render the themes section, which behaves like a panel.
-	 *
-	 * @since 4.2.0
-	 * @access protected
-	 */
-	protected function render() {
-		$classes = 'accordion-section control-section control-section-' . $this->type;
-		?>
-		<li id="accordion-section-<?php echo esc_attr( $this->id ); ?>" class="<?php echo esc_attr( $classes ); ?>">
-			<h3 class="accordion-section-title">
-				<?php
-				if ( $this->manager->is_theme_active() ) {
-					/* translators: %s: theme name */
-					printf( __( '<span>Active theme</span> %s' ), $this->title );
-				} else {
-					/* translators: %s: theme name */
-					printf( __( '<span>Previewing theme</span> %s' ), $this->title );
-				}
-				?>
-
-				<button type="button" class="button change-theme"><?php _ex( 'Change', 'theme' ); ?></button>
-			</h3>
-			<div class="customize-themes-panel control-panel-content themes-php">
-				<h2>
-					<?php _e( 'Themes' ); ?>
-					<span class="title-count theme-count"><?php echo count( $this->controls ) + 1 /* Active theme */; ?></span>
-				</h2>
-
-				<h3 class="accordion-section-title customize-section-title">
-					<?php
-					if ( $this->manager->is_theme_active() ) {
-						/* translators: %s: theme name */
-						printf( __( '<span>Active theme</span> %s' ), $this->title );
-					} else {
-						/* translators: %s: theme name */
-						printf( __( '<span>Previewing theme</span> %s' ), $this->title );
-					}
-					?>
-					<button type="button" class="button customize-theme"><?php _e( 'Customize' ); ?></button>
-				</h3>
-
-				<div class="theme-overlay" tabindex="0" role="dialog" aria-label="<?php esc_attr_e( 'Theme Details' ); ?>"></div>
-
-				<div id="customize-container"></div>
-				<?php if ( count( $this->controls ) > 4 ) : ?>
-					<p><label for="themes-filter">
-						<span class="screen-reader-text"><?php _e( 'Search installed themes...' ); ?></span>
-						<input type="text" id="themes-filter" placeholder="<?php esc_attr_e( 'Search installed themes...' ); ?>" />
-					</label></p>
-				<?php endif; ?>
-				<div class="theme-browser rendered">
-					<ul class="themes accordion-section-content">
-					</ul>
-				</div>
-			</div>
-		</li>
-<?php }
-}
 
 /**
  * Customizer section representing widget area (sidebar).
+ *
+ * @package WordPress
+ * @subpackage Customize
  *
  * @since 4.1.0
  *
@@ -531,4 +368,3 @@ class WP_Customize_Sidebar_Section extends WP_Customize_Section {
 		return $this->manager->widgets->is_sidebar_rendered( $this->sidebar_id );
 	}
 }
->>>>>>> WPHome/master

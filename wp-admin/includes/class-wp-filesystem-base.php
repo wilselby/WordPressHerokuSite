@@ -1,10 +1,6 @@
 <?php
 /**
-<<<<<<< HEAD
- * Base WordPress Filesystem.
-=======
  * Base WordPress Filesystem
->>>>>>> WPHome/master
  *
  * @package WordPress
  * @subpackage Filesystem
@@ -13,31 +9,12 @@
 /**
  * Base WordPress Filesystem class for which Filesystem implementations extend
  *
-<<<<<<< HEAD
- * @since 2.5
-=======
  * @since 2.5.0
->>>>>>> WPHome/master
  */
 class WP_Filesystem_Base {
 	/**
 	 * Whether to display debug data for the connection.
 	 *
-<<<<<<< HEAD
-	 * @since 2.5
-	 * @access public
-	 * @var bool
-	 */
-	var $verbose = false;
-	/**
-	 * Cached list of local filepaths to mapped remote filepaths.
-	 *
-	 * @since 2.7
-	 * @access private
-	 * @var array
-	 */
-	var $cache = array();
-=======
 	 * @access public
 	 * @since 2.5.0
 	 * @var bool
@@ -47,87 +24,72 @@ class WP_Filesystem_Base {
 	/**
 	 * Cached list of local filepaths to mapped remote filepaths.
 	 *
+	 * @access private
 	 * @since 2.7.0
 	 * @var array
 	 */
-	public $cache = array();
->>>>>>> WPHome/master
+	private $cache = array();
 
 	/**
 	 * The Access method of the current connection, Set automatically.
 	 *
-<<<<<<< HEAD
-	 * @since 2.5
-	 * @access public
-	 * @var string
-	 */
-	var $method = '';
-
-	/**
-	 * Returns the path on the remote filesystem of ABSPATH
-	 *
-	 * @since 2.7
-	 * @access public
-	 * @return string The location of the remote path.
-	 */
-	function abspath() {
-		$folder = $this->find_folder(ABSPATH);
-		//Perhaps the FTP folder is rooted at the WordPress install, Check for wp-includes folder in root, Could have some false positives, but rare.
-		if ( ! $folder && $this->is_dir('/wp-includes') )
-			$folder = '/';
-		return $folder;
-	}
-	/**
-	 * Returns the path on the remote filesystem of WP_CONTENT_DIR
-	 *
-	 * @since 2.7
-	 * @access public
-	 * @return string The location of the remote path.
-	 */
-	function wp_content_dir() {
-		return $this->find_folder(WP_CONTENT_DIR);
-	}
-	/**
-	 * Returns the path on the remote filesystem of WP_PLUGIN_DIR
-	 *
-	 * @since 2.7
-	 * @access public
-	 *
-	 * @return string The location of the remote path.
-	 */
-	function wp_plugins_dir() {
-		return $this->find_folder(WP_PLUGIN_DIR);
-	}
-	/**
-	 * Returns the path on the remote filesystem of the Themes Directory
-	 *
-	 * @since 2.7
-	 * @access public
-	 *
-	 * @return string The location of the remote path.
-	 */
-	function wp_themes_dir() {
-		return $this->wp_content_dir() . 'themes/';
-	}
-	/**
-	 * Returns the path on the remote filesystem of WP_LANG_DIR
-	 *
-	 * @since 3.2.0
-	 * @access public
-	 *
-	 * @return string The location of the remote path.
-	 */
-	function wp_lang_dir() {
-=======
 	 * @access public
 	 * @since 2.5.0
 	 * @var string
 	 */
 	public $method = '';
 
-	public $errors = null;
+	/**
+	 * Make private properties readable for backwards compatibility.
+	 *
+	 * @since 4.0.0
+	 * @access public
+	 *
+	 * @param string $name Property to get.
+	 * @return mixed Property.
+	 */
+	public function __get( $name ) {
+		return $this->$name;
+	}
 
-	public $options = array();
+	/**
+	 * Make private properties settable for backwards compatibility.
+	 *
+	 * @since 4.0.0
+	 * @access public
+	 *
+	 * @param string $name  Property to set.
+	 * @param mixed  $value Property value.
+	 * @return mixed Newly-set property.
+	 */
+	public function __set( $name, $value ) {
+		return $this->$name = $value;
+	}
+
+	/**
+	 * Make private properties checkable for backwards compatibility.
+	 *
+	 * @since 4.0.0
+	 * @access public
+	 *
+	 * @param string $name Property to check if set.
+	 * @return bool Whether the property is set.
+	 */
+	public function __isset( $name ) {
+		return isset( $this->$name );
+	}
+
+	/**
+	 * Make private properties un-settable for backwards compatibility.
+	 *
+	 * @since 4.0.0
+	 * @access public
+	 *
+	 * @param string $name Property to unset.
+	 */
+	public function __unset( $name ) {
+		unset( $this->$name );
+	}
 
 	/**
 	 * Return the path on the remote filesystem of ABSPATH.
@@ -197,26 +159,10 @@ class WP_Filesystem_Base {
 	 * @return string The location of the remote path.
 	 */
 	public function wp_lang_dir() {
->>>>>>> WPHome/master
 		return $this->find_folder(WP_LANG_DIR);
 	}
 
 	/**
-<<<<<<< HEAD
-	 * Locates a folder on the remote filesystem.
-	 *
-	 * Deprecated; use WP_Filesystem::abspath() or WP_Filesystem::wp_*_dir() methods instead.
-	 *
-	 * @since 2.5
-	 * @deprecated 2.7
-	 * @access public
-	 *
-	 * @param string $base The folder to start searching from
-	 * @param bool $echo True to display debug information
-	 * @return string The location of the remote path.
-	 */
-	function find_base_dir($base = '.', $echo = false) {
-=======
 	 * Locate a folder on the remote filesystem.
 	 *
 	 * @access public
@@ -234,27 +180,10 @@ class WP_Filesystem_Base {
 	 * @return string The location of the remote path.
 	 */
 	public function find_base_dir( $base = '.', $echo = false ) {
->>>>>>> WPHome/master
 		_deprecated_function(__FUNCTION__, '2.7', 'WP_Filesystem::abspath() or WP_Filesystem::wp_*_dir()' );
 		$this->verbose = $echo;
 		return $this->abspath();
 	}
-<<<<<<< HEAD
-	/**
-	 * Locates a folder on the remote filesystem.
-	 *
-	 * Deprecated; use WP_Filesystem::abspath() or WP_Filesystem::wp_*_dir() methods instead.
-	 *
-	 * @since 2.5
-	 * @deprecated 2.7
-	 * @access public
-	 *
-	 * @param string $base The folder to start searching from
-	 * @param bool $echo True to display debug information
-	 * @return string The location of the remote path.
-	 */
-	function get_base_dir($base = '.', $echo = false) {
-=======
 
 	/**
 	 * Locate a folder on the remote filesystem.
@@ -273,40 +202,12 @@ class WP_Filesystem_Base {
 	 * @return string The location of the remote path.
 	 */
 	public function get_base_dir( $base = '.', $echo = false ) {
->>>>>>> WPHome/master
 		_deprecated_function(__FUNCTION__, '2.7', 'WP_Filesystem::abspath() or WP_Filesystem::wp_*_dir()' );
 		$this->verbose = $echo;
 		return $this->abspath();
 	}
 
 	/**
-<<<<<<< HEAD
-	 * Locates a folder on the remote filesystem.
-	 *
-	 * Assumes that on Windows systems, Stripping off the Drive letter is OK
-	 * Sanitizes \\ to / in windows filepaths.
-	 *
-	 * @since 2.7
-	 * @access public
-	 *
-	 * @param string $folder the folder to locate
-	 * @return string The location of the remote path.
-	 */
-	function find_folder($folder) {
-
-		if ( strpos($this->method, 'ftp') !== false ) {
-			$constant_overrides = array( 'FTP_BASE' => ABSPATH, 'FTP_CONTENT_DIR' => WP_CONTENT_DIR, 'FTP_PLUGIN_DIR' => WP_PLUGIN_DIR, 'FTP_LANG_DIR' => WP_LANG_DIR );
-			foreach ( $constant_overrides as $constant => $dir )
-				if ( defined($constant) && $folder === $dir )
-					return trailingslashit(constant($constant));
-		} elseif ( 'direct' == $this->method ) {
-			$folder = str_replace('\\', '/', $folder); //Windows path sanitisation
-			return trailingslashit($folder);
-		}
-
-		$folder = preg_replace('|^([a-z]{1}):|i', '', $folder); //Strip out windows drive letter if it's there.
-		$folder = str_replace('\\', '/', $folder); //Windows path sanitisation
-=======
 	 * Locate a folder on the remote filesystem.
 	 *
 	 * Assumes that on Windows systems, Stripping off the Drive
@@ -316,7 +217,7 @@ class WP_Filesystem_Base {
 	 * @since 2.7.0
 	 *
 	 * @param string $folder the folder to locate.
-	 * @return string|false The location of the remote path, false on failure.
+	 * @return string The location of the remote path.
 	 */
 	public function find_folder( $folder ) {
 
@@ -360,16 +261,11 @@ class WP_Filesystem_Base {
 
 		$folder = preg_replace('|^([a-z]{1}):|i', '', $folder); // Strip out windows drive letter if it's there.
 		$folder = str_replace('\\', '/', $folder); // Windows path sanitisation
->>>>>>> WPHome/master
 
 		if ( isset($this->cache[ $folder ] ) )
 			return $this->cache[ $folder ];
 
-<<<<<<< HEAD
-		if ( $this->exists($folder) ) { //Folder exists at that absolute path.
-=======
 		if ( $this->exists($folder) ) { // Folder exists at that absolute path.
->>>>>>> WPHome/master
 			$folder = trailingslashit($folder);
 			$this->cache[ $folder ] = $folder;
 			return $folder;
@@ -380,70 +276,36 @@ class WP_Filesystem_Base {
 	}
 
 	/**
-<<<<<<< HEAD
-	 * Locates a folder on the remote filesystem.
-	 *
-	 * Expects Windows sanitized path
-	 *
-	 * @since 2.7
-	 * @access private
-	 *
-	 * @param string $folder the folder to locate
-	 * @param string $base the folder to start searching from
-	 * @param bool $loop if the function has recursed, Internal use only
-	 * @return string The location of the remote path.
-	 */
-	function search_for_folder($folder, $base = '.', $loop = false ) {
-=======
 	 * Locate a folder on the remote filesystem.
 	 *
 	 * Expects Windows sanitized path.
 	 *
+	 * @access private
 	 * @since 2.7.0
 	 *
 	 * @param string $folder The folder to locate.
 	 * @param string $base   The folder to start searching from.
 	 * @param bool   $loop   If the function has recursed, Internal use only.
-	 * @return string|false The location of the remote path, false to cease looping.
+	 * @return string The location of the remote path.
 	 */
 	public function search_for_folder( $folder, $base = '.', $loop = false ) {
->>>>>>> WPHome/master
 		if ( empty( $base ) || '.' == $base )
 			$base = trailingslashit($this->cwd());
 
 		$folder = untrailingslashit($folder);
 
-<<<<<<< HEAD
-		$folder_parts = explode('/', $folder);
-		$last_index = array_pop( array_keys( $folder_parts ) );
-=======
 		if ( $this->verbose )
 			printf( "\n" . __('Looking for %1$s in %2$s') . "<br/>\n", $folder, $base );
 
 		$folder_parts = explode('/', $folder);
 		$folder_part_keys = array_keys( $folder_parts );
 		$last_index = array_pop( $folder_part_keys );
->>>>>>> WPHome/master
 		$last_path = $folder_parts[ $last_index ];
 
 		$files = $this->dirlist( $base );
 
 		foreach ( $folder_parts as $index => $key ) {
 			if ( $index == $last_index )
-<<<<<<< HEAD
-				continue; //We want this to be caught by the next code block.
-
-			//Working from /home/ to /user/ to /wordpress/ see if that file exists within the current folder,
-			// If its found, change into it and follow through looking for it.
-			// If it cant find WordPress down that route, it'll continue onto the next folder level, and see if that matches, and so on.
-			// If it reaches the end, and still cant find it, it'll return false for the entire function.
-			if ( isset($files[ $key ]) ){
-				//Lets try that folder:
-				$newdir = trailingslashit(path_join($base, $key));
-				if ( $this->verbose )
-					printf( __('Changing to %s') . '<br/>', $newdir );
-				// only search for the remaining path tokens in the directory, not the full path again
-=======
 				continue; // We want this to be caught by the next code block.
 
 			/*
@@ -461,25 +323,12 @@ class WP_Filesystem_Base {
 					printf( "\n" . __('Changing to %s') . "<br/>\n", $newdir );
 
 				// Only search for the remaining path tokens in the directory, not the full path again.
->>>>>>> WPHome/master
 				$newfolder = implode( '/', array_slice( $folder_parts, $index + 1 ) );
 				if ( $ret = $this->search_for_folder( $newfolder, $newdir, $loop) )
 					return $ret;
 			}
 		}
 
-<<<<<<< HEAD
-		//Only check this as a last resort, to prevent locating the incorrect install. All above procedures will fail quickly if this is the right branch to take.
-		if (isset( $files[ $last_path ] ) ) {
-			if ( $this->verbose )
-				printf( __('Found %s') . '<br/>',  $base . $last_path );
-			return trailingslashit($base . $last_path);
-		}
-		if ( $loop )
-			return false; //Prevent this function from looping again.
-		//As an extra last resort, Change back to / if the folder wasn't found. This comes into effect when the CWD is /home/user/ but WP is at /var/www/.... mainly dedicated setups.
-		return $this->search_for_folder($folder, '/', true);
-=======
 		// Only check this as a last resort, to prevent locating the incorrect install. All above procedures will fail quickly if this is the right branch to take.
 		if (isset( $files[ $last_path ] ) ) {
 			if ( $this->verbose )
@@ -495,25 +344,10 @@ class WP_Filesystem_Base {
 		// As an extra last resort, Change back to / if the folder wasn't found.
 		// This comes into effect when the CWD is /home/user/ but WP is at /var/www/....
 		return $this->search_for_folder( $folder, '/', true );
->>>>>>> WPHome/master
 
 	}
 
 	/**
-<<<<<<< HEAD
-	 * Returns the *nix style file permissions for a file
-	 *
-	 * From the PHP documentation page for fileperms()
-	 *
-	 * @link http://docs.php.net/fileperms
-	 * @since 2.5
-	 * @access public
-	 *
-	 * @param string $file string filename
-	 * @return int octal representation of permissions
-	 */
-	function gethchmod($file){
-=======
 	 * Return the *nix-style file permissions for a file.
 	 *
 	 * From the PHP documentation page for fileperms().
@@ -527,7 +361,6 @@ class WP_Filesystem_Base {
 	 * @return string The *nix-style representation of permissions.
 	 */
 	public function gethchmod( $file ){
->>>>>>> WPHome/master
 		$perms = $this->getchmod($file);
 		if (($perms & 0xC000) == 0xC000) // Socket
 			$info = 's';
@@ -570,25 +403,12 @@ class WP_Filesystem_Base {
 	}
 
 	/**
-<<<<<<< HEAD
-	 * Converts *nix style file permissions to a octal number.
-=======
 	 * Convert *nix-style file permissions to a octal number.
->>>>>>> WPHome/master
 	 *
 	 * Converts '-rw-r--r--' to 0644
 	 * From "info at rvgate dot nl"'s comment on the PHP documentation for chmod()
  	 *
 	 * @link http://docs.php.net/manual/en/function.chmod.php#49614
-<<<<<<< HEAD
-	 * @since 2.5
-	 * @access public
-	 *
-	 * @param string $mode string *nix style file permission
-	 * @return int octal representation
-	 */
-	function getnumchmodfromh($mode) {
-=======
 	 *
 	 * @access public
 	 * @since 2.5.0
@@ -597,22 +417,13 @@ class WP_Filesystem_Base {
 	 * @return int octal representation
 	 */
 	public function getnumchmodfromh( $mode ) {
->>>>>>> WPHome/master
 		$realmode = '';
 		$legal =  array('', 'w', 'r', 'x', '-');
 		$attarray = preg_split('//', $mode);
 
-<<<<<<< HEAD
 		for ($i=0; $i < count($attarray); $i++)
 		   if ($key = array_search($attarray[$i], $legal))
 			   $realmode .= $legal[$key];
-=======
-		for ( $i = 0, $c = count( $attarray ); $i < $c; $i++ ) {
-		   if ($key = array_search($attarray[$i], $legal)) {
-			   $realmode .= $legal[$key];
-		   }
-		}
->>>>>>> WPHome/master
 
 		$mode = str_pad($realmode, 10, '-', STR_PAD_LEFT);
 		$trans = array('-'=>'0', 'r'=>'4', 'w'=>'2', 'x'=>'1');
@@ -626,22 +437,9 @@ class WP_Filesystem_Base {
 	}
 
 	/**
-<<<<<<< HEAD
-	 * Determines if the string provided contains binary characters.
-	 *
-	 * @since 2.7
-	 * @access private
-	 *
-	 * @param string $text String to test against
-	 * @return bool true if string is binary, false otherwise
-	 */
-	function is_binary( $text ) {
-		return (bool) preg_match('|[^\x20-\x7E]|', $text); //chr(32)..chr(127)
-	}
-}
-=======
 	 * Determine if the string provided contains binary characters.
 	 *
+	 * @access private
 	 * @since 2.7.0
 	 *
 	 * @param string $text String to test against.
@@ -1015,4 +813,3 @@ class WP_Filesystem_Base {
 	}
 
 } // WP_Filesystem_Base
->>>>>>> WPHome/master

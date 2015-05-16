@@ -1,11 +1,6 @@
-<<<<<<< HEAD
-var showNotice, adminMenu, columns, validateForm, screenMeta;
-(function($){
-=======
 /* global setUserSetting, ajaxurl, commonL10n, alert, confirm, pagenow */
 var showNotice, adminMenu, columns, validateForm, screenMeta;
 ( function( $, window, undefined ) {
->>>>>>> WPHome/master
 // Removed in 3.3.
 // (perhaps) needed for back-compat
 adminMenu = {
@@ -71,19 +66,11 @@ columns = {
 		n = parseInt( $t.attr('colspan'), 10 ) + diff;
 		$t.attr('colspan', n.toString());
 	}
-<<<<<<< HEAD
-}
-=======
 };
->>>>>>> WPHome/master
 
 $(document).ready(function(){columns.init();});
 
 validateForm = function( form ) {
-<<<<<<< HEAD
-	return !$( form ).find('.form-required').filter( function() { return $('input:visible', this).val() == ''; } ).addClass( 'form-invalid' ).find('input:visible').change( function() { $(this).closest('.form-invalid').removeClass( 'form-invalid' ); } ).size();
-}
-=======
 	return !$( form )
 		.find( '.form-required' )
 		.filter( function() { return $( 'input:visible', this ).val() === ''; } )
@@ -92,7 +79,6 @@ validateForm = function( form ) {
 		.change( function() { $( this ).closest( '.form-invalid' ).removeClass( 'form-invalid' ); } )
 		.size();
 };
->>>>>>> WPHome/master
 
 // stub for doing better warnings
 showNotice = {
@@ -145,11 +131,8 @@ screenMeta = {
 			panel.focus();
 			link.addClass('screen-meta-active').attr('aria-expanded', true);
 		});
-<<<<<<< HEAD
-=======
 
 		$( document ).trigger( 'screen:options:open' );
->>>>>>> WPHome/master
 	},
 
 	close: function( panel, link ) {
@@ -158,22 +141,15 @@ screenMeta = {
 			$('.screen-meta-toggle').css('visibility', '');
 			panel.parent().hide();
 		});
-<<<<<<< HEAD
-=======
 
 		$( document ).trigger( 'screen:options:close' );
->>>>>>> WPHome/master
 	}
 };
 
 /**
  * Help tabs.
  */
-<<<<<<< HEAD
-$('.contextual-help-tabs').delegate('a', 'click focus', function(e) {
-=======
 $('.contextual-help-tabs').delegate('a', 'click', function(e) {
->>>>>>> WPHome/master
 	var link = $(this),
 		panel;
 
@@ -195,18 +171,6 @@ $('.contextual-help-tabs').delegate('a', 'click', function(e) {
 });
 
 $(document).ready( function() {
-<<<<<<< HEAD
-	var lastClicked = false, checks, first, last, checked, menu = $('#adminmenu'), mobileEvent,
-		pageInput = $('input.current-page'), currentPage = pageInput.val();
-
-	// when the menu is folded, make the fly-out submenu header clickable
-	menu.on('click.wp-submenu-head', '.wp-submenu-head', function(e){
-		$(e.target).parent().siblings('a').get(0).click();
-	});
-
-	$('#collapse-menu').on('click.collapse-menu', function(e){
-		var body = $(document.body);
-=======
 	var checks, first, last, checked, sliced, mobileEvent, transitionTimeout, focusedRowActions, $firstHeading,
 		lastClicked = false,
 		pageInput = $('input.current-page'),
@@ -246,22 +210,10 @@ $(document).ready( function() {
 
 	$('#collapse-menu').on('click.collapse-menu', function() {
 		var body = $( document.body ), respWidth, state;
->>>>>>> WPHome/master
 
 		// reset any compensation for submenus near the bottom of the screen
 		$('#adminmenu div.wp-submenu').css('margin-top', '');
 
-<<<<<<< HEAD
-		if ( $(window).width() < 900 ) {
-			if ( body.hasClass('auto-fold') ) {
-				body.removeClass('auto-fold');
-				setUserSetting('unfold', 1);
-				body.removeClass('folded');
-				deleteUserSetting('mfold');
-			} else {
-				body.addClass('auto-fold');
-				deleteUserSetting('unfold');
-=======
 		if ( window.innerWidth ) {
 			// window.innerWidth is affected by zooming on phones
 			respWidth = Math.max( window.innerWidth, document.documentElement.clientWidth );
@@ -280,33 +232,10 @@ $(document).ready( function() {
 				body.addClass('auto-fold');
 				setUserSetting('unfold', 0);
 				state = 'folded';
->>>>>>> WPHome/master
 			}
 		} else {
 			if ( body.hasClass('folded') ) {
 				body.removeClass('folded');
-<<<<<<< HEAD
-				deleteUserSetting('mfold');
-			} else {
-				body.addClass('folded');
-				setUserSetting('mfold', 'f');
-			}
-		}
-	});
-
-	if ( 'ontouchstart' in window || /IEMobile\/[1-9]/.test(navigator.userAgent) ) { // touch screen device
-		// iOS Safari works with touchstart, the rest work with click
-		mobileEvent = /Mobile\/.+Safari/.test(navigator.userAgent) ? 'touchstart' : 'click';
-
-		// close any open submenus when touch/click is not on the menu
-		$(document.body).on( mobileEvent+'.wp-mobile-hover', function(e) {
-			if ( !$(e.target).closest('#adminmenu').length )
-				menu.find('li.wp-has-submenu.opensub').removeClass('opensub');
-		});
-
-		menu.find('a.wp-has-submenu').on( mobileEvent+'.wp-mobile-hover', function(e) {
-			var el = $(this), parent = el.parent();
-=======
 				setUserSetting('mfold', 'o');
 				state = 'open';
 			} else {
@@ -375,77 +304,19 @@ $(document).ready( function() {
 			if ( $adminmenu.data( 'wp-responsive' ) ) {
 				return;
 			}
->>>>>>> WPHome/master
 
 			// Show the sub instead of following the link if:
 			//	- the submenu is not open
 			//	- the submenu is not shown inline or the menu is not folded
-<<<<<<< HEAD
-			if ( !parent.hasClass('opensub') && ( !parent.hasClass('wp-menu-open') || parent.width() < 40 ) ) {
-				e.preventDefault();
-				menu.find('li.opensub').removeClass('opensub');
-				parent.addClass('opensub');
-=======
 			if ( ! $menuItem.hasClass( 'opensub' ) && ( ! $menuItem.hasClass( 'wp-menu-open' ) || $menuItem.width() < 40 ) ) {
 				event.preventDefault();
 				adjustSubmenu( $menuItem );
 				$adminmenu.find( 'li.opensub' ).removeClass( 'opensub' );
 				$menuItem.addClass('opensub');
->>>>>>> WPHome/master
 			}
 		});
 	}
 
-<<<<<<< HEAD
-	menu.find('li.wp-has-submenu').hoverIntent({
-		over: function(e){
-			var b, h, o, f, m = $(this).find('.wp-submenu'), menutop, wintop, maxtop, top = parseInt( m.css('top'), 10 );
-
-			if ( isNaN(top) || top > -5 ) // meaning the submenu is visible
-				return;
-
-			menutop = $(this).offset().top;
-			wintop = $(window).scrollTop();
-			maxtop = menutop - wintop - 30; // max = make the top of the sub almost touch admin bar
-
-			b = menutop + m.height() + 1; // Bottom offset of the menu
-			h = $('#wpwrap').height(); // Height of the entire page
-			o = 60 + b - h;
-			f = $(window).height() + wintop - 15; // The fold
-
-			if ( f < (b - o) )
-				o = b - f;
-
-			if ( o > maxtop )
-				o = maxtop;
-
-			if ( o > 1 )
-				m.css('margin-top', '-'+o+'px');
-			else
-				m.css('margin-top', '');
-
-			menu.find('li.menu-top').removeClass('opensub');
-			$(this).addClass('opensub');
-		},
-		out: function(){
-			$(this).removeClass('opensub').find('.wp-submenu').css('margin-top', '');
-		},
-		timeout: 200,
-		sensitivity: 7,
-		interval: 90
-	});
-
-	menu.on('focus.adminmenu', '.wp-submenu a', function(e){
-		$(e.target).closest('li.menu-top').addClass('opensub');
-	}).on('blur.adminmenu', '.wp-submenu a', function(e){
-		$(e.target).closest('li.menu-top').removeClass('opensub');
-	});
-
-	// Move .updated and .error alert boxes. Don't move boxes designed to be inline.
-	$('div.wrap h2:first').nextAll('div.updated, div.error').addClass('below-h2');
-	$('div.updated, div.error').not('.below-h2, .inline').insertAfter( $('div.wrap h2:first') );
-
-=======
 	if ( ! isIOS && ! isAndroid ) {
 		$adminmenu.find( 'li.wp-has-submenu' ).hoverIntent({
 			over: function() {
@@ -502,28 +373,6 @@ $(document).ready( function() {
 	$firstHeading.nextAll( 'div.updated, div.error, div.notice' ).addClass( 'below-h2' );
 	$( 'div.updated, div.error, div.notice' ).not( '.below-h2, .inline' ).insertAfter( $firstHeading );
 
-	// Make notices dismissible
-	$( '.notice.is-dismissible' ).each( function() {
-		var $this = $( this ),
-			$button = $( '<button type="button" class="notice-dismiss"><span class="screen-reader-text"></span></button>' ),
-			btnText = commonL10n.dismiss || '';
-
-		// Ensure plain text
-		$button.find( '.screen-reader-text' ).text( btnText );
-
-		$this.append( $button );
-
-		$button.on( 'click.wp-dismiss-notice', function( event ) {
-			event.preventDefault();
-			$this.fadeTo( 100 , 0, function() {
-				$(this).slideUp( 100, function() {
-					$(this).remove();
-				});
-			});
-		});
-	});
-
->>>>>>> WPHome/master
 	// Init screen meta
 	screenMeta.init();
 
@@ -537,12 +386,8 @@ $(document).ready( function() {
 			last = checks.index( this );
 			checked = $(this).prop('checked');
 			if ( 0 < first && 0 < last && first != last ) {
-<<<<<<< HEAD
-				checks.slice( first, last ).prop( 'checked', function(){
-=======
 				sliced = ( last > first ) ? checks.slice( first, last ) : checks.slice( last, first );
 				sliced.prop( 'checked', function() {
->>>>>>> WPHome/master
 					if ( $(this).closest('tr').is(':visible') )
 						return checked;
 
@@ -555,46 +400,12 @@ $(document).ready( function() {
 		// toggle "check all" checkboxes
 		var unchecked = $(this).closest('tbody').find(':checkbox').filter(':visible').not(':checked');
 		$(this).closest('table').children('thead, tfoot').find(':checkbox').prop('checked', function() {
-<<<<<<< HEAD
-			return ( 0 == unchecked.length );
-=======
 			return ( 0 === unchecked.length );
->>>>>>> WPHome/master
 		});
 
 		return true;
 	});
 
-<<<<<<< HEAD
-	$('thead, tfoot').find('.check-column :checkbox').click( function(e) {
-		var c = $(this).prop('checked'),
-			kbtoggle = 'undefined' == typeof toggleWithKeyboard ? false : toggleWithKeyboard,
-			toggle = e.shiftKey || kbtoggle;
-
-		$(this).closest( 'table' ).children( 'tbody' ).filter(':visible')
-		.children().children('.check-column').find(':checkbox')
-		.prop('checked', function() {
-			if ( $(this).closest('tr').is(':hidden') )
-				return false;
-			if ( toggle )
-				return $(this).prop( 'checked' );
-			else if (c)
-				return true;
-			return false;
-		});
-
-		$(this).closest('table').children('thead,  tfoot').filter(':visible')
-		.children().children('.check-column').find(':checkbox')
-		.prop('checked', function() {
-			if ( toggle )
-				return false;
-			else if (c)
-				return true;
-			return false;
-		});
-	});
-
-=======
 	$('thead, tfoot').find('.check-column :checkbox').on( 'click.wp-toggle-checkboxes', function( event ) {
 		var $this = $(this),
 			$table = $this.closest( 'table' ),
@@ -631,24 +442,18 @@ $(document).ready( function() {
 	});
 
 	// Show row actions on keyboard focus of its parent container element or any other elements contained within
-	$( '#wpbody-content' ).on({
-		focusin: function() {
-			clearTimeout( transitionTimeout );
-			focusedRowActions = $( this ).find( '.row-actions' );
-			// transitionTimeout is necessary for Firefox, but Chrome won't remove the CSS class without a little help.
-			$( '.row-actions' ).not( this ).removeClass( 'visible' );
-			focusedRowActions.addClass( 'visible' );
-		},
-		focusout: function() {
-			// Tabbing between post title and .row-actions links needs a brief pause, otherwise
-			// the .row-actions div gets hidden in transit in some browsers (ahem, Firefox).
-			transitionTimeout = setTimeout( function() {
-				focusedRowActions.removeClass( 'visible' );
-			}, 30 );
-		}
-	}, 'td.post-title, td.title, td.comment, .tags td.column-name, .bookmarks td.column-name, td.blogname, .users-network td.column-blogs, td.username, .dashboard-comment-wrap' );
+	$( 'td.post-title, td.title, td.comment, .bookmarks td.column-name, td.blogname, td.username, .dashboard-comment-wrap' ).focusin(function(){
+		clearTimeout( transitionTimeout );
+		focusedRowActions = $(this).find( '.row-actions' );
+		focusedRowActions.addClass( 'visible' );
+	}).focusout(function(){
+		// Tabbing between post title and .row-actions links needs a brief pause, otherwise
+		// the .row-actions div gets hidden in transit in some browsers (ahem, Firefox).
+		transitionTimeout = setTimeout(function(){
+			focusedRowActions.removeClass( 'visible' );
+		}, 30);
+	});
 
->>>>>>> WPHome/master
 	$('#default-password-nag-no').click( function() {
 		setUserSetting('default_password_nag', 'hide');
 		$('div.default-password-nag').hide();
@@ -660,11 +465,6 @@ $(document).ready( function() {
 		var el = e.target, selStart, selEnd, val, scroll, sel;
 
 		if ( e.keyCode == 27 ) { // escape key
-<<<<<<< HEAD
-=======
-			// when pressing Escape: Opera 12 and 27 blur form fields, IE 8 clears them
-			e.preventDefault();
->>>>>>> WPHome/master
 			$(el).data('tab-out', true);
 			return;
 		}
@@ -681,13 +481,10 @@ $(document).ready( function() {
 		selEnd = el.selectionEnd;
 		val = el.value;
 
-<<<<<<< HEAD
 		try {
 			this.lastKey = 9; // not a standard DOM property, lastKey is to help stop Opera tab event. See blur handler below.
 		} catch(err) {}
 
-=======
->>>>>>> WPHome/master
 		if ( document.selection ) {
 			el.focus();
 			sel = document.selection.createRange();
@@ -705,18 +502,13 @@ $(document).ready( function() {
 			e.preventDefault();
 	});
 
-<<<<<<< HEAD
-	$('#newcontent').bind('blur.wpevent_InsertTab', function(e) {
+	$('#newcontent').bind('blur.wpevent_InsertTab', function() {
 		if ( this.lastKey && 9 == this.lastKey )
 			this.focus();
 	});
 
 	if ( pageInput.length ) {
-		pageInput.closest('form').submit( function(e){
-=======
-	if ( pageInput.length ) {
 		pageInput.closest('form').submit( function() {
->>>>>>> WPHome/master
 
 			// Reset paging var for new filters/searches but not for bulk actions. See #17685.
 			if ( $('select[name="action"]').val() == -1 && $('select[name="action2"]').val() == -1 && pageInput.val() == currentPage )
@@ -724,13 +516,10 @@ $(document).ready( function() {
 		});
 	}
 
-<<<<<<< HEAD
-=======
 	$('.search-box input[type="search"], .search-box input[type="submit"]').mousedown(function () {
 		$('select[name^="action"]').val('-1');
 	});
 
->>>>>>> WPHome/master
 	// Scroll into view when focused
 	$('#contextual-help-link, #show-settings-link').on( 'focus.scroll-into-view', function(e){
 		if ( e.target.scrollIntoView )
@@ -753,22 +542,6 @@ $(document).ready( function() {
 		toggleUploadButton();
 		input.on('change', toggleUploadButton);
 	})();
-<<<<<<< HEAD
-});
-
-// internal use
-$(document).bind( 'wp_CloseOnEscape', function( e, data ) {
-	if ( typeof(data.cb) != 'function' )
-		return;
-
-	if ( typeof(data.condition) != 'function' || data.condition() )
-		data.cb();
-
-	return true;
-});
-
-})(jQuery);
-=======
 
 	function pinMenu( event ) {
 		var windowPos = $window.scrollTop(),
@@ -1068,7 +841,7 @@ $(document).bind( 'wp_CloseOnEscape', function( e, data ) {
 	window.wpResponsive.init();
 	setPinMenu();
 
-	$document.on( 'wp-pin-menu wp-window-resized.pin-menu postboxes-columnchange.pin-menu postbox-toggled.pin-menu wp-collapse-menu.pin-menu wp-scroll-start.pin-menu', setPinMenu );
+	$document.on( 'wp-window-resized.pin-menu postboxes-columnchange.pin-menu postbox-toggled.pin-menu wp-collapse-menu.pin-menu wp-scroll-start.pin-menu', setPinMenu );
 });
 
 // Fire a custom jQuery event at the end of window resize
@@ -1099,4 +872,3 @@ $(document).bind( 'wp_CloseOnEscape', function( e, data ) {
 })();
 
 }( jQuery, window ));
->>>>>>> WPHome/master

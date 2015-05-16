@@ -1,18 +1,10 @@
 <?php
 /**
-<<<<<<< HEAD
- * The template for displaying Tag pages.
- *
- * Used to display archive-type pages for posts in a tag.
- *
- * Learn more: http://codex.wordpress.org/Template_Hierarchy
-=======
  * The template for displaying Tag pages
  *
  * Used to display archive-type pages for posts in a tag.
  *
- * @link https://codex.wordpress.org/Template_Hierarchy
->>>>>>> WPHome/master
+ * @link http://codex.wordpress.org/Template_Hierarchy
  *
  * @package WordPress
  * @subpackage Twenty_Twelve
@@ -37,12 +29,8 @@ get_header(); ?>
 			/* Start the Loop */
 			while ( have_posts() ) : the_post();
 
-<<<<<<< HEAD
-				/* Include the post format-specific template for the content. If you want to
-=======
 				/*
 				 * Include the post format-specific template for the content. If you want to
->>>>>>> WPHome/master
 				 * this in a child theme then include a file called called content-___.php
 				 * (where ___ is the post format) and that will be used instead.
 				 */
@@ -61,8 +49,4 @@ get_header(); ?>
 	</section><!-- #primary -->
 
 <?php get_sidebar(); ?>
-<<<<<<< HEAD
 <?php get_footer(); ?>
-=======
-<?php get_footer(); ?>
->>>>>>> WPHome/master

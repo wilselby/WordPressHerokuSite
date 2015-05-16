@@ -4,11 +4,7 @@
  *
  * Will eventually replace and standardize the WordPress HTTP requests made.
  *
-<<<<<<< HEAD
- * @link http://trac.wordpress.org/ticket/4779 HTTP API Proposal
-=======
  * @link https://core.trac.wordpress.org/ticket/4779 HTTP API Proposal
->>>>>>> WPHome/master
  *
  * @package WordPress
  * @subpackage HTTP
@@ -33,15 +29,6 @@ function _wp_http_get_object() {
 }
 
 /**
-<<<<<<< HEAD
- * Retrieve the raw response from the HTTP request.
- *
- * The array structure is a little complex.
- *
- * <code>
- * $res = array( 'headers' => array(), 'response' => array('code' => int, 'message' => string) );
- * </code>
-=======
  * Retrieve the raw response from a safe HTTP request.
  *
  * This function is ideal when the HTTP request is being made to an arbitrary
@@ -137,30 +124,17 @@ function wp_safe_remote_head( $url, $args = array() ) {
  *             'message' => string
  *         )
  *     );
->>>>>>> WPHome/master
  *
  * All of the headers in $res['headers'] are with the name as the key and the
  * value as the value. So to get the User-Agent, you would do the following.
  *
-<<<<<<< HEAD
- * <code>
- * $user_agent = $res['headers']['user-agent'];
- * </code>
-=======
  *     $user_agent = $res['headers']['user-agent'];
->>>>>>> WPHome/master
  *
  * The body is the raw response content and can be retrieved from $res['body'].
  *
  * This function is called first to make the request and there are other API
  * functions to abstract out the above convoluted setup.
  *
-<<<<<<< HEAD
- * @since 2.7.0
- *
- * @param string $url Site URL to retrieve.
- * @param array $args Optional. Override the defaults.
-=======
  * Request method defaults for helper functions:
  *  - Default 'GET'  for wp_remote_get()
  *  - Default 'POST' for wp_remote_post()
@@ -172,7 +146,6 @@ function wp_safe_remote_head( $url, $args = array() ) {
  *
  * @param string $url  Site URL to retrieve.
  * @param array  $args Optional. Request arguments. Default empty array.
->>>>>>> WPHome/master
  * @return WP_Error|array The response or WP_Error on failure.
  */
 function wp_remote_request($url, $args = array()) {
@@ -183,14 +156,6 @@ function wp_remote_request($url, $args = array()) {
 /**
  * Retrieve the raw response from the HTTP request using the GET method.
  *
-<<<<<<< HEAD
- * @see wp_remote_request() For more information on the response array format.
- *
- * @since 2.7.0
- *
- * @param string $url Site URL to retrieve.
- * @param array $args Optional. Override the defaults.
-=======
  * @since 2.7.0
  *
  * @see wp_remote_request() For more information on the response array format.
@@ -198,7 +163,6 @@ function wp_remote_request($url, $args = array()) {
  *
  * @param string $url  Site URL to retrieve.
  * @param array  $args Optional. Request arguments. Default empty array.
->>>>>>> WPHome/master
  * @return WP_Error|array The response or WP_Error on failure.
  */
 function wp_remote_get($url, $args = array()) {
@@ -209,14 +173,6 @@ function wp_remote_get($url, $args = array()) {
 /**
  * Retrieve the raw response from the HTTP request using the POST method.
  *
-<<<<<<< HEAD
- * @see wp_remote_request() For more information on the response array format.
- *
- * @since 2.7.0
- *
- * @param string $url Site URL to retrieve.
- * @param array $args Optional. Override the defaults.
-=======
  * @since 2.7.0
  *
  * @see wp_remote_request() For more information on the response array format.
@@ -224,7 +180,6 @@ function wp_remote_get($url, $args = array()) {
  *
  * @param string $url  Site URL to retrieve.
  * @param array  $args Optional. Request arguments. Default empty array.
->>>>>>> WPHome/master
  * @return WP_Error|array The response or WP_Error on failure.
  */
 function wp_remote_post($url, $args = array()) {
@@ -235,14 +190,6 @@ function wp_remote_post($url, $args = array()) {
 /**
  * Retrieve the raw response from the HTTP request using the HEAD method.
  *
-<<<<<<< HEAD
- * @see wp_remote_request() For more information on the response array format.
- *
- * @since 2.7.0
- *
- * @param string $url Site URL to retrieve.
- * @param array $args Optional. Override the defaults.
-=======
  * @since 2.7.0
  *
  * @see wp_remote_request() For more information on the response array format.
@@ -250,7 +197,6 @@ function wp_remote_post($url, $args = array()) {
  *
  * @param string $url  Site URL to retrieve.
  * @param array  $args Optional. Request arguments. Default empty array.
->>>>>>> WPHome/master
  * @return WP_Error|array The response or WP_Error on failure.
  */
 function wp_remote_head($url, $args = array()) {
@@ -266,11 +212,7 @@ function wp_remote_head($url, $args = array()) {
  * @param array $response HTTP response.
  * @return array The headers of the response. Empty array if incorrect parameter given.
  */
-<<<<<<< HEAD
-function wp_remote_retrieve_headers(&$response) {
-=======
 function wp_remote_retrieve_headers( $response ) {
->>>>>>> WPHome/master
 	if ( is_wp_error($response) || ! isset($response['headers']) || ! is_array($response['headers']))
 		return array();
 
@@ -286,11 +228,7 @@ function wp_remote_retrieve_headers( $response ) {
  * @param string $header Header name to retrieve value from.
  * @return string The header value. Empty string on if incorrect parameter given, or if the header doesn't exist.
  */
-<<<<<<< HEAD
-function wp_remote_retrieve_header(&$response, $header) {
-=======
 function wp_remote_retrieve_header( $response, $header ) {
->>>>>>> WPHome/master
 	if ( is_wp_error($response) || ! isset($response['headers']) || ! is_array($response['headers']))
 		return '';
 
@@ -308,15 +246,9 @@ function wp_remote_retrieve_header( $response, $header ) {
  * @since 2.7.0
  *
  * @param array $response HTTP response.
-<<<<<<< HEAD
- * @return string the response code. Empty string on incorrect parameter given.
- */
-function wp_remote_retrieve_response_code(&$response) {
-=======
  * @return int|string The response code as an integer. Empty string on incorrect parameter given.
  */
 function wp_remote_retrieve_response_code( $response ) {
->>>>>>> WPHome/master
 	if ( is_wp_error($response) || ! isset($response['response']) || ! is_array($response['response']))
 		return '';
 
@@ -333,11 +265,7 @@ function wp_remote_retrieve_response_code( $response ) {
  * @param array $response HTTP response.
  * @return string The response message. Empty string on incorrect parameter given.
  */
-<<<<<<< HEAD
-function wp_remote_retrieve_response_message(&$response) {
-=======
 function wp_remote_retrieve_response_message( $response ) {
->>>>>>> WPHome/master
 	if ( is_wp_error($response) || ! isset($response['response']) || ! is_array($response['response']))
 		return '';
 
@@ -352,11 +280,7 @@ function wp_remote_retrieve_response_message( $response ) {
  * @param array $response HTTP response.
  * @return string The body of the response. Empty string if no body or incorrect parameter given.
  */
-<<<<<<< HEAD
-function wp_remote_retrieve_body(&$response) {
-=======
 function wp_remote_retrieve_body( $response ) {
->>>>>>> WPHome/master
 	if ( is_wp_error($response) || ! isset($response['body']) )
 		return '';
 
@@ -407,8 +331,6 @@ function get_http_origin() {
 	if ( ! empty ( $_SERVER[ 'HTTP_ORIGIN' ] ) )
 		$origin = $_SERVER[ 'HTTP_ORIGIN' ];
 
-<<<<<<< HEAD
-=======
 	/**
 	 * Change the origin of an HTTP request.
 	 *
@@ -416,16 +338,11 @@ function get_http_origin() {
 	 *
 	 * @param string $origin The original origin for the request.
 	 */
->>>>>>> WPHome/master
 	return apply_filters( 'http_origin', $origin );
 }
 
 /**
-<<<<<<< HEAD
- * Retrieve list of allowed http origins.
-=======
  * Retrieve list of allowed HTTP origins.
->>>>>>> WPHome/master
  *
  * @since 3.4.0
  *
@@ -443,8 +360,6 @@ function get_allowed_http_origins() {
 		'https://' . $home_origin[ 'host' ],
 	) );
 
-<<<<<<< HEAD
-=======
 	/**
 	 * Change the origin types allowed for HTTP requests.
 	 *
@@ -458,26 +373,16 @@ function get_allowed_http_origins() {
 	 *     @type string Secure URL for home origin.
 	 * }
 	 */
->>>>>>> WPHome/master
 	return apply_filters( 'allowed_http_origins' , $allowed_origins );
 }
 
 /**
-<<<<<<< HEAD
- * Determines if the http origin is an authorized one.
- *
- * @since 3.4.0
- *
- * @param string Origin URL. If not provided, the value of get_http_origin() is used.
- * @return bool True if the origin is allowed. False otherwise.
-=======
  * Determines if the HTTP origin is an authorized one.
  *
  * @since 3.4.0
  *
  * @param null|string $origin Origin URL. If not provided, the value of get_http_origin() is used.
  * @return bool|null True if the origin is allowed. False otherwise.
->>>>>>> WPHome/master
  */
 function is_allowed_http_origin( $origin = null ) {
 	$origin_arg = $origin;
@@ -488,8 +393,6 @@ function is_allowed_http_origin( $origin = null ) {
 	if ( $origin && ! in_array( $origin, get_allowed_http_origins() ) )
 		$origin = '';
 
-<<<<<<< HEAD
-=======
 	/**
 	 * Change the allowed HTTP origin result.
 	 *
@@ -498,7 +401,6 @@ function is_allowed_http_origin( $origin = null ) {
 	 * @param string $origin Result of check for allowed origin.
 	 * @param string $origin_arg original origin string passed into is_allowed_http_origin function.
 	 */
->>>>>>> WPHome/master
 	return apply_filters( 'allowed_http_origin', $origin, $origin_arg );
 }
 
@@ -533,8 +435,6 @@ function send_origin_headers() {
 
 	return false;
 }
-<<<<<<< HEAD
-=======
 
 /**
  * Validate a URL for safe use in the HTTP API.
@@ -650,4 +550,3 @@ function ms_allowed_http_request_hosts( $is_external, $host ) {
 	$queried[ $host ] = (bool) $wpdb->get_var( $wpdb->prepare( "SELECT domain FROM $wpdb->blogs WHERE domain = %s LIMIT 1", $host ) );
 	return $queried[ $host ];
 }
->>>>>>> WPHome/master

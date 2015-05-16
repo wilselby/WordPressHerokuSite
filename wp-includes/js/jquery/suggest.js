@@ -18,11 +18,7 @@
 		var $input, $results, timeout, prevLength, cache, cacheSize;
 
 		$input = $(input).attr("autocomplete", "off");
-<<<<<<< HEAD
-		$results = $(document.createElement("ul"));
-=======
 		$results = $("<ul/>");
->>>>>>> WPHome/master
 
 		timeout = false;		// hold timeout ID for suggestion results to appear
 		prevLength = 0;			// last recorded length of $input.val()
@@ -41,26 +37,7 @@
 			setTimeout(function() { $results.hide() }, 200);
 		});
 
-<<<<<<< HEAD
-
-		// help IE users if possible
-		if ( $.browser.msie ) {
-			try {
-				$results.bgiframe();
-			} catch(e) { }
-		}
-
-		// I really hate browser detection, but I don't see any other way
-		if ($.browser.mozilla)
-			$input.keypress(processKey);	// onkeypress repeats arrow keys in Mozilla/Opera
-		else
-			$input.keydown(processKey);		// onkeydown repeats arrow keys in IE/Safari
-
-
-
-=======
 		$input.keydown(processKey);
->>>>>>> WPHome/master
 
 		function resetPosition() {
 			// requires jquery.dimension plugin
@@ -263,28 +240,17 @@
 			if ($currentResult) {
 				if ( options.multiple ) {
 					if ( $input.val().indexOf(options.multipleSep) != -1 ) {
-<<<<<<< HEAD
-						$currentVal = $input.val().substr( 0, ( $input.val().lastIndexOf(options.multipleSep) + options.multipleSep.length ) );
-					} else {
-						$currentVal = "";
-					}
-					$input.val( $currentVal + $currentResult.text() + options.multipleSep);
-=======
 						$currentVal = $input.val().substr( 0, ( $input.val().lastIndexOf(options.multipleSep) + options.multipleSep.length ) ) + ' ';
 					} else {
 						$currentVal = "";
 					}
 					$input.val( $currentVal + $currentResult.text() + options.multipleSep + ' ' );
->>>>>>> WPHome/master
 					$input.focus();
 				} else {
 					$input.val($currentResult.text());
 				}
 				$results.hide();
-<<<<<<< HEAD
-=======
 				$input.trigger('change');
->>>>>>> WPHome/master
 
 				if (options.onSelect)
 					options.onSelect.apply($input[0]);
@@ -328,11 +294,7 @@
 
 		options = options || {};
 		options.multiple = options.multiple || false;
-<<<<<<< HEAD
-		options.multipleSep = options.multipleSep || ", ";
-=======
 		options.multipleSep = options.multipleSep || ",";
->>>>>>> WPHome/master
 		options.source = source;
 		options.delay = options.delay || 100;
 		options.resultsClass = options.resultsClass || 'ac_results';
@@ -351,8 +313,4 @@
 
 	};
 
-<<<<<<< HEAD
 })(jQuery);
-=======
-})(jQuery);
->>>>>>> WPHome/master

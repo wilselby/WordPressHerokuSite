@@ -1,22 +1,13 @@
 <?php
 /**
-<<<<<<< HEAD
- * Twenty Twelve functions and definitions.
-=======
  * Twenty Twelve functions and definitions
->>>>>>> WPHome/master
  *
  * Sets up the theme and provides some helper functions, which are used
  * in the theme as custom template tags. Others are attached to action and
  * filter hooks in WordPress to change core functionality.
  *
-<<<<<<< HEAD
  * When using a child theme (see http://codex.wordpress.org/Theme_Development and
  * http://codex.wordpress.org/Child_Themes), you can override certain functions
-=======
- * When using a child theme (see https://codex.wordpress.org/Theme_Development and
- * https://codex.wordpress.org/Child_Themes), you can override certain functions
->>>>>>> WPHome/master
  * (those wrapped in a function_exists() call) by defining them first in your child theme's
  * functions.php file. The child theme's functions.php file is included before the parent
  * theme's file, so the child theme functions would be used.
@@ -24,33 +15,20 @@
  * Functions that are not pluggable (not wrapped in function_exists()) are instead attached
  * to a filter or action hook.
  *
-<<<<<<< HEAD
- * For more information on hooks, actions, and filters, see http://codex.wordpress.org/Plugin_API.
-=======
- * For more information on hooks, actions, and filters, @link https://codex.wordpress.org/Plugin_API
->>>>>>> WPHome/master
+ * For more information on hooks, actions, and filters, @link http://codex.wordpress.org/Plugin_API
  *
  * @package WordPress
  * @subpackage Twenty_Twelve
  * @since Twenty Twelve 1.0
  */
 
-<<<<<<< HEAD
-/**
- * Sets up the content width value based on the theme's design and stylesheet.
- */
-=======
 // Set up the content width value based on the theme's design and stylesheet.
->>>>>>> WPHome/master
 if ( ! isset( $content_width ) )
 	$content_width = 625;
 
 /**
-<<<<<<< HEAD
-=======
  * Twenty Twelve setup.
  *
->>>>>>> WPHome/master
  * Sets up theme defaults and registers the various WordPress features that
  * Twenty Twelve supports.
  *
@@ -86,13 +64,8 @@ function twentytwelve_setup() {
 	register_nav_menu( 'primary', __( 'Primary Menu', 'twentytwelve' ) );
 
 	/*
-<<<<<<< HEAD
-	 * This theme supports custom background color and image, and here
-	 * we also set up the default background color.
-=======
 	 * This theme supports custom background color and image,
 	 * and here we also set up the default background color.
->>>>>>> WPHome/master
 	 */
 	add_theme_support( 'custom-background', array(
 		'default-color' => 'e6e6e6',
@@ -105,56 +78,11 @@ function twentytwelve_setup() {
 add_action( 'after_setup_theme', 'twentytwelve_setup' );
 
 /**
-<<<<<<< HEAD
- * Adds support for a custom header image.
-=======
  * Add support for a custom header image.
->>>>>>> WPHome/master
  */
 require( get_template_directory() . '/inc/custom-header.php' );
 
 /**
-<<<<<<< HEAD
- * Enqueues scripts and styles for front-end.
- *
- * @since Twenty Twelve 1.0
- */
-function twentytwelve_scripts_styles() {
-	global $wp_styles;
-
-	/*
-	 * Adds JavaScript to pages with the comment form to support
-	 * sites with threaded comments (when in use).
-	 */
-	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) )
-		wp_enqueue_script( 'comment-reply' );
-
-	/*
-	 * Adds JavaScript for handling the navigation menu hide-and-show behavior.
-	 */
-	wp_enqueue_script( 'twentytwelve-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '1.0', true );
-
-	/*
-	 * Loads our special font CSS file.
-	 *
-	 * The use of Open Sans by default is localized. For languages that use
-	 * characters not supported by the font, the font can be disabled.
-	 *
-	 * To disable in a child theme, use wp_dequeue_style()
-	 * function mytheme_dequeue_fonts() {
-	 *     wp_dequeue_style( 'twentytwelve-fonts' );
-	 * }
-	 * add_action( 'wp_enqueue_scripts', 'mytheme_dequeue_fonts', 11 );
-	 */
-
-	/* translators: If there are characters in your language that are not supported
-	   by Open Sans, translate this to 'off'. Do not translate into your own language. */
-	if ( 'off' !== _x( 'on', 'Open Sans font: on or off', 'twentytwelve' ) ) {
-		$subsets = 'latin,latin-ext';
-
-		/* translators: To add an additional Open Sans character subset specific to your language, translate
-		   this to 'greek', 'cyrillic' or 'vietnamese'. Do not translate into your own language. */
-=======
  * Return the Google font stylesheet URL if available.
  *
  * The use of Open Sans by default is localized. For languages that use
@@ -176,7 +104,6 @@ function twentytwelve_get_font_url() {
 		/* translators: To add an additional Open Sans character subset specific to your language,
 		 * translate this to 'greek', 'cyrillic' or 'vietnamese'. Do not translate into your own language.
 		 */
->>>>>>> WPHome/master
 		$subset = _x( 'no-subset', 'Open Sans font: add new subset (greek, cyrillic, vietnamese)', 'twentytwelve' );
 
 		if ( 'cyrillic' == $subset )
@@ -191,19 +118,6 @@ function twentytwelve_get_font_url() {
 			'family' => 'Open+Sans:400italic,700italic,400,700',
 			'subset' => $subsets,
 		);
-<<<<<<< HEAD
-		wp_enqueue_style( 'twentytwelve-fonts', add_query_arg( $query_args, "$protocol://fonts.googleapis.com/css" ), array(), null );
-	}
-
-	/*
-	 * Loads our main stylesheet.
-	 */
-	wp_enqueue_style( 'twentytwelve-style', get_stylesheet_uri() );
-
-	/*
-	 * Loads the Internet Explorer specific stylesheet.
-	 */
-=======
 		$font_url = add_query_arg( $query_args, "$protocol://fonts.googleapis.com/css" );
 	}
 
@@ -236,15 +150,12 @@ function twentytwelve_scripts_styles() {
 	wp_enqueue_style( 'twentytwelve-style', get_stylesheet_uri() );
 
 	// Loads the Internet Explorer specific stylesheet.
->>>>>>> WPHome/master
 	wp_enqueue_style( 'twentytwelve-ie', get_template_directory_uri() . '/css/ie.css', array( 'twentytwelve-style' ), '20121010' );
 	$wp_styles->add_data( 'twentytwelve-ie', 'conditional', 'lt IE 9' );
 }
 add_action( 'wp_enqueue_scripts', 'twentytwelve_scripts_styles' );
 
 /**
-<<<<<<< HEAD
-=======
  * Filter TinyMCE CSS path to include Google Fonts.
  *
  * Adds additional stylesheets to the TinyMCE editor if needed.
@@ -274,7 +185,6 @@ add_filter( 'mce_css', 'twentytwelve_mce_css' );
 /**
  * Filter the page title.
  *
->>>>>>> WPHome/master
  * Creates a nicely formatted and more specific title element text
  * for output in head of document, based on current view.
  *
@@ -291,11 +201,7 @@ function twentytwelve_wp_title( $title, $sep ) {
 		return $title;
 
 	// Add the site name.
-<<<<<<< HEAD
-	$title .= get_bloginfo( 'name' );
-=======
 	$title .= get_bloginfo( 'name', 'display' );
->>>>>>> WPHome/master
 
 	// Add the site description for the home/front page.
 	$site_description = get_bloginfo( 'description', 'display' );
@@ -303,11 +209,7 @@ function twentytwelve_wp_title( $title, $sep ) {
 		$title = "$title $sep $site_description";
 
 	// Add a page number if necessary.
-<<<<<<< HEAD
-	if ( $paged >= 2 || $page >= 2 )
-=======
 	if ( ( $paged >= 2 || $page >= 2 ) && ! is_404() )
->>>>>>> WPHome/master
 		$title = "$title $sep " . sprintf( __( 'Page %s', 'twentytwelve' ), max( $paged, $page ) );
 
 	return $title;
@@ -315,11 +217,8 @@ function twentytwelve_wp_title( $title, $sep ) {
 add_filter( 'wp_title', 'twentytwelve_wp_title', 10, 2 );
 
 /**
-<<<<<<< HEAD
-=======
  * Filter the page menu arguments.
  *
->>>>>>> WPHome/master
  * Makes our wp_nav_menu() fallback -- wp_page_menu() -- show a home link.
  *
  * @since Twenty Twelve 1.0
@@ -332,11 +231,8 @@ function twentytwelve_page_menu_args( $args ) {
 add_filter( 'wp_page_menu_args', 'twentytwelve_page_menu_args' );
 
 /**
-<<<<<<< HEAD
-=======
  * Register sidebars.
  *
->>>>>>> WPHome/master
  * Registers our main widget area and the front page widget areas.
  *
  * @since Twenty Twelve 1.0
@@ -383,23 +279,14 @@ if ( ! function_exists( 'twentytwelve_content_nav' ) ) :
 function twentytwelve_content_nav( $html_id ) {
 	global $wp_query;
 
-<<<<<<< HEAD
 	$html_id = esc_attr( $html_id );
 
 	if ( $wp_query->max_num_pages > 1 ) : ?>
 		<nav id="<?php echo $html_id; ?>" class="navigation" role="navigation">
 			<h3 class="assistive-text"><?php _e( 'Post navigation', 'twentytwelve' ); ?></h3>
-			<div class="nav-previous alignleft"><?php next_posts_link( __( '<span class="meta-nav">&larr;</span> Older posts', 'twentytwelve' ) ); ?></div>
-			<div class="nav-next alignright"><?php previous_posts_link( __( 'Newer posts <span class="meta-nav">&rarr;</span>', 'twentytwelve' ) ); ?></div>
-		</nav><!-- #<?php echo $html_id; ?> .navigation -->
-=======
-	if ( $wp_query->max_num_pages > 1 ) : ?>
-		<nav id="<?php echo esc_attr( $html_id ); ?>" class="navigation" role="navigation">
-			<h3 class="assistive-text"><?php _e( 'Post navigation', 'twentytwelve' ); ?></h3>
 			<div class="nav-previous"><?php next_posts_link( __( '<span class="meta-nav">&larr;</span> Older posts', 'twentytwelve' ) ); ?></div>
 			<div class="nav-next"><?php previous_posts_link( __( 'Newer posts <span class="meta-nav">&rarr;</span>', 'twentytwelve' ) ); ?></div>
-		</nav><!-- .navigation -->
->>>>>>> WPHome/master
+		</nav><!-- #<?php echo $html_id; ?> .navigation -->
 	<?php endif;
 }
 endif;
@@ -435,17 +322,10 @@ function twentytwelve_comment( $comment, $args, $depth ) {
 			<header class="comment-meta comment-author vcard">
 				<?php
 					echo get_avatar( $comment, 44 );
-<<<<<<< HEAD
-					printf( '<cite class="fn">%1$s %2$s</cite>',
-						get_comment_author_link(),
-						// If current post author is also comment author, make it known visually.
-						( $comment->user_id === $post->post_author ) ? '<span> ' . __( 'Post author', 'twentytwelve' ) . '</span>' : ''
-=======
 					printf( '<cite><b class="fn">%1$s</b> %2$s</cite>',
 						get_comment_author_link(),
 						// If current post author is also comment author, make it known visually.
 						( $comment->user_id === $post->post_author ) ? '<span>' . __( 'Post author', 'twentytwelve' ) . '</span>' : ''
->>>>>>> WPHome/master
 					);
 					printf( '<a href="%1$s"><time datetime="%2$s">%3$s</time></a>',
 						esc_url( get_comment_link( $comment->comment_ID ) ),
@@ -477,11 +357,8 @@ endif;
 
 if ( ! function_exists( 'twentytwelve_entry_meta' ) ) :
 /**
-<<<<<<< HEAD
-=======
  * Set up post entry meta.
  *
->>>>>>> WPHome/master
  * Prints HTML with meta information for current post: categories, tags, permalink, author, and date.
  *
  * Create your own twentytwelve_entry_meta() to override in a child theme.
@@ -528,11 +405,8 @@ function twentytwelve_entry_meta() {
 endif;
 
 /**
-<<<<<<< HEAD
-=======
  * Extend the default WordPress body classes.
  *
->>>>>>> WPHome/master
  * Extends the default WordPress body class to denote:
  * 1. Using a full-width layout, when no active widgets in the sidebar
  *    or full-width template.
@@ -544,19 +418,12 @@ endif;
  *
  * @since Twenty Twelve 1.0
  *
-<<<<<<< HEAD
- * @param array Existing class values.
-=======
  * @param array $classes Existing class values.
->>>>>>> WPHome/master
  * @return array Filtered class values.
  */
 function twentytwelve_body_class( $classes ) {
 	$background_color = get_background_color();
-<<<<<<< HEAD
-=======
 	$background_image = get_background_image();
->>>>>>> WPHome/master
 
 	if ( ! is_active_sidebar( 'sidebar-1' ) || is_page_template( 'page-templates/full-width.php' ) )
 		$classes[] = 'full-width';
@@ -569,19 +436,12 @@ function twentytwelve_body_class( $classes ) {
 			$classes[] = 'two-sidebars';
 	}
 
-<<<<<<< HEAD
-	if ( empty( $background_color ) )
-		$classes[] = 'custom-background-empty';
-	elseif ( in_array( $background_color, array( 'fff', 'ffffff' ) ) )
-		$classes[] = 'custom-background-white';
-=======
 	if ( empty( $background_image ) ) {
 		if ( empty( $background_color ) )
 			$classes[] = 'custom-background-empty';
 		elseif ( in_array( $background_color, array( 'fff', 'ffffff' ) ) )
 			$classes[] = 'custom-background-white';
 	}
->>>>>>> WPHome/master
 
 	// Enable custom font class only if the font CSS is queued to load.
 	if ( wp_style_is( 'twentytwelve-fonts', 'queue' ) )
@@ -595,11 +455,8 @@ function twentytwelve_body_class( $classes ) {
 add_filter( 'body_class', 'twentytwelve_body_class' );
 
 /**
-<<<<<<< HEAD
-=======
  * Adjust content width in certain contexts.
  *
->>>>>>> WPHome/master
  * Adjusts content_width value for full-width and single image attachment
  * templates, and when there are no active widgets in the sidebar.
  *
@@ -614,18 +471,6 @@ function twentytwelve_content_width() {
 add_action( 'template_redirect', 'twentytwelve_content_width' );
 
 /**
-<<<<<<< HEAD
- * Add postMessage support for site title and description for the Theme Customizer.
- *
- * @since Twenty Twelve 1.0
- *
- * @param WP_Customize_Manager $wp_customize Theme Customizer object.
- * @return void
- */
-function twentytwelve_customize_register( $wp_customize ) {
-	$wp_customize->get_setting( 'blogname' )->transport = 'postMessage';
-	$wp_customize->get_setting( 'blogdescription' )->transport = 'postMessage';
-=======
  * Register postMessage support.
  *
  * Add postMessage support for site title and description for the Customizer.
@@ -638,26 +483,17 @@ function twentytwelve_customize_register( $wp_customize ) {
 	$wp_customize->get_setting( 'blogname' )->transport         = 'postMessage';
 	$wp_customize->get_setting( 'blogdescription' )->transport  = 'postMessage';
 	$wp_customize->get_setting( 'header_textcolor' )->transport = 'postMessage';
->>>>>>> WPHome/master
 }
 add_action( 'customize_register', 'twentytwelve_customize_register' );
 
 /**
-<<<<<<< HEAD
- * Binds JS handlers to make Theme Customizer preview reload changes asynchronously.
-=======
  * Enqueue Javascript postMessage handlers for the Customizer.
  *
  * Binds JS handlers to make the Customizer preview reload changes asynchronously.
->>>>>>> WPHome/master
  *
  * @since Twenty Twelve 1.0
  */
 function twentytwelve_customize_preview_js() {
-<<<<<<< HEAD
-	wp_enqueue_script( 'twentytwelve-customizer', get_template_directory_uri() . '/js/theme-customizer.js', array( 'customize-preview' ), '20120827', true );
-=======
 	wp_enqueue_script( 'twentytwelve-customizer', get_template_directory_uri() . '/js/theme-customizer.js', array( 'customize-preview' ), '20141120', true );
->>>>>>> WPHome/master
 }
 add_action( 'customize_preview_init', 'twentytwelve_customize_preview_js' );

@@ -23,23 +23,8 @@ _deprecated_file( sprintf( __( 'Theme without %1$s' ), basename(__FILE__) ), '3.
 <!-- You can start editing here. -->
 
 <?php if ( have_comments() ) : ?>
-<<<<<<< HEAD
 	<h3 id="comments"><?php	printf( _n( 'One Response to %2$s', '%1$s Responses to %2$s', get_comments_number() ),
 									number_format_i18n( get_comments_number() ), '&#8220;' . get_the_title() . '&#8221;' ); ?></h3>
-=======
-	<h3 id="comments">
-		<?php
-			if ( 1 == get_comments_number() ) {
-				/* translators: %s: post title */
-				printf( __( 'One Response to %s' ),  '&#8220;' . get_the_title() . '&#8221;' );
-			} else {
-				/* translators: 1: number of comments, 2: post title */
-				printf( _n( '%1$s Response to %2$s', '%1$s Responses to %2$s', get_comments_number() ),
-					number_format_i18n( get_comments_number() ),  '&#8220;' . get_the_title() . '&#8221;' );
-			}
-		?>
-	</h3>
->>>>>>> WPHome/master
 
 	<div class="navigation">
 		<div class="alignleft"><?php previous_comments_link() ?></div>
@@ -80,11 +65,7 @@ _deprecated_file( sprintf( __( 'Theme without %1$s' ), basename(__FILE__) ), '3.
 <p><?php printf(__('You must be <a href="%s">logged in</a> to post a comment.'), wp_login_url( get_permalink() )); ?></p>
 <?php else : ?>
 
-<<<<<<< HEAD
-<form action="<?php echo get_option('siteurl'); ?>/wp-comments-post.php" method="post" id="commentform">
-=======
 <form action="<?php echo site_url(); ?>/wp-comments-post.php" method="post" id="commentform">
->>>>>>> WPHome/master
 
 <?php if ( is_user_logged_in() ) : ?>
 
@@ -110,14 +91,10 @@ _deprecated_file( sprintf( __( 'Theme without %1$s' ), basename(__FILE__) ), '3.
 <p><input name="submit" type="submit" id="submit" tabindex="5" value="<?php esc_attr_e('Submit Comment'); ?>" />
 <?php comment_id_fields(); ?>
 </p>
-<<<<<<< HEAD
-<?php do_action('comment_form', $post->ID); ?>
-=======
 <?php
 /** This filter is documented in wp-includes/comment-template.php */
 do_action( 'comment_form', $post->ID );
 ?>
->>>>>>> WPHome/master
 
 </form>
 

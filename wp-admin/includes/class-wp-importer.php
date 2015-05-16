@@ -6,14 +6,9 @@ class WP_Importer {
 	/**
 	 * Class Constructor
 	 *
-<<<<<<< HEAD
 	 * @return void
 	 */
-	function __construct() {}
-=======
-	 */
 	public function __construct() {}
->>>>>>> WPHome/master
 
 	/**
 	 * Returns array with imported permalinks from WordPress database
@@ -21,11 +16,7 @@ class WP_Importer {
 	 * @param string $bid
 	 * @return array
 	 */
-<<<<<<< HEAD
-	function get_imported_posts( $importer_name, $bid ) {
-=======
 	public function get_imported_posts( $importer_name, $bid ) {
->>>>>>> WPHome/master
 		global $wpdb;
 
 		$hashtable = array();
@@ -50,11 +41,7 @@ class WP_Importer {
 			}
 		} while ( count( $results ) == $limit );
 
-<<<<<<< HEAD
-		// unset to save memory
-=======
 		// Unset to save memory.
->>>>>>> WPHome/master
 		unset( $results, $r );
 
 		return $hashtable;
@@ -66,11 +53,7 @@ class WP_Importer {
 	 * @param string $bid
 	 * @return int
 	 */
-<<<<<<< HEAD
-	function count_imported_posts( $importer_name, $bid ) {
-=======
 	public function count_imported_posts( $importer_name, $bid ) {
->>>>>>> WPHome/master
 		global $wpdb;
 
 		$count = 0;
@@ -84,11 +67,7 @@ class WP_Importer {
 		if ( !empty( $result ) )
 			$count = intval( $result[0]->cnt );
 
-<<<<<<< HEAD
-		// unset to save memory
-=======
 		// Unset to save memory.
->>>>>>> WPHome/master
 		unset( $results );
 
 		return $count;
@@ -100,11 +79,7 @@ class WP_Importer {
 	 * @param string $bid
 	 * @return array
 	 */
-<<<<<<< HEAD
-	function get_imported_comments( $bid ) {
-=======
 	public function get_imported_comments( $bid ) {
->>>>>>> WPHome/master
 		global $wpdb;
 
 		$hashtable = array();
@@ -134,21 +109,13 @@ class WP_Importer {
 			}
 		} while ( count( $results ) == $limit );
 
-<<<<<<< HEAD
-		// unset to save memory
-=======
 		// Unset to save memory.
->>>>>>> WPHome/master
 		unset( $results, $r );
 
 		return $hashtable;
 	}
 
-<<<<<<< HEAD
-	function set_blog( $blog_id ) {
-=======
 	public function set_blog( $blog_id ) {
->>>>>>> WPHome/master
 		if ( is_numeric( $blog_id ) ) {
 			$blog_id = (int) $blog_id;
 		} else {
@@ -175,11 +142,7 @@ class WP_Importer {
 		return $blog_id;
 	}
 
-<<<<<<< HEAD
-	function set_user( $user_id ) {
-=======
 	public function set_user( $user_id ) {
->>>>>>> WPHome/master
 		if ( is_numeric( $user_id ) ) {
 			$user_id = (int) $user_id;
 		} else {
@@ -201,11 +164,7 @@ class WP_Importer {
 	 * @param string $b
 	 * @return int
 	 */
-<<<<<<< HEAD
-	function cmpr_strlen( $a, $b ) {
-=======
 	public function cmpr_strlen( $a, $b ) {
->>>>>>> WPHome/master
 		return strlen( $b ) - strlen( $a );
 	}
 
@@ -218,15 +177,9 @@ class WP_Importer {
 	 * @param bool $head
 	 * @return array
 	 */
-<<<<<<< HEAD
-	function get_page( $url, $username = '', $password = '', $head = false ) {
-		// Increase the timeout
-		add_filter( 'http_request_timeout', array( &$this, 'bump_request_timeout' ) );
-=======
 	public function get_page( $url, $username = '', $password = '', $head = false ) {
 		// Increase the timeout
 		add_filter( 'http_request_timeout', array( $this, 'bump_request_timeout' ) );
->>>>>>> WPHome/master
 
 		$headers = array();
 		$args = array();
@@ -237,11 +190,7 @@ class WP_Importer {
 
 		$args['headers'] = $headers;
 
-<<<<<<< HEAD
-		return wp_remote_request( $url, $args );
-=======
 		return wp_safe_remote_request( $url, $args );
->>>>>>> WPHome/master
 	}
 
 	/**
@@ -250,11 +199,7 @@ class WP_Importer {
 	 * @param int $val
 	 * @return int
 	 */
-<<<<<<< HEAD
-	function bump_request_timeout( $val ) {
-=======
 	public function bump_request_timeout( $val ) {
->>>>>>> WPHome/master
 		return 60;
 	}
 
@@ -263,15 +208,9 @@ class WP_Importer {
 	 *
 	 * @return bool
 	 */
-<<<<<<< HEAD
-	function is_user_over_quota() {
-		if ( function_exists( 'upload_is_user_over_quota' ) ) {
-			if ( upload_is_user_over_quota( 1 ) ) {
-=======
 	public function is_user_over_quota() {
 		if ( function_exists( 'upload_is_user_over_quota' ) ) {
-			if ( upload_is_user_over_quota() ) {
->>>>>>> WPHome/master
+			if ( upload_is_user_over_quota( 1 ) ) {
 				echo "Sorry, you have used your upload quota.\n";
 				return true;
 			}
@@ -286,11 +225,7 @@ class WP_Importer {
 	 * @param string $string
 	 * @return string
 	 */
-<<<<<<< HEAD
-	function min_whitespace( $string ) {
-=======
 	public function min_whitespace( $string ) {
->>>>>>> WPHome/master
 		return preg_replace( '|[\r\n\t ]+|', ' ', $string );
 	}
 
@@ -299,11 +234,7 @@ class WP_Importer {
 	 *
 	 * @return void
 	 */
-<<<<<<< HEAD
-	function stop_the_insanity() {
-=======
 	public function stop_the_insanity() {
->>>>>>> WPHome/master
 		global $wpdb, $wp_actions;
 		// Or define( 'WP_IMPORTING', true );
 		$wpdb->queries = array();
@@ -342,22 +273,14 @@ function get_cli_args( $param, $required = false ) {
 			}
 
 			$last_arg = $key;
-<<<<<<< HEAD
 		} else if ( (bool) preg_match( "/^-([a-zA-Z0-9]+)/", $args[$i], $match ) ) {
-=======
-		} elseif ( (bool) preg_match( "/^-([a-zA-Z0-9]+)/", $args[$i], $match ) ) {
->>>>>>> WPHome/master
 			for ( $j = 0, $jl = strlen( $match[1] ); $j < $jl; $j++ ) {
 				$key = $match[1]{$j};
 				$out[$key] = true;
 			}
 
 			$last_arg = $key;
-<<<<<<< HEAD
 		} else if ( $last_arg !== null ) {
-=======
-		} elseif ( $last_arg !== null ) {
->>>>>>> WPHome/master
 			$out[$last_arg] = $args[$i];
 		}
 	}

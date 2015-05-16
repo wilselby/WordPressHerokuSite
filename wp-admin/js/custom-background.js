@@ -1,15 +1,8 @@
-<<<<<<< HEAD
-(function($) {
-	$(document).ready(function() {
-		var bgImage = $("#custom-background-image"),
-			frame;
-=======
 /* global ajaxurl */
 (function($) {
 	$(document).ready(function() {
 		var frame,
 			bgImage = $( '#custom-background-image' );
->>>>>>> WPHome/master
 
 		$('#background-color').wpColorPicker({
 			change: function( event, ui ) {
@@ -79,8 +72,4 @@
 			frame.open();
 		});
 	});
-<<<<<<< HEAD
 })(jQuery);
-=======
-})(jQuery);
->>>>>>> WPHome/master

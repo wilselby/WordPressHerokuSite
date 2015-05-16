@@ -29,21 +29,12 @@ function is_subdomain_install() {
  * Returns array of network plugin files to be included in global scope.
  *
  * The default directory is wp-content/plugins. To change the default directory
-<<<<<<< HEAD
- * manually, define <code>WP_PLUGIN_DIR</code> and <code>WP_PLUGIN_URL</code>
- * in wp-config.php.
- *
- * @access private
- * @since 3.1.0
- * @return array Files to include
-=======
  * manually, define `WP_PLUGIN_DIR` and `WP_PLUGIN_URL` in `wp-config.php`.
  *
  * @access private
  * @since 3.1.0
  *
  * @return array Files to include.
->>>>>>> WPHome/master
  */
 function wp_get_active_network_plugins() {
 	$active_plugins = (array) get_site_option( 'active_sitewide_plugins', array() );
@@ -75,17 +66,6 @@ function wp_get_active_network_plugins() {
  * use the wp-content/blog-deleted.php, blog-inactive.php and
  * blog-suspended.php drop-ins.
  *
-<<<<<<< HEAD
- * @return bool|string Returns true on success, or drop-in file to include.
- */
-function ms_site_check() {
-	global $wpdb;
-
-	$blog = get_blog_details();
-
-	// Allow short-circuiting
-	$check = apply_filters('ms_site_check', null);
-=======
  * @since 3.0.0
  *
  * @return bool|string Returns true on success, or drop-in file to include.
@@ -101,7 +81,6 @@ function ms_site_check() {
 	 * @param bool null Whether to skip the blog status check. Default null.
 	*/
 	$check = apply_filters( 'ms_site_check', null );
->>>>>>> WPHome/master
 	if ( null !== $check )
 		return true;
 
@@ -113,22 +92,14 @@ function ms_site_check() {
 		if ( file_exists( WP_CONTENT_DIR . '/blog-deleted.php' ) )
 			return WP_CONTENT_DIR . '/blog-deleted.php';
 		else
-<<<<<<< HEAD
-			wp_die( __( 'This user has elected to delete their account and the content is no longer available.' ), '', array( 'response' => 410 ) );
-=======
 			wp_die( __( 'This site is no longer available.' ), '', array( 'response' => 410 ) );
->>>>>>> WPHome/master
 	}
 
 	if ( '2' == $blog->deleted ) {
 		if ( file_exists( WP_CONTENT_DIR . '/blog-inactive.php' ) )
 			return WP_CONTENT_DIR . '/blog-inactive.php';
 		else
-<<<<<<< HEAD
-			wp_die( sprintf( __( 'This site has not been activated yet. If you are having problems activating your site, please contact <a href="mailto:%1$s">%1$s</a>.' ), str_replace( '@', ' AT ', get_site_option( 'admin_email', "support@{$current_site->domain}" ) ) ) );
-=======
 			wp_die( sprintf( __( 'This site has not been activated yet. If you are having problems activating your site, please contact <a href="mailto:%1$s">%1$s</a>.' ), str_replace( '@', ' AT ', get_site_option( 'admin_email', 'support@' . get_current_site()->domain ) ) ) );
->>>>>>> WPHome/master
 	}
 
 	if ( $blog->archived == '1' || $blog->spam == '1' ) {
@@ -142,120 +113,6 @@ function ms_site_check() {
 }
 
 /**
-<<<<<<< HEAD
- * Sets current site name.
- *
- * @access private
- * @since 3.0.0
- * @return object $current_site object with site_name
- */
-function get_current_site_name( $current_site ) {
-	global $wpdb;
-
-	$current_site->site_name = wp_cache_get( $current_site->id . ':site_name', 'site-options' );
-	if ( ! $current_site->site_name ) {
-		$current_site->site_name = $wpdb->get_var( $wpdb->prepare( "SELECT meta_value FROM $wpdb->sitemeta WHERE site_id = %d AND meta_key = 'site_name'", $current_site->id ) );
-		if ( ! $current_site->site_name )
-			$current_site->site_name = ucfirst( $current_site->domain );
-		wp_cache_set( $current_site->id . ':site_name', $current_site->site_name, 'site-options' );
-	}
-
-	return $current_site;
-}
-
-/**
- * Sets current_site object.
- *
- * @access private
- * @since 3.0.0
- * @return object $current_site object
- */
-function wpmu_current_site() {
-	global $wpdb, $current_site, $domain, $path, $sites, $cookie_domain;
-
-	if ( empty( $current_site ) )
-		$current_site = new stdClass;
-
-	if ( defined( 'DOMAIN_CURRENT_SITE' ) && defined( 'PATH_CURRENT_SITE' ) ) {
-		$current_site->id = defined( 'SITE_ID_CURRENT_SITE' ) ? SITE_ID_CURRENT_SITE : 1;
-		$current_site->domain = DOMAIN_CURRENT_SITE;
-		$current_site->path   = $path = PATH_CURRENT_SITE;
-		if ( defined( 'BLOG_ID_CURRENT_SITE' ) )
-			$current_site->blog_id = BLOG_ID_CURRENT_SITE;
-		elseif ( defined( 'BLOGID_CURRENT_SITE' ) ) // deprecated.
-			$current_site->blog_id = BLOGID_CURRENT_SITE;
-		if ( DOMAIN_CURRENT_SITE == $domain )
-			$current_site->cookie_domain = $cookie_domain;
-		elseif ( substr( $current_site->domain, 0, 4 ) == 'www.' )
-			$current_site->cookie_domain = substr( $current_site->domain, 4 );
-		else
-			$current_site->cookie_domain = $current_site->domain;
-
-		wp_load_core_site_options( $current_site->id );
-
-		return $current_site;
-	}
-
-	$current_site = wp_cache_get( 'current_site', 'site-options' );
-	if ( $current_site )
-		return $current_site;
-
-	$sites = $wpdb->get_results( "SELECT * FROM $wpdb->site" ); // usually only one site
-	if ( 1 == count( $sites ) ) {
-		$current_site = $sites[0];
-		wp_load_core_site_options( $current_site->id );
-		$path = $current_site->path;
-		$current_site->blog_id = $wpdb->get_var( $wpdb->prepare( "SELECT blog_id FROM $wpdb->blogs WHERE domain = %s AND path = %s", $current_site->domain, $current_site->path ) );
-		$current_site = get_current_site_name( $current_site );
-		if ( substr( $current_site->domain, 0, 4 ) == 'www.' )
-			$current_site->cookie_domain = substr( $current_site->domain, 4 );
-		wp_cache_set( 'current_site', $current_site, 'site-options' );
-		return $current_site;
-	}
-	$path = substr( $_SERVER[ 'REQUEST_URI' ], 0, 1 + strpos( $_SERVER[ 'REQUEST_URI' ], '/', 1 ) );
-
-	if ( $domain == $cookie_domain )
-		$current_site = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM $wpdb->site WHERE domain = %s AND path = %s", $domain, $path ) );
-	else
-		$current_site = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM $wpdb->site WHERE domain IN ( %s, %s ) AND path = %s ORDER BY CHAR_LENGTH( domain ) DESC LIMIT 1", $domain, $cookie_domain, $path ) );
-
-	if ( ! $current_site ) {
-		if ( $domain == $cookie_domain )
-			$current_site = $wpdb->get_row( $wpdb->prepare("SELECT * FROM $wpdb->site WHERE domain = %s AND path='/'", $domain ) );
-		else
-			$current_site = $wpdb->get_row( $wpdb->prepare("SELECT * FROM $wpdb->site WHERE domain IN ( %s, %s ) AND path = '/' ORDER BY CHAR_LENGTH( domain ) DESC LIMIT 1", $domain, $cookie_domain, $path ) );
-	}
-
-	if ( $current_site ) {
-		$path = $current_site->path;
-		$current_site->cookie_domain = $cookie_domain;
-		return $current_site;
-	}
-
-	if ( is_subdomain_install() ) {
-		$sitedomain = substr( $domain, 1 + strpos( $domain, '.' ) );
-		$current_site = $wpdb->get_row( $wpdb->prepare("SELECT * FROM $wpdb->site WHERE domain = %s AND path = %s", $sitedomain, $path) );
-		if ( $current_site ) {
-			$current_site->cookie_domain = $current_site->domain;
-			return $current_site;
-		}
-
-		$current_site = $wpdb->get_row( $wpdb->prepare("SELECT * FROM $wpdb->site WHERE domain = %s AND path='/'", $sitedomain) );
-	}
-
-	if ( $current_site || defined( 'WP_INSTALLING' ) ) {
-		$path = '/';
-		return $current_site;
-	}
-
-	// Still no dice.
-	wp_load_translations_early();
-
-	if ( 1 == count( $sites ) )
-		wp_die( sprintf( __( 'That site does not exist. Please try <a href="%s">%s</a>.' ), 'http://' . $sites[0]->domain . $sites[0]->path ) );
-	else
-		wp_die( __( 'No site defined on this host. If you are the owner of this site, please check <a href="http://codex.wordpress.org/Debugging_a_WordPress_Network">Debugging a WordPress Network</a> for help.' ) );
-=======
  * Retrieve a network object by its domain and path.
  *
  * @since 3.9.0
@@ -451,8 +308,6 @@ function get_site_by_path( $domain, $path, $segments = null ) {
 		$path_segments = array_slice( $path_segments, 0, $segments );
 	}
 
-	$paths = array();
-
 	while ( count( $path_segments ) ) {
 		$paths[] = '/' . implode( '/', $path_segments ) . '/';
 		array_pop( $path_segments );
@@ -525,7 +380,6 @@ function get_site_by_path( $domain, $path, $segments = null ) {
 	}
 
 	return false;
->>>>>>> WPHome/master
 }
 
 /**
@@ -539,52 +393,23 @@ function get_site_by_path( $domain, $path, $segments = null ) {
 function ms_not_installed() {
 	global $wpdb, $domain, $path;
 
-<<<<<<< HEAD
 	wp_load_translations_early();
 
 	$title = __( 'Error establishing a database connection' );
 	$msg  = '<h1>' . $title . '</h1>';
-	if ( ! is_admin() )
-		die( $msg );
-	$msg .= '<p>' . __( 'If your site does not display, please contact the owner of this network.' ) . '';
-	$msg .= ' ' . __( 'If you are the owner of this network please check that MySQL is running properly and all tables are error free.' ) . '</p>';
-	if ( false && !$wpdb->get_var( "SHOW TABLES LIKE '$wpdb->site'" ) )
-		$msg .= '<p>' . sprintf( __( '<strong>Database tables are missing.</strong> This means that MySQL is not running, WordPress was not installed properly, or someone deleted <code>%s</code>. You really should look at your database now.' ), $wpdb->site ) . '</p>';
-	else
-		$msg .= '<p>' . sprintf( __( '<strong>Could not find site <code>%1$s</code>.</strong> Searched for table <code>%2$s</code> in database <code>%3$s</code>. Is that right?' ), rtrim( $domain . $path, '/' ), $wpdb->blogs, DB_NAME ) . '</p>';
-	$msg .= '<p><strong>' . __( 'What do I do now?' ) . '</strong> ';
-	$msg .= __( 'Read the <a target="_blank" href="http://codex.wordpress.org/Debugging_a_WordPress_Network">bug report</a> page. Some of the guidelines there may help you figure out what went wrong.' );
-=======
 	if ( ! is_admin() ) {
-		dead_db();
+		die( $msg );
 	}
-
-	wp_load_translations_early();
-
-	$title = __( 'Error establishing a database connection' );
-
-	$msg  = '<h1>' . $title . '</h1>';
 	$msg .= '<p>' . __( 'If your site does not display, please contact the owner of this network.' ) . '';
 	$msg .= ' ' . __( 'If you are the owner of this network please check that MySQL is running properly and all tables are error free.' ) . '</p>';
 	$query = $wpdb->prepare( "SHOW TABLES LIKE %s", $wpdb->esc_like( $wpdb->site ) );
 	if ( ! $wpdb->get_var( $query ) ) {
-		$msg .= '<p>' . sprintf(
-			/* translators: %s: table name */
-			__( '<strong>Database tables are missing.</strong> This means that MySQL is not running, WordPress was not installed properly, or someone deleted %s. You really should look at your database now.' ),
-			'<code>' . $wpdb->site . '</code>'
-		) . '</p>';
+		$msg .= '<p>' . sprintf( __( '<strong>Database tables are missing.</strong> This means that MySQL is not running, WordPress was not installed properly, or someone deleted <code>%s</code>. You really should look at your database now.' ), $wpdb->site ) . '</p>';
 	} else {
-		$msg .= '<p>' . sprintf(
-			/* translators: 1: site url, 2: table name, 3: database name */
-			__( '<strong>Could not find site %1$s.</strong> Searched for table %2$s in database %3$s. Is that right?' ),
-			'<code>' . rtrim( $domain . $path, '/' ) . '</code>',
-			'<code>' . $wpdb->blogs . '</code>',
-			'<code>' . DB_NAME . '</code>'
-		) . '</p>';
+		$msg .= '<p>' . sprintf( __( '<strong>Could not find site <code>%1$s</code>.</strong> Searched for table <code>%2$s</code> in database <code>%3$s</code>. Is that right?' ), rtrim( $domain . $path, '/' ), $wpdb->blogs, DB_NAME ) . '</p>';
 	}
 	$msg .= '<p><strong>' . __( 'What do I do now?' ) . '</strong> ';
-	$msg .= __( 'Read the <a target="_blank" href="https://codex.wordpress.org/Debugging_a_WordPress_Network">bug report</a> page. Some of the guidelines there may help you figure out what went wrong.' );
->>>>>>> WPHome/master
+	$msg .= __( 'Read the <a target="_blank" href="http://codex.wordpress.org/Debugging_a_WordPress_Network">bug report</a> page. Some of the guidelines there may help you figure out what went wrong.' );
 	$msg .= ' ' . __( 'If you&#8217;re still stuck with this message, then check that your database contains the following tables:' ) . '</p><ul>';
 	foreach ( $wpdb->tables('global') as $t => $table ) {
 		if ( 'sitecategories' == $t )
@@ -593,10 +418,7 @@ function ms_not_installed() {
 	}
 	$msg .= '</ul>';
 
-<<<<<<< HEAD
 	wp_die( $msg, $title );
-=======
-	wp_die( $msg, $title, array( 'response' => 500 ) );
 }
 
 /**
@@ -633,5 +455,4 @@ function wpmu_current_site() {
 	global $current_site;
 	_deprecated_function( __FUNCTION__, '3.9' );
 	return $current_site;
->>>>>>> WPHome/master
 }

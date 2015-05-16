@@ -13,24 +13,12 @@
  * @since 3.0.0
  */
 
-<<<<<<< HEAD
-=======
-// Functions
-add_action( 'update_option_blog_public', 'update_blog_public', 10, 2 );
-add_filter( 'option_users_can_register', 'users_can_register_signup_filter' );
-add_filter( 'site_option_welcome_user_email', 'welcome_user_msg_filter' );
-
->>>>>>> WPHome/master
 // Users
 add_filter( 'wpmu_validate_user_signup', 'signup_nonce_check' );
 add_action( 'init', 'maybe_add_existing_user_to_blog' );
 add_action( 'wpmu_new_user', 'newuser_notify_siteadmin' );
 add_action( 'wpmu_activate_user', 'add_new_user_to_blog', 10, 3 );
-<<<<<<< HEAD
-add_action( 'sanitize_user', 'strtolower' );
-=======
 add_filter( 'sanitize_user', 'strtolower' );
->>>>>>> WPHome/master
 
 // Blogs
 add_filter( 'wpmu_validate_blog_signup', 'signup_nonce_check' );
@@ -46,13 +34,6 @@ add_filter( 'allowed_redirect_hosts', 'redirect_this_site' );
 
 // Administration
 add_filter( 'term_id_filter', 'global_terms', 10, 2 );
-<<<<<<< HEAD
-add_action( 'publish_post', 'update_posts_count' );
-add_action( 'delete_post', '_update_blog_date_on_post_delete' );
-add_action( 'transition_post_status', '_update_blog_date_on_post_publish', 10, 3 );
-add_action( 'admin_init', 'wp_schedule_update_network_counts');
-add_action( 'update_network_counts', 'wp_update_network_counts');
-=======
 add_action( 'delete_post', '_update_posts_count_on_delete' );
 add_action( 'delete_post', '_update_blog_date_on_post_delete' );
 add_action( 'transition_post_status', '_update_blog_date_on_post_publish', 10, 3 );
@@ -66,7 +47,6 @@ foreach ( array( 'user_register', 'deleted_user', 'wpmu_new_user', 'make_spam_us
 foreach ( array( 'make_spam_blog', 'make_ham_blog', 'archive_blog', 'unarchive_blog', 'make_delete_blog', 'make_undelete_blog' ) as $action )
 	add_action( $action, 'wp_maybe_update_network_site_counts' );
 unset( $action );
->>>>>>> WPHome/master
 
 // Files
 add_filter( 'wp_upload_bits', 'upload_is_file_too_big' );
@@ -90,10 +70,6 @@ add_filter( 'force_filtered_html_on_import', '__return_true' );
 remove_filter( 'option_siteurl', '_config_wp_siteurl' );
 remove_filter( 'option_home',    '_config_wp_home'    );
 
-<<<<<<< HEAD
-// If the network upgrade hasn't run yet, assume ms-files.php rewriting is used.
-add_filter( 'default_site_option_ms_files_rewriting', '__return_true' );
-=======
 // Some options changes should trigger blog details refresh.
 add_action( 'update_option_blogname',   'refresh_blog_details', 10, 0 );
 add_action( 'update_option_siteurl',    'refresh_blog_details', 10, 0 );
@@ -104,4 +80,3 @@ add_filter( 'default_site_option_ms_files_rewriting', '__return_true' );
 
 // Whitelist multisite domains for HTTP requests
 add_filter( 'http_request_host_is_external', 'ms_allowed_http_request_hosts', 20, 2 );
->>>>>>> WPHome/master

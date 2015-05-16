@@ -16,12 +16,8 @@ abstract class WP_Image_Editor {
 	protected $size = null;
 	protected $mime_type = null;
 	protected $default_mime_type = 'image/jpeg';
-<<<<<<< HEAD
-	protected $quality = 90;
-=======
 	protected $quality = false;
 	protected $default_quality = 90;
->>>>>>> WPHome/master
 
 	/**
 	 * Each instance handles a single file.
@@ -87,46 +83,28 @@ abstract class WP_Image_Editor {
 	/**
 	 * Resizes current image.
 	 *
-<<<<<<< HEAD
-=======
 	 * At minimum, either a height or width must be provided.
 	 * If one of the two is set to null, the resize will
 	 * maintain aspect ratio according to the provided dimension.
 	 *
->>>>>>> WPHome/master
 	 * @since 3.5.0
 	 * @access public
 	 * @abstract
 	 *
-<<<<<<< HEAD
-	 * @param int $max_w
-	 * @param int $max_h
-	 * @param boolean $crop
-=======
 	 * @param  int|null $max_w Image width.
 	 * @param  int|null $max_h Image height.
 	 * @param  boolean  $crop
->>>>>>> WPHome/master
 	 * @return boolean|WP_Error
 	 */
 	abstract public function resize( $max_w, $max_h, $crop = false );
 
 	/**
-<<<<<<< HEAD
-	 * Processes current image and saves to disk
-	 * multiple sizes from single source.
-=======
 	 * Resize multiple images from a single source.
->>>>>>> WPHome/master
 	 *
 	 * @since 3.5.0
 	 * @access public
 	 * @abstract
 	 *
-<<<<<<< HEAD
-	 * @param array $sizes { {'width'=>int, 'height'=>int, 'crop'=>bool}, ... }
-	 * @return array
-=======
 	 * @param array $sizes {
 	 *     An array of image size arrays. Default sizes are 'small', 'medium', 'large'.
 	 *
@@ -137,7 +115,6 @@ abstract class WP_Image_Editor {
 	 *     }
 	 * }
 	 * @return array An array of resized images metadata by size.
->>>>>>> WPHome/master
 	 */
 	abstract public function multi_resize( $sizes );
 
@@ -148,10 +125,7 @@ abstract class WP_Image_Editor {
 	 * @access public
 	 * @abstract
 	 *
-<<<<<<< HEAD
 	 * @param string|int $src The source file or Attachment ID.
-=======
->>>>>>> WPHome/master
 	 * @param int $src_x The start x position to crop from.
 	 * @param int $src_y The start y position to crop from.
 	 * @param int $src_w The width to crop.
@@ -182,13 +156,8 @@ abstract class WP_Image_Editor {
 	 * @access public
 	 * @abstract
 	 *
-<<<<<<< HEAD
-	 * @param boolean $horz Horizontal Flip
-	 * @param boolean $vert Vertical Flip
-=======
 	 * @param boolean $horz Flip along Horizontal Axis
 	 * @param boolean $vert Flip along Vertical Axis
->>>>>>> WPHome/master
 	 * @return boolean|WP_Error
 	 */
 	abstract public function flip( $horz, $vert );
@@ -225,10 +194,6 @@ abstract class WP_Image_Editor {
 	 *
 	 * @param int $width
 	 * @param int $height
-<<<<<<< HEAD
-=======
-	 * @return true
->>>>>>> WPHome/master
 	 */
 	protected function update_size( $width = null, $height = null ) {
 		$this->size = array(
@@ -239,8 +204,6 @@ abstract class WP_Image_Editor {
 	}
 
 	/**
-<<<<<<< HEAD
-=======
 	 * Gets the Image Compression quality on a 1-100% scale.
 	 *
 	 * @since 4.0.0
@@ -257,21 +220,12 @@ abstract class WP_Image_Editor {
 	}
 
 	/**
->>>>>>> WPHome/master
 	 * Sets Image Compression quality on a 1-100% scale.
 	 *
 	 * @since 3.5.0
 	 * @access public
 	 *
 	 * @param int $quality Compression Quality. Range: [1,100]
-<<<<<<< HEAD
-	 * @return boolean
-	 */
-	public function set_quality( $quality ) {
-		$this->quality = apply_filters( 'wp_editor_set_quality', $quality );
-
-		return ( (bool) $this->quality );
-=======
 	 * @return boolean|WP_Error True if set successfully; WP_Error on failure.
 	 */
 	public function set_quality( $quality = null ) {
@@ -327,7 +281,6 @@ abstract class WP_Image_Editor {
 		} else {
 			return new WP_Error( 'invalid_image_quality', __('Attempted to set image quality outside of the range [1,100].') );
 		}
->>>>>>> WPHome/master
 	}
 
 	/**
@@ -346,12 +299,7 @@ abstract class WP_Image_Editor {
 	 * @return array { filename|null, extension, mime-type }
 	 */
 	protected function get_output_format( $filename = null, $mime_type = null ) {
-<<<<<<< HEAD
-		$new_ext = $file_ext = null;
-		$file_mime = null;
-=======
 		$new_ext = null;
->>>>>>> WPHome/master
 
 		// By default, assume specified type takes priority
 		if ( $mime_type ) {
@@ -378,8 +326,6 @@ abstract class WP_Image_Editor {
 		// Double-check that the mime-type selected is supported by the editor.
 		// If not, choose a default instead.
 		if ( ! $this->supports_mime_type( $mime_type ) ) {
-<<<<<<< HEAD
-=======
 			/**
 			 * Filter default mime type prior to getting the file extension.
 			 *
@@ -389,7 +335,6 @@ abstract class WP_Image_Editor {
 			 *
 			 * @param string $mime_type Mime type string.
 			 */
->>>>>>> WPHome/master
 			$mime_type = apply_filters( 'image_editor_default_mime_type', $this->default_mime_type );
 			$new_ext = $this->get_extension( $mime_type );
 		}
@@ -443,11 +388,7 @@ abstract class WP_Image_Editor {
 	 * @since 3.5.0
 	 * @access public
 	 *
-<<<<<<< HEAD
 	 * @return string suffix
-=======
-	 * @return false|string suffix
->>>>>>> WPHome/master
 	 */
 	public function get_suffix() {
 		if ( ! $this->get_size() )
@@ -468,19 +409,11 @@ abstract class WP_Image_Editor {
 	 * @return boolean
 	 */
 	protected function make_image( $filename, $function, $arguments ) {
-<<<<<<< HEAD
-		$dst_file = $filename;
-
-		if ( $stream = wp_is_stream( $filename ) ) {
-			$filename = null;
-			ob_start();
-=======
 		if ( $stream = wp_is_stream( $filename ) ) {
 			ob_start();
 		} else {
 			// The directory containing the original file may no longer exist when using a replication plugin.
 			wp_mkdir_p( dirname( $filename ) );
->>>>>>> WPHome/master
 		}
 
 		$result = call_user_func_array( $function, $arguments );
@@ -488,11 +421,7 @@ abstract class WP_Image_Editor {
 		if ( $result && $stream ) {
 			$contents = ob_get_contents();
 
-<<<<<<< HEAD
-			$fp = fopen( $dst_file, 'w' );
-=======
 			$fp = fopen( $filename, 'w' );
->>>>>>> WPHome/master
 
 			if ( ! $fp )
 				return false;

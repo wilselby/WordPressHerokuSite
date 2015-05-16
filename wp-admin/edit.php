@@ -7,26 +7,17 @@
  */
 
 /** WordPress Administration Bootstrap */
-<<<<<<< HEAD
-require_once( './admin.php' );
-=======
 require_once( dirname( __FILE__ ) . '/admin.php' );
->>>>>>> WPHome/master
 
 if ( ! $typenow )
 	wp_die( __( 'Invalid post type' ) );
 
-<<<<<<< HEAD
-=======
 if ( 'attachment' === $typenow ) {
 	if ( wp_redirect( admin_url( 'upload.php' ) ) ) {
 		exit;
 	}
 }
 
-global $post_type, $post_type_object;
-
->>>>>>> WPHome/master
 $post_type = $typenow;
 $post_type_object = get_post_type_object( $post_type );
 
@@ -34,11 +25,7 @@ if ( ! $post_type_object )
 	wp_die( __( 'Invalid post type' ) );
 
 if ( ! current_user_can( $post_type_object->cap->edit_posts ) )
-<<<<<<< HEAD
-	wp_die( __( 'Cheatin&#8217; uh?' ) );
-=======
 	wp_die( __( 'Cheatin&#8217; uh?' ), 403 );
->>>>>>> WPHome/master
 
 $wp_list_table = _get_list_table('WP_Posts_List_Table');
 $pagenum = $wp_list_table->get_pagenum();
@@ -67,11 +54,7 @@ $doaction = $wp_list_table->current_action();
 if ( $doaction ) {
 	check_admin_referer('bulk-posts');
 
-<<<<<<< HEAD
-	$sendback = remove_query_arg( array('trashed', 'untrashed', 'deleted', 'ids'), wp_get_referer() );
-=======
 	$sendback = remove_query_arg( array('trashed', 'untrashed', 'deleted', 'locked', 'ids'), wp_get_referer() );
->>>>>>> WPHome/master
 	if ( ! $sendback )
 		$sendback = admin_url( $parent_file );
 	$sendback = add_query_arg( 'paged', $pagenum, $sendback );
@@ -79,18 +62,12 @@ if ( $doaction ) {
 		$sendback = admin_url($post_new_file);
 
 	if ( 'delete_all' == $doaction ) {
-<<<<<<< HEAD
-		$post_status = preg_replace('/[^a-z0-9_-]+/i', '', $_REQUEST['post_status']);
-		if ( get_post_status_object($post_status) ) // Check the post status exists first
-			$post_ids = $wpdb->get_col( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE post_type=%s AND post_status = %s", $post_type, $post_status ) );
-=======
 		// Prepare for deletion of all posts with a specified post status (i.e. Empty trash).
 		$post_status = preg_replace('/[^a-z0-9_-]+/i', '', $_REQUEST['post_status']);
 		// Validate the post status exists.
 		if ( get_post_status_object( $post_status ) ) {
 			$post_ids = $wpdb->get_col( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE post_type=%s AND post_status = %s", $post_type, $post_status ) );
 		}
->>>>>>> WPHome/master
 		$doaction = 'delete';
 	} elseif ( isset( $_REQUEST['media'] ) ) {
 		$post_ids = $_REQUEST['media'];
@@ -107,13 +84,6 @@ if ( $doaction ) {
 
 	switch ( $doaction ) {
 		case 'trash':
-<<<<<<< HEAD
-			$trashed = 0;
-			foreach( (array) $post_ids as $post_id ) {
-				if ( !current_user_can($post_type_object->cap->delete_post, $post_id) )
-					wp_die( __('You are not allowed to move this item to the Trash.') );
-
-=======
 			$trashed = $locked = 0;
 
 			foreach( (array) $post_ids as $post_id ) {
@@ -125,27 +95,18 @@ if ( $doaction ) {
 					continue;
 				}
 
->>>>>>> WPHome/master
 				if ( !wp_trash_post($post_id) )
 					wp_die( __('Error in moving to Trash.') );
 
 				$trashed++;
 			}
-<<<<<<< HEAD
-			$sendback = add_query_arg( array('trashed' => $trashed, 'ids' => join(',', $post_ids) ), $sendback );
-=======
 
 			$sendback = add_query_arg( array('trashed' => $trashed, 'ids' => join(',', $post_ids), 'locked' => $locked ), $sendback );
->>>>>>> WPHome/master
 			break;
 		case 'untrash':
 			$untrashed = 0;
 			foreach( (array) $post_ids as $post_id ) {
-<<<<<<< HEAD
-				if ( !current_user_can($post_type_object->cap->delete_post, $post_id) )
-=======
 				if ( !current_user_can( 'delete_post', $post_id) )
->>>>>>> WPHome/master
 					wp_die( __('You are not allowed to restore this item from the Trash.') );
 
 				if ( !wp_untrash_post($post_id) )
@@ -160,26 +121,15 @@ if ( $doaction ) {
 			foreach( (array) $post_ids as $post_id ) {
 				$post_del = get_post($post_id);
 
-<<<<<<< HEAD
-				if ( !current_user_can($post_type_object->cap->delete_post, $post_id) )
-=======
 				if ( !current_user_can( 'delete_post', $post_id ) )
->>>>>>> WPHome/master
 					wp_die( __('You are not allowed to delete this item.') );
 
 				if ( $post_del->post_type == 'attachment' ) {
 					if ( ! wp_delete_attachment($post_id) )
-<<<<<<< HEAD
-						wp_die( __('Error in deleting...') );
-				} else {
-					if ( !wp_delete_post($post_id) )
-						wp_die( __('Error in deleting...') );
-=======
 						wp_die( __('Error in deleting.') );
 				} else {
 					if ( !wp_delete_post($post_id) )
 						wp_die( __('Error in deleting.') );
->>>>>>> WPHome/master
 				}
 				$deleted++;
 			}
@@ -204,21 +154,14 @@ if ( $doaction ) {
 	wp_redirect($sendback);
 	exit();
 } elseif ( ! empty($_REQUEST['_wp_http_referer']) ) {
-<<<<<<< HEAD
-	 wp_redirect( remove_query_arg( array('_wp_http_referer', '_wpnonce'), stripslashes($_SERVER['REQUEST_URI']) ) );
-=======
 	 wp_redirect( remove_query_arg( array('_wp_http_referer', '_wpnonce'), wp_unslash($_SERVER['REQUEST_URI']) ) );
->>>>>>> WPHome/master
 	 exit;
 }
 
 $wp_list_table->prepare_items();
 
 wp_enqueue_script('inline-edit-post');
-<<<<<<< HEAD
-=======
 wp_enqueue_script('heartbeat');
->>>>>>> WPHome/master
 
 $title = $post_type_object->labels->name;
 
@@ -263,13 +206,8 @@ if ( 'post' == $post_type ) {
 
 	get_current_screen()->set_help_sidebar(
 	'<p><strong>' . __('For more information:') . '</strong></p>' .
-<<<<<<< HEAD
 	'<p>' . __('<a href="http://codex.wordpress.org/Posts_Screen" target="_blank">Documentation on Managing Posts</a>') . '</p>' .
-	'<p>' . __('<a href="http://wordpress.org/support/" target="_blank">Support Forums</a>') . '</p>'
-=======
-	'<p>' . __('<a href="https://codex.wordpress.org/Posts_Screen" target="_blank">Documentation on Managing Posts</a>') . '</p>' .
 	'<p>' . __('<a href="https://wordpress.org/support/" target="_blank">Support Forums</a>') . '</p>'
->>>>>>> WPHome/master
 	);
 
 } elseif ( 'page' == $post_type ) {
@@ -289,29 +227,12 @@ if ( 'post' == $post_type ) {
 
 	get_current_screen()->set_help_sidebar(
 	'<p><strong>' . __('For more information:') . '</strong></p>' .
-<<<<<<< HEAD
 	'<p>' . __('<a href="http://codex.wordpress.org/Pages_Screen" target="_blank">Documentation on Managing Pages</a>') . '</p>' .
-	'<p>' . __('<a href="http://wordpress.org/support/" target="_blank">Support Forums</a>') . '</p>'
-	);
-}
-
-add_screen_option( 'per_page', array( 'label' => $title, 'default' => 20, 'option' => 'edit_' . $post_type . '_per_page' ) );
-
-require_once('./admin-header.php');
-?>
-<div class="wrap">
-<?php screen_icon(); ?>
-<h2><?php
-echo esc_html( $post_type_object->labels->name );
-if ( current_user_can( $post_type_object->cap->create_posts ) )
-	echo ' <a href="' . esc_url( $post_new_file ) . '" class="add-new-h2">' . esc_html( $post_type_object->labels->add_new ) . '</a>';
-=======
-	'<p>' . __('<a href="https://codex.wordpress.org/Pages_Screen" target="_blank">Documentation on Managing Pages</a>') . '</p>' .
 	'<p>' . __('<a href="https://wordpress.org/support/" target="_blank">Support Forums</a>') . '</p>'
 	);
 }
 
-add_screen_option( 'per_page', array( 'default' => 20, 'option' => 'edit_' . $post_type . '_per_page' ) );
+add_screen_option( 'per_page', array( 'label' => $title, 'default' => 20, 'option' => 'edit_' . $post_type . '_per_page' ) );
 
 $bulk_counts = array(
 	'updated'   => isset( $_REQUEST['updated'] )   ? absint( $_REQUEST['updated'] )   : 0,
@@ -324,16 +245,14 @@ $bulk_counts = array(
 $bulk_messages = array();
 $bulk_messages['post'] = array(
 	'updated'   => _n( '%s post updated.', '%s posts updated.', $bulk_counts['updated'] ),
-	'locked'    => ( 1 == $bulk_counts['locked'] ) ? __( '1 post not updated, somebody is editing it.' ) :
-	                   _n( '%s post not updated, somebody is editing it.', '%s posts not updated, somebody is editing them.', $bulk_counts['locked'] ),
+	'locked'    => _n( '%s post not updated, somebody is editing it.', '%s posts not updated, somebody is editing them.', $bulk_counts['locked'] ),
 	'deleted'   => _n( '%s post permanently deleted.', '%s posts permanently deleted.', $bulk_counts['deleted'] ),
 	'trashed'   => _n( '%s post moved to the Trash.', '%s posts moved to the Trash.', $bulk_counts['trashed'] ),
 	'untrashed' => _n( '%s post restored from the Trash.', '%s posts restored from the Trash.', $bulk_counts['untrashed'] ),
 );
 $bulk_messages['page'] = array(
 	'updated'   => _n( '%s page updated.', '%s pages updated.', $bulk_counts['updated'] ),
-	'locked'    => ( 1 == $bulk_counts['locked'] ) ? __( '1 page not updated, somebody is editing it.' ) :
-	                   _n( '%s page not updated, somebody is editing it.', '%s pages not updated, somebody is editing them.', $bulk_counts['locked'] ),
+	'locked'    => _n( '%s page not updated, somebody is editing it.', '%s pages not updated, somebody is editing them.', $bulk_counts['locked'] ),
 	'deleted'   => _n( '%s page permanently deleted.', '%s pages permanently deleted.', $bulk_counts['deleted'] ),
 	'trashed'   => _n( '%s page moved to the Trash.', '%s pages moved to the Trash.', $bulk_counts['trashed'] ),
 	'untrashed' => _n( '%s page restored from the Trash.', '%s pages restored from the Trash.', $bulk_counts['untrashed'] ),
@@ -360,41 +279,10 @@ require_once( ABSPATH . 'wp-admin/admin-header.php' );
 echo esc_html( $post_type_object->labels->name );
 if ( current_user_can( $post_type_object->cap->create_posts ) )
 	echo ' <a href="' . esc_url( admin_url( $post_new_file ) ) . '" class="add-new-h2">' . esc_html( $post_type_object->labels->add_new ) . '</a>';
->>>>>>> WPHome/master
 if ( ! empty( $_REQUEST['s'] ) )
 	printf( ' <span class="subtitle">' . __('Search results for &#8220;%s&#8221;') . '</span>', get_search_query() );
 ?></h2>
 
-<<<<<<< HEAD
-<?php if ( isset( $_REQUEST['locked'] ) || isset( $_REQUEST['updated'] ) || isset( $_REQUEST['deleted'] ) || isset( $_REQUEST['trashed'] ) || isset( $_REQUEST['untrashed'] ) ) {
-	$messages = array();
-?>
-<div id="message" class="updated"><p>
-<?php if ( isset( $_REQUEST['updated'] ) && $updated = absint( $_REQUEST['updated'] ) ) {
-	$messages[] = sprintf( _n( '%s post updated.', '%s posts updated.', $updated ), number_format_i18n( $updated ) );
-}
-
-if ( isset( $_REQUEST['locked'] ) && $locked = absint( $_REQUEST['locked'] ) ) {
-	$messages[] = sprintf( _n( '%s item not updated, somebody is editing it.', '%s items not updated, somebody is editing them.', $locked ), number_format_i18n( $locked ) );
-}
-
-if ( isset( $_REQUEST['deleted'] ) && $deleted = absint( $_REQUEST['deleted'] ) ) {
-	$messages[] = sprintf( _n( 'Item permanently deleted.', '%s items permanently deleted.', $deleted ), number_format_i18n( $deleted ) );
-}
-
-if ( isset( $_REQUEST['trashed'] ) && $trashed = absint( $_REQUEST['trashed'] ) ) {
-	$messages[] = sprintf( _n( 'Item moved to the Trash.', '%s items moved to the Trash.', $trashed ), number_format_i18n( $trashed ) );
-	$ids = isset($_REQUEST['ids']) ? $_REQUEST['ids'] : 0;
-	$messages[] = '<a href="' . esc_url( wp_nonce_url( "edit.php?post_type=$post_type&doaction=undo&action=untrash&ids=$ids", "bulk-posts" ) ) . '">' . __('Undo') . '</a>';
-}
-
-if ( isset( $_REQUEST['untrashed'] ) && $untrashed = absint( $_REQUEST['untrashed'] ) ) {
-	$messages[] = sprintf( _n( 'Item restored from the Trash.', '%s items restored from the Trash.', $untrashed ), number_format_i18n( $untrashed ) );
-}
-
-if ( $messages )
-	echo join( ' ', $messages );
-=======
 <?php
 // If we have a bulk message to issue:
 $messages = array();
@@ -411,25 +299,15 @@ foreach ( $bulk_counts as $message => $count ) {
 }
 
 if ( $messages )
-	echo '<div id="message" class="updated notice is-dismissible"><p>' . join( ' ', $messages ) . '</p></div>';
->>>>>>> WPHome/master
+	echo '<div id="message" class="updated"><p>' . join( ' ', $messages ) . '</p></div>';
 unset( $messages );
 
 $_SERVER['REQUEST_URI'] = remove_query_arg( array( 'locked', 'skipped', 'updated', 'deleted', 'trashed', 'untrashed' ), $_SERVER['REQUEST_URI'] );
 ?>
-<<<<<<< HEAD
-</p></div>
-<?php } ?>
 
 <?php $wp_list_table->views(); ?>
 
 <form id="posts-filter" action="" method="get">
-=======
-
-<?php $wp_list_table->views(); ?>
-
-<form id="posts-filter" method="get">
->>>>>>> WPHome/master
 
 <?php $wp_list_table->search_box( $post_type_object->labels->search_items, 'post' ); ?>
 
@@ -453,8 +331,4 @@ if ( $wp_list_table->has_items() )
 </div>
 
 <?php
-<<<<<<< HEAD
-include('./admin-footer.php');
-=======
 include( ABSPATH . 'wp-admin/admin-footer.php' );
->>>>>>> WPHome/master

@@ -30,11 +30,7 @@
  * USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  * @package IXR
-<<<<<<< HEAD
- * @since 1.5
-=======
  * @since 1.5.0
->>>>>>> WPHome/master
  *
  * @copyright  Incutio Ltd 2010 (http://www.incutio.com)
  * @version    1.7.4 7th September 2010
@@ -47,11 +43,7 @@
  * IXR_Value
  *
  * @package IXR
-<<<<<<< HEAD
- * @since 1.5
-=======
  * @since 1.5.0
->>>>>>> WPHome/master
  */
 class IXR_Value {
     var $data;
@@ -159,11 +151,7 @@ class IXR_Value {
     /**
      * Checks whether or not the supplied array is a struct or not
      *
-<<<<<<< HEAD
-     * @param unknown_type $array
-=======
      * @param array $array
->>>>>>> WPHome/master
      * @return boolean
      */
     function isStruct($array)
@@ -183,11 +171,7 @@ class IXR_Value {
  * IXR_MESSAGE
  *
  * @package IXR
-<<<<<<< HEAD
- * @since 1.5
-=======
  * @since 1.5.0
->>>>>>> WPHome/master
  *
  */
 class IXR_Message
@@ -219,13 +203,6 @@ class IXR_Message
     {
         // first remove the XML declaration
         // merged from WP #10698 - this method avoids the RAM usage of preg_replace on very large messages
-<<<<<<< HEAD
-        $header = preg_replace( '/<\?xml.*?\?'.'>/', '', substr($this->message, 0, 100), 1);
-        $this->message = substr_replace($this->message, $header, 0, 100);
-        if (trim($this->message) == '') {
-            return false;
-        }
-=======
         $header = preg_replace( '/<\?xml.*?\?'.'>/s', '', substr( $this->message, 0, 100 ), 1 );
         $this->message = trim( substr_replace( $this->message, $header, 0, 100 ) );
         if ( '' == $this->message ) {
@@ -264,7 +241,6 @@ class IXR_Message
             return false;
         }
 
->>>>>>> WPHome/master
         $this->_parser = xml_parser_create();
         // Set XML parser to take the case of tags in to account
         xml_parser_set_option($this->_parser, XML_OPTION_CASE_FOLDING, false);
@@ -389,11 +365,7 @@ class IXR_Message
                     $this->_arraystructs[count($this->_arraystructs)-1][] = $value;
                 }
             } else {
-<<<<<<< HEAD
-                // Just add as a paramater
-=======
                 // Just add as a parameter
->>>>>>> WPHome/master
                 $this->params[] = $value;
             }
         }
@@ -405,11 +377,7 @@ class IXR_Message
  * IXR_Server
  *
  * @package IXR
-<<<<<<< HEAD
- * @since 1.5
-=======
  * @since 1.5.0
->>>>>>> WPHome/master
  */
 class IXR_Server
 {
@@ -434,15 +402,7 @@ class IXR_Server
     {
         if (!$data) {
             if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] !== 'POST') {
-<<<<<<< HEAD
             	header('Content-Type: text/plain'); // merged from WP #9093
-=======
-                if ( function_exists( 'status_header' ) ) {
-                    status_header( 405 ); // WP #20986
-                    header( 'Allow: POST' );
-                }
-                header('Content-Type: text/plain'); // merged from WP #9093
->>>>>>> WPHome/master
                 die('XML-RPC server accepts POST requests only.');
             }
 
@@ -498,11 +458,7 @@ EOD;
 
         // Perform the callback and send the response
         if (count($args) == 1) {
-<<<<<<< HEAD
-            // If only one paramater just send that instead of the whole array
-=======
             // If only one parameter just send that instead of the whole array
->>>>>>> WPHome/master
             $args = $args[0];
         }
 
@@ -632,11 +588,7 @@ EOD;
  * IXR_Request
  *
  * @package IXR
-<<<<<<< HEAD
- * @since 1.5
-=======
  * @since 1.5.0
->>>>>>> WPHome/master
  */
 class IXR_Request
 {
@@ -679,11 +631,7 @@ EOD;
  * IXR_Client
  *
  * @package IXR
-<<<<<<< HEAD
- * @since 1.5
-=======
  * @since 1.5.0
->>>>>>> WPHome/master
  *
  */
 class IXR_Client
@@ -714,13 +662,10 @@ class IXR_Client
             if (!$this->path) {
                 $this->path = '/';
             }
-<<<<<<< HEAD
-=======
 
             if ( ! empty( $bits['query'] ) ) {
                 $this->path .= '?' . $bits['query'];
             }
->>>>>>> WPHome/master
         } else {
             $this->server = $server;
             $this->path = $path;
@@ -842,11 +787,7 @@ class IXR_Client
  * IXR_Error
  *
  * @package IXR
-<<<<<<< HEAD
- * @since 1.5
-=======
  * @since 1.5.0
->>>>>>> WPHome/master
  */
 class IXR_Error
 {
@@ -888,11 +829,7 @@ EOD;
  * IXR_Date
  *
  * @package IXR
-<<<<<<< HEAD
- * @since 1.5
-=======
  * @since 1.5.0
->>>>>>> WPHome/master
  */
 class IXR_Date {
     var $year;
@@ -955,11 +892,7 @@ class IXR_Date {
  * IXR_Base64
  *
  * @package IXR
-<<<<<<< HEAD
- * @since 1.5
-=======
  * @since 1.5.0
->>>>>>> WPHome/master
  */
 class IXR_Base64
 {
@@ -980,11 +913,7 @@ class IXR_Base64
  * IXR_IntrospectionServer
  *
  * @package IXR
-<<<<<<< HEAD
- * @since 1.5
-=======
  * @since 1.5.0
->>>>>>> WPHome/master
  */
 class IXR_IntrospectionServer extends IXR_Server
 {
@@ -1147,11 +1076,7 @@ class IXR_IntrospectionServer extends IXR_Server
  * IXR_ClientMulticall
  *
  * @package IXR
-<<<<<<< HEAD
- * @since 1.5
-=======
  * @since 1.5.0
->>>>>>> WPHome/master
  */
 class IXR_ClientMulticall extends IXR_Client
 {

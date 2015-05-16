@@ -1,50 +1,16 @@
 <?php
 /**
-<<<<<<< HEAD
- * BackPress Scripts enqueue.
- *
- * These classes were refactored from the WordPress WP_Scripts and WordPress
- * script enqueue API.
- *
- * @package BackPress
- * @since r74
- */
-
-/**
- * BackPress enqueued dependiences class.
-=======
  * BackPress Scripts enqueue
  *
  * Classes were refactored from the WP_Scripts and WordPress script enqueue API.
  *
  * @since BackPress r74
->>>>>>> WPHome/master
  *
  * @package BackPress
  * @uses _WP_Dependency
  * @since r74
  */
 class WP_Dependencies {
-<<<<<<< HEAD
-	var $registered = array();
-	var $queue = array();
-	var $to_do = array();
-	var $done = array();
-	var $args = array();
-	var $groups = array();
-	var $group = 0;
-
-	/**
-	 * Do the dependencies
-	 *
-	 * Process the items passed to it or the queue. Processes all dependencies.
-	 *
-	 * @param mixed $handles (optional) items to be processed. (void) processes queue, (string) process that item, (array of strings) process those items
-	 * @return array Items that have been processed
-	 */
-	function do_items( $handles = false, $group = false ) {
-		// Print the queue if nothing is passed. If a string is passed, print that script. If an array is passed, print those scripts.
-=======
 	/**
 	 * An array of registered handle objects.
 	 *
@@ -127,16 +93,12 @@ class WP_Dependencies {
 		 * If nothing is passed, print the queue. If a string is passed,
 		 * print that item. If an array is passed, print those items.
 		 */
->>>>>>> WPHome/master
 		$handles = false === $handles ? $this->queue : (array) $handles;
 		$this->all_deps( $handles );
 
 		foreach( $this->to_do as $key => $handle ) {
 			if ( !in_array($handle, $this->done, true) && isset($this->registered[$handle]) ) {
 
-<<<<<<< HEAD
-				if ( ! $this->registered[$handle]->src ) { // Defines a group.
-=======
 				/*
 				 * A single item may alias a set of items, by having dependencies,
 				 * but no source. Queuing the item queues the dependencies.
@@ -147,20 +109,16 @@ class WP_Dependencies {
 				 * The src property is false.
 				 */
 				if ( ! $this->registered[$handle]->src ) {
->>>>>>> WPHome/master
 					$this->done[] = $handle;
 					continue;
 				}
 
-<<<<<<< HEAD
-=======
 				/*
 				 * Attempt to process the item. If successful,
 				 * add the handle to the done array.
 				 *
 				 * Unset the item from the to_do array.
 				 */
->>>>>>> WPHome/master
 				if ( $this->do_item( $handle, $group ) )
 					$this->done[] = $handle;
 
@@ -171,9 +129,6 @@ class WP_Dependencies {
 		return $this->done;
 	}
 
-<<<<<<< HEAD
-	function do_item( $handle ) {
-=======
 	/**
 	 * Process a dependency.
 	 *
@@ -184,22 +139,10 @@ class WP_Dependencies {
 	 * @return bool True on success, false if not set.
 	 */
 	public function do_item( $handle ) {
->>>>>>> WPHome/master
 		return isset($this->registered[$handle]);
 	}
 
 	/**
-<<<<<<< HEAD
-	 * Determines dependencies
-	 *
-	 * Recursively builds array of items to process taking dependencies into account. Does NOT catch infinite loops.
-	 *
-	 *
-	 * @param mixed $handles Accepts (string) dep name or (array of strings) dep names
-	 * @param bool $recursion Used internally when function calls itself
-	 */
-	function all_deps( $handles, $recursion = false, $group = false ) {
-=======
 	 * Determine dependencies.
 	 *
 	 * Recursively builds an array of items to process taking
@@ -214,7 +157,6 @@ class WP_Dependencies {
 	 * @return bool True on success, false on failure.
 	 */
 	public function all_deps( $handles, $recursion = false, $group = false ) {
->>>>>>> WPHome/master
 		if ( !$handles = (array) $handles )
 			return false;
 
@@ -233,15 +175,6 @@ class WP_Dependencies {
 
 			$keep_going = true;
 			if ( !isset($this->registered[$handle]) )
-<<<<<<< HEAD
-				$keep_going = false; // Script doesn't exist
-			elseif ( $this->registered[$handle]->deps && array_diff($this->registered[$handle]->deps, array_keys($this->registered)) )
-				$keep_going = false; // Script requires deps which don't exist (not a necessary check. efficiency?)
-			elseif ( $this->registered[$handle]->deps && !$this->all_deps( $this->registered[$handle]->deps, true, $group ) )
-				$keep_going = false; // Script requires deps which don't exist
-
-			if ( !$keep_going ) { // Either script or its deps don't exist.
-=======
 				$keep_going = false; // Item doesn't exist.
 			elseif ( $this->registered[$handle]->deps && array_diff($this->registered[$handle]->deps, array_keys($this->registered)) )
 				$keep_going = false; // Item requires dependencies that don't exist.
@@ -249,18 +182,13 @@ class WP_Dependencies {
 				$keep_going = false; // Item requires dependencies that don't exist.
 
 			if ( ! $keep_going ) { // Either item or its dependencies don't exist.
->>>>>>> WPHome/master
 				if ( $recursion )
 					return false; // Abort this branch.
 				else
 					continue; // We're at the top level. Move on to the next one.
 			}
 
-<<<<<<< HEAD
-			if ( $queued ) // Already grobbed it and its deps
-=======
 			if ( $queued ) // Already grabbed it and its dependencies.
->>>>>>> WPHome/master
 				continue;
 
 			if ( isset($handle_parts[1]) )
@@ -273,19 +201,6 @@ class WP_Dependencies {
 	}
 
 	/**
-<<<<<<< HEAD
-	 * Adds item
-	 *
-	 * Adds the item only if no item of that name already exists
-	 *
-	 * @param string $handle Script name
-	 * @param string $src Script url
-	 * @param array $deps (optional) Array of script names on which this script depends
-	 * @param string $ver (optional) Script version (used for cache busting)
-	 * @return array Hierarchical array of dependencies
-	 */
-	function add( $handle, $src, $deps = array(), $ver = false, $args = null ) {
-=======
 	 * Register an item.
 	 *
 	 * Registers the item if no item of that name already exists.
@@ -298,10 +213,9 @@ class WP_Dependencies {
 	 * @param array  $deps   Optional. An array of item handle strings on which this item depends.
 	 * @param string $ver    Optional. Version (used for cache busting).
 	 * @param mixed  $args   Optional. Custom property of the item. NOT the class property $args. Examples: $media, $in_footer.
-	 * @return bool Whether the item has been registered. True on success, false on failure.
+	 * @return bool True on success, false on failure.
 	 */
 	public function add( $handle, $src, $deps = array(), $ver = false, $args = null ) {
->>>>>>> WPHome/master
 		if ( isset($this->registered[$handle]) )
 			return false;
 		$this->registered[$handle] = new _WP_Dependency( $handle, $src, $deps, $ver, $args );
@@ -309,18 +223,6 @@ class WP_Dependencies {
 	}
 
 	/**
-<<<<<<< HEAD
-	 * Adds extra data
-	 *
-	 * Adds data only if script has already been added.
-	 *
-	 * @param string $handle Script name
-	 * @param string $key
-	 * @param mixed $value
-	 * @return bool success
-	 */
-	function add_data( $handle, $key, $value ) {
-=======
 	 * Add extra item data.
 	 *
 	 * Adds data to a registered item.
@@ -334,7 +236,6 @@ class WP_Dependencies {
 	 * @return bool True on success, false on failure.
 	 */
 	public function add_data( $handle, $key, $value ) {
->>>>>>> WPHome/master
 		if ( !isset( $this->registered[$handle] ) )
 			return false;
 
@@ -342,19 +243,6 @@ class WP_Dependencies {
 	}
 
 	/**
-<<<<<<< HEAD
-	 * Get extra data
-	 *
-	 * Gets data associated with a certain handle.
-	 *
-	 * @since WP 3.3
-	 *
-	 * @param string $handle Script name
-	 * @param string $key
-	 * @return mixed
-	 */
-	function get_data( $handle, $key ) {
-=======
 	 * Get extra item data.
 	 *
 	 * Gets data associated with a registered item.
@@ -367,7 +255,6 @@ class WP_Dependencies {
 	 * @return mixed Extra item data (string), false otherwise.
 	 */
 	public function get_data( $handle, $key ) {
->>>>>>> WPHome/master
 		if ( !isset( $this->registered[$handle] ) )
 			return false;
 
@@ -377,9 +264,6 @@ class WP_Dependencies {
 		return $this->registered[$handle]->extra[$key];
 	}
 
-<<<<<<< HEAD
-	function remove( $handles ) {
-=======
 	/**
 	 * Un-register an item or items.
 	 *
@@ -390,14 +274,10 @@ class WP_Dependencies {
 	 * @return void
 	 */
 	public function remove( $handles ) {
->>>>>>> WPHome/master
 		foreach ( (array) $handles as $handle )
 			unset($this->registered[$handle]);
 	}
 
-<<<<<<< HEAD
-	function enqueue( $handles ) {
-=======
 	/**
 	 * Queue an item or items.
 	 *
@@ -412,7 +292,6 @@ class WP_Dependencies {
 	 * @param mixed $handles Item handle and argument (string) or item handles and arguments (array of strings).
 	 */
 	public function enqueue( $handles ) {
->>>>>>> WPHome/master
 		foreach ( (array) $handles as $handle ) {
 			$handle = explode('?', $handle);
 			if ( !in_array($handle[0], $this->queue) && isset($this->registered[$handle[0]]) ) {
@@ -423,9 +302,6 @@ class WP_Dependencies {
 		}
 	}
 
-<<<<<<< HEAD
-	function dequeue( $handles ) {
-=======
 	/**
 	 * Dequeue an item or items.
 	 *
@@ -438,7 +314,6 @@ class WP_Dependencies {
 	 * @param mixed $handles Item handle and argument (string) or item handles and arguments (array of strings).
 	 */
 	public function dequeue( $handles ) {
->>>>>>> WPHome/master
 		foreach ( (array) $handles as $handle ) {
 			$handle = explode('?', $handle);
 			$key = array_search($handle[0], $this->queue);
@@ -449,10 +324,6 @@ class WP_Dependencies {
 		}
 	}
 
-<<<<<<< HEAD
-
-	function query( $handle, $list = 'registered' ) {
-=======
 	/**
 	 * Recursively search the passed dependency tree for $handle
 	 *
@@ -489,7 +360,6 @@ class WP_Dependencies {
 	 * @return bool Found, or object Item data.
 	 */
 	public function query( $handle, $list = 'registered' ) {
->>>>>>> WPHome/master
 		switch ( $list ) {
 			case 'registered' :
 			case 'scripts': // back compat
@@ -499,14 +369,10 @@ class WP_Dependencies {
 
 			case 'enqueued' :
 			case 'queue' :
-<<<<<<< HEAD
-				return in_array( $handle, $this->queue );
-=======
 				if ( in_array( $handle, $this->queue ) ) {
 					return true;
 				}
 				return $this->recurse_deps( $this->queue, $handle );
->>>>>>> WPHome/master
 
 			case 'to_do' :
 			case 'to_print': // back compat
@@ -519,9 +385,6 @@ class WP_Dependencies {
 		return false;
 	}
 
-<<<<<<< HEAD
-	function set_group( $handle, $recursion, $group ) {
-=======
 	/**
 	 * Set item group, unless already in a lower group.
 	 *
@@ -534,7 +397,6 @@ class WP_Dependencies {
 	 * @return bool Not already in the group or a lower group
 	 */
 	public function set_group( $handle, $recursion, $group ) {
->>>>>>> WPHome/master
 		$group = (int) $group;
 
 		if ( $recursion )
@@ -549,20 +411,6 @@ class WP_Dependencies {
 		return true;
 	}
 
-<<<<<<< HEAD
-}
-
-class _WP_Dependency {
-	var $handle;
-	var $src;
-	var $deps = array();
-	var $ver = false;
-	var $args = null;
-
-	var $extra = array();
-
-	function __construct() {
-=======
 } // WP_Dependencies
 
 /**
@@ -636,15 +484,11 @@ class _WP_Dependency {
 	 * @since 2.6.0
 	 */
 	public function __construct() {
->>>>>>> WPHome/master
 		@list( $this->handle, $this->src, $this->deps, $this->ver, $this->args ) = func_get_args();
 		if ( ! is_array($this->deps) )
 			$this->deps = array();
 	}
 
-<<<<<<< HEAD
-	function add_data( $name, $data ) {
-=======
 	/**
 	 * Add handle data.
 	 *
@@ -656,15 +500,10 @@ class _WP_Dependency {
 	 * @return bool False if not scalar, true otherwise.
 	 */
 	public function add_data( $name, $data ) {
->>>>>>> WPHome/master
 		if ( !is_scalar($name) )
 			return false;
 		$this->extra[$name] = $data;
 		return true;
 	}
-<<<<<<< HEAD
-}
-=======
 
 } // _WP_Dependencies
->>>>>>> WPHome/master

@@ -1,10 +1,6 @@
 <?php
 /**
-<<<<<<< HEAD
- * The template for displaying Search Results pages.
-=======
  * The template for displaying Search Results pages
->>>>>>> WPHome/master
  *
  * @package WordPress
  * @subpackage Twenty_Twelve

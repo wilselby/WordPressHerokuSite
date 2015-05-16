@@ -20,11 +20,7 @@ jQuery(document).ready(function(){
 
 //add thickbox to href & area elements that have a class of .thickbox
 function tb_init(domChunk){
-<<<<<<< HEAD
-	jQuery(domChunk).live('click', tb_click);
-=======
 	jQuery('body').on('click', domChunk, tb_click);
->>>>>>> WPHome/master
 }
 
 function tb_click(){
@@ -50,10 +46,7 @@ function tb_show(caption, url, imageGroup) {//function called when the user clic
 			if(document.getElementById("TB_overlay") === null){
 				jQuery("body").append("<div id='TB_overlay'></div><div id='TB_window'></div>");
 				jQuery("#TB_overlay").click(tb_remove);
-<<<<<<< HEAD
-=======
 				jQuery( 'body' ).addClass( 'modal-open' );
->>>>>>> WPHome/master
 			}
 		}
 
@@ -112,11 +105,7 @@ function tb_show(caption, url, imageGroup) {//function called when the user clic
 			imgPreloader.onload = function(){
 			imgPreloader.onload = null;
 
-<<<<<<< HEAD
-			// Resizing large images - orginal by Christian Montoya edited by me.
-=======
 			// Resizing large images - original by Christian Montoya edited by me.
->>>>>>> WPHome/master
 			var pagesize = tb_getPageSize();
 			var x = pagesize[0] - 150;
 			var y = pagesize[1] - 150;
@@ -141,11 +130,7 @@ function tb_show(caption, url, imageGroup) {//function called when the user clic
 
 			TB_WIDTH = imageWidth + 30;
 			TB_HEIGHT = imageHeight + 60;
-<<<<<<< HEAD
-			jQuery("#TB_window").append("<a href='' id='TB_ImageOff' title='"+thickboxL10n.close+"'><img id='TB_Image' src='"+url+"' width='"+imageWidth+"' height='"+imageHeight+"' alt='"+caption+"'/></a>" + "<div id='TB_caption'>"+caption+"<div id='TB_secondLine'>" + TB_imageCount + TB_PrevHTML + TB_NextHTML + "</div></div><div id='TB_closeWindow'><a href='#' id='TB_closeWindowButton' title='"+thickboxL10n.close+"'><div class='tb-close-icon'></div></a></div>");
-=======
 			jQuery("#TB_window").append("<a href='' id='TB_ImageOff'><span class='screen-reader-text'>"+thickboxL10n.close+"</span><img id='TB_Image' src='"+url+"' width='"+imageWidth+"' height='"+imageHeight+"' alt='"+caption+"'/></a>" + "<div id='TB_caption'>"+caption+"<div id='TB_secondLine'>" + TB_imageCount + TB_PrevHTML + TB_NextHTML + "</div></div><div id='TB_closeWindow'><a href='#' id='TB_closeWindowButton'><span class='screen-reader-text'>"+thickboxL10n.close+"</span><div class='tb-close-icon'></div></a></div>");
->>>>>>> WPHome/master
 
 			jQuery("#TB_closeWindowButton").click(tb_remove);
 
@@ -172,16 +157,8 @@ function tb_show(caption, url, imageGroup) {//function called when the user clic
 			}
 
 			jQuery(document).bind('keydown.thickbox', function(e){
-<<<<<<< HEAD
-				e.stopImmediatePropagation();
-
-				if ( e.which == 27 ){ // close
-					if ( ! jQuery(document).triggerHandler( 'wp_CloseOnEscape', [{ event: e, what: 'thickbox', cb: tb_remove }] ) )
-						tb_remove();
-=======
 				if ( e.which == 27 ){ // close
 					tb_remove();
->>>>>>> WPHome/master
 
 				} else if ( e.which == 190 ){ // display previous image
 					if(!(TB_NextHTML == "")){
@@ -209,13 +186,8 @@ function tb_show(caption, url, imageGroup) {//function called when the user clic
 			var queryString = url.replace(/^[^\?]+\??/,'');
 			var params = tb_parseQuery( queryString );
 
-<<<<<<< HEAD
-			TB_WIDTH = (params['width']*1) + 30 || 630; //defaults to 630 if no paramaters were added to URL
-			TB_HEIGHT = (params['height']*1) + 40 || 440; //defaults to 440 if no paramaters were added to URL
-=======
 			TB_WIDTH = (params['width']*1) + 30 || 630; //defaults to 630 if no parameters were added to URL
 			TB_HEIGHT = (params['height']*1) + 40 || 440; //defaults to 440 if no parameters were added to URL
->>>>>>> WPHome/master
 			ajaxContentW = TB_WIDTH - 30;
 			ajaxContentH = TB_HEIGHT - 45;
 
@@ -223,11 +195,7 @@ function tb_show(caption, url, imageGroup) {//function called when the user clic
 					urlNoQuery = url.split('TB_');
 					jQuery("#TB_iframeContent").remove();
 					if(params['modal'] != "true"){//iframe no modal
-<<<<<<< HEAD
-						jQuery("#TB_window").append("<div id='TB_title'><div id='TB_ajaxWindowTitle'>"+caption+"</div><div id='TB_closeAjaxWindow'><a href='#' id='TB_closeWindowButton' title='"+thickboxL10n.close+"'><div class='tb-close-icon'></div></a></div></div><iframe frameborder='0' hspace='0' src='"+urlNoQuery[0]+"' id='TB_iframeContent' name='TB_iframeContent"+Math.round(Math.random()*1000)+"' onload='tb_showIframe()' style='width:"+(ajaxContentW + 29)+"px;height:"+(ajaxContentH + 17)+"px;' >"+thickboxL10n.noiframes+"</iframe>");
-=======
 						jQuery("#TB_window").append("<div id='TB_title'><div id='TB_ajaxWindowTitle'>"+caption+"</div><div id='TB_closeAjaxWindow'><a href='#' id='TB_closeWindowButton'><span class='screen-reader-text'>"+thickboxL10n.close+"</span><div class='tb-close-icon'></div></a></div></div><iframe frameborder='0' hspace='0' src='"+urlNoQuery[0]+"' id='TB_iframeContent' name='TB_iframeContent"+Math.round(Math.random()*1000)+"' onload='tb_showIframe()' style='width:"+(ajaxContentW + 29)+"px;height:"+(ajaxContentH + 17)+"px;' >"+thickboxL10n.noiframes+"</iframe>");
->>>>>>> WPHome/master
 					}else{//iframe modal
 					jQuery("#TB_overlay").unbind();
 						jQuery("#TB_window").append("<iframe frameborder='0' hspace='0' src='"+urlNoQuery[0]+"' id='TB_iframeContent' name='TB_iframeContent"+Math.round(Math.random()*1000)+"' onload='tb_showIframe()' style='width:"+(ajaxContentW + 29)+"px;height:"+(ajaxContentH + 17)+"px;'>"+thickboxL10n.noiframes+"</iframe>");
@@ -260,21 +228,10 @@ function tb_show(caption, url, imageGroup) {//function called when the user clic
 					jQuery("#TB_window").css({'visibility':'visible'});
 				}else if(url.indexOf('TB_iframe') != -1){
 					tb_position();
-<<<<<<< HEAD
-					if(jQuery.browser.safari){//safari needs help because it will not fire iframe onload
-						jQuery("#TB_load").remove();
-						jQuery("#TB_window").css({'visibility':'visible'});
-					}
-				}else{
-					jQuery("#TB_ajaxContent").load(url += "&random=" + (new Date().getTime()),function(){//to do a post change this load method
-=======
 					jQuery("#TB_load").remove();
 					jQuery("#TB_window").css({'visibility':'visible'});
 				}else{
-					var load_url = url;
-					load_url += -1 === url.indexOf('?') ? '?' : '&';
-					jQuery("#TB_ajaxContent").load(load_url += "random=" + (new Date().getTime()),function(){//to do a post change this load method
->>>>>>> WPHome/master
+					jQuery("#TB_ajaxContent").load(url += "&random=" + (new Date().getTime()),function(){//to do a post change this load method
 						tb_position();
 						jQuery("#TB_load").remove();
 						tb_init("#TB_ajaxContent a.thickbox");
@@ -285,19 +242,9 @@ function tb_show(caption, url, imageGroup) {//function called when the user clic
 		}
 
 		if(!params['modal']){
-<<<<<<< HEAD
-			jQuery(document).bind('keyup.thickbox', function(e){
-
-				if ( e.which == 27 ){ // close
-					e.stopImmediatePropagation();
-					if ( ! jQuery(document).triggerHandler( 'wp_CloseOnEscape', [{ event: e, what: 'thickbox', cb: tb_remove }] ) )
-						tb_remove();
-
-=======
 			jQuery(document).bind('keydown.thickbox', function(e){
 				if ( e.which == 27 ){ // close
 					tb_remove();
->>>>>>> WPHome/master
 					return false;
 				}
 			});
@@ -318,10 +265,7 @@ function tb_remove() {
  	jQuery("#TB_imageOff").unbind("click");
 	jQuery("#TB_closeWindowButton").unbind("click");
 	jQuery("#TB_window").fadeOut("fast",function(){jQuery('#TB_window,#TB_overlay,#TB_HideSelect').trigger("tb_unload").unbind().remove();});
-<<<<<<< HEAD
-=======
 	jQuery( 'body' ).removeClass( 'modal-open' );
->>>>>>> WPHome/master
 	jQuery("#TB_load").remove();
 	if (typeof document.body.style.maxHeight == "undefined") {//if IE 6
 		jQuery("body","html").css({height: "auto", width: "auto"});

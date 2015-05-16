@@ -15,23 +15,11 @@
  * For the parameter, if the file is called "header-special.php" then specify
  * "special".
  *
-<<<<<<< HEAD
- * @uses locate_template()
  * @since 1.5.0
- * @uses do_action() Calls 'get_header' action.
-=======
- * @since 1.5.0
->>>>>>> WPHome/master
  *
  * @param string $name The name of the specialised header.
  */
 function get_header( $name = null ) {
-<<<<<<< HEAD
-	do_action( 'get_header', $name );
-
-	$templates = array();
-	if ( isset($name) )
-=======
 	/**
 	 * Fires before the header template file is loaded.
 	 *
@@ -49,7 +37,6 @@ function get_header( $name = null ) {
 	$templates = array();
 	$name = (string) $name;
 	if ( '' !== $name )
->>>>>>> WPHome/master
 		$templates[] = "header-{$name}.php";
 
 	$templates[] = 'header.php';
@@ -68,23 +55,11 @@ function get_header( $name = null ) {
  * For the parameter, if the file is called "footer-special.php" then specify
  * "special".
  *
-<<<<<<< HEAD
- * @uses locate_template()
  * @since 1.5.0
- * @uses do_action() Calls 'get_footer' action.
-=======
- * @since 1.5.0
->>>>>>> WPHome/master
  *
  * @param string $name The name of the specialised footer.
  */
 function get_footer( $name = null ) {
-<<<<<<< HEAD
-	do_action( 'get_footer', $name );
-
-	$templates = array();
-	if ( isset($name) )
-=======
 	/**
 	 * Fires before the footer template file is loaded.
 	 *
@@ -102,7 +77,6 @@ function get_footer( $name = null ) {
 	$templates = array();
 	$name = (string) $name;
 	if ( '' !== $name )
->>>>>>> WPHome/master
 		$templates[] = "footer-{$name}.php";
 
 	$templates[] = 'footer.php';
@@ -121,23 +95,11 @@ function get_footer( $name = null ) {
  * For the parameter, if the file is called "sidebar-special.php" then specify
  * "special".
  *
-<<<<<<< HEAD
- * @uses locate_template()
  * @since 1.5.0
- * @uses do_action() Calls 'get_sidebar' action.
-=======
- * @since 1.5.0
->>>>>>> WPHome/master
  *
  * @param string $name The name of the specialised sidebar.
  */
 function get_sidebar( $name = null ) {
-<<<<<<< HEAD
-	do_action( 'get_sidebar', $name );
-
-	$templates = array();
-	if ( isset($name) )
-=======
 	/**
 	 * Fires before the sidebar template file is loaded.
 	 *
@@ -155,7 +117,6 @@ function get_sidebar( $name = null ) {
 	$templates = array();
 	$name = (string) $name;
 	if ( '' !== $name )
->>>>>>> WPHome/master
 		$templates[] = "sidebar-{$name}.php";
 
 	$templates[] = 'sidebar.php';
@@ -181,24 +142,12 @@ function get_sidebar( $name = null ) {
  * For the $name parameter, if the file is called "{slug}-special.php" then specify
  * "special".
  *
-<<<<<<< HEAD
- * @uses locate_template()
  * @since 3.0.0
- * @uses do_action() Calls 'get_template_part_{$slug}' action.
-=======
- * @since 3.0.0
->>>>>>> WPHome/master
  *
  * @param string $slug The slug name for the generic template.
  * @param string $name The name of the specialised template.
  */
 function get_template_part( $slug, $name = null ) {
-<<<<<<< HEAD
-	do_action( "get_template_part_{$slug}", $slug, $name );
-
-	$templates = array();
-	if ( isset($name) )
-=======
 	/**
 	 * Fires before the specified template part file is loaded.
 	 *
@@ -215,7 +164,6 @@ function get_template_part( $slug, $name = null ) {
 	$templates = array();
 	$name = (string) $name;
 	if ( '' !== $name )
->>>>>>> WPHome/master
 		$templates[] = "{$slug}-{$name}.php";
 
 	$templates[] = "{$slug}.php";
@@ -236,40 +184,11 @@ function get_template_part( $slug, $name = null ) {
  * form into the sidebar and also by the search widget in WordPress.
  *
  * There is also an action that is called whenever the function is run called,
-<<<<<<< HEAD
- * 'get_search_form'. This can be useful for outputting JavaScript that the
-=======
  * 'pre_get_search_form'. This can be useful for outputting JavaScript that the
->>>>>>> WPHome/master
  * search relies on or various formatting that applies to the beginning of the
  * search. To give a few examples of what it can be used for.
  *
  * @since 2.7.0
-<<<<<<< HEAD
- * @param boolean $echo Default to echo and not return the form.
- * @return string|null String when retrieving, null when displaying or if searchform.php exists.
- */
-function get_search_form($echo = true) {
-	do_action( 'get_search_form' );
-
-	$search_form_template = locate_template('searchform.php');
-	if ( '' != $search_form_template ) {
-		require($search_form_template);
-		return;
-	}
-
-	$form = '<form role="search" method="get" id="searchform" action="' . esc_url( home_url( '/' ) ) . '" >
-	<div><label class="screen-reader-text" for="s">' . __('Search for:') . '</label>
-	<input type="text" value="' . get_search_query() . '" name="s" id="s" />
-	<input type="submit" id="searchsubmit" value="'. esc_attr__('Search') .'" />
-	</div>
-	</form>';
-
-	if ( $echo )
-		echo apply_filters('get_search_form', $form);
-	else
-		return apply_filters('get_search_form', $form);
-=======
  *
  * @param boolean $echo Default to echo and not return the form.
  * @return string|null String when retrieving, null when displaying or if searchform.php exists.
@@ -338,7 +257,6 @@ function get_search_form( $echo = true ) {
 		echo $result;
 	else
 		return $result;
->>>>>>> WPHome/master
 }
 
 /**
@@ -348,10 +266,6 @@ function get_search_form( $echo = true ) {
  * or log out depending on whether they are currently logged in.
  *
  * @since 1.5.0
-<<<<<<< HEAD
- * @uses apply_filters() Calls 'loginout' hook on HTML link content.
-=======
->>>>>>> WPHome/master
  *
  * @param string $redirect Optional path to redirect to on login/logout.
  * @param boolean $echo Default to echo and not return the link.
@@ -363,12 +277,6 @@ function wp_loginout($redirect = '', $echo = true) {
 	else
 		$link = '<a href="' . esc_url( wp_logout_url($redirect) ) . '">' . __('Log out') . '</a>';
 
-<<<<<<< HEAD
-	if ( $echo )
-		echo apply_filters('loginout', $link);
-	else
-		return apply_filters('loginout', $link);
-=======
 	if ( $echo ) {
 		/**
 		 * Filter the HTML output for the Log In/Log Out link.
@@ -382,24 +290,14 @@ function wp_loginout($redirect = '', $echo = true) {
 		/** This filter is documented in wp-includes/general-template.php */
 		return apply_filters( 'loginout', $link );
 	}
->>>>>>> WPHome/master
 }
 
 /**
  * Returns the Log Out URL.
  *
-<<<<<<< HEAD
- * Returns the URL that allows the user to log out of the site
- *
- * @since 2.7.0
- * @uses wp_nonce_url() To protect against CSRF
- * @uses site_url() To generate the log in URL
- * @uses apply_filters() calls 'logout_url' hook on final logout url
-=======
  * Returns the URL that allows the user to log out of the site.
  *
  * @since 2.7.0
->>>>>>> WPHome/master
  *
  * @param string $redirect Path to redirect to on logout.
  * @return string A log out URL.
@@ -413,9 +311,6 @@ function wp_logout_url($redirect = '') {
 	$logout_url = add_query_arg($args, site_url('wp-login.php', 'login'));
 	$logout_url = wp_nonce_url( $logout_url, 'log-out' );
 
-<<<<<<< HEAD
-	return apply_filters('logout_url', $logout_url, $redirect);
-=======
 	/**
 	 * Filter the logout URL.
 	 *
@@ -425,23 +320,14 @@ function wp_logout_url($redirect = '') {
 	 * @param string $redirect   Path to redirect to on logout.
 	 */
 	return apply_filters( 'logout_url', $logout_url, $redirect );
->>>>>>> WPHome/master
 }
 
 /**
  * Returns the Log In URL.
  *
-<<<<<<< HEAD
- * Returns the URL that allows the user to log in to the site
- *
- * @since 2.7.0
- * @uses site_url() To generate the log in URL
- * @uses apply_filters() calls 'login_url' hook on final login url
-=======
  * Returns the URL that allows the user to log in to the site.
  *
  * @since 2.7.0
->>>>>>> WPHome/master
  *
  * @param string $redirect Path to redirect to on login.
  * @param bool $force_reauth Whether to force reauthorization, even if a cookie is present. Default is false.
@@ -456,20 +342,15 @@ function wp_login_url($redirect = '', $force_reauth = false) {
 	if ( $force_reauth )
 		$login_url = add_query_arg('reauth', '1', $login_url);
 
-<<<<<<< HEAD
-	return apply_filters('login_url', $login_url, $redirect);
-=======
 	/**
 	 * Filter the login URL.
 	 *
 	 * @since 2.8.0
-	 * @since 4.2.0 The `$force_reauth` parameter was added.
 	 *
-	 * @param string $login_url    The login URL.
-	 * @param string $redirect     The path to redirect to on login, if supplied.
-	 * @param bool   $force_reauth Whether to force reauthorization, even if a cookie is present.
+	 * @param string $login_url The login URL.
+	 * @param string $redirect  The path to redirect to on login, if supplied.
 	 */
-	return apply_filters( 'login_url', $login_url, $redirect, $force_reauth );
+	return apply_filters( 'login_url', $login_url, $redirect );
 }
 
 /**
@@ -490,7 +371,6 @@ function wp_registration_url() {
 	 * @param string $register The user registration URL.
 	 */
 	return apply_filters( 'register_url', site_url( 'wp-login.php?action=register', 'login' ) );
->>>>>>> WPHome/master
 }
 
 /**
@@ -498,36 +378,11 @@ function wp_registration_url() {
  * the HTML immediately. Pass array('echo'=>false) to return the string instead.
  *
  * @since 3.0.0
-<<<<<<< HEAD
-=======
  *
->>>>>>> WPHome/master
  * @param array $args Configuration options to modify the form output.
  * @return string|null String when retrieving, null when displaying.
  */
 function wp_login_form( $args = array() ) {
-<<<<<<< HEAD
-	$defaults = array( 'echo' => true,
-						'redirect' => ( is_ssl() ? 'https://' : 'http://' ) . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'], // Default redirect is back to the current page
-	 					'form_id' => 'loginform',
-						'label_username' => __( 'Username' ),
-						'label_password' => __( 'Password' ),
-						'label_remember' => __( 'Remember Me' ),
-						'label_log_in' => __( 'Log In' ),
-						'id_username' => 'user_login',
-						'id_password' => 'user_pass',
-						'id_remember' => 'rememberme',
-						'id_submit' => 'wp-submit',
-						'remember' => true,
-						'value_username' => '',
-						'value_remember' => false, // Set this to true to default the "Remember me" checkbox to checked
-					);
-	$args = wp_parse_args( $args, apply_filters( 'login_form_defaults', $defaults ) );
-
-	$form = '
-		<form name="' . $args['form_id'] . '" id="' . $args['form_id'] . '" action="' . esc_url( site_url( 'wp-login.php', 'login_post' ) ) . '" method="post">
-			' . apply_filters( 'login_form_top', '', $args ) . '
-=======
 	$defaults = array(
 		'echo' => true,
 		'redirect' => ( is_ssl() ? 'https://' : 'http://' ) . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'], // Default redirect is back to the current page
@@ -596,7 +451,6 @@ function wp_login_form( $args = array() ) {
 	$form = '
 		<form name="' . $args['form_id'] . '" id="' . $args['form_id'] . '" action="' . esc_url( site_url( 'wp-login.php', 'login_post' ) ) . '" method="post">
 			' . $login_form_top . '
->>>>>>> WPHome/master
 			<p class="login-username">
 				<label for="' . esc_attr( $args['id_username'] ) . '">' . esc_html( $args['label_username'] ) . '</label>
 				<input type="text" name="log" id="' . esc_attr( $args['id_username'] ) . '" class="input" value="' . esc_attr( $args['value_username'] ) . '" size="20" />
@@ -605,21 +459,13 @@ function wp_login_form( $args = array() ) {
 				<label for="' . esc_attr( $args['id_password'] ) . '">' . esc_html( $args['label_password'] ) . '</label>
 				<input type="password" name="pwd" id="' . esc_attr( $args['id_password'] ) . '" class="input" value="" size="20" />
 			</p>
-<<<<<<< HEAD
-			' . apply_filters( 'login_form_middle', '', $args ) . '
-=======
 			' . $login_form_middle . '
->>>>>>> WPHome/master
 			' . ( $args['remember'] ? '<p class="login-remember"><label><input name="rememberme" type="checkbox" id="' . esc_attr( $args['id_remember'] ) . '" value="forever"' . ( $args['value_remember'] ? ' checked="checked"' : '' ) . ' /> ' . esc_html( $args['label_remember'] ) . '</label></p>' : '' ) . '
 			<p class="login-submit">
 				<input type="submit" name="wp-submit" id="' . esc_attr( $args['id_submit'] ) . '" class="button-primary" value="' . esc_attr( $args['label_log_in'] ) . '" />
 				<input type="hidden" name="redirect_to" value="' . esc_url( $args['redirect'] ) . '" />
 			</p>
-<<<<<<< HEAD
-			' . apply_filters( 'login_form_bottom', '', $args ) . '
-=======
 			' . $login_form_bottom . '
->>>>>>> WPHome/master
 		</form>';
 
 	if ( $args['echo'] )
@@ -634,11 +480,6 @@ function wp_login_form( $args = array() ) {
  * Returns the URL that allows the user to retrieve the lost password
  *
  * @since 2.8.0
-<<<<<<< HEAD
- * @uses site_url() To generate the lost password URL
- * @uses apply_filters() calls 'lostpassword_url' hook on the lostpassword url
-=======
->>>>>>> WPHome/master
  *
  * @param string $redirect Path to redirect to on login.
  * @return string Lost password URL.
@@ -650,8 +491,6 @@ function wp_lostpassword_url( $redirect = '' ) {
 	}
 
 	$lostpassword_url = add_query_arg( $args, network_site_url('wp-login.php', 'login') );
-<<<<<<< HEAD
-=======
 
 	/**
 	 * Filter the Lost Password URL.
@@ -661,7 +500,6 @@ function wp_lostpassword_url( $redirect = '' ) {
 	 * @param string $lostpassword_url The lost password page URL.
 	 * @param string $redirect         The path to redirect to on login.
 	 */
->>>>>>> WPHome/master
 	return apply_filters( 'lostpassword_url', $lostpassword_url, $redirect );
 }
 
@@ -672,16 +510,9 @@ function wp_lostpassword_url( $redirect = '' ) {
  * not logged in and registration is enabled or to the dashboard if logged in.
  *
  * @since 1.5.0
-<<<<<<< HEAD
- * @uses apply_filters() Calls 'register' hook on register / admin link content.
- *
- * @param string $before Text to output before the link (defaults to <li>).
- * @param string $after Text to output after the link (defaults to </li>).
-=======
  *
  * @param string $before Text to output before the link. Default `<li>`.
  * @param string $after Text to output after the link. Default `</li>`.
->>>>>>> WPHome/master
  * @param boolean $echo Default to echo and not return the link.
  * @return string|null String when retrieving, null when displaying.
  */
@@ -689,23 +520,13 @@ function wp_register( $before = '<li>', $after = '</li>', $echo = true ) {
 
 	if ( ! is_user_logged_in() ) {
 		if ( get_option('users_can_register') )
-<<<<<<< HEAD
-			$link = $before . '<a href="' . site_url('wp-login.php?action=register', 'login') . '">' . __('Register') . '</a>' . $after;
-=======
 			$link = $before . '<a href="' . esc_url( wp_registration_url() ) . '">' . __('Register') . '</a>' . $after;
->>>>>>> WPHome/master
 		else
 			$link = '';
 	} else {
 		$link = $before . '<a href="' . admin_url() . '">' . __('Site Admin') . '</a>' . $after;
 	}
 
-<<<<<<< HEAD
-	if ( $echo )
-		echo apply_filters('register', $link);
-	else
-		return apply_filters('register', $link);
-=======
 	/**
 	 * Filter the HTML link to the Registration or Admin page.
 	 *
@@ -723,7 +544,6 @@ function wp_register( $before = '<li>', $after = '</li>', $echo = true ) {
 	} else {
 		return $link;
 	}
->>>>>>> WPHome/master
 }
 
 /**
@@ -733,13 +553,6 @@ function wp_register( $before = '<li>', $after = '</li>', $echo = true ) {
  * but one purpose might have been to allow for theme switching.
  *
  * @since 1.5.0
-<<<<<<< HEAD
- * @link http://trac.wordpress.org/ticket/1458 Explanation of 'wp_meta' action.
- * @uses do_action() Calls 'wp_meta' hook.
- */
-function wp_meta() {
-	do_action('wp_meta');
-=======
  *
  * @link https://core.trac.wordpress.org/ticket/1458 Explanation of 'wp_meta' action.
  */
@@ -750,7 +563,6 @@ function wp_meta() {
 	 * @since 1.5.0
 	 */
 	do_action( 'wp_meta' );
->>>>>>> WPHome/master
 }
 
 /**
@@ -769,17 +581,6 @@ function bloginfo( $show='' ) {
  * Retrieve information about the blog.
  *
  * Some show parameter values are deprecated and will be removed in future
-<<<<<<< HEAD
- * versions. These options will trigger the _deprecated_argument() function.
- * The deprecated blog info options are listed in the function contents.
- *
- * The possible values for the 'show' parameter are listed below.
- * <ol>
- * <li><strong>url</strong> - Blog URI to homepage.</li>
- * <li><strong>wpurl</strong> - Blog URI path to WordPress.</li>
- * <li><strong>description</strong> - Secondary title</li>
- * </ol>
-=======
  * versions. These options will trigger the {@see _deprecated_argument()}
  * function. The deprecated blog info options are listed in the function
  * contents.
@@ -789,7 +590,6 @@ function bloginfo( $show='' ) {
  * 1. url - Blog URI to homepage.
  * 2. wpurl - Blog URI path to WordPress.
  * 3. description - Secondary title
->>>>>>> WPHome/master
  *
  * The feed URL options can be retrieved from 'rdf_url' (RSS 0.91),
  * 'rss_url' (RSS 1.0), 'rss2_url' (RSS 2.0), or 'atom_url' (Atom feed). The
@@ -807,17 +607,7 @@ function get_bloginfo( $show = '', $filter = 'raw' ) {
 	switch( $show ) {
 		case 'home' : // DEPRECATED
 		case 'siteurl' : // DEPRECATED
-<<<<<<< HEAD
 			_deprecated_argument( __FUNCTION__, '2.2', sprintf( __('The <code>%s</code> option is deprecated for the family of <code>bloginfo()</code> functions.' ), $show ) . ' ' . sprintf( __( 'Use the <code>%s</code> option instead.' ), 'url'  ) );
-=======
-			_deprecated_argument( __FUNCTION__, '2.2', sprintf(
-				/* translators: 1: 'siteurl'/'home' argument, 2: bloginfo() function name, 3: 'url' argument */
-				__( 'The %1$s option is deprecated for the family of %2$s functions. Use the %3$s option instead.' ),
-				'<code>' . $show . '</code>',
-				'<code>bloginfo()</code>',
-				'<code>url</code>'
-			) );
->>>>>>> WPHome/master
 		case 'url' :
 			$output = home_url();
 			break;
@@ -846,11 +636,7 @@ function get_bloginfo( $show = '', $filter = 'raw' ) {
 			$output = get_feed_link('comments_rss2');
 			break;
 		case 'pingback_url':
-<<<<<<< HEAD
-			$output = get_option('siteurl') .'/xmlrpc.php';
-=======
 			$output = site_url( 'xmlrpc.php' );
->>>>>>> WPHome/master
 			break;
 		case 'stylesheet_url':
 			$output = get_stylesheet_uri();
@@ -881,17 +667,7 @@ function get_bloginfo( $show = '', $filter = 'raw' ) {
 			$output = str_replace('_', '-', $output);
 			break;
 		case 'text_direction':
-<<<<<<< HEAD
 			//_deprecated_argument( __FUNCTION__, '2.2', sprintf( __('The <code>%s</code> option is deprecated for the family of <code>bloginfo()</code> functions.' ), $show ) . ' ' . sprintf( __( 'Use the <code>%s</code> function instead.' ), 'is_rtl()'  ) );
-=======
-			_deprecated_argument( __FUNCTION__, '2.2', sprintf(
-				/* translators: 1: 'text_direction' argument, 2: bloginfo() function name, 3: is_rtl() function name */
-				__( 'The %1$s option is deprecated for the family of %2$s functions. Use the %3$s function instead.' ),
-				'<code>' . $show . '</code>',
-				'<code>bloginfo()</code>',
-				'<code>is_rtl()</code>'
-			) );
->>>>>>> WPHome/master
 			if ( function_exists( 'is_rtl' ) ) {
 				$output = is_rtl() ? 'rtl' : 'ltr';
 			} else {
@@ -911,12 +687,6 @@ function get_bloginfo( $show = '', $filter = 'raw' ) {
 		$url = false;
 
 	if ( 'display' == $filter ) {
-<<<<<<< HEAD
-		if ( $url )
-			$output = apply_filters('bloginfo_url', $output, $show);
-		else
-			$output = apply_filters('bloginfo', $output, $show);
-=======
 		if ( $url ) {
 			/**
 			 * Filter the URL returned by get_bloginfo().
@@ -938,20 +708,17 @@ function get_bloginfo( $show = '', $filter = 'raw' ) {
 			 */
 			$output = apply_filters( 'bloginfo', $output, $show );
 		}
->>>>>>> WPHome/master
 	}
 
 	return $output;
 }
 
 /**
-<<<<<<< HEAD
-=======
  * Display title tag with contents.
  *
- * @ignore
  * @since 4.1.0
  * @access private
+ * @internal
  *
  * @see wp_title()
  */
@@ -969,7 +736,6 @@ function _wp_render_title_tag() {
 }
 
 /**
->>>>>>> WPHome/master
  * Display or retrieve page title for all areas of blog.
  *
  * By default, the page title will display the separator before the page title,
@@ -992,11 +758,7 @@ function _wp_render_title_tag() {
  * @return string|null String on retrieve, null when displaying.
  */
 function wp_title($sep = '&raquo;', $display = true, $seplocation = '') {
-<<<<<<< HEAD
-	global $wpdb, $wp_locale;
-=======
 	global $wp_locale, $page, $paged;
->>>>>>> WPHome/master
 
 	$m = get_query_var('m');
 	$year = get_query_var('year');
@@ -1012,8 +774,6 @@ function wp_title($sep = '&raquo;', $display = true, $seplocation = '') {
 		$title = single_post_title( '', false );
 	}
 
-<<<<<<< HEAD
-=======
 	// If there's a post type archive
 	if ( is_post_type_archive() ) {
 		$post_type = get_query_var( 'post_type' );
@@ -1024,7 +784,6 @@ function wp_title($sep = '&raquo;', $display = true, $seplocation = '') {
 			$title = post_type_archive_title( '', false );
 	}
 
->>>>>>> WPHome/master
 	// If there's a category or tag
 	if ( is_category() || is_tag() ) {
 		$title = single_term_title( '', false );
@@ -1033,20 +792,6 @@ function wp_title($sep = '&raquo;', $display = true, $seplocation = '') {
 	// If there's a taxonomy
 	if ( is_tax() ) {
 		$term = get_queried_object();
-<<<<<<< HEAD
-		$tax = get_taxonomy( $term->taxonomy );
-		$title = single_term_title( $tax->labels->name . $t_sep, false );
-	}
-
-	// If there's an author
-	if ( is_author() ) {
-		$author = get_queried_object();
-		$title = $author->display_name;
-	}
-
-	// If there's a post type archive
-	if ( is_post_type_archive() )
-=======
 		if ( $term ) {
 			$tax = get_taxonomy( $term->taxonomy );
 			$title = single_term_title( $tax->labels->name . $t_sep, false );
@@ -1062,7 +807,6 @@ function wp_title($sep = '&raquo;', $display = true, $seplocation = '') {
 
 	// Post type archives with has_archive should override terms.
 	if ( is_post_type_archive() && $post_type_object->has_archive )
->>>>>>> WPHome/master
 		$title = post_type_archive_title( '', false );
 
 	// If there's a month
@@ -1097,19 +841,6 @@ function wp_title($sep = '&raquo;', $display = true, $seplocation = '') {
 	if ( !empty($title) )
 		$prefix = " $sep ";
 
-<<<<<<< HEAD
- 	// Determines position of the separator and direction of the breadcrumb
-	if ( 'right' == $seplocation ) { // sep on right, so reverse the order
-		$title_array = explode( $t_sep, $title );
-		$title_array = array_reverse( $title_array );
-		$title = implode( " $sep ", $title_array ) . $prefix;
-	} else {
-		$title_array = explode( $t_sep, $title );
-		$title = $prefix . implode( " $sep ", $title_array );
-	}
-
-	$title = apply_filters('wp_title', $title, $sep, $seplocation);
-=======
 	/**
 	 * Filter the parts of the page title.
 	 *
@@ -1150,7 +881,6 @@ function wp_title($sep = '&raquo;', $display = true, $seplocation = '') {
 	 * @param string $seplocation Location of the separator (left or right).
 	 */
 	$title = apply_filters( 'wp_title', $title, $sep, $seplocation );
->>>>>>> WPHome/master
 
 	// Send it out
 	if ( $display )
@@ -1182,13 +912,6 @@ function single_post_title($prefix = '', $display = true) {
 	if ( !isset($_post->post_title) )
 		return;
 
-<<<<<<< HEAD
-	$title = apply_filters('single_post_title', $_post->post_title, $_post);
-	if ( $display )
-		echo $prefix . $title;
-	else
-		return $title;
-=======
 	/**
 	 * Filter the page title for a single post.
 	 *
@@ -1202,7 +925,6 @@ function single_post_title($prefix = '', $display = true) {
 		echo $prefix . $title;
 	else
 		return $prefix . $title;
->>>>>>> WPHome/master
 }
 
 /**
@@ -1221,10 +943,6 @@ function post_type_archive_title( $prefix = '', $display = true ) {
 	if ( ! is_post_type_archive() )
 		return;
 
-<<<<<<< HEAD
-	$post_type_obj = get_queried_object();
-	$title = apply_filters('post_type_archive_title', $post_type_obj->labels->name );
-=======
 	$post_type = get_query_var( 'post_type' );
 	if ( is_array( $post_type ) )
 		$post_type = reset( $post_type );
@@ -1240,16 +958,11 @@ function post_type_archive_title( $prefix = '', $display = true ) {
 	 * @param string $post_type      Post type.
 	 */
 	$title = apply_filters( 'post_type_archive_title', $post_type_obj->labels->name, $post_type );
->>>>>>> WPHome/master
 
 	if ( $display )
 		echo $prefix . $title;
 	else
-<<<<<<< HEAD
-		return $title;
-=======
 		return $prefix . $title;
->>>>>>> WPHome/master
 }
 
 /**
@@ -1317,16 +1030,6 @@ function single_term_title( $prefix = '', $display = true ) {
 	if ( !$term )
 		return;
 
-<<<<<<< HEAD
-	if ( is_category() )
-		$term_name = apply_filters( 'single_cat_title', $term->name );
-	elseif ( is_tag() )
-		$term_name = apply_filters( 'single_tag_title', $term->name );
-	elseif ( is_tax() )
-		$term_name = apply_filters( 'single_term_title', $term->name );
-	else
-		return;
-=======
 	if ( is_category() ) {
 		/**
 		 * Filter the category archive page title.
@@ -1357,7 +1060,6 @@ function single_term_title( $prefix = '', $display = true ) {
 	} else {
 		return;
 	}
->>>>>>> WPHome/master
 
 	if ( empty( $term_name ) )
 		return;
@@ -1365,11 +1067,7 @@ function single_term_title( $prefix = '', $display = true ) {
 	if ( $display )
 		echo $prefix . $term_name;
 	else
-<<<<<<< HEAD
-		return $term_name;
-=======
 		return $prefix . $term_name;
->>>>>>> WPHome/master
 }
 
 /**
@@ -1416,8 +1114,6 @@ function single_month_title($prefix = '', $display = true ) {
 }
 
 /**
-<<<<<<< HEAD
-=======
  * Display the archive title based on the queried object.
  *
  * @since 4.1.0
@@ -1533,7 +1229,6 @@ function get_the_archive_description() {
 }
 
 /**
->>>>>>> WPHome/master
  * Retrieve archive link content based on predefined or custom code.
  *
  * The format can be one of four styles. The 'link' for head element, 'option'
@@ -1541,11 +1236,7 @@ function get_the_archive_description() {
  * elements). Custom content is also supported using the before and after
  * parameters.
  *
-<<<<<<< HEAD
- * The 'link' format uses the link HTML element with the <em>archives</em>
-=======
  * The 'link' format uses the `<link>` HTML element with the **archives**
->>>>>>> WPHome/master
  * relationship. The before and after parameters are not used. The text
  * parameter is used to describe the link.
  *
@@ -1563,11 +1254,8 @@ function get_the_archive_description() {
  *
  * @since 1.0.0
  *
-<<<<<<< HEAD
-=======
  * @todo Properly document optional arguments as such
  *
->>>>>>> WPHome/master
  * @param string $url URL to archive.
  * @param string $text Archive text description.
  * @param string $format Optional, default is 'html'. Can be 'link', 'option', 'html', or custom.
@@ -1577,20 +1265,6 @@ function get_the_archive_description() {
  */
 function get_archives_link($url, $text, $format = 'html', $before = '', $after = '') {
 	$text = wptexturize($text);
-<<<<<<< HEAD
-	$title_text = esc_attr($text);
-	$url = esc_url($url);
-
-	if ('link' == $format)
-		$link_html = "\t<link rel='archives' title='$title_text' href='$url' />\n";
-	elseif ('option' == $format)
-		$link_html = "\t<option value='$url'>$before $text $after</option>\n";
-	elseif ('html' == $format)
-		$link_html = "\t<li>$before<a href='$url' title='$title_text'>$text</a>$after</li>\n";
-	else // custom
-		$link_html = "\t$before<a href='$url' title='$title_text'>$text</a>$after\n";
-
-=======
 	$url = esc_url($url);
 
 	if ('link' == $format)
@@ -1609,7 +1283,6 @@ function get_archives_link($url, $text, $format = 'html', $before = '', $after =
 	 *
 	 * @param string $link_html The archive HTML link content.
 	 */
->>>>>>> WPHome/master
 	$link_html = apply_filters( 'get_archives_link', $link_html );
 
 	return $link_html;
@@ -1618,33 +1291,6 @@ function get_archives_link($url, $text, $format = 'html', $before = '', $after =
 /**
  * Display archive links based on type and format.
  *
-<<<<<<< HEAD
- * The 'type' argument offers a few choices and by default will display monthly
- * archive links. The other options for values are 'daily', 'weekly', 'monthly',
- * 'yearly', 'postbypost' or 'alpha'. Both 'postbypost' and 'alpha' display the
- * same archive link list, the difference between the two is that 'alpha'
- * will order by post title and 'postbypost' will order by post date.
- *
- * The date archives will logically display dates with links to the archive post
- * page. The 'postbypost' and 'alpha' values for 'type' argument will display
- * the post titles.
- *
- * The 'limit' argument will only display a limited amount of links, specified
- * by the 'limit' integer value. By default, there is no limit. The
- * 'show_post_count' argument will show how many posts are within the archive.
- * By default, the 'show_post_count' argument is set to false.
- *
- * For the 'format', 'before', and 'after' arguments, see {@link
- * get_archives_link()}. The values of these arguments have to do with that
- * function.
- *
- * @since 1.2.0
- *
- * @param string|array $args Optional. Override defaults.
- * @return string|null String when retrieving, null when displaying.
- */
-function wp_get_archives($args = '') {
-=======
  * @since 1.2.0
  *
  * @see get_archives_link()
@@ -1666,14 +1312,13 @@ function wp_get_archives($args = '') {
  *     @type string     $before          Markup to prepend to the beginning of each link. Default empty.
  *     @type string     $after           Markup to append to the end of each link. Default empty.
  *     @type bool       $show_post_count Whether to display the post count alongside the link. Default false.
- *     @type bool|int   $echo            Whether to echo or return the links list. Default 1|true to echo.
+ *     @type bool       $echo            Whether to echo or return the links list. Default 1|true to echo.
  *     @type string     $order           Whether to use ascending or descending order. Accepts 'ASC', or 'DESC'.
  *                                       Default 'DESC'.
  * }
  * @return string|null String when retrieving, null when displaying.
  */
 function wp_get_archives( $args = '' ) {
->>>>>>> WPHome/master
 	global $wpdb, $wp_locale;
 
 	$defaults = array(
@@ -1684,21 +1329,6 @@ function wp_get_archives( $args = '' ) {
 	);
 
 	$r = wp_parse_args( $args, $defaults );
-<<<<<<< HEAD
-	extract( $r, EXTR_SKIP );
-
-	if ( '' == $type )
-		$type = 'monthly';
-
-	if ( '' != $limit ) {
-		$limit = absint($limit);
-		$limit = ' LIMIT '.$limit;
-	}
-
-	$order = strtoupper( $order );
-	if ( $order !== 'ASC' )
-		$order = 'DESC';
-=======
 
 	if ( '' == $r['type'] ) {
 		$r['type'] = 'monthly';
@@ -1713,7 +1343,6 @@ function wp_get_archives( $args = '' ) {
 	if ( $order !== 'ASC' ) {
 		$order = 'DESC';
 	}
->>>>>>> WPHome/master
 
 	// this is what will separate dates on weekly archive links
 	$archive_week_separator = '&#8211;';
@@ -1728,16 +1357,6 @@ function wp_get_archives( $args = '' ) {
 	$archive_week_start_date_format = 'Y/m/d';
 	$archive_week_end_date_format	= 'Y/m/d';
 
-<<<<<<< HEAD
-	if ( !$archive_date_format_over_ride ) {
-		$archive_day_date_format = get_option('date_format');
-		$archive_week_start_date_format = get_option('date_format');
-		$archive_week_end_date_format = get_option('date_format');
-	}
-
-	//filters
-	$where = apply_filters( 'getarchives_where', "WHERE post_type = 'post' AND post_status = 'publish'", $r );
-=======
 	if ( ! $archive_date_format_over_ride ) {
 		$archive_day_date_format = get_option( 'date_format' );
 		$archive_week_start_date_format = get_option( 'date_format' );
@@ -1762,129 +1381,10 @@ function wp_get_archives( $args = '' ) {
 	 * @param string $sql_join Portion of SQL query containing JOIN clause.
 	 * @param array  $r        An array of default arguments.
 	 */
->>>>>>> WPHome/master
 	$join = apply_filters( 'getarchives_join', '', $r );
 
 	$output = '';
 
-<<<<<<< HEAD
-	if ( 'monthly' == $type ) {
-		$query = "SELECT YEAR(post_date) AS `year`, MONTH(post_date) AS `month`, count(ID) as posts FROM $wpdb->posts $join $where GROUP BY YEAR(post_date), MONTH(post_date) ORDER BY post_date $order $limit";
-		$key = md5($query);
-		$cache = wp_cache_get( 'wp_get_archives' , 'general');
-		if ( !isset( $cache[ $key ] ) ) {
-			$arcresults = $wpdb->get_results($query);
-			$cache[ $key ] = $arcresults;
-			wp_cache_set( 'wp_get_archives', $cache, 'general' );
-		} else {
-			$arcresults = $cache[ $key ];
-		}
-		if ( $arcresults ) {
-			$afterafter = $after;
-			foreach ( (array) $arcresults as $arcresult ) {
-				$url = get_month_link( $arcresult->year, $arcresult->month );
-				/* translators: 1: month name, 2: 4-digit year */
-				$text = sprintf(__('%1$s %2$d'), $wp_locale->get_month($arcresult->month), $arcresult->year);
-				if ( $show_post_count )
-					$after = '&nbsp;('.$arcresult->posts.')' . $afterafter;
-				$output .= get_archives_link($url, $text, $format, $before, $after);
-			}
-		}
-	} elseif ('yearly' == $type) {
-		$query = "SELECT YEAR(post_date) AS `year`, count(ID) as posts FROM $wpdb->posts $join $where GROUP BY YEAR(post_date) ORDER BY post_date $order $limit";
-		$key = md5($query);
-		$cache = wp_cache_get( 'wp_get_archives' , 'general');
-		if ( !isset( $cache[ $key ] ) ) {
-			$arcresults = $wpdb->get_results($query);
-			$cache[ $key ] = $arcresults;
-			wp_cache_set( 'wp_get_archives', $cache, 'general' );
-		} else {
-			$arcresults = $cache[ $key ];
-		}
-		if ($arcresults) {
-			$afterafter = $after;
-			foreach ( (array) $arcresults as $arcresult) {
-				$url = get_year_link($arcresult->year);
-				$text = sprintf('%d', $arcresult->year);
-				if ($show_post_count)
-					$after = '&nbsp;('.$arcresult->posts.')' . $afterafter;
-				$output .= get_archives_link($url, $text, $format, $before, $after);
-			}
-		}
-	} elseif ( 'daily' == $type ) {
-		$query = "SELECT YEAR(post_date) AS `year`, MONTH(post_date) AS `month`, DAYOFMONTH(post_date) AS `dayofmonth`, count(ID) as posts FROM $wpdb->posts $join $where GROUP BY YEAR(post_date), MONTH(post_date), DAYOFMONTH(post_date) ORDER BY post_date $order $limit";
-		$key = md5($query);
-		$cache = wp_cache_get( 'wp_get_archives' , 'general');
-		if ( !isset( $cache[ $key ] ) ) {
-			$arcresults = $wpdb->get_results($query);
-			$cache[ $key ] = $arcresults;
-			wp_cache_set( 'wp_get_archives', $cache, 'general' );
-		} else {
-			$arcresults = $cache[ $key ];
-		}
-		if ( $arcresults ) {
-			$afterafter = $after;
-			foreach ( (array) $arcresults as $arcresult ) {
-				$url	= get_day_link($arcresult->year, $arcresult->month, $arcresult->dayofmonth);
-				$date = sprintf('%1$d-%2$02d-%3$02d 00:00:00', $arcresult->year, $arcresult->month, $arcresult->dayofmonth);
-				$text = mysql2date($archive_day_date_format, $date);
-				if ($show_post_count)
-					$after = '&nbsp;('.$arcresult->posts.')'.$afterafter;
-				$output .= get_archives_link($url, $text, $format, $before, $after);
-			}
-		}
-	} elseif ( 'weekly' == $type ) {
-		$week = _wp_mysql_week( '`post_date`' );
-		$query = "SELECT DISTINCT $week AS `week`, YEAR( `post_date` ) AS `yr`, DATE_FORMAT( `post_date`, '%Y-%m-%d' ) AS `yyyymmdd`, count( `ID` ) AS `posts` FROM `$wpdb->posts` $join $where GROUP BY $week, YEAR( `post_date` ) ORDER BY `post_date` $order $limit";
-		$key = md5($query);
-		$cache = wp_cache_get( 'wp_get_archives' , 'general');
-		if ( !isset( $cache[ $key ] ) ) {
-			$arcresults = $wpdb->get_results($query);
-			$cache[ $key ] = $arcresults;
-			wp_cache_set( 'wp_get_archives', $cache, 'general' );
-		} else {
-			$arcresults = $cache[ $key ];
-		}
-		$arc_w_last = '';
-		$afterafter = $after;
-		if ( $arcresults ) {
-				foreach ( (array) $arcresults as $arcresult ) {
-					if ( $arcresult->week != $arc_w_last ) {
-						$arc_year = $arcresult->yr;
-						$arc_w_last = $arcresult->week;
-						$arc_week = get_weekstartend($arcresult->yyyymmdd, get_option('start_of_week'));
-						$arc_week_start = date_i18n($archive_week_start_date_format, $arc_week['start']);
-						$arc_week_end = date_i18n($archive_week_end_date_format, $arc_week['end']);
-						$url  = sprintf('%1$s/%2$s%3$sm%4$s%5$s%6$sw%7$s%8$d', home_url(), '', '?', '=', $arc_year, '&amp;', '=', $arcresult->week);
-						$text = $arc_week_start . $archive_week_separator . $arc_week_end;
-						if ($show_post_count)
-							$after = '&nbsp;('.$arcresult->posts.')'.$afterafter;
-						$output .= get_archives_link($url, $text, $format, $before, $after);
-					}
-				}
-		}
-	} elseif ( ( 'postbypost' == $type ) || ('alpha' == $type) ) {
-		$orderby = ('alpha' == $type) ? 'post_title ASC ' : 'post_date DESC ';
-		$query = "SELECT * FROM $wpdb->posts $join $where ORDER BY $orderby $limit";
-		$key = md5($query);
-		$cache = wp_cache_get( 'wp_get_archives' , 'general');
-		if ( !isset( $cache[ $key ] ) ) {
-			$arcresults = $wpdb->get_results($query);
-			$cache[ $key ] = $arcresults;
-			wp_cache_set( 'wp_get_archives', $cache, 'general' );
-		} else {
-			$arcresults = $cache[ $key ];
-		}
-		if ( $arcresults ) {
-			foreach ( (array) $arcresults as $arcresult ) {
-				if ( $arcresult->post_date != '0000-00-00 00:00:00' ) {
-					$url  = get_permalink( $arcresult );
-					if ( $arcresult->post_title )
-						$text = strip_tags( apply_filters( 'the_title', $arcresult->post_title, $arcresult->ID ) );
-					else
-						$text = $arcresult->ID;
-					$output .= get_archives_link($url, $text, $format, $before, $after);
-=======
 	$last_changed = wp_cache_get( 'last_changed', 'posts' );
 	if ( ! $last_changed ) {
 		$last_changed = microtime();
@@ -1938,6 +1438,7 @@ function wp_get_archives( $args = '' ) {
 		$key = "wp_get_archives:$key:$last_changed";
 		if ( ! $results = wp_cache_get( $key, 'posts' ) ) {
 			$results = $wpdb->get_results( $query );
+			$cache[ $key ] = $results;
 			wp_cache_set( $key, $results, 'posts' );
 		}
 		if ( $results ) {
@@ -1981,7 +1482,7 @@ function wp_get_archives( $args = '' ) {
 			}
 		}
 	} elseif ( ( 'postbypost' == $r['type'] ) || ('alpha' == $r['type'] ) ) {
-		$orderby = ( 'alpha' == $r['type'] ) ? 'post_title ASC ' : 'post_date DESC, ID DESC ';
+		$orderby = ( 'alpha' == $r['type'] ) ? 'post_title ASC ' : 'post_date DESC ';
 		$query = "SELECT * FROM $wpdb->posts $join $where ORDER BY $orderby $limit";
 		$key = md5( $query );
 		$key = "wp_get_archives:$key:$last_changed";
@@ -2000,23 +1501,15 @@ function wp_get_archives( $args = '' ) {
 						$text = $result->ID;
 					}
 					$output .= get_archives_link( $url, $text, $r['format'], $r['before'], $r['after'] );
->>>>>>> WPHome/master
 				}
 			}
 		}
 	}
-<<<<<<< HEAD
-	if ( $echo )
-		echo $output;
-	else
-		return $output;
-=======
 	if ( $r['echo'] ) {
 		echo $output;
 	} else {
 		return $output;
 	}
->>>>>>> WPHome/master
 }
 
 /**
@@ -2039,10 +1532,6 @@ function calendar_week_mod($num) {
  * no posts for the month, then it will not be displayed.
  *
  * @since 1.0.0
-<<<<<<< HEAD
- * @uses calendar_week_mod()
-=======
->>>>>>> WPHome/master
  *
  * @param bool $initial Optional, default is true. Use initial calendar names.
  * @param bool $echo Optional, default is true. Set to false for return.
@@ -2051,27 +1540,16 @@ function calendar_week_mod($num) {
 function get_calendar($initial = true, $echo = true) {
 	global $wpdb, $m, $monthnum, $year, $wp_locale, $posts;
 
-<<<<<<< HEAD
-	$cache = array();
-=======
->>>>>>> WPHome/master
 	$key = md5( $m . $monthnum . $year );
 	if ( $cache = wp_cache_get( 'get_calendar', 'calendar' ) ) {
 		if ( is_array($cache) && isset( $cache[ $key ] ) ) {
 			if ( $echo ) {
-<<<<<<< HEAD
-				echo apply_filters( 'get_calendar',  $cache[$key] );
-				return;
-			} else {
-				return apply_filters( 'get_calendar',  $cache[$key] );
-=======
 				/** This filter is documented in wp-includes/general-template.php */
 				echo apply_filters( 'get_calendar', $cache[$key] );
 				return;
 			} else {
 				/** This filter is documented in wp-includes/general-template.php */
 				return apply_filters( 'get_calendar', $cache[$key] );
->>>>>>> WPHome/master
 			}
 		}
 	}
@@ -2159,11 +1637,7 @@ function get_calendar($initial = true, $echo = true) {
 	<tr>';
 
 	if ( $previous ) {
-<<<<<<< HEAD
-		$calendar_output .= "\n\t\t".'<td colspan="3" id="prev"><a href="' . get_month_link($previous->year, $previous->month) . '" title="' . esc_attr( sprintf(__('View posts for %1$s %2$s'), $wp_locale->get_month($previous->month), date('Y', mktime(0, 0 , 0, $previous->month, 1, $previous->year)))) . '">&laquo; ' . $wp_locale->get_month_abbrev($wp_locale->get_month($previous->month)) . '</a></td>';
-=======
 		$calendar_output .= "\n\t\t".'<td colspan="3" id="prev"><a href="' . get_month_link($previous->year, $previous->month) . '">&laquo; ' . $wp_locale->get_month_abbrev($wp_locale->get_month($previous->month)) . '</a></td>';
->>>>>>> WPHome/master
 	} else {
 		$calendar_output .= "\n\t\t".'<td colspan="3" id="prev" class="pad">&nbsp;</td>';
 	}
@@ -2171,11 +1645,7 @@ function get_calendar($initial = true, $echo = true) {
 	$calendar_output .= "\n\t\t".'<td class="pad">&nbsp;</td>';
 
 	if ( $next ) {
-<<<<<<< HEAD
-		$calendar_output .= "\n\t\t".'<td colspan="3" id="next"><a href="' . get_month_link($next->year, $next->month) . '" title="' . esc_attr( sprintf(__('View posts for %1$s %2$s'), $wp_locale->get_month($next->month), date('Y', mktime(0, 0 , 0, $next->month, 1, $next->year))) ) . '">' . $wp_locale->get_month_abbrev($wp_locale->get_month($next->month)) . ' &raquo;</a></td>';
-=======
 		$calendar_output .= "\n\t\t".'<td colspan="3" id="next"><a href="' . get_month_link($next->year, $next->month) . '">' . $wp_locale->get_month_abbrev($wp_locale->get_month($next->month)) . ' &raquo;</a></td>';
->>>>>>> WPHome/master
 	} else {
 		$calendar_output .= "\n\t\t".'<td colspan="3" id="next" class="pad">&nbsp;</td>';
 	}
@@ -2187,11 +1657,6 @@ function get_calendar($initial = true, $echo = true) {
 	<tbody>
 	<tr>';
 
-<<<<<<< HEAD
-=======
-	$daywithpost = array();
-
->>>>>>> WPHome/master
 	// Get days with posts
 	$dayswithposts = $wpdb->get_results("SELECT DISTINCT DAYOFMONTH(post_date)
 		FROM $wpdb->posts WHERE post_date >= '{$thisyear}-{$thismonth}-01 00:00:00'
@@ -2201,11 +1666,8 @@ function get_calendar($initial = true, $echo = true) {
 		foreach ( (array) $dayswithposts as $daywith ) {
 			$daywithpost[] = $daywith[0];
 		}
-<<<<<<< HEAD
 	} else {
 		$daywithpost = array();
-=======
->>>>>>> WPHome/master
 	}
 
 	if (strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE') !== false || stripos($_SERVER['HTTP_USER_AGENT'], 'camino') !== false || stripos($_SERVER['HTTP_USER_AGENT'], 'safari') !== false)
@@ -2223,10 +1685,7 @@ function get_calendar($initial = true, $echo = true) {
 	if ( $ak_post_titles ) {
 		foreach ( (array) $ak_post_titles as $ak_post_title ) {
 
-<<<<<<< HEAD
-=======
 				/** This filter is documented in wp-includes/post-template.php */
->>>>>>> WPHome/master
 				$post_title = esc_attr( apply_filters( 'the_title', $ak_post_title->post_title, $ak_post_title->ID ) );
 
 				if ( empty($ak_titles_for_day['day_'.$ak_post_title->dom]) )
@@ -2273,12 +1732,6 @@ function get_calendar($initial = true, $echo = true) {
 	$cache[ $key ] = $calendar_output;
 	wp_cache_set( 'get_calendar', $cache, 'calendar' );
 
-<<<<<<< HEAD
-	if ( $echo )
-		echo apply_filters( 'get_calendar',  $calendar_output );
-	else
-		return apply_filters( 'get_calendar',  $calendar_output );
-=======
 	if ( $echo ) {
 		/**
 		 * Filter the HTML calendar output.
@@ -2292,7 +1745,6 @@ function get_calendar($initial = true, $echo = true) {
 		/** This filter is documented in wp-includes/general-template.php */
 		return apply_filters( 'get_calendar', $calendar_output );
 	}
->>>>>>> WPHome/master
 
 }
 
@@ -2305,13 +1757,10 @@ function get_calendar($initial = true, $echo = true) {
 function delete_get_calendar_cache() {
 	wp_cache_delete( 'get_calendar', 'calendar' );
 }
-<<<<<<< HEAD
 add_action( 'save_post', 'delete_get_calendar_cache' );
 add_action( 'delete_post', 'delete_get_calendar_cache' );
 add_action( 'update_option_start_of_week', 'delete_get_calendar_cache' );
 add_action( 'update_option_gmt_offset', 'delete_get_calendar_cache' );
-=======
->>>>>>> WPHome/master
 
 /**
  * Display all of the allowed tags in HTML format with attributes.
@@ -2351,11 +1800,7 @@ function the_date_xml() {
 }
 
 /**
-<<<<<<< HEAD
- * Display or Retrieve the date the current $post was written (once per date)
-=======
  * Display or Retrieve the date the current post was written (once per date)
->>>>>>> WPHome/master
  *
  * Will only output the date if the current post's date is different from the
  * previous one output.
@@ -2367,11 +1812,7 @@ function the_date_xml() {
  * Date string output can be filtered with 'get_the_date'.
  *
  * @since 0.71
-<<<<<<< HEAD
- * @uses get_the_date()
-=======
  *
->>>>>>> WPHome/master
  * @param string $d Optional. PHP date format defaults to the date_format option if not specified.
  * @param string $before Optional. Output before the date.
  * @param string $after Optional. Output after the date.
@@ -2380,16 +1821,6 @@ function the_date_xml() {
  */
 function the_date( $d = '', $before = '', $after = '', $echo = true ) {
 	global $currentday, $previousday;
-<<<<<<< HEAD
-	$the_date = '';
-	if ( $currentday != $previousday ) {
-		$the_date .= $before;
-		$the_date .= get_the_date( $d );
-		$the_date .= $after;
-		$previousday = $currentday;
-
-		$the_date = apply_filters('the_date', $the_date, $d, $before, $after);
-=======
 
 	if ( $currentday != $previousday ) {
 		$the_date = $before . get_the_date( $d ) . $after;
@@ -2407,7 +1838,6 @@ function the_date( $d = '', $before = '', $after = '', $echo = true ) {
 		 * @param string $after    HTML output after the date.
 		 */
 		$the_date = apply_filters( 'the_date', $the_date, $d, $before, $after );
->>>>>>> WPHome/master
 
 		if ( $echo )
 			echo $the_date;
@@ -2419,32 +1849,13 @@ function the_date( $d = '', $before = '', $after = '', $echo = true ) {
 }
 
 /**
-<<<<<<< HEAD
- * Retrieve the date the current $post was written.
-=======
  * Retrieve the date on which the post was written.
->>>>>>> WPHome/master
  *
  * Unlike the_date() this function will always return the date.
  * Modify output with 'get_the_date' filter.
  *
  * @since 3.0.0
  *
-<<<<<<< HEAD
- * @param string $d Optional. PHP date format defaults to the date_format option if not specified.
- * @return string|null Null if displaying, string if retrieving.
- */
-function get_the_date( $d = '' ) {
-	$post = get_post();
-	$the_date = '';
-
-	if ( '' == $d )
-		$the_date .= mysql2date(get_option('date_format'), $post->post_date);
-	else
-		$the_date .= mysql2date($d, $post->post_date);
-
-	return apply_filters('get_the_date', $the_date, $d);
-=======
  * @param  string      $d    Optional. PHP date format defaults to the date_format option if not specified.
  * @param  int|WP_Post $post Optional. Post ID or WP_Post object. Default current post.
  * @return false|string Date the current post was written. False on failure.
@@ -2473,7 +1884,6 @@ function get_the_date( $d = '', $post = null ) {
 	 * @param int|WP_Post $post     The post object or ID.
 	 */
 	return apply_filters( 'get_the_date', $the_date, $d, $post );
->>>>>>> WPHome/master
 }
 
 /**
@@ -2490,9 +1900,6 @@ function get_the_date( $d = '', $post = null ) {
 function the_modified_date($d = '', $before='', $after='', $echo = true) {
 
 	$the_modified_date = $before . get_the_modified_date($d) . $after;
-<<<<<<< HEAD
-	$the_modified_date = apply_filters('the_modified_date', $the_modified_date, $d, $before, $after);
-=======
 
 	/**
 	 * Filter the date a post was last modified for display.
@@ -2506,7 +1913,6 @@ function the_modified_date($d = '', $before='', $after='', $echo = true) {
 	 * @param string $after             HTML output after the date.
 	 */
 	$the_modified_date = apply_filters( 'the_modified_date', $the_modified_date, $d, $before, $after );
->>>>>>> WPHome/master
 
 	if ( $echo )
 		echo $the_modified_date;
@@ -2528,9 +1934,6 @@ function get_the_modified_date($d = '') {
 		$the_time = get_post_modified_time(get_option('date_format'), null, null, true);
 	else
 		$the_time = get_post_modified_time($d, null, null, true);
-<<<<<<< HEAD
-	return apply_filters('get_the_modified_date', $the_time, $d);
-=======
 
 	/**
 	 * Filter the date a post was last modified.
@@ -2542,7 +1945,6 @@ function get_the_modified_date($d = '') {
 	 *                         'date_format' option.
 	 */
 	return apply_filters( 'get_the_modified_date', $the_time, $d );
->>>>>>> WPHome/master
 }
 
 /**
@@ -2553,9 +1955,6 @@ function get_the_modified_date($d = '') {
  * @param string $d Either 'G', 'U', or php date format.
  */
 function the_time( $d = '' ) {
-<<<<<<< HEAD
-	echo apply_filters('the_time', get_the_time( $d ), $d);
-=======
 	/**
 	 * Filter the time a post was written for display.
 	 *
@@ -2566,7 +1965,6 @@ function the_time( $d = '' ) {
 	 *                             or php date format.
 	 */
 	echo apply_filters( 'the_time', get_the_time( $d ), $d );
->>>>>>> WPHome/master
 }
 
 /**
@@ -2574,35 +1972,23 @@ function the_time( $d = '' ) {
  *
  * @since 1.5.0
  *
-<<<<<<< HEAD
- * @param string $d Optional Either 'G', 'U', or php date format defaults to the value specified in the time_format option.
- * @param int|object $post Optional post ID or object. Default is global $post object.
- * @return string
-=======
  * @param string      $d    Optional. Format to use for retrieving the time the post
  *                          was written. Either 'G', 'U', or php date format defaults
  *                          to the value specified in the time_format option. Default empty.
  * @param int|WP_Post $post WP_Post object or ID. Default is global $post object.
  * @return false|string Formatted date string or Unix timestamp. False on failure.
->>>>>>> WPHome/master
  */
 function get_the_time( $d = '', $post = null ) {
 	$post = get_post($post);
 
-<<<<<<< HEAD
-=======
 	if ( ! $post ) {
 		return false;
 	}
 
->>>>>>> WPHome/master
 	if ( '' == $d )
 		$the_time = get_post_time(get_option('time_format'), false, $post, true);
 	else
 		$the_time = get_post_time($d, false, $post, true);
-<<<<<<< HEAD
-	return apply_filters('get_the_time', $the_time, $d, $post);
-=======
 
 	/**
 	 * Filter the time a post was written.
@@ -2616,7 +2002,6 @@ function get_the_time( $d = '', $post = null ) {
 	 * @param int|WP_Post $post     WP_Post object or ID.
 	 */
 	return apply_filters( 'get_the_time', $the_time, $d, $post );
->>>>>>> WPHome/master
 }
 
 /**
@@ -2624,17 +2009,6 @@ function get_the_time( $d = '', $post = null ) {
  *
  * @since 2.0.0
  *
-<<<<<<< HEAD
- * @param string $d Optional Either 'G', 'U', or php date format.
- * @param bool $gmt Optional, default is false. Whether to return the gmt time.
- * @param int|object $post Optional post ID or object. Default is global $post object.
- * @param bool $translate Whether to translate the time string
- * @return string
- */
-function get_post_time( $d = 'U', $gmt = false, $post = null, $translate = false ) { // returns timestamp
-	$post = get_post($post);
-
-=======
  * @param string      $d         Optional. Format to use for retrieving the time the post
  *                               was written. Either 'G', 'U', or php date format. Default 'U'.
  * @param bool        $gmt       Optional. Whether to retrieve the GMT time. Default false.
@@ -2649,16 +2023,12 @@ function get_post_time( $d = 'U', $gmt = false, $post = null, $translate = false
 		return false;
 	}
 
->>>>>>> WPHome/master
 	if ( $gmt )
 		$time = $post->post_date_gmt;
 	else
 		$time = $post->post_date;
 
 	$time = mysql2date($d, $time, $translate);
-<<<<<<< HEAD
-	return apply_filters('get_post_time', $time, $d, $gmt);
-=======
 
 	/**
 	 * Filter the localized time a post was written.
@@ -2671,7 +2041,6 @@ function get_post_time( $d = 'U', $gmt = false, $post = null, $translate = false
 	 * @param bool   $gmt  Whether to retrieve the GMT time. Default false.
 	 */
 	return apply_filters( 'get_post_time', $time, $d, $gmt );
->>>>>>> WPHome/master
 }
 
 /**
@@ -2682,9 +2051,6 @@ function get_post_time( $d = 'U', $gmt = false, $post = null, $translate = false
  * @param string $d Optional Either 'G', 'U', or php date format defaults to the value specified in the time_format option.
  */
 function the_modified_time($d = '') {
-<<<<<<< HEAD
-	echo apply_filters('the_modified_time', get_the_modified_time($d), $d);
-=======
 	/**
 	 * Filter the localized time a post was last modified, for display.
 	 *
@@ -2696,7 +2062,6 @@ function the_modified_time($d = '') {
 	 *                                      specified in 'time_format' option.
 	 */
 	echo apply_filters( 'the_modified_time', get_the_modified_time($d), $d );
->>>>>>> WPHome/master
 }
 
 /**
@@ -2712,9 +2077,6 @@ function get_the_modified_time($d = '') {
 		$the_time = get_post_modified_time(get_option('time_format'), null, null, true);
 	else
 		$the_time = get_post_modified_time($d, null, null, true);
-<<<<<<< HEAD
-	return apply_filters('get_the_modified_time', $the_time, $d);
-=======
 
 	/**
 	 * Filter the localized time a post was last modified.
@@ -2727,7 +2089,6 @@ function get_the_modified_time($d = '') {
 	 *                         to value specified in 'time_format' option.
 	 */
 	return apply_filters( 'get_the_modified_time', $the_time, $d );
->>>>>>> WPHome/master
 }
 
 /**
@@ -2735,40 +2096,26 @@ function get_the_modified_time($d = '') {
  *
  * @since 2.0.0
  *
-<<<<<<< HEAD
- * @param string $d Optional, default is 'U'. Either 'G', 'U', or php date format.
- * @param bool $gmt Optional, default is false. Whether to return the gmt time.
- * @param int|object $post Optional, default is global post object. A post_id or post object
- * @param bool $translate Optional, default is false. Whether to translate the result
- * @return string Returns timestamp
-=======
  * @param string      $d         Optional. Format to use for retrieving the time the post
  *                               was modified. Either 'G', 'U', or php date format. Default 'U'.
  * @param bool        $gmt       Optional. Whether to retrieve the GMT time. Default false.
  * @param int|WP_Post $post      WP_Post object or ID. Default is global $post object.
  * @param bool        $translate Whether to translate the time string. Default false.
  * @return false|string Formatted date string or Unix timestamp. False on failure.
->>>>>>> WPHome/master
  */
 function get_post_modified_time( $d = 'U', $gmt = false, $post = null, $translate = false ) {
 	$post = get_post($post);
 
-<<<<<<< HEAD
-=======
 	if ( ! $post ) {
 		return false;
 	}
 
->>>>>>> WPHome/master
 	if ( $gmt )
 		$time = $post->post_modified_gmt;
 	else
 		$time = $post->post_modified;
 	$time = mysql2date($d, $time, $translate);
 
-<<<<<<< HEAD
-	return apply_filters('get_post_modified_time', $time, $d, $gmt);
-=======
 	/**
 	 * Filter the localized time a post was last modified.
 	 *
@@ -2779,7 +2126,6 @@ function get_post_modified_time( $d = 'U', $gmt = false, $post = null, $translat
 	 * @param bool   $gmt  Whether to return the GMT time. Default false.
 	 */
 	return apply_filters( 'get_post_modified_time', $time, $d, $gmt );
->>>>>>> WPHome/master
 }
 
 /**
@@ -2787,17 +2133,10 @@ function get_post_modified_time( $d = 'U', $gmt = false, $post = null, $translat
  *
  * @since 0.71
  * @uses $wp_locale
-<<<<<<< HEAD
- * @uses $post
-=======
->>>>>>> WPHome/master
  */
 function the_weekday() {
 	global $wp_locale;
 	$the_weekday = $wp_locale->get_weekday( mysql2date( 'w', get_post()->post_date, false ) );
-<<<<<<< HEAD
-	$the_weekday = apply_filters('the_weekday', $the_weekday);
-=======
 
 	/**
 	 * Filter the weekday on which the post was written, for display.
@@ -2807,7 +2146,6 @@ function the_weekday() {
 	 * @param string $the_weekday
 	 */
 	$the_weekday = apply_filters( 'the_weekday', $the_weekday );
->>>>>>> WPHome/master
 	echo $the_weekday;
 }
 
@@ -2823,11 +2161,7 @@ function the_weekday() {
  * @param string $after Optional Output after the date.
  */
 function the_weekday_date($before='',$after='') {
-<<<<<<< HEAD
-	global $wp_locale, $day, $previousweekday;
-=======
 	global $wp_locale, $currentday, $previousweekday;
->>>>>>> WPHome/master
 	$the_weekday_date = '';
 	if ( $currentday != $previousweekday ) {
 		$the_weekday_date .= $before;
@@ -2835,9 +2169,6 @@ function the_weekday_date($before='',$after='') {
 		$the_weekday_date .= $after;
 		$previousweekday = $currentday;
 	}
-<<<<<<< HEAD
-	$the_weekday_date = apply_filters('the_weekday_date', $the_weekday_date, $before, $after);
-=======
 
 	/**
 	 * Filter the localized date on which the post was written, for display.
@@ -2849,7 +2180,6 @@ function the_weekday_date($before='',$after='') {
 	 * @param string $after            The HTML to output after the date.
 	 */
 	$the_weekday_date = apply_filters( 'the_weekday_date', $the_weekday_date, $before, $after );
->>>>>>> WPHome/master
 	echo $the_weekday_date;
 }
 
@@ -2857,12 +2187,6 @@ function the_weekday_date($before='',$after='') {
  * Fire the wp_head action
  *
  * @since 1.2.0
-<<<<<<< HEAD
- * @uses do_action() Calls 'wp_head' hook.
- */
-function wp_head() {
-	do_action('wp_head');
-=======
  */
 function wp_head() {
 	/**
@@ -2871,19 +2195,12 @@ function wp_head() {
 	 * @since 1.5.0
 	 */
 	do_action( 'wp_head' );
->>>>>>> WPHome/master
 }
 
 /**
  * Fire the wp_footer action
  *
  * @since 1.5.1
-<<<<<<< HEAD
- * @uses do_action() Calls 'wp_footer' hook.
- */
-function wp_footer() {
-	do_action('wp_footer');
-=======
  */
 function wp_footer() {
 	/**
@@ -2892,7 +2209,6 @@ function wp_footer() {
 	 * @since 1.5.1
 	 */
 	do_action( 'wp_footer' );
->>>>>>> WPHome/master
 }
 
 /**
@@ -2911,23 +2227,14 @@ function feed_links( $args = array() ) {
 		'separator'	=> _x('&raquo;', 'feed link'),
 		/* translators: 1: blog title, 2: separator (raquo) */
 		'feedtitle'	=> __('%1$s %2$s Feed'),
-<<<<<<< HEAD
-		/* translators: %s: blog title, 2: separator (raquo) */
-=======
 		/* translators: 1: blog title, 2: separator (raquo) */
->>>>>>> WPHome/master
 		'comstitle'	=> __('%1$s %2$s Comments Feed'),
 	);
 
 	$args = wp_parse_args( $args, $defaults );
 
-<<<<<<< HEAD
-	echo '<link rel="alternate" type="' . feed_content_type() . '" title="' . esc_attr(sprintf( $args['feedtitle'], get_bloginfo('name'), $args['separator'] )) . '" href="' . get_feed_link() . "\" />\n";
-	echo '<link rel="alternate" type="' . feed_content_type() . '" title="' . esc_attr(sprintf( $args['comstitle'], get_bloginfo('name'), $args['separator'] )) . '" href="' . get_feed_link( 'comments_' . get_default_feed() ) . "\" />\n";
-=======
 	echo '<link rel="alternate" type="' . feed_content_type() . '" title="' . esc_attr( sprintf( $args['feedtitle'], get_bloginfo('name'), $args['separator'] ) ) . '" href="' . esc_url( get_feed_link() ) . "\" />\n";
 	echo '<link rel="alternate" type="' . feed_content_type() . '" title="' . esc_attr( sprintf( $args['comstitle'], get_bloginfo('name'), $args['separator'] ) ) . '" href="' . esc_url( get_feed_link( 'comments_' . get_default_feed() ) ) . "\" />\n";
->>>>>>> WPHome/master
 }
 
 /**
@@ -2957,30 +2264,11 @@ function feed_links_extra( $args = array() ) {
 
 	$args = wp_parse_args( $args, $defaults );
 
-<<<<<<< HEAD
-	if ( is_single() || is_page() ) {
-=======
 	if ( is_singular() ) {
->>>>>>> WPHome/master
 		$id = 0;
 		$post = get_post( $id );
 
 		if ( comments_open() || pings_open() || $post->comment_count > 0 ) {
-<<<<<<< HEAD
-			$title = sprintf( $args['singletitle'], get_bloginfo('name'), $args['separator'], esc_html( get_the_title() ) );
-			$href = get_post_comments_feed_link( $post->ID );
-		}
-	} elseif ( is_category() ) {
-		$term = get_queried_object();
-
-		$title = sprintf( $args['cattitle'], get_bloginfo('name'), $args['separator'], $term->name );
-		$href = get_category_feed_link( $term->term_id );
-	} elseif ( is_tag() ) {
-		$term = get_queried_object();
-
-		$title = sprintf( $args['tagtitle'], get_bloginfo('name'), $args['separator'], $term->name );
-		$href = get_tag_feed_link( $term->term_id );
-=======
 			$title = sprintf( $args['singletitle'], get_bloginfo('name'), $args['separator'], the_title_attribute( array( 'echo' => false ) ) );
 			$href = get_post_comments_feed_link( $post->ID );
 		}
@@ -3006,7 +2294,6 @@ function feed_links_extra( $args = array() ) {
 			$title = sprintf( $args['tagtitle'], get_bloginfo('name'), $args['separator'], $term->name );
 			$href = get_tag_feed_link( $term->term_id );
 		}
->>>>>>> WPHome/master
 	} elseif ( is_author() ) {
 		$author_id = intval( get_query_var('author') );
 
@@ -3017,13 +2304,9 @@ function feed_links_extra( $args = array() ) {
 		$href = get_search_feed_link();
 	} elseif ( is_post_type_archive() ) {
 		$title = sprintf( $args['posttypetitle'], get_bloginfo('name'), $args['separator'], post_type_archive_title( '', false ) );
-<<<<<<< HEAD
-		$href = get_post_type_archive_feed_link( get_queried_object()->name );
-=======
 		$post_type_obj = get_queried_object();
 		if ( $post_type_obj )
 			$href = get_post_type_archive_feed_link( $post_type_obj->name );
->>>>>>> WPHome/master
 	}
 
 	if ( isset($title) && isset($href) )
@@ -3047,13 +2330,8 @@ function rsd_link() {
  * @since 2.3.1
  */
 function wlwmanifest_link() {
-<<<<<<< HEAD
-	echo '<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="'
-		. get_bloginfo('wpurl') . '/wp-includes/wlwmanifest.xml" /> ' . "\n";
-=======
 	echo '<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="',
 		includes_url( 'wlwmanifest.xml' ), '" /> ', "\n";
->>>>>>> WPHome/master
 }
 
 /**
@@ -3082,27 +2360,7 @@ function noindex() {
  * @since 3.3.0
  */
 function wp_no_robots() {
-<<<<<<< HEAD
-	echo "<meta name='robots' content='noindex,nofollow' />\n";
-}
-
-/**
- * Determine if TinyMCE is available.
- *
- * Checks to see if the user has deleted the tinymce files to slim down there WordPress install.
- *
- * @since 2.1.0
- *
- * @return bool Whether TinyMCE exists.
- */
-function rich_edit_exists() {
-	global $wp_rich_edit_exists;
-	if ( !isset($wp_rich_edit_exists) )
-		$wp_rich_edit_exists = file_exists(ABSPATH . WPINC . '/js/tinymce/tiny_mce.js');
-	return $wp_rich_edit_exists;
-=======
 	echo "<meta name='robots' content='noindex,follow' />\n";
->>>>>>> WPHome/master
 }
 
 /**
@@ -3130,9 +2388,6 @@ function user_can_richedit() {
 		}
 	}
 
-<<<<<<< HEAD
-	return apply_filters('user_can_richedit', $wp_rich_edit);
-=======
 	/**
 	 * Filter whether the user can access the rich (Visual) editor.
 	 *
@@ -3141,7 +2396,6 @@ function user_can_richedit() {
 	 * @param bool $wp_rich_edit Whether the user can access to the rich (Visual) editor.
 	 */
 	return apply_filters( 'user_can_richedit', $wp_rich_edit );
->>>>>>> WPHome/master
 }
 
 /**
@@ -3156,13 +2410,6 @@ function user_can_richedit() {
  */
 function wp_default_editor() {
 	$r = user_can_richedit() ? 'tinymce' : 'html'; // defaults
-<<<<<<< HEAD
-	if ( $user = wp_get_current_user() ) { // look for cookie
-		$ed = get_user_setting('editor', 'tinymce');
-		$r = ( in_array($ed, array('tinymce', 'html', 'test') ) ) ? $ed : $r;
-	}
-	return apply_filters( 'wp_default_editor', $r ); // filter
-=======
 	if ( wp_get_current_user() ) { // look for cookie
 		$ed = get_user_setting('editor', 'tinymce');
 		$r = ( in_array($ed, array('tinymce', 'html', 'test') ) ) ? $ed : $r;
@@ -3176,28 +2423,19 @@ function wp_default_editor() {
 	 * @param array $r An array of editors. Accepts 'tinymce', 'html', 'test'.
 	 */
 	return apply_filters( 'wp_default_editor', $r );
->>>>>>> WPHome/master
 }
 
 /**
  * Renders an editor.
  *
  * Using this function is the proper way to output all needed components for both TinyMCE and Quicktags.
-<<<<<<< HEAD
- * _WP_Editors should not be used directly. See http://core.trac.wordpress.org/ticket/17144.
-=======
  * _WP_Editors should not be used directly. See https://core.trac.wordpress.org/ticket/17144.
->>>>>>> WPHome/master
  *
  * NOTE: Once initialized the TinyMCE editor cannot be safely moved in the DOM. For that reason
  * running wp_editor() inside of a metabox is not a good idea unless only Quicktags is used.
  * On the post edit screen several actions can be used to include additional editors
  * containing TinyMCE: 'edit_page_form', 'edit_form_advanced' and 'dbx_post_sidebar'.
-<<<<<<< HEAD
- * See http://core.trac.wordpress.org/ticket/19173 for more information.
-=======
  * See https://core.trac.wordpress.org/ticket/19173 for more information.
->>>>>>> WPHome/master
  *
  * @see wp-includes/class-wp-editor.php
  * @since 3.3.0
@@ -3220,19 +2458,12 @@ function wp_editor( $content, $editor_id, $settings = array() ) {
  * to ensure that it is safe for placing in an html attribute.
  *
  * @since 2.3.0
-<<<<<<< HEAD
- * @uses esc_attr()
-=======
->>>>>>> WPHome/master
  *
  * @param bool $escaped Whether the result is escaped. Default true.
  * 	Only use when you are later escaping it. Do not use unescaped.
  * @return string
  */
 function get_search_query( $escaped = true ) {
-<<<<<<< HEAD
-	$query = apply_filters( 'get_search_query', get_query_var( 's' ) );
-=======
 	/**
 	 * Filter the contents of the search query variable.
 	 *
@@ -3242,7 +2473,6 @@ function get_search_query( $escaped = true ) {
 	 */
 	$query = apply_filters( 'get_search_query', get_query_var( 's' ) );
 
->>>>>>> WPHome/master
 	if ( $escaped )
 		$query = esc_attr( $query );
 	return $query;
@@ -3254,12 +2484,6 @@ function get_search_query( $escaped = true ) {
  * The search query string is passed through {@link esc_attr()}
  * to ensure that it is safe for placing in an html attribute.
  *
-<<<<<<< HEAD
- * @uses esc_attr()
- * @since 2.1.0
- */
-function the_search_query() {
-=======
  * @since 2.1.0
  */
 function the_search_query() {
@@ -3270,7 +2494,6 @@ function the_search_query() {
 	 *
 	 * @param mixed $search Contents of the search query variable.
 	 */
->>>>>>> WPHome/master
 	echo esc_attr( apply_filters( 'the_search_query', get_search_query( false ) ) );
 }
 
@@ -3286,10 +2509,6 @@ function the_search_query() {
  */
 function language_attributes($doctype = 'html') {
 	$attributes = array();
-<<<<<<< HEAD
-	$output = '';
-=======
->>>>>>> WPHome/master
 
 	if ( function_exists( 'is_rtl' ) && is_rtl() )
 		$attributes[] = 'dir="rtl"';
@@ -3303,10 +2522,6 @@ function language_attributes($doctype = 'html') {
 	}
 
 	$output = implode(' ', $attributes);
-<<<<<<< HEAD
-	$output = apply_filters('language_attributes', $output);
-	echo $output;
-=======
 
 	/**
 	 * Filter the language attributes for display in the html tag.
@@ -3316,7 +2531,6 @@ function language_attributes($doctype = 'html') {
 	 * @param string $output A space-separated list of language attributes.
 	 */
 	echo apply_filters( 'language_attributes', $output );
->>>>>>> WPHome/master
 }
 
 /**
@@ -3359,19 +2573,6 @@ function language_attributes($doctype = 'html') {
  * It is possible to add query vars to the link by using the 'add_args' argument
  * and see {@link add_query_arg()} for more information.
  *
-<<<<<<< HEAD
- * @since 2.1.0
- *
- * @param string|array $args Optional. Override defaults.
- * @return array|string String of page links or array of page links.
- */
-function paginate_links( $args = '' ) {
-	$defaults = array(
-		'base' => '%_%', // http://example.com/all_posts.php%_% : %_% is replaced by format (below)
-		'format' => '?page=%#%', // ?page=%#% : %#% is replaced by the page number
-		'total' => 1,
-		'current' => 0,
-=======
  * The 'before_page_number' and 'after_page_number' arguments allow users to
  * augment the links themselves. Typically this might be to add context to the
  * numbered links so that screen reader users understand what the links are for.
@@ -3380,28 +2581,7 @@ function paginate_links( $args = '' ) {
  *
  * @since 2.1.0
  *
- * @param string|array $args {
- *     Optional. Array or string of arguments for generating paginated links for archives.
- *
- *     @type string $base               Base of the paginated url. Default empty.
- *     @type string $format             Format for the pagination structure. Default empty.
- *     @type int    $total              The total amount of pages. Default is the value WP_Query's
- *                                      `max_num_pages` or 1.
- *     @type int    $current            The current page number. Default is 'paged' query var or 1.
- *     @type bool   $show_all           Whether to show all pages. Default false.
- *     @type int    $end_size           How many numbers on either the start and the end list edges.
- *                                      Default 1.
- *     @type int    $mid_size           How many numbers to either side of the current pages. Default 2.
- *     @type bool   $prev_next          Whether to include the previous and next links in the list. Default true.
- *     @type bool   $prev_text          The previous page text. Default '« Previous'.
- *     @type bool   $next_text          The next page text. Default '« Previous'.
- *     @type string $type               Controls format of the returned value. Possible values are 'plain',
- *                                      'array' and 'list'. Default is 'plain'.
- *     @type array  $add_args           An array of query args to add. Default false.
- *     @type string $add_fragment       A string to append to each link. Default empty.
- *     @type string $before_page_number A string to appear before the page number. Default empty.
- *     @type string $after_page_number  A string to append after the page number. Default empty.
- * }
+ * @param string|array $args Optional. Override defaults.
  * @return array|string String of page links or array of page links.
  */
 function paginate_links( $args = '' ) {
@@ -3427,7 +2607,6 @@ function paginate_links( $args = '' ) {
 		'format' => $format, // ?page=%#% : %#% is replaced by the page number
 		'total' => $total,
 		'current' => $current,
->>>>>>> WPHome/master
 		'show_all' => false,
 		'prev_next' => true,
 		'prev_text' => __('&laquo; Previous'),
@@ -3435,51 +2614,6 @@ function paginate_links( $args = '' ) {
 		'end_size' => 1,
 		'mid_size' => 2,
 		'type' => 'plain',
-<<<<<<< HEAD
-		'add_args' => false, // array of query args to add
-		'add_fragment' => ''
-	);
-
-	$args = wp_parse_args( $args, $defaults );
-	extract($args, EXTR_SKIP);
-
-	// Who knows what else people pass in $args
-	$total = (int) $total;
-	if ( $total < 2 )
-		return;
-	$current  = (int) $current;
-	$end_size = 0  < (int) $end_size ? (int) $end_size : 1; // Out of bounds?  Make it the default.
-	$mid_size = 0 <= (int) $mid_size ? (int) $mid_size : 2;
-	$add_args = is_array($add_args) ? $add_args : false;
-	$r = '';
-	$page_links = array();
-	$n = 0;
-	$dots = false;
-
-	if ( $prev_next && $current && 1 < $current ) :
-		$link = str_replace('%_%', 2 == $current ? '' : $format, $base);
-		$link = str_replace('%#%', $current - 1, $link);
-		if ( $add_args )
-			$link = add_query_arg( $add_args, $link );
-		$link .= $add_fragment;
-		$page_links[] = '<a class="prev page-numbers" href="' . esc_url( apply_filters( 'paginate_links', $link ) ) . '">' . $prev_text . '</a>';
-	endif;
-	for ( $n = 1; $n <= $total; $n++ ) :
-		$n_display = number_format_i18n($n);
-		if ( $n == $current ) :
-			$page_links[] = "<span class='page-numbers current'>$n_display</span>";
-			$dots = true;
-		else :
-			if ( $show_all || ( $n <= $end_size || ( $current && $n >= $current - $mid_size && $n <= $current + $mid_size ) || $n > $total - $end_size ) ) :
-				$link = str_replace('%_%', 1 == $n ? '' : $format, $base);
-				$link = str_replace('%#%', $n, $link);
-				if ( $add_args )
-					$link = add_query_arg( $add_args, $link );
-				$link .= $add_fragment;
-				$page_links[] = "<a class='page-numbers' href='" . esc_url( apply_filters( 'paginate_links', $link ) ) . "'>$n_display</a>";
-				$dots = true;
-			elseif ( $dots && !$show_all ) :
-=======
 		'add_args' => array(), // array of query args to add
 		'add_fragment' => '',
 		'before_page_number' => '',
@@ -3495,21 +2629,12 @@ function paginate_links( $args = '' ) {
 	// Merge additional query vars found in the original URL into 'add_args' array.
 	if ( isset( $url_parts[1] ) ) {
 		// Find the format argument.
-		$format = explode( '?', str_replace( '%_%', $args['format'], $args['base'] ) );
-		$format_query = isset( $format[1] ) ? $format[1] : '';
-		wp_parse_str( $format_query, $format_args );
-
-		// Find the query args of the requested URL.
-		wp_parse_str( $url_parts[1], $url_query_args );
+		$format_query = parse_url( str_replace( '%_%', $args['format'], $args['base'] ), PHP_URL_QUERY );
+		wp_parse_str( $format_query, $format_arg );
 
 		// Remove the format argument from the array of query arguments, to avoid overwriting custom format.
-		foreach ( $format_args as $format_arg => $format_arg_value ) {
-			if ( isset( $url_query_args[ $format_arg ] ) ) {
-				unset( $url_query_args[ $format_arg ] );
-			}
-		}
-
-		$args['add_args'] = array_merge( $args['add_args'], urlencode_deep( $url_query_args ) );
+		wp_parse_str( remove_query_arg( array_keys( $format_arg ), $url_parts[1] ), $query_args );
+		$args['add_args'] = array_merge( $args['add_args'], urlencode_deep( $query_args ) );
 	}
 
 	// Who knows what else people pass in $args
@@ -3563,26 +2688,11 @@ function paginate_links( $args = '' ) {
 				$page_links[] = "<a class='page-numbers' href='" . esc_url( apply_filters( 'paginate_links', $link ) ) . "'>" . $args['before_page_number'] . number_format_i18n( $n ) . $args['after_page_number'] . "</a>";
 				$dots = true;
 			elseif ( $dots && ! $args['show_all'] ) :
->>>>>>> WPHome/master
 				$page_links[] = '<span class="page-numbers dots">' . __( '&hellip;' ) . '</span>';
 				$dots = false;
 			endif;
 		endif;
 	endfor;
-<<<<<<< HEAD
-	if ( $prev_next && $current && ( $current < $total || -1 == $total ) ) :
-		$link = str_replace('%_%', $format, $base);
-		$link = str_replace('%#%', $current + 1, $link);
-		if ( $add_args )
-			$link = add_query_arg( $add_args, $link );
-		$link .= $add_fragment;
-		$page_links[] = '<a class="next page-numbers" href="' . esc_url( apply_filters( 'paginate_links', $link ) ) . '">' . $next_text . '</a>';
-	endif;
-	switch ( $type ) :
-		case 'array' :
-			return $page_links;
-			break;
-=======
 	if ( $args['prev_next'] && $current && ( $current < $total || -1 == $total ) ) :
 		$link = str_replace( '%_%', $args['format'], $args['base'] );
 		$link = str_replace( '%#%', $current + 1, $link );
@@ -3597,24 +2707,16 @@ function paginate_links( $args = '' ) {
 		case 'array' :
 			return $page_links;
 
->>>>>>> WPHome/master
 		case 'list' :
 			$r .= "<ul class='page-numbers'>\n\t<li>";
 			$r .= join("</li>\n\t<li>", $page_links);
 			$r .= "</li>\n</ul>\n";
 			break;
-<<<<<<< HEAD
-		default :
-			$r = join("\n", $page_links);
-			break;
-	endswitch;
-=======
 
 		default :
 			$r = join("\n", $page_links);
 			break;
 	}
->>>>>>> WPHome/master
 	return $r;
 }
 
@@ -3622,15 +2724,6 @@ function paginate_links( $args = '' ) {
  * Registers an admin colour scheme css file.
  *
  * Allows a plugin to register a new admin colour scheme. For example:
-<<<<<<< HEAD
- * <code>
- * wp_admin_css_color('classic', __('Classic'), admin_url("css/colors-classic.css"),
- * array('#07273E', '#14568A', '#D54E21', '#2683AE'));
- * </code>
- *
- * @since 2.5.0
- *
-=======
  *
  *     wp_admin_css_color( 'classic', __( 'Classic' ), admin_url( "css/colors-classic.css" ), array(
  *         '#07273E', '#14568A', '#D54E21', '#2683AE'
@@ -3640,34 +2733,24 @@ function paginate_links( $args = '' ) {
  *
  * @todo Properly document optional arguments as such
  *
->>>>>>> WPHome/master
  * @param string $key The unique key for this theme.
  * @param string $name The name of the theme.
  * @param string $url The url of the css file containing the colour scheme.
  * @param array $colors Optional An array of CSS color definitions which are used to give the user a feel for the theme.
-<<<<<<< HEAD
- */
-function wp_admin_css_color($key, $name, $url, $colors = array()) {
-=======
  * @param array $icons Optional An array of CSS color definitions used to color any SVG icons
  */
 function wp_admin_css_color( $key, $name, $url, $colors = array(), $icons = array() ) {
->>>>>>> WPHome/master
 	global $_wp_admin_css_colors;
 
 	if ( !isset($_wp_admin_css_colors) )
 		$_wp_admin_css_colors = array();
 
-<<<<<<< HEAD
-	$_wp_admin_css_colors[$key] = (object) array('name' => $name, 'url' => $url, 'colors' => $colors);
-=======
 	$_wp_admin_css_colors[$key] = (object) array(
 		'name' => $name,
 		'url' => $url,
 		'colors' => $colors,
 		'icon_colors' => $icons,
 	);
->>>>>>> WPHome/master
 }
 
 /**
@@ -3676,19 +2759,13 @@ function wp_admin_css_color( $key, $name, $url, $colors = array(), $icons = arra
  * @since 3.0.0
  */
 function register_admin_color_schemes() {
-<<<<<<< HEAD
-	wp_admin_css_color( 'classic', _x( 'Blue', 'admin color scheme' ), admin_url( 'css/colors-classic.min.css' ),
-		array( '#5589aa', '#cfdfe9', '#d1e5ee', '#eff8ff' ) );
-	wp_admin_css_color( 'fresh', _x( 'Gray', 'admin color scheme' ), admin_url( 'css/colors-fresh.min.css' ),
-		array( '#555', '#a0a0a0', '#ccc', '#f1f1f1' ) );
-=======
 	$suffix = is_rtl() ? '-rtl' : '';
 	$suffix .= defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
 	wp_admin_css_color( 'fresh', _x( 'Default', 'admin color scheme' ),
 		false,
-		array( '#222', '#333', '#0073aa', '#00a0d2' ),
-		array( 'base' => '#999', 'focus' => '#00a0d2', 'current' => '#fff' )
+		array( '#222', '#333', '#0074a2', '#2ea2cc' ),
+		array( 'base' => '#999', 'focus' => '#2ea2cc', 'current' => '#fff' )
 	);
 
 	// Other color schemes are not available when running out of src
@@ -3737,7 +2814,6 @@ function register_admin_color_schemes() {
 		array( 'base' => '#f3f2f1', 'focus' => '#fff', 'current' => '#fff' )
 	);
 
->>>>>>> WPHome/master
 }
 
 /**
@@ -3757,8 +2833,6 @@ function wp_admin_css_uri( $file = 'wp-admin' ) {
 	}
 	$_file = add_query_arg( 'version', get_bloginfo( 'version' ),  $_file );
 
-<<<<<<< HEAD
-=======
 	/**
 	 * Filter the URI of a WordPress admin CSS file.
 	 *
@@ -3767,7 +2841,6 @@ function wp_admin_css_uri( $file = 'wp-admin' ) {
 	 * @param string $_file Relative path to the file with query arguments attached.
 	 * @param string $file  Relative path to the file, minus its ".css" extension.
 	 */
->>>>>>> WPHome/master
 	return apply_filters( 'wp_admin_css_uri', $_file, $file );
 }
 
@@ -3785,10 +2858,6 @@ function wp_admin_css_uri( $file = 'wp-admin' ) {
  * $file is a file relative to wp-admin/ without its ".css" extension. A
  * stylesheet link to that generated URL is printed.
  *
-<<<<<<< HEAD
- * @package WordPress
-=======
->>>>>>> WPHome/master
  * @since 2.3.0
  * @uses $wp_styles WordPress Styles Object
  *
@@ -3798,14 +2867,8 @@ function wp_admin_css_uri( $file = 'wp-admin' ) {
  */
 function wp_admin_css( $file = 'wp-admin', $force_echo = false ) {
 	global $wp_styles;
-<<<<<<< HEAD
 	if ( !is_a($wp_styles, 'WP_Styles') )
 		$wp_styles = new WP_Styles();
-=======
-	if ( ! ( $wp_styles instanceof WP_Styles ) ) {
-		$wp_styles = new WP_Styles();
-	}
->>>>>>> WPHome/master
 
 	// For backward compatibility
 	$handle = 0 === strpos( $file, 'css/' ) ? substr( $file, 4 ) : $file;
@@ -3818,11 +2881,6 @@ function wp_admin_css( $file = 'wp-admin', $force_echo = false ) {
 		return;
 	}
 
-<<<<<<< HEAD
-	echo apply_filters( 'wp_admin_css', "<link rel='stylesheet' href='" . esc_url( wp_admin_css_uri( $file ) ) . "' type='text/css' />\n", $file );
-	if ( function_exists( 'is_rtl' ) && is_rtl() )
-		echo apply_filters( 'wp_admin_css', "<link rel='stylesheet' href='" . esc_url( wp_admin_css_uri( "$file-rtl" ) ) . "' type='text/css' />\n", "$file-rtl" );
-=======
 	/**
 	 * Filter the stylesheet link to the specified CSS file.
 	 *
@@ -3840,7 +2898,6 @@ function wp_admin_css( $file = 'wp-admin', $force_echo = false ) {
 		/** This filter is documented in wp-includes/general-template.php */
 		echo apply_filters( 'wp_admin_css', "<link rel='stylesheet' href='" . esc_url( wp_admin_css_uri( "$file-rtl" ) ) . "' type='text/css' />\n", "$file-rtl" );
 	}
->>>>>>> WPHome/master
 }
 
 /**
@@ -3866,8 +2923,6 @@ function add_thickbox() {
  * @since 2.5.0
  */
 function wp_generator() {
-<<<<<<< HEAD
-=======
 	/**
 	 * Filter the output of the XHTML generator tag.
 	 *
@@ -3875,7 +2930,6 @@ function wp_generator() {
 	 *
 	 * @param string $generator_type The XHTML generator.
 	 */
->>>>>>> WPHome/master
 	the_generator( apply_filters( 'wp_generator_type', 'xhtml' ) );
 }
 
@@ -3886,17 +2940,10 @@ function wp_generator() {
  * for a plugin to filter generators overall the the_generator filter.
  *
  * @since 2.5.0
-<<<<<<< HEAD
- * @uses apply_filters() Calls 'the_generator' hook.
-=======
->>>>>>> WPHome/master
  *
  * @param string $type The type of generator to output - (html|xhtml|atom|rss2|rdf|comment|export).
  */
 function the_generator( $type ) {
-<<<<<<< HEAD
-	echo apply_filters('the_generator', get_the_generator($type), $type) . "\n";
-=======
 	/**
 	 * Filter the output of the XHTML generator tag for display.
 	 *
@@ -3907,7 +2954,6 @@ function the_generator( $type ) {
 	 *                               'xhtml', 'atom', 'rss2', 'rdf', 'comment', 'export'.
 	 */
 	echo apply_filters( 'the_generator', get_the_generator($type), $type ) . "\n";
->>>>>>> WPHome/master
 }
 
 /**
@@ -3918,10 +2964,6 @@ function the_generator( $type ) {
  * 'get_the_generator_{$type}' filter.
  *
  * @since 2.5.0
-<<<<<<< HEAD
- * @uses apply_filters() Calls 'get_the_generator_$type' hook.
-=======
->>>>>>> WPHome/master
  *
  * @param string $type The type of generator to return - (html|xhtml|atom|rss2|rdf|comment|export).
  * @return string The HTML content for the generator.
@@ -3976,8 +3018,6 @@ function get_the_generator( $type = '' ) {
 			$gen = '<!-- generator="WordPress/' . get_bloginfo_rss('version') . '" created="'. date('Y-m-d H:i') . '" -->';
 			break;
 	}
-<<<<<<< HEAD
-=======
 
 	/**
 	 * Filter the HTML for the retrieved generator type.
@@ -3990,7 +3030,6 @@ function get_the_generator( $type = '' ) {
 	 * @param string $type The type of generator. Accepts 'html', 'xhtml', 'atom',
 	 *                     'rss2', 'rdf', 'comment', 'export'.
 	 */
->>>>>>> WPHome/master
 	return apply_filters( "get_the_generator_{$type}", $gen, $type );
 }
 
@@ -4067,8 +3106,6 @@ function __checked_selected_helper( $helper, $current, $echo, $type ) {
 
 	return $result;
 }
-<<<<<<< HEAD
-=======
 
 /**
  * Default settings for heartbeat
@@ -4089,4 +3126,18 @@ function wp_heartbeat_settings( $settings ) {
 
 	return $settings;
 }
->>>>>>> WPHome/master
+
+/**
+ * Temporary function to add a missing style rule to the themes page.
+ * This avoids the need to ship an entirely rebuilt wp-admin.css in partial builds.
+ *
+ * @since 4.1.1
+ * @ignore
+ */
+function _wp_add_themesphp_notice_styling() {
+	global $pagenow;
+	if ( 'themes.php' == $pagenow ) {
+		echo "<style type='text/css'>.themes-php div.notice { margin: 0 0 20px 0; clear: both; }</style>\n";
+	}
+}
+add_action( 'admin_head', '_wp_add_themesphp_notice_styling' );

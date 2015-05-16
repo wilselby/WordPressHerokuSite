@@ -1,18 +1,4 @@
 /**
-<<<<<<< HEAD
- * navigation.js
- *
- * Handles toggling the navigation menu for small screens.
- */
-( function() {
-	var nav = document.getElementById( 'site-navigation' ), button, menu;
-	if ( ! nav )
-		return;
-	button = nav.getElementsByTagName( 'h3' )[0];
-	menu   = nav.getElementsByTagName( 'ul' )[0];
-	if ( ! button )
-		return;
-=======
  * Handles toggling the navigation menu for small screens and
  * accessibility for submenu items.
  */
@@ -27,7 +13,6 @@
 	if ( ! button ) {
 		return;
 	}
->>>>>>> WPHome/master
 
 	// Hide button if menu is missing or empty.
 	if ( ! menu || ! menu.childNodes.length ) {
@@ -36,18 +21,11 @@
 	}
 
 	button.onclick = function() {
-<<<<<<< HEAD
-		if ( -1 == menu.className.indexOf( 'nav-menu' ) )
-			menu.className = 'nav-menu';
-
-		if ( -1 != button.className.indexOf( 'toggled-on' ) ) {
-=======
 		if ( -1 === menu.className.indexOf( 'nav-menu' ) ) {
 			menu.className = 'nav-menu';
 		}
 
 		if ( -1 !== button.className.indexOf( 'toggled-on' ) ) {
->>>>>>> WPHome/master
 			button.className = button.className.replace( ' toggled-on', '' );
 			menu.className = menu.className.replace( ' toggled-on', '' );
 		} else {
@@ -55,9 +33,6 @@
 			menu.className += ' toggled-on';
 		}
 	};
-<<<<<<< HEAD
-} )();
-=======
 } )();
 
 // Better focus for hidden submenu items for accessibility.
@@ -78,4 +53,3 @@
     } );
   }
 } )( jQuery );
->>>>>>> WPHome/master

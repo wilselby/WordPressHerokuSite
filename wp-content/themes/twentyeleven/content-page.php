@@ -1,10 +1,6 @@
 <?php
 /**
-<<<<<<< HEAD
- * The template used for displaying page content in page.php
-=======
  * Template used for displaying page content in page.php
->>>>>>> WPHome/master
  *
  * @package WordPress
  * @subpackage Twenty_Eleven

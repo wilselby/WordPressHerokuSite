@@ -8,23 +8,16 @@
 header('Content-Type: ' . feed_content_type('atom') . '; charset=' . get_option('blog_charset'), true);
 $more = 1;
 
-<<<<<<< HEAD
-echo '<?xml version="1.0" encoding="'.get_option('blog_charset').'"?'.'>'; ?>
-=======
 echo '<?xml version="1.0" encoding="'.get_option('blog_charset').'"?'.'>';
 
 /** This action is documented in wp-includes/feed-rss2.php */
 do_action( 'rss_tag_pre', 'atom' );
 ?>
->>>>>>> WPHome/master
 <feed
   xmlns="http://www.w3.org/2005/Atom"
   xmlns:thr="http://purl.org/syndication/thread/1.0"
   xml:lang="<?php bloginfo_rss( 'language' ); ?>"
   xml:base="<?php bloginfo_rss('url') ?>/wp-atom.php"
-<<<<<<< HEAD
-  <?php do_action('atom_ns'); ?>
-=======
   <?php
   /**
    * Fires at end of the Atom feed root to add namespaces.
@@ -33,7 +26,6 @@ do_action( 'rss_tag_pre', 'atom' );
    */
   do_action( 'atom_ns' );
   ?>
->>>>>>> WPHome/master
  >
 	<title type="text"><?php bloginfo_rss('name'); wp_title_rss(); ?></title>
 	<subtitle type="text"><?php bloginfo_rss("description") ?></subtitle>
@@ -44,10 +36,6 @@ do_action( 'rss_tag_pre', 'atom' );
 	<id><?php bloginfo('atom_url'); ?></id>
 	<link rel="self" type="application/atom+xml" href="<?php self_link(); ?>" />
 
-<<<<<<< HEAD
-	<?php do_action('atom_head'); ?>
-	<?php while (have_posts()) : the_post(); ?>
-=======
 	<?php
 	/**
 	 * Fires just before the first Atom feed entry.
@@ -58,16 +46,12 @@ do_action( 'rss_tag_pre', 'atom' );
 
 	while ( have_posts() ) : the_post();
 	?>
->>>>>>> WPHome/master
 	<entry>
 		<author>
 			<name><?php the_author() ?></name>
 			<?php $author_url = get_the_author_meta('url'); if ( !empty($author_url) ) : ?>
 			<uri><?php the_author_meta('url')?></uri>
 			<?php endif;
-<<<<<<< HEAD
-			do_action('atom_author'); ?>
-=======
 
 			/**
 			 * Fires at the end of each Atom feed author entry.
@@ -76,7 +60,6 @@ do_action( 'rss_tag_pre', 'atom' );
 			 */
 			do_action( 'atom_author' );
 		?>
->>>>>>> WPHome/master
 		</author>
 		<title type="<?php html_type_rss(); ?>"><![CDATA[<?php the_title_rss() ?>]]></title>
 		<link rel="alternate" type="<?php bloginfo_rss('html_type'); ?>" href="<?php the_permalink_rss() ?>" />
@@ -88,10 +71,6 @@ do_action( 'rss_tag_pre', 'atom' );
 <?php if ( !get_option('rss_use_excerpt') ) : ?>
 		<content type="<?php html_type_rss(); ?>" xml:base="<?php the_permalink_rss() ?>"><![CDATA[<?php the_content_feed('atom') ?>]]></content>
 <?php endif; ?>
-<<<<<<< HEAD
-<?php atom_enclosure(); ?>
-<?php do_action('atom_entry'); ?>
-=======
 	<?php atom_enclosure();
 	/**
 	 * Fires at the end of each Atom feed item.
@@ -100,7 +79,6 @@ do_action( 'rss_tag_pre', 'atom' );
 	 */
 	do_action( 'atom_entry' );
 		?>
->>>>>>> WPHome/master
 		<link rel="replies" type="<?php bloginfo_rss('html_type'); ?>" href="<?php the_permalink_rss() ?>#comments" thr:count="<?php echo get_comments_number()?>"/>
 		<link rel="replies" type="application/atom+xml" href="<?php echo esc_url( get_post_comments_feed_link(0, 'atom') ); ?>" thr:count="<?php echo get_comments_number()?>"/>
 		<thr:total><?php echo get_comments_number()?></thr:total>
